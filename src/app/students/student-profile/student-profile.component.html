@@ -1,0 +1,834 @@
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>Προφίλ</h1>
+      </div>
+      <div class="col-sm-6">
+        <!-- <ol class=" float-sm-right">
+          <li class="breadcrumb-item"><a href="/student">student</a></li>
+          <li class="breadcrumb-item active">profile</li>
+        </ol> -->
+      </div>
+    </div>
+  </div>
+  <!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-3">
+        <!-- Profile Image -->
+        <div class="card card-primary card-outline">
+          <div class="card-body box-profile">
+            <div class="text-center">
+              <!-- <img class="profile-user-img img-fluid img-circle" src="assets/images//user4-128x128.jpg" -->
+              <!-- alt="User profile picture"> -->
+              <i class="fas fa-4x fa-user-graduate"></i>
+            </div>
+
+            <h3 class="profile-username text-center">
+              {{ studentsSSOData[0].givenname }} {{ studentsSSOData[0].sn }}
+            </h3>
+
+            <p *ngIf="
+                studentsSSOData[0].edupersonprimaryaffiliation == 'student'
+              " class="text-muted text-center">
+              Φοιτητής
+            </p>
+            <!-- <p *ngIf="studentsSSOData[0].edupersonprimaryaffiliation == 'affiliate' " class="text-muted text-center">
+              Φοιτητής</p> -->
+
+            <!-- <ul class="list-group list-group-unbordered mb-3">
+              <li class="list-group-item">
+                <b>Followers</b> <a class="float-right">1,322</a>
+              </li>
+              <li class="list-group-item">
+                <b>Following</b> <a class="float-right">543</a>
+              </li>
+              <li class="list-group-item">
+                <b>Friends</b> <a class="float-right">13,287</a>
+              </li>
+            </ul> -->
+
+            <!-- <a href="#" class="btn btn-primary btn-block"><b>Αλλαγή εικόνας</b></a> -->
+          </div>
+          <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+
+        <!-- About Me Box -->
+        <div class="card card-primary">
+          <div class="card-header student-card-header">
+            <h3 class="card-title">Σχετικά με εμένα</h3>
+          </div>
+          <!-- /.card-header -->
+          <div class="card-body">
+            <strong><i class="fas fa-book mr-1"></i> Εκπαίδευση</strong>
+            <p class="text-muted">
+              {{ studentsSSOData[0].education }}
+            </p>
+            <hr />
+            <strong><i class="fas fa-map-marker-alt mr-1"></i> Τοποθεσία</strong>
+            <p class="text-muted">
+              {{ studentsSSOData[0].address }}, {{ studentsSSOData[0].city }}
+            </p>
+            <hr />
+            <strong><i class="fas fa-pencil-alt mr-1"></i> Ικανότητες</strong>
+            <p class="text-muted">
+              <span class="tag tag-danger">{{ studentsSSOData[0].skills }}
+              </span>
+            </p>
+            <hr />
+            <strong><i class="far fa-file-alt mr-1"></i> Ενδιαφέροντα</strong>
+            <p class="text-muted">
+              {{ studentsSSOData[0].interests }}
+            </p>
+          </div>
+          <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+      </div>
+      <!-- /.col -->
+      <div class="col-md-9">
+        <div class="card">
+          <div class="card-header p-2">
+            <ul class="nav nav-pills">
+              <!-- <li class="nav-item"><a class="nav-link" href="#activity" data-toggle="tab">Ενδιαφέροντα:</a></li>
+              <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">Επιπρόσθετα Στοιχεία: </a></li>
+              <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Διακρίσεις-Βραβεία-Υποτροφίες:</a></li>
+              <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Δια Βίου Μόρφωση:</a></li>
+              <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Γνώσεις Η/Υ:</a></li>
+              <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Ξένες Γλώσσες:</a></li>
+              <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Εργασιακή Εμπειρία:</a></li>
+              <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Εκπαίδευση:</a></li> -->
+              <li class="nav-item">
+                <a class="nav-link active" href="#settings" data-toggle="tab">Βασικά Στοιχεία</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#sumbasiDetails" data-toggle="tab">Στοιχεία Σύμβασης</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#bio" data-toggle="tab">Βιογραφικό</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#studentContact" data-toggle="tab">Στοιχεία Επικοινωνίας</a>
+              </li>
+            </ul>
+          </div>
+          <!-- /.card-header -->
+          <div class="card-body">
+            <div class="tab-content">
+              <div class="tab-pane" id="activity">
+                <!-- Post -->
+              </div>
+              <!-- <form>
+                <mat-form-field>
+                  <input matInput type="text" name="title" required minlength="3" placeholder=""
+                    [value]="studentsSSOData[0].sn">
+                </mat-form-field>
+              </form> -->
+              <!-- {{ studentsSSOData | json }} -->
+              <div class="tab-pane active" id="settings">
+                <div class="alert alert-danger" role="alert">
+                  Τα στοιχεία αντλούνται από τo φοιτητολόγιο. Σε περίπτωση που
+                  δεν συμφωνείτε επικοινωνήστε με την γραμματεία
+                </div>
+                <form ngNativeValidate #studentsDetailsForm="ngForm" class="form-horizontal"
+                  (ngSubmit)="onSubmitStudentDetails(studentsDetailsForm.value)">
+                  <div class="form-group row">
+                    <label for="inputName" class="col-sm-2 col-form-label">Όνομα&nbsp;<span
+                        class="text-danger">*</span></label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="inputName" name="name" placeholder="Όνομα"
+                        [value]="studentsSSOData[0].givenname" readonly />
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="inputName" class="col-sm-2 col-form-label">Επώνυμο&nbsp;<span
+                        class="text-danger">*</span></label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="inputName" name="surname" placeholder="Επώνυμο"
+                        [value]="studentsSSOData[0].sn" readonly />
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="inputName2" class="col-sm-2 col-form-label">Όνομα Πατρός&nbsp;<span
+                        class="text-danger">*</span></label>
+                    <div class="col-sm-10">
+                      <input type="text" name="father_name" ngModel [ngModel]="studentsSSOData[0].father_name"
+                        class="form-control" id="inputName2" placeholder="Όνομα Πατρός" />
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="inputExperience" class="col-sm-2 col-form-label">Επώνυμο Πατρός&nbsp;<span
+                        class="text-danger">*</span></label>
+                    <div class="col-sm-10">
+                      <input type="text" name="father_last_name" ngModel [ngModel]="studentsSSOData[0].father_last_name"
+                        class="form-control" id="fatherLastName" placeholder="Επώνυμο Πατρός" />
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="inputName2" class="col-sm-2 col-form-label">Όνομα Μητρός&nbsp;<span
+                        class="text-danger">*</span></label>
+                    <div class="col-sm-10">
+                      <input type="text" name="mother_name" ngModel [ngModel]="studentsSSOData[0].mother_name"
+                        class="form-control" id="inputName2" placeholder="Όνομα Μητρός" value="" />
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="inputName2" class="col-sm-2 col-form-label">Επώνυμο Μητρός&nbsp;<span
+                        class="text-danger">*</span></label>
+                    <div class="col-sm-10">
+                      <input type="text" name="mother_last_name" ngModel [ngModel]="studentsSSOData[0].mother_last_name"
+                        class="form-control" id="inputName2" placeholder="Επώνυμο Μητρός" value="" />
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="inputExperience" class="col-sm-2 col-form-label">Ημ. Γέννησης&nbsp;<span
+                        class="text-danger">*</span></label>
+                    <div class="col-sm-10">
+                      <input class="form-control" type="text" id="date_of_birth" name="schacdateofbirth"
+                        placeholder="Ημερομηνία Γέννησης" required readonly min="1900-01-01" max="2500-01-01"
+                        [value]="studentsSSOData[0].schacdateofbirth" />
+                    </div>
+                  </div>
+                  <!-- <div class="form-group row">
+                    <label for="inputExperience" class="col-sm-2 col-form-label">Φύλο&nbsp;<span
+                        class="text-danger">*</span></label>
+                    <div class="col-sm-10">
+                      <select class="form-control" id="sex" name="sex">
+                        <option value="0">Άνδρας</option>
+                        <option value="1" selected>Γυναίκα</option>
+                      </select>
+                    </div>
+                  </div> -->
+                  <div class="form-group row">
+                    <label for="inputExperience" class="col-sm-2 col-form-label">Φύλο&nbsp;<span
+                        class="text-danger">*</span></label>
+                    <div class="col-sm-10">
+                      <input *ngIf="studentsSSOData[0].schacgender == 1" type="text" id="sex" class="form-control"
+                        name="sex" value="Άνδρας" readonly />
+                      <input *ngIf="studentsSSOData[0].schacgender == 0" type="text" id="sex" name="sex"
+                        class="form-control" value="Γυναίκα" readonly />
+                    </div>
+                  </div>
+                  <!-- <div class="form-group row">
+                    <label class="col-sm-2 col-form-label"
+                      for="edit-profile-student-field-student-military-training-und">Στρατιωτικές Υποχρεώσεις
+                    </label>
+                    <div class="col-sm-10">
+                      <select id="edit-profile-student-field-student-military-training-und"
+                        name="profile_student[field_student_military_training][und]" class="form-control">
+                        <option value="_none" selected="selected">- Καμία επιλογή -</option>
+                        <option value="no">Μή εκπληρωμένες</option>
+                        <option value="yes">Εκπληρωμένες</option>
+                      </select>
+                    </div>
+                  </div> -->
+
+                  <!-- <div class="form-group row">
+                    <label for="inputExperience" class="col-sm-2 col-form-label">Εμπειρία</label>
+                    <div class="col-sm-10">
+                      <textarea class="form-control" id="inputExperience" placeholder="Εμπειρία"></textarea>
+                    </div>
+                  </div> -->
+                  <div class="form-group row">
+                    <div class="offset-sm-2 col-sm-10">
+                      <div class="checkbox">
+                        <label>
+                          <!-- <input type="checkbox"> Αποδέχομαι τους <a href="#">όρους χρήσης</a> -->
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group container-fluid row" style="width: 280px; margin: auto">
+                    <div class="col-sm-6">
+                      <button type="submit" class="btn btn-primary">
+                        Αποθήκευση
+                      </button>
+                    </div>
+                    <div class="col-sm-6">
+                      <a (click)="studentsDetailsForm.resetForm()" class="btn btn-secondary">
+                        Ακύρωση
+                      </a>
+                    </div>
+                  </div>
+                </form>
+              </div>
+
+              <div class="tab-pane" id="sumbasiDetails">
+                <div class="alert alert-danger" role="alert">
+                  - Τα παρακάτω στοιχεία είναι αυστηρά προσωπικά και αφορούν
+                  μόνο εσάς και όχι π.χ κάποιο άλλο πρόσωπο της οικογένειας σας.
+                  <br />- Το ΑΜΚΑ αντλείται από τo φοιτητολόγιο. Σε περίπτωση
+                  που δεν συμφωνείτε επικοινωνήστε με την γραμματεία
+                </div>
+                <form ngNativeValidate #studentContractDetailsForm="ngForm" class="form-horizontal"
+                  (ngSubmit)="onSubmitStudentContractDetails(studentContractDetailsForm.value)">
+                  <div class="form-group row">
+                    <label for="inputName" class="col-sm-2 col-form-label">ΑΦΜ&nbsp;<span
+                        class="text-danger">*</span></label>
+                    <div class="col-sm-10">
+                      <input type="text" name="ssn" ngModel class="form-control" [ngModel]="studentsSSOData[0].ssn"
+                        id="inputName" placeholder="ΑΦΜ" required />
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-sm-2 col-form-label"></label>
+                    <div class="mb-3 col-sm-10">
+                      <label for="formFile" class="form-label mr-1">Ανεβάστε φωτογραφία που να απεικονίζεται το
+                        ΑΦΜ</label>
+                      <i class="fa fa-info-circle fa-lg fa-icon" data-toggle="tooltip" data-placement="top"
+                        title="Υποστηριζόμενος τύπος αρχέιων: .pdf .jpg .png .webp .jpeg .gif .doc .docx">
+                      </i>
+                      <input class="form-control" (change)="validateSsnFIle('ssnFileId')" id="ssnFileId" #fileInput
+                        type="file" id="formFile" required />
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="inputDOY" class="col-sm-2 col-form-label">ΔΟΥ&nbsp;<span
+                        class="text-danger">*</span></label>
+                    <div class="col-sm-10">
+                      <input type="text" name="doy" ngModel [ngModel]="studentsSSOData[0].doy" class="form-control"
+                        id="inputDOY" placeholder="ΔΟΥ" required />
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="inputExperience" class="col-sm-2 col-form-label">IBAN&nbsp;<span
+                        class="text-danger">*</span></label>
+                    <div class="col-sm-10">
+                      <input type="text" name="iban" [ngModel]="studentsSSOData[0].iban" ngModel class="form-control"
+                        id="inputName2" placeholder="IBAN" required />
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-sm-2 col-form-label"></label>
+                    <div class="mb-3 col-sm-10">
+                      <label for="formFile" class="form-label mr-1">Ανεβάστε φωτογραφία που να απεικονίζεται το IBAN
+                      </label>
+                      <i class="fa fa-info-circle fa-lg fa-icon" data-toggle="tooltip" data-placement="top"
+                        title="Υποστηριζόμενος τύπος αρχέιων: .pdf .jpg .png .webp .jpeg .gif .doc .docx">
+                      </i>
+                      <input class="form-control" (change)="validateIbanFIle('ibanFileId')" id="ibanFileId" #fileInput2
+                        type="file" id="formFile" required />
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="inputExperience" class="col-sm-2 col-form-label">ΑΜΚΑ&nbsp;<span
+                        class="text-danger">*</span></label>
+                    <div class="col-sm-10">
+                      <input class="form-control" type="text" id="amka" name="amka" placeholder="AMKA"
+                        [value]="this.studentsSSOData[0].schacpersonaluniqueid" readonly required />
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <div class="offset-sm-2 col-sm-10">
+                      <div class="checkbox">
+                        <label>
+                          <!-- <input type="checkbox"> Αποδέχομαι τους <a href="#">όρους χρήσης</a> -->
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group container-fluid row" style="width: 280px; margin: auto">
+                    <div class="col-sm-6">
+                      <button type="submit" class="btn btn-primary">
+                        Αποθήκευση
+                      </button>
+                    </div>
+                    <div class="col-sm-6">
+                      <a (click)="studentContractDetailsForm.resetForm()" class="btn btn-secondary">
+                        Ακύρωση
+                      </a>
+                    </div>
+                  </div>
+                </form>
+              </div>
+
+              <div class="tab-pane" id="studentContact">
+                <div class="alert alert-danger" role="alert">
+                  Τα στοιχεία αντλούνται από τo φοιτητολόγιο. Σε περίπτωση που
+                  δεν συμφωνείτε επικοινωνήστε με την γραμματεία
+                </div>
+                <form ngNativeValidate #studentContactForm="ngForm" class="form-horizontal"
+                  (ngSubmit)="onSubmitStudentContact(studentContactForm.value)">
+                  <div class="fieldset-wrapper">
+                    <!-- <div class="form-item form-type-checkbox form-item-profile-student-field-student-address-und-0-re-geocode-location">
+                        <input type="checkbox" id="edit-profile-student-field-student-address-und-0-re-geocode-location" name="profile_student[field_student_address][und][0][re_geocode_location]" value="1" class="form-checkbox">  <label class="option" for="edit-profile-student-field-student-address-und-0-re-geocode-location">Re geocode </label>
+                       <div class="description">Check this box to re-geocode location.</div>
+                       </div>
+                       <div class="form-item form-type-checkbox form-item-profile-student-field-student-address-und-0-delete-location">
+                        <input type="checkbox" id="edit-profile-student-field-student-address-und-0-delete-location" name="profile_student[field_student_address][und][0][delete_location]" value="1" class="form-checkbox">  <label class="option" for="edit-profile-student-field-student-address-und-0-delete-location">Διαγραφή </label>
+                       <div class="description">Check this box to delete this location.</div>
+                       </div> -->
+                    <div class="form-group row">
+                      <label for="inputEmail" class="col-sm-2 col-form-label">Email <span
+                          style="color: red">*</span></label>
+                      <div class="col-sm-10">
+                        <input type="email" class="form-control" id="inputEmail" placeholder=""
+                          [value]="this.studentsSSOData[0].id + '@uop.gr'" required />
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="edit-profile-student-field-student-address-und-0-phone"
+                        class="col-sm-2 col-form-label">Τηλέφωνο</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control"
+                          id="edit-profile-student-field-student-address-und-0-phone" name="phone" ngModel
+                          placeholder="" [ngModel]="studentsSSOData[0].phone" required value="" size="31"
+                          maxlength="31" />
+                      </div>
+                    </div>
+                    <div
+                      class="form-group row form-type-textfield form-item-profile-student-field-student-address-und-0-street">
+                      <label class="col-sm-2 col-form-label"
+                        for="edit-profile-student-field-student-address-und-0-street">Οδός
+                      </label>
+                      <div class="col-sm-10">
+                        <input type="text" id="edit-profile-student-field-student-address-und-0-street" name="address"
+                          ngModel [ngModel]="studentsSSOData[0].address" value="" size="64" maxlength="255"
+                          class="form-text form-control" />
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-sm-2 col-form-label"
+                        for="edit-profile-student-field-student-address-und-0-additional">Περιοχή
+                      </label>
+                      <div class="col-sm-10">
+                        <input type="text" id="edit-profile-student-field-student-address-und-0-additional"
+                          name="location" ngModel [ngModel]="studentsSSOData[0].location" size="64" maxlength="255"
+                          class="form-text form-control" />
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-sm-2 col-form-label"
+                        for="edit-profile-student-field-student-address-und-0-city">Πόλη
+                      </label>
+                      <div class="col-sm-10">
+                        <input type="text" id="edit-profile-student-field-student-address-und-0-city" name="city"
+                          ngModel value="" [ngModel]="studentsSSOData[0].city" size="64" maxlength="255"
+                          class="form-text form-control" />
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-sm-2 col-form-label"
+                        for="edit-profile-student-field-student-address-und-0-postal-code">Ταχυδρομικός κώδικας
+                      </label>
+                      <div class="col-sm-10">
+                        <input type="text" id="edit-profile-student-field-student-address-und-0-postal-code"
+                          name="post_address" ngModel [ngModel]="studentsSSOData[0].post_address" value="" size="16"
+                          maxlength="16" class="form-text form-control" />
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-sm-2 col-form-label"
+                        for="edit-profile-student-field-student-address-und-0-country">Χώρα
+                      </label>
+                      <div class="col-sm-10">
+                        <select name="country" ngModel [ngModel]="studentsSSOData[0].country"
+                          class="location_auto_country form-select ajax-processed"
+                          id="edit-profile-student-field-student-address-und-0-country">
+                          <option value="xx">ΕΚΤΟΣ ΛΙΣΤΑΣ</option>
+                          <option value="bl">Άγιος Βαρθολομαίος</option>
+                          <option value="vc">
+                            Άγιος Βικέντιος και Γρεναδίνες
+                          </option>
+
+                          <option value="sm">Άγιος Μαρίνος</option>
+                          <option value="sx">Άγιος Μαρτίνος</option>
+                          <option value="mf">Άγιος Μαρτίνος Γαλλίας</option>
+                          <option value="kn">
+                            Άγιος Χριστόφορος και Νέβις
+                          </option>
+                          <option value="eg">Αίγυπτος</option>
+                          <option value="sh">Αγία Ελένη</option>
+                          <option value="lc">Αγία Λουκία</option>
+                          <option value="ao">Αγκόλα</option>
+                          <option value="az">Αζερμπαϊτζάν</option>
+                          <option value="et">Αιθιοπία</option>
+                          <option value="ci">Ακτή Ελεφαντοστού</option>
+                          <option value="al">Αλβανία</option>
+                          <option value="dz">Αλγερία</option>
+                          <option value="vi">
+                            Αμερικανικές Παρθένοι Νήσοι
+                          </option>
+                          <option value="as">Αμερικανική Σαμόα</option>
+                          <option value="tl">Ανατολικό Τιμόρ</option>
+                          <option value="ai">Ανγκουίλα</option>
+                          <option value="ad">Ανδόρρα</option>
+                          <option value="ag">Αντίγκουα και Μπαρμπούντα</option>
+                          <option value="aq">Ανταρκτική</option>
+                          <option value="um">
+                            Απομακρυσμένες Νησίδες των ΗΠΑ
+                          </option>
+                          <option value="ar">Αργεντινή</option>
+                          <option value="am">Αρμενία</option>
+                          <option value="aw">Αρούμπα</option>
+                          <option value="at">Αυστρία</option>
+                          <option value="au">Αυστραλία</option>
+                          <option value="af">Αφγανιστάν</option>
+                          <option value="ht">Αϊτή</option>
+                          <option value="be">Βέλγιο</option>
+                          <option value="vu">Βανουάτου</option>
+                          <option value="va">Βατικανό</option>
+                          <option value="ve">Βενεζουέλα</option>
+                          <option value="bm">Βερμούδες</option>
+                          <option value="vn">Βιετνάμ</option>
+                          <option value="bo">Βολιβία</option>
+                          <option value="ba">Βοσνία και Ερζεγοβίνη</option>
+                          <option value="bg">Βουλγαρία</option>
+                          <option value="br">Βραζιλία</option>
+                          <option value="vg">Βρετανικές Παρθένοι Νήσοι</option>
+                          <option value="io">
+                            Βρετανικό Έδαφος Ινδικού Ωκεανού
+                          </option>
+                          <option value="kp">Βόρεια Κορέα</option>
+                          <option value="mp">Βόρειες Μαριάνες Νήσοι</option>
+                          <option value="fr">Γαλλία</option>
+                          <option value="tf">Γαλλικά Νότια Εδάφη</option>
+                          <option value="gf">Γαλλική Γουιάνα</option>
+                          <option value="pf">Γαλλική Πολυνησία</option>
+                          <option value="de">Γερμανία</option>
+                          <option value="ge">Γεωργία</option>
+                          <option value="gi">Γιβραλτάρ</option>
+                          <option value="gm">Γκάμπια</option>
+                          <option value="gh">Γκάνα</option>
+                          <option value="gg">Γκέρνσεϊ</option>
+                          <option value="ga">Γκαμπόν</option>
+                          <option value="gu">Γκουαχάν</option>
+                          <option value="gp">Γουαδελούπη</option>
+                          <option value="gt">Γουατεμάλα</option>
+                          <option value="gy">Γουιάνα</option>
+                          <option value="gn">Γουινέα</option>
+                          <option value="gw">Γουινέα-Μπισσάου</option>
+                          <option value="gd">Γρενάδα</option>
+                          <option value="gl">Γροιλανδία</option>
+                          <option value="dk">Δανία</option>
+                          <option value="cg">Δημοκρατία του Κονγκό</option>
+                          <option value="do">Δομινικανή Δημοκρατία</option>
+                          <option value="eh">Δυτική Σαχάρα</option>
+                          <option value="sv">Ελ Σαλβαδόρ</option>
+                          <option value="ch">Ελβετία</option>
+                          <option value="gr" selected="selected">Ελλάδα</option>
+                          <option value="er">Ερυθραία</option>
+                          <option value="ee">Εσθονία</option>
+                          <option value="zm">Ζάμπια</option>
+                          <option value="zw">Ζιμπάμπουε</option>
+                          <option value="ae">Ηνωμένα Αραβικά Εμιράτα</option>
+                          <option value="us">
+                            Ηνωμένες Πολιτείες της Αμερικής
+                          </option>
+                          <option value="gb">Ηνωμένο Βασίλειο</option>
+                          <option value="jp">Ιαπωνία</option>
+                          <option value="in">Ινδία</option>
+                          <option value="id">Ινδονησία</option>
+                          <option value="jo">Ιορδανία</option>
+                          <option value="iq">Ιράκ</option>
+                          <option value="ir">Ιράν</option>
+                          <option value="ie">Ιρλανδία</option>
+                          <option value="gq">Ισημερινή Γουινέα</option>
+                          <option value="ec">Ισημερινός</option>
+                          <option value="is">Ισλανδία</option>
+                          <option value="es">Ισπανία</option>
+                          <option value="il">Ισραήλ</option>
+                          <option value="it">Ιταλία</option>
+                          <option value="ke">Κένυα</option>
+                          <option value="cn">Κίνα</option>
+                          <option value="kz">Καζακστάν</option>
+                          <option value="cm">Καμερούν</option>
+                          <option value="kh">Καμπότζη</option>
+                          <option value="ca">Καναδάς</option>
+                          <option value="qa">Κατάρ</option>
+                          <option value="cf">
+                            Κεντροαφρικανική Δημοκρατία
+                          </option>
+                          <option value="kg">Κιργιζία</option>
+                          <option value="ki">Κιριμπάτι</option>
+                          <option value="co">Κολομβία</option>
+                          <option value="km">Κομόρες</option>
+                          <option value="cd">Κονγκό (Κινσάσα)</option>
+                          <option value="kw">Κουβέιτ</option>
+                          <option value="cw">Κουρασάο</option>
+                          <option value="cu">Κούβα</option>
+                          <option value="hr">Κροατία</option>
+                          <option value="cr">Κόστα Ρίκα</option>
+                          <option value="cy">Κύπρος</option>
+                          <option value="la">Λάος</option>
+                          <option value="lb">Λίβανος</option>
+                          <option value="ls">Λεσότο</option>
+                          <option value="lv">Λεττονία</option>
+                          <option value="by">Λευκορωσία</option>
+                          <option value="lr">Λιβερία</option>
+                          <option value="ly">Λιβύη</option>
+                          <option value="lt">Λιθουανία</option>
+                          <option value="li">Λιχτενστάιν</option>
+                          <option value="lu">Λουξεμβούργο</option>
+                          <option value="ml">Μάλι</option>
+                          <option value="mt">Μάλτα</option>
+                          <option value="yt">Μαγιότ</option>
+                          <option value="mg">Μαδαγασκάρη</option>
+                          <option value="mo">Μακάου</option>
+                          <option value="mw">Μαλάουι</option>
+                          <option value="my">Μαλαισία</option>
+                          <option value="mv">Μαλδίβες</option>
+                          <option value="mq">Μαρτινίκα</option>
+                          <option value="ma">Μαρόκο</option>
+                          <option value="mu">Μαυρίκιος</option>
+                          <option value="mr">Μαυριτανία</option>
+                          <option value="me">Μαυροβούνιο</option>
+                          <option value="mx">Μεξικό</option>
+                          <option value="mm">Μιανμάρ</option>
+                          <option value="fm">Μικρονησία</option>
+                          <option value="mn">Μογγολία</option>
+                          <option value="mz">Μοζαμβίκη</option>
+                          <option value="md">Μολδαβία</option>
+                          <option value="mc">Μονακό</option>
+                          <option value="ms">Μοντσερράτ</option>
+                          <option value="bd">Μπανγκλαντές</option>
+                          <option value="bb">Μπαρμπάντος</option>
+                          <option value="bs">Μπαχάμες</option>
+                          <option value="bh">Μπαχρέιν</option>
+                          <option value="bz">Μπελίζε</option>
+                          <option value="bj">Μπενίν</option>
+                          <option value="bw">Μποτσουάνα</option>
+                          <option value="bf">Μπουρκίνα Φάσο</option>
+                          <option value="bi">Μπουρούντι</option>
+                          <option value="bt">Μπουτάν</option>
+                          <option value="bn">Μπρουνέι</option>
+                          <option value="nr">Ναουρού</option>
+                          <option value="nz">Νέα Ζηλανδία</option>
+                          <option value="nc">Νέα Καληδονία</option>
+                          <option value="ax">Νήσοι Ώλαντ</option>
+                          <option value="ck">Νήσοι Κουκ</option>
+                          <option value="mh">Νήσοι Μάρσαλ</option>
+                          <option value="gs">
+                            Νήσοι Νότια Γεωργία και Νότιες Σάντουιτς
+                          </option>
+                          <option value="pn">Νήσοι Πίτκαιρν</option>
+                          <option value="sb">Νήσοι Σολομώντα</option>
+                          <option value="fo">Νήσοι Φερόες</option>
+                          <option value="fk">Νήσοι Φώκλαντ</option>
+                          <option value="hm">
+                            Νήσοι Χερντ και Μακντόναλντ
+                          </option>
+                          <option value="im">Νήσος του Μαν</option>
+                          <option value="ne">Νίγηρας</option>
+                          <option value="na">Ναμίμπια</option>
+                          <option value="np">Νεπάλ</option>
+                          <option value="bv">Νησί Μπουβέ</option>
+                          <option value="nf">Νησί Νόρφολκ</option>
+                          <option value="cx">Νησί των Χριστουγέννων</option>
+                          <option value="bq">Νησιά BES</option>
+                          <option value="ky">Νησιά Καϋμάν</option>
+                          <option value="cc">Νησιά Κόκος (Κήλινγκ)</option>
+                          <option value="ng">Νιγηρία</option>
+                          <option value="ni">Νικαράγουα</option>
+                          <option value="nu">Νιούε</option>
+                          <option value="no">Νορβηγία</option>
+                          <option value="dm">Ντομίνικα</option>
+                          <option value="za">Νότια Αφρική</option>
+                          <option value="kr">Νότια Κορέα</option>
+                          <option value="ss">Νότιο Σουδάν</option>
+                          <option value="nl">Ολλανδία</option>
+                          <option value="an">Ολλανδικές Αντίλλες</option>
+                          <option value="om">Ομάν</option>
+                          <option value="hn">Ονδούρα</option>
+                          <option value="hu">Ουγγαρία</option>
+                          <option value="ug">Ουγκάντα</option>
+                          <option value="uz">Ουζμπεκιστάν</option>
+                          <option value="ua">Ουκρανία</option>
+                          <option value="uy">Ουρουγουάη</option>
+                          <option value="wf">Ουώλις και Φουτούνα</option>
+                          <option value="pk">Πακιστάν</option>
+                          <option value="pw">Παλάου</option>
+                          <option value="ps">Παλαιστίνη</option>
+                          <option value="pa">Παναμάς</option>
+                          <option value="pg">Παπούα Νέα Γουινέα</option>
+                          <option value="py">Παραγουάη</option>
+                          <option value="pe">Περού</option>
+                          <option value="pl">Πολωνία</option>
+                          <option value="pt">Πορτογαλία</option>
+                          <option value="pr">Πουέρτο Ρίκο</option>
+                          <option value="cv">Πράσινο Ακρωτήριο</option>
+                          <option value="re">Ρεουνιόν</option>
+                          <option value="rw">Ρουάντα</option>
+                          <option value="ro">Ρουμανία</option>
+                          <option value="ru">Ρωσία</option>
+                          <option value="st">Σάο Τομέ και Πρίνσιπε</option>
+                          <option value="pm">Σαιν Πιερ και Μικελόν</option>
+                          <option value="ws">Σαμόα</option>
+                          <option value="sa">Σαουδική Αραβία</option>
+                          <option value="sj">Σβάλμπαρντ και Γιαν Μαγιέν</option>
+                          <option value="sn">Σενεγάλη</option>
+                          <option value="rs">Σερβία</option>
+                          <option value="sc">Σεϋχέλλες</option>
+                          <option value="sl">Σιέρα Λεόνε</option>
+                          <option value="sg">Σιγκαπούρη</option>
+                          <option value="mk">Σκόπια</option>
+                          <option value="sk">Σλοβακία</option>
+                          <option value="si">Σλοβενία</option>
+                          <option value="so">Σομαλία</option>
+                          <option value="sz">Σουαζιλάνδη</option>
+                          <option value="sd">Σουδάν</option>
+                          <option value="se">Σουηδία</option>
+                          <option value="sr">Σουρινάμ</option>
+                          <option value="lk">Σρι Λάνκα</option>
+                          <option value="sy">Συρία</option>
+                          <option value="tz">Τανζανία</option>
+                          <option value="tj">Τατζικιστάν</option>
+                          <option value="tw">Ταϊβάν</option>
+                          <option value="th">Ταϊλάνδη</option>
+                          <option value="tc">Τερκ και Κάικος</option>
+                          <option value="je">Τζέρσεϊ</option>
+                          <option value="jm">Τζαμάικα</option>
+                          <option value="dj">Τζιμπουτί</option>
+                          <option value="tk">Τοκελάου</option>
+                          <option value="tv">Τουβαλού</option>
+                          <option value="tr">Τουρκία</option>
+                          <option value="tm">Τουρκμενιστάν</option>
+                          <option value="tt">Τρινιδάδ και Τομπάγκο</option>
+                          <option value="td">Τσαντ</option>
+                          <option value="cz">Τσεχία</option>
+                          <option value="tn">Τυνησία</option>
+                          <option value="tg">Τόγκο</option>
+                          <option value="to">Τόνγκα</option>
+                          <option value="ye">Υεμένη</option>
+                          <option value="ph">Φιλιππίνες</option>
+                          <option value="fi">Φινλανδία</option>
+                          <option value="fj">Φίτζι</option>
+                          <option value="cl">Χιλή</option>
+                          <option value="hk">Χονγκ Κονγκ</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <div class="offset-sm-2 col-sm-10">
+                        <div class="checkbox">
+                          <label>
+                            <!-- <input type="checkbox"> Αποδέχομαι τους <a href="#">όρους χρήσης</a> -->
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group container-fluid row" style="width: 280px; margin: auto">
+                      <div class="col-sm-6">
+                        <button type="submit" class="btn btn-primary">
+                          Αποθήκευση
+                        </button>
+                      </div>
+                      <div class="col-sm-6">
+                        <a (click)="studentContactForm.resetForm()" class="btn btn-secondary">
+                          Ακύρωση
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+
+              <div class="tab-pane" id="bio">
+                <form ngNativeValidate #studentBioForm="ngForm" class="form-horizontal"
+                  (ngSubmit)="onSubmitStudentBio(studentBioForm.value)">
+                  <div class="form-group row">
+                    <label for="inputExperience" class="col-sm-2 col-form-label">Εκπαίδευση</label>
+                    <div class="col-sm-10">
+                      <textarea class="form-control" name="education" ngModel [ngModel]="studentsSSOData[0].education"
+                        id="inputExperience" placeholder="Εκπαίδευση"></textarea>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="inputExperience" class="col-sm-2 col-form-label">Εμπειρία</label>
+                    <div class="col-sm-10">
+                      <textarea class="form-control" name="experience" ngModel [ngModel]="studentsSSOData[0].experience"
+                        id="inputExperience" placeholder="Εμπειρία"></textarea>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="inputExperience" class="col-sm-2 col-form-label">Ξένες Γλώσσες</label>
+                    <div class="col-sm-10">
+                      <textarea class="form-control" name="languages" ngModel [ngModel]="studentsSSOData[0].languages"
+                        id="inputExperience" placeholder="Ξένες Γλώσσες"></textarea>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="inputExperience" class="col-sm-2 col-form-label">Γνώσεις Η/Υ</label>
+                    <div class="col-sm-10">
+                      <textarea class="form-control" name="computer_skills" ngModel
+                        [ngModel]="studentsSSOData[0].computer_skills" id="inputExperience"
+                        placeholder="Γνώσεις Η/Υ"></textarea>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="inputExperience" class="col-sm-2 col-form-label">Δια Βίου Μόρφωση</label>
+                    <div class="col-sm-10">
+                      <textarea class="form-control" name="other_edu" ngModel [ngModel]="studentsSSOData[0].other_edu"
+                        id="inputExperience" placeholder="Δια Βίου Μόρφωση"></textarea>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="inputExperience" class="col-sm-2 col-form-label">Διακρίσεις-Βραβεία-Υποτροφίες</label>
+                    <div class="col-sm-10">
+                      <textarea class="form-control" name="honors" ngModel [ngModel]="studentsSSOData[0].honors"
+                        id="inputExperience" placeholder="Διακρίσεις-Βραβεία-Υποτροφίες"></textarea>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="inputExperience" class="col-sm-2 col-form-label">Ενδιαφέροντα</label>
+                    <div class="col-sm-10">
+                      <textarea class="form-control" name="interests" ngModel [ngModel]="studentsSSOData[0].interests"
+                        id="inputExperience" placeholder="Ενδιαφέροντα"></textarea>
+                    </div>
+                  </div>
+                  <!-- <div class="form-group row">
+                    <label for="inputExperience" class="col-sm-2 col-form-label">Επιπρόσθετα Στοιχεία</label>
+                    <div class="col-sm-10">
+                      <textarea class="form-control" id="inputExperience" placeholder="Επιπρόσθετα Στοιχεία"></textarea>
+                    </div>
+                  </div> -->
+                  <div class="form-group row">
+                    <label for="inputExperience" class="col-sm-2 col-form-label">Ικανότητες</label>
+                    <div class="col-sm-10">
+                      <textarea class="form-control" name="skills" ngModel [ngModel]="studentsSSOData[0].skills"
+                        id="inputExperience" placeholder="Ικανότητες"></textarea>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <div class="offset-sm-2 col-sm-10">
+                      <div class="checkbox">
+                        <label>
+                          <!-- <input type="checkbox"> Αποδέχομαι τους <a href="#">όρους χρήσης</a> -->
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group container-fluid row" style="width: 280px; margin: auto">
+                    <div class="col-sm-6">
+                      <button type="submit" class="btn btn-primary">
+                        Αποθήκευση
+                      </button>
+                    </div>
+                    <div class="col-sm-6">
+                      <a (click)="studentBioForm.resetForm()" class="btn btn-secondary">
+                        Ακύρωση
+                      </a>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <!-- /.tab-content -->
+          </div>
+          <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+      </div>
+      <!-- /.col -->
+    </div>
+    <!-- /.row -->
+  </div>
+  <!-- /.container-fluid -->
+</section>
+<!-- /.content -->

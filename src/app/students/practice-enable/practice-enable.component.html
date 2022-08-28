@@ -1,0 +1,214 @@
+<!-- <button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
+  {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
+</button> -->
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>Εκδήλωση ενδιαφέροντος για πρακτική άσκηση</h1>
+      </div>
+      <div class="col-sm-6">
+        <!-- <ol class=" float-sm-right">
+          <li class="breadcrumb-item"><a href="/student">student</a></li>
+          <li class="breadcrumb-item active">profile</li>
+        </ol> -->
+      </div>
+    </div>
+  </div>
+  <!-- /.container-fluid -->
+</section>
+<div class="alert alert-danger pb-0" role="alert">
+  <ul>
+    <li>Μέρος των στοιχείων αντλούνται από τo φοιτητολόγιο. Σε περίπτωση που
+      δεν συμφωνείτε επικοινωνήστε με την γραμματεία</li>
+    <li>Υπενθυμίζεται ότι η ηλεκτρονική αίτηση επέχει θέση υπεύθυνης δήλωσης</li>
+  </ul>
+</div>
+<mat-stepper orientation="vertical" [linear]="isLinear" #stepper>
+  <mat-step [stepControl]="firstFormGroup">
+    <form [formGroup]="firstFormGroup">
+      <ng-template matStepLabel>Βασικά στοιχεία</ng-template>
+      <mat-form-field class="mr-2" appearance="fill">
+        <mat-label>Όνομα</mat-label>
+        <input matInput class="inactive-field" placeholder="Όνομα" id="name" name="name"
+          [ngModel]="studentsSSOData[0]?.givenname" formControlName="nameCtrl" readonly required>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Επώνυμο</mat-label>
+        <input matInput class="inactive-field" placeholder="Επώνυμο" name="surname" [ngModel]="studentsSSOData[0]?.sn"
+          formControlName="surnameCtrl" readonly required>
+      </mat-form-field><br>
+      <mat-form-field class="mr-2" appearance="fill">
+        <mat-label>Όνομα Πατρός</mat-label>
+        <input matInput placeholder="Όνομα Πατρός" name="father_name" ngModel
+          [ngModel]="studentsSSOData[0]?.father_name" formControlName="fatherNameCtrl" required>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Επώνυμο Πατρός</mat-label>
+        <input matInput placeholder="Επώνυμο Πατρός" name="father_last_name" ngModel
+          [ngModel]="studentsSSOData[0]?.father_last_name" formControlName="fatherSurnameCtrl" required>
+      </mat-form-field><br>
+      <mat-form-field class="mr-2" appearance="fill">
+        <mat-label>Όνομα Μητρός</mat-label>
+        <input matInput placeholder="Όνομα Μητρός" name="mother_name" ngModel
+          [ngModel]="studentsSSOData[0]?.mother_name" formControlName="motherNameCtrl" required>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Επώνυμο Μητρός</mat-label>
+        <input matInput placeholder="Επώνυμο Μητρός" name="mother_last_name"
+          [ngModel]="studentsSSOData[0]?.mother_last_name" formControlName="motherSurnameCtrl" required>
+      </mat-form-field><br>
+      <mat-form-field class="mr-2" appearance="fill">
+        <mat-label>Ημερομηνία Γέννησης</mat-label>
+        <input matInput class="inactive-field" placeholder="Ημερομηνία Γέννησης"
+          [ngModel]="studentsSSOData[0]?.schacdateofbirth" formControlName="dobCtrl" name="schacdateofbirth" readonly
+          min="1900-01-01" max="2800-01-01" required>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Φύλο</mat-label>
+        <input matInput class="inactive-field" name="sex" placeholder="Φύλο" [ngModel]="gender"
+          formControlName="genderCtrl" readonly required>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperNext>Επόμενο</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="secondFormGroup">
+    <form [formGroup]="secondFormGroup">
+      <ng-template matStepLabel>Στοιχεία Σύμβασης</ng-template>
+      <mat-form-field class="mr-2" appearance="fill">
+        <mat-label>ΑΦΜ</mat-label>
+        <input matInput name="ssn" ngModel [ngModel]="studentsSSOData[0]?.ssn" id="inputName" placeholder="ΑΦΜ"
+          formControlName="ssnControl" required>
+      </mat-form-field><br>
+      <mat-form-field appearance="fill">
+        <mat-label>ΔΟΥ</mat-label>
+        <input matInput name="doy" ngModel [ngModel]="studentsSSOData[0]?.doy" id="inputDOY" placeholder="ΔΟΥ*"
+          formControlName="doyControl" required>
+      </mat-form-field><br>
+      <mat-form-field appearance="fill">
+        <mat-label>IBAN</mat-label>
+        <input matInput name="iban" id="iban" [ngModel]="studentsSSOData[0]?.iban" ngModel placeholder="ΔΟΥ*"
+          formControlName="ibanControl" required>
+      </mat-form-field><br>
+      <mat-form-field appearance="fill">
+        <mat-label>ΑΜΚΑ</mat-label>
+        <input matInput class="inactive-field" ngModel [ngModel]="studentsSSOData[0]?.schacpersonaluniqueid" id="amka"
+          name="amka" placeholder="ΑΜΚΑ*" formControlName="amkaControl" required readonly>
+      </mat-form-field>
+      <br><br>
+      <h6>Ανεβάστε φωτογραφία που να απεικονίζεται το ΑΦΜ <i class="fa fa-info-circle fa-lg fa-icon"
+          data-toggle="tooltip" data-placement="top"
+          title="Υποστηριζόμενος τύπος αρχέιων: .pdf .jpg .png .webp .jpeg .gif .doc .docx">
+        </i></h6>
+      <mat-form-field>
+        <ngx-mat-file-input (change)="validateFiles('ssnFile')" formControlName="ssnFile" placeholder="Φωτογραφία ΑΦΜ">
+        </ngx-mat-file-input>
+        <!-- <mat-icon matSuffix>insert_photo</mat-icon> -->
+      </mat-form-field>
+      <br><br>
+      <h6>Ανεβάστε φωτογραφία που να απεικονίζεται το IBAN <i class="fa fa-info-circle fa-lg fa-icon"
+          data-toggle="tooltip" data-placement="top"
+          title="Υποστηριζόμενος τύπος αρχέιων: .pdf .jpg .png .webp .jpeg .gif .doc .docx">
+        </i></h6>
+      <mat-form-field>
+        <ngx-mat-file-input (change)="validateFiles('ibanFile')" formControlName="ibanFile"
+          placeholder="Φωτογραφία ΙΒΑΝ"></ngx-mat-file-input>
+        <!-- <mat-icon matSuffix>insert_photo</mat-icon> -->
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperPrevious>Προηγούμενο</button>
+        <button mat-button matStepperNext>Επόμενο</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="specialDataFormGroup">
+    <form [formGroup]="specialDataFormGroup">
+      <ng-template matStepLabel>Ειδικά στοιχεία</ng-template>
+      <p class="pt-2 pb-0 mb-0"> Ανήκω σε: Άτομα με Αναπηρίες (ΑμεΑ) κατηγορίας 5</p>
+      <mat-form-field class="mr-2" appearance="fill">
+        <mat-label>Επιλέξτε</mat-label>
+        <mat-select formControlName="ameaCatCtrl" required>
+          <!-- <mat-option>-- None --</mat-option> -->
+          <mat-option value="1">ΝΑΙ</mat-option>
+          <mat-option value="0">ΟΧΙ</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <br>
+      <p class="pb-0 mb-0">Έχω σύμβαση εργασίας με ιδιωτικό/δημόσιο τομέα</p>
+      <mat-form-field class="mr-2" appearance="fill">
+        <mat-label>Επιλέξτε</mat-label>
+        <mat-select formControlName="workingCatCtrl" required>
+          <!-- <mat-option>-- None --</mat-option> -->
+          <mat-option value="1">ΝΑΙ</mat-option>
+          <mat-option value="0">ΟΧΙ</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <br>
+      <p class="pb-0 mb-0">Υπηρετώ στον στρατό</p>
+      <mat-form-field class="mr-2" appearance="fill">
+        <mat-label>Επιλέξτε</mat-label>
+        <mat-select formControlName="armyCatCtrl" required>
+          <!-- <mat-option>-- None --</mat-option> -->
+          <mat-option value="1">ΝΑΙ</mat-option>
+          <mat-option value="0">ΟΧΙ</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <br>
+      <div>
+        <button mat-button matStepperPrevious>Προηγούμενο</button>
+        <button mat-button matStepperNext>Επόμενο</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="contactFormGroup">
+    <form [formGroup]="contactFormGroup">
+      <ng-template matStepLabel>Στοιχεία Επικοινωνίας</ng-template>
+      <mat-form-field class="mr-2" appearance="fill">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="emailCtrl" type="email" id="inputEmail"
+          [ngModel]="this.studentsSSOData[0]?.id + '@uop.gr'" placeholder="email" required>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Τηλέφωνο</mat-label>
+        <input matInput type="text" id="phone" name="phone" formControlName="phoneCtrl" ngModel placeholder="Τηλέφωνο"
+          [ngModel]="studentsSSOData[0]?.phone" size="31" maxlength="31" />
+      </mat-form-field><br>
+      <mat-form-field class="mr-2" appearance="fill">
+        <mat-label>Οδός</mat-label>
+        <input matInput formControlName="addressCtrl" id="address" name="address" ngModel
+          [ngModel]="studentsSSOData[0]?.address" size="64" maxlength="255">
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Περιοχή</mat-label>
+        <input matInput type="text" id="location" name="location" ngModel [ngModel]="studentsSSOData[0]?.location"
+          size="64" maxlength="255" formControlName="locationCtrl" placeholder="Περιοχή" />
+      </mat-form-field><br>
+      <mat-form-field class="mr-2" appearance="fill">
+        <mat-label>Πόλη</mat-label>
+        <input matInput type="text" id="city" name="city" ngModel formControlName="cityCtrl"
+          [ngModel]="studentsSSOData[0]?.city" size="64" maxlength="255" />
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Ταχυδρομικός κώδικας</mat-label>
+        <input matInput type="text" id="postal-code" name="post_address" ngModel
+          [ngModel]="studentsSSOData[0]?.post_address" size="16" maxlength="16" formControlName="postalCodeCtrl" />
+      </mat-form-field><br>
+      <div>
+        <button mat-button matStepperPrevious>Προηγούμενο</button>
+        <button mat-button matStepperNext (click)="updateStudentsAllDetails()">Επόμενο</button>
+        <!-- <button mat-button matStepperNext>Επόμενο</button> -->
+      </div>
+    </form>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Ολοκλήρωση αίτησης</ng-template>
+    <p><i class="fas fa-2x fa-check text-success"></i> Καταχωρήθηκε η αίτησή σας, θα γίνει ο έλεγχος και αν πληρείτε τις
+      προϋποθέσεις για πραγματοποίηση πρακτικής άσκησης, θα ενεργοποιήθει η πρόσβαση σας στο σύστημα.</p>
+    <div>
+      <!-- <button mat-button matStepperPrevious>Πίσω</button> -->
+      <!-- <button mat-button (click)="stepper.reset()">Καθαρισμός Φόρμας</button> -->
+    </div>
+  </mat-step>
+</mat-stepper>

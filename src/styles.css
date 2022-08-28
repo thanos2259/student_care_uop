@@ -1,0 +1,875 @@
+.dark-mode .btn-primary {
+  color: #fff;
+  background-color: #3f6791 !important;
+  border-color: #3f6791 !important;
+  box-shadow: none;
+}
+
+.dark-mode .student-card-header {
+  background-color: #3f6791 !important;
+}
+
+.dark-mode .card-primary.card-outline {
+  border-top: 3px solid #3f6791 !important;
+}
+
+.dark-mode .nav-pills .nav-link.active,
+.nav-pills .show>.nav-link {
+  color: #fff;
+  background-color: #3f6791 !important;
+}
+
+.btn-primary {
+  background-color: rgba(34, 73, 87, 1) !important;
+  border-color: rgba(34, 73, 87, 1) !important;
+}
+
+.student-card-header {
+  background-color: rgba(34, 73, 87, 1) !important;
+}
+
+.card-primary.card-outline {
+  border-top: 3px solid rgba(34, 73, 87, 1) !important;
+}
+
+.nav-pills .nav-link.active,
+.nav-pills .show>.nav-link {
+  color: #fff;
+  background-color: rgba(34, 73, 87, 1) !important;
+}
+
+.dark-mode input[type=date]::-webkit-calendar-picker-indicator {
+  filter: invert(100%);
+}
+
+.dark-mode h3,
+.dark-mode h4 {
+  color: white !important;
+}
+
+.dark-mode .dark-div {
+  background-color: #343a40 !important;
+}
+
+.dark-mode .dark-div strong {
+  color: white;
+  background-color: #343a40 !important;
+}
+
+.dark-mode .dark-div h4 {
+  color: white !important;
+}
+
+.dark-mode .widget h4 {
+  color: white !important;
+}
+
+.dark-mode .title a,
+.dark-mode .action a {
+  color: white !important;
+}
+
+.dark-mode .delete:hover {
+  color: #DC3545 !important;
+}
+
+.dark-mode .list-group a {
+  color: rgb(206, 205, 205) !important;
+}
+
+.list-group a:hover {
+  color: black;
+  background-color: #f5f5f5 !important;
+}
+
+.list-group a {
+  font-weight: normal !important;
+}
+
+.dark-mode .list-group a:hover {
+  background-color: #3c4249 !important;
+}
+
+.dark-mode .list-group li {
+  color: white !important;
+}
+
+.dark-mode .terms-box {
+  background-color: #40444b !important;
+  border: 2px solid rgb(134, 116, 116) !important;
+}
+
+.list-group li {
+  font-weight: 600 !important;
+  color: 777777 !important;
+  background-color: #eeeeee !important;
+}
+
+.dark-mode .list-group li {
+  font-weight: 600 !important;
+  color: 777777 !important;
+  background-color: #272a2eb4 !important;
+}
+
+
+/* calendar css start */
+
+*,
+*:before,
+*:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+#calendar {
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+  width: 420px;
+  margin: 0 auto;
+  height: 570px;
+  overflow: hidden;
+  border-radius: 18px;
+}
+
+#calendar .header {
+  height: 50px;
+  width: 420px;
+  /* background: rgba(66, 66, 66, 1); */
+  background: rgb(22, 49, 59);
+  text-align: center;
+  position: relative;
+  z-index: 100;
+}
+
+#calendar .header h1 {
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+  line-height: 50px;
+  font-weight: 100;
+  letter-spacing: 1px;
+}
+
+#calendar {
+  color: white;
+}
+
+#calendar .left,
+#calendar .right {
+  position: absolute;
+  width: 0px;
+  height: 0px;
+  border-style: solid;
+  top: 50%;
+  margin-top: -7.5px;
+  cursor: pointer;
+}
+
+#calendar .left {
+  border-width: 7.5px 10px 7.5px 0;
+  border-color: transparent rgba(160, 159, 160, 1) transparent transparent;
+  left: 20px;
+}
+
+#calendar .right {
+  border-width: 7.5px 0 7.5px 10px;
+  border-color: transparent transparent transparent rgba(160, 159, 160, 1);
+  right: 20px;
+}
+
+.month {
+  /*overflow: hidden;*/
+  opacity: 0;
+}
+
+.month.new {
+  animation: fadeIn 1s ease-out;
+  -webkit-animation: fadeIn 1s ease-out;
+  opacity: 1;
+}
+
+.month.in.next {
+  -webkit-animation: moveFromTopFadeMonth .4s ease-out;
+  -moz-animation: moveFromTopFadeMonth .4s ease-out;
+  animation: moveFromTopFadeMonth .4s ease-out;
+  opacity: 1;
+}
+
+.month.out.next {
+  -webkit-animation: moveToTopFadeMonth .4s ease-in;
+  -moz-animation: moveToTopFadeMonth .4s ease-in;
+  animation: moveToTopFadeMonth .4s ease-in;
+  opacity: 1;
+}
+
+.month.in.prev {
+  -webkit-animation: moveFromBottomFadeMonth .4s ease-out;
+  -moz-animation: moveFromBottomFadeMonth .4s ease-out;
+  animation: moveFromBottomFadeMonth .4s ease-out;
+  opacity: 1;
+}
+
+.month.out.prev {
+  -webkit-animation: moveToBottomFadeMonth .4s ease-in;
+  -moz-animation: moveToBottomFadeMonth .4s ease-in;
+  animation: moveToBottomFadeMonth .4s ease-in;
+  opacity: 1;
+}
+
+.week {
+  background: rgba(34, 73, 87, 1);
+  /* background: #4A4A4A; */
+}
+
+.day {
+  display: inline-block;
+  width: 60px;
+  padding: 10px;
+  text-align: center;
+  vertical-align: top;
+  cursor: pointer;
+  /* background: #4A4A4A; */
+  background: rgba(34, 73, 87, 1);
+  position: relative;
+  z-index: 100;
+}
+
+.day.other {
+  color: rgba(255, 255, 255, .3);
+}
+
+.day.today {
+  color: rgba(156, 202, 235, 1);
+}
+
+.day-name {
+  font-size: 9px;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+  color: rgba(255, 255, 255, .5);
+  letter-spacing: .7px;
+}
+
+.day-number {
+  font-size: 24px;
+  letter-spacing: 1.5px;
+}
+
+
+.day .day-events {
+  list-style: none;
+  margin-top: 3px;
+  text-align: center;
+  height: 12px;
+  line-height: 6px;
+  overflow: hidden;
+}
+
+.day .day-events span {
+  vertical-align: top;
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+  width: 5px;
+  height: 5px;
+  line-height: 5px;
+  margin: 0 1px;
+}
+
+.blue {
+  background: rgba(156, 202, 235, 1);
+}
+
+.orange {
+  background: rgba(247, 167, 0, 1);
+}
+
+.green {
+  background: rgba(153, 198, 109, 1);
+}
+
+.yellow {
+  background: rgba(249, 233, 0, 1);
+}
+
+.details {
+  position: relative;
+  width: 420px;
+  height: 75px;
+  background: #395c68;
+  margin-top: 5px;
+  border-radius: 4px;
+}
+
+.details.in {
+  -webkit-animation: moveFromTopFade .5s ease both;
+  -moz-animation: moveFromTopFade .5s ease both;
+  animation: moveFromTopFade .5s ease both;
+}
+
+.details.out {
+  -webkit-animation: moveToTopFade .5s ease both;
+  -moz-animation: moveToTopFade .5s ease both;
+  animation: moveToTopFade .5s ease both;
+}
+
+.arrow {
+  position: absolute;
+  top: -5px;
+  left: 50%;
+  margin-left: -2px;
+  width: 0px;
+  height: 0px;
+  border-style: solid;
+  border-width: 0 5px 5px 5px;
+  border-color: transparent transparent rgba(164, 164, 164, 1) transparent;
+  transition: all 0.7s ease;
+}
+
+.events {
+  height: 75px;
+  padding: 7px 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.events.in {
+  -webkit-animation: fadeIn .3s ease both;
+  -moz-animation: fadeIn .3s ease both;
+  animation: fadeIn .3s ease both;
+}
+
+.events.in {
+  -webkit-animation-delay: .3s;
+  -moz-animation-delay: .3s;
+  animation-delay: .3s;
+}
+
+.details.out .events {
+  -webkit-animation: fadeOutShrink .4s ease both;
+  -moz-animation: fadeOutShink .4s ease both;
+  animation: fadeOutShink .4s ease both;
+}
+
+.events.out {
+  -webkit-animation: fadeOut .3s ease both;
+  -moz-animation: fadeOut .3s ease both;
+  animation: fadeOut .3s ease both;
+}
+
+.event {
+  font-size: 16px;
+  line-height: 22px;
+  letter-spacing: .5px;
+  padding: 2px 16px;
+  vertical-align: top;
+}
+
+.event.empty {
+  color: #eee;
+}
+
+.event-category {
+  height: 10px;
+  width: 10px;
+  display: inline-block;
+  margin: 6px 0 0;
+  vertical-align: top;
+}
+
+.event span {
+  display: inline-block;
+  padding: 0 0 0 7px;
+}
+
+#calendar .legend {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 30px;
+  background: rgba(60, 60, 60, 1);
+  line-height: 30px;
+
+}
+
+.entry {
+  position: relative;
+  padding: 0 0 0 25px;
+  font-size: 13px;
+  display: inline-block;
+  line-height: 30px;
+  background: transparent;
+}
+
+.entry:after {
+  position: absolute;
+  content: '';
+  height: 5px;
+  width: 5px;
+  top: 12px;
+  left: 14px;
+}
+
+.entry.blue:after {
+  background: rgba(156, 202, 235, 1);
+}
+
+.entry.orange:after {
+  background: rgba(247, 167, 0, 1);
+}
+
+.entry.green:after {
+  background: rgba(153, 198, 109, 1);
+}
+
+.entry.yellow:after {
+  background: rgba(249, 233, 0, 1);
+}
+
+/* Animations are cool!  */
+@-webkit-keyframes moveFromTopFade {
+  from {
+    opacity: .3;
+    height: 0px;
+    margin-top: 0px;
+    -webkit-transform: translateY(-100%);
+  }
+}
+
+@-moz-keyframes moveFromTopFade {
+  from {
+    height: 0px;
+    margin-top: 0px;
+    -moz-transform: translateY(-100%);
+  }
+}
+
+@keyframes moveFromTopFade {
+  from {
+    height: 0px;
+    margin-top: 0px;
+    transform: translateY(-100%);
+  }
+}
+
+@-webkit-keyframes moveToTopFade {
+  to {
+    opacity: .3;
+    height: 0px;
+    margin-top: 0px;
+    opacity: 0.3;
+    -webkit-transform: translateY(-100%);
+  }
+}
+
+@-moz-keyframes moveToTopFade {
+  to {
+    height: 0px;
+    -moz-transform: translateY(-100%);
+  }
+}
+
+@keyframes moveToTopFade {
+  to {
+    height: 0px;
+    transform: translateY(-100%);
+  }
+}
+
+@-webkit-keyframes moveToTopFadeMonth {
+  to {
+    opacity: 0;
+    -webkit-transform: translateY(-30%) scale(.95);
+  }
+}
+
+@-moz-keyframes moveToTopFadeMonth {
+  to {
+    opacity: 0;
+    -moz-transform: translateY(-30%);
+  }
+}
+
+@keyframes moveToTopFadeMonth {
+  to {
+    opacity: 0;
+    -moz-transform: translateY(-30%);
+  }
+}
+
+@-webkit-keyframes moveFromTopFadeMonth {
+  from {
+    opacity: 0;
+    -webkit-transform: translateY(30%) scale(.95);
+  }
+}
+
+@-moz-keyframes moveFromTopFadeMonth {
+  from {
+    opacity: 0;
+    -moz-transform: translateY(30%);
+  }
+}
+
+@keyframes moveFromTopFadeMonth {
+  from {
+    opacity: 0;
+    -moz-transform: translateY(30%);
+  }
+}
+
+@-webkit-keyframes moveToBottomFadeMonth {
+  to {
+    opacity: 0;
+    -webkit-transform: translateY(30%) scale(.95);
+  }
+}
+
+@-moz-keyframes moveToBottomFadeMonth {
+  to {
+    opacity: 0;
+    -webkit-transform: translateY(30%);
+  }
+}
+
+@keyframes moveToBottomFadeMonth {
+  to {
+    opacity: 0;
+    -webkit-transform: translateY(30%);
+  }
+}
+
+@-webkit-keyframes moveFromBottomFadeMonth {
+  from {
+    opacity: 0;
+    -webkit-transform: translateY(-30%) scale(.95);
+  }
+}
+
+@-moz-keyframes moveFromBottomFadeMonth {
+  from {
+    opacity: 0;
+    -webkit-transform: translateY(-30%);
+  }
+}
+
+@keyframes moveFromBottomFadeMonth {
+  from {
+    opacity: 0;
+    -webkit-transform: translateY(-30%);
+  }
+}
+
+@-webkit-keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+}
+
+@-moz-keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes fadeOut {
+  to {
+    opacity: 0;
+  }
+}
+
+@-moz-keyframes fadeOut {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes fadeOutShink {
+  to {
+    opacity: 0;
+    padding: 0px;
+    height: 0px;
+  }
+}
+
+@-moz-keyframes fadeOutShink {
+  to {
+    opacity: 0;
+    padding: 0px;
+    height: 0px;
+  }
+}
+
+@keyframes fadeOutShink {
+  to {
+    opacity: 0;
+    padding: 0px;
+    height: 0px;
+  }
+}
+
+/* calendar css end */
+
+
+.dark-mode .btn-collapse-min {
+  color: white !important;
+}
+
+.input-search,
+.btn-search-switch {
+  background-color: white !important;
+  color: #464646 !important;
+}
+
+.dark-mode .input-search,
+.dark-mode .btn-search-switch {
+  background-color: #3f474e !important;
+  border: 1px solid #56606a !important;
+  /* border: 1px solid #137474!important; */
+  /* border: 1px solid #1a78d6!important; */
+  color: white !important;
+}
+
+/* .dark-mode .main-header {
+  background-color: #3f474e!important;
+  border: 1px solid #56606a!important;
+
+   color: white!important;
+}  */
+
+
+.or-separator label {
+  background-color: #fff;
+  padding: 0 0.4em;
+  position: relative;
+}
+
+.dark-mode .or-separator label {
+  color: white;
+  background-color: #1a1a1a !important;
+}
+
+.dark-mode .or-separator:before {
+  filter: invert(1);
+  -webkit-filter: invert(1);
+  background-color: #ffffff !important;
+}
+
+.dark-mode .or-separator:after {
+  color: white;
+  background-color: #ffffff !important;
+}
+
+/* .moon-icon {
+  color: #54555e;
+  height: 39px;
+}
+
+.dark-mode .moon-icon {
+  color: white;
+  height: 39px;
+} */
+
+.text-steps {
+  color: black;
+}
+
+.dark-mode .text-steps {
+  color: white;
+}
+
+.dark-mode .position-h2 {
+  color: white !important;
+}
+
+.submissions .table .td {
+  padding: 0 !important;
+}
+
+/* @import "~@angular/material/prebuilt-themes/indigo-pink.css"; */
+
+.interns-positions-search {
+  padding-bottom: 0 !important;
+  padding-top: 0 !important;
+  margin-right: 0 !important;
+  outline: none !important;
+  border-bottom: 2px solid rgb(255, 255, 255) !important;
+}
+
+.dark-mode .interns-positions-search {
+  color: white;
+  background-color: #343a40 !important;
+  border-bottom: 2px solid #343a40 !important;
+}
+
+.dark-mode .interns-positions-search:focus {
+  padding-bottom: 0 !important;
+  padding-top: 0 !important;
+  border-bottom: 2px solid #3498db !important;
+}
+
+.interns-positions-search:focus {
+  padding-bottom: 0 !important;
+  padding-top: 0 !important;
+  border-bottom: 2px solid rgb(0, 0, 0) !important;
+}
+
+.dark-mode #dep-manager-table {
+  background-color: #343a40 !important;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+/* ------------------------------------------------------------------- */
+/* Job List and resumes list li dark mode start
+---------------------------------------------------------------------- */
+.dark-mode .resumes-list li,
+.dark-mode .job-list li {
+  background-color: #343a40 !important;
+  border-top: 1px solid #e0e0e0;
+  position: relative;
+}
+
+.dark-mode .resumes-list li:last-child,
+.dark-mode .job-list li:last-child {
+  border-bottom: 1px solid #343a40 !important;
+}
+
+.dark-mode .resumes-list li:last-child,
+.dark-mode .job-list li:last-child {
+  border-bottom: 1px solid #343a40 !important;
+}
+
+.dark-mode .resumes-list li:nth-child(2n),
+.dark-mode .job-list li:nth-child(2n) {
+  background-color: #343a40 !important;
+}
+
+.dark-mode .resumes-list li.highlighted,
+.dark-mode .job-list li.highlighted {
+  background-color: #343a40 !important;
+  border-color: #e0da94 !important;
+  z-index: 100;
+}
+
+/* ------------------------------------------------------------------- */
+/* Job List and resumes list li dark mode end
+---------------------------------------------------------------------- */
+
+
+/* ------------------------------------------------------------------- */
+/* Sheets Div Typography
+---------------------------------------------------------------------- */
+
+.sheets-div h1,
+.sheets-div h2,
+.sheets-div h3,
+.sheets-div h4,
+.sheets-div h5,
+.sheets-div h6 {
+  color: #333;
+  font-weight: 500;
+}
+
+.dark-mode .sheets-div h1,
+.dark-mode .sheets-div h2,
+.dark-mode .sheets-div h3,
+.dark-mode .sheets-div h4,
+.dark-mode .sheets-div h5,
+.dark-mode .sheets-div h6 {
+  color: white !important;
+  font-weight: 500;
+}
+
+.v3_60 {
+  padding-top: 40px;
+  width: 449px;
+  height: 289px;
+  text-align: center;
+  margin: auto;
+}
+
+/* ------------------------------------------------------------------- */
+/* End of Sheets Div Typography
+---------------------------------------------------------------------- */
+
+@media only screen and (max-width: 480px) {
+  .app-loading .app-loading-logo img {
+    height: 72px;
+  }
+}
+
+.app-three-bounce {
+  width: 80px;
+  text-align: center;
+}
+
+.app-three-bounce .app-child {
+  width: 20px;
+  height: 20px;
+  background-color: #e6e6e6;
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: app-three-bounce 1.4s ease-in-out 0s infinite both;
+  animation: app-three-bounce 1.4s ease-in-out 0s infinite both;
+}
+
+.app-three-bounce .app-bounce1 {
+  -webkit-animation-delay: -0.32s;
+  animation-delay: -0.32s;
+}
+
+.app-three-bounce .app-bounce2 {
+  -webkit-animation-delay: -0.16s;
+  animation-delay: -0.16s;
+}
+
+@-webkit-keyframes app-three-bounce {
+
+  0%,
+  80%,
+  100% {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+  }
+
+  40% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+}
+
+@keyframes app-three-bounce {
+
+  0%,
+  80%,
+  100% {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+  }
+
+  40% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+}
+
+/* ------------------------------------------------------------------- */
+/* End of Sheets UOP-loading and bouncer style
+---------------------------------------------------------------------- */

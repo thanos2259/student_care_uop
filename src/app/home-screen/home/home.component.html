@@ -1,0 +1,70 @@
+<div id="content" class="content" role="main">
+  <div class="v3_50 container-fluid" id="a1">
+    <div class="row">
+      <div class="col-12 col-md-7 left-col">
+        <br />
+        <input type="checkbox" id="ChangeTheme" />
+        <div *ngIf="isRoute()" class="v3_60">
+          <app-home-header></app-home-header>
+          <span id="minorHeading" class="minor-heading">{{ 'HOME.LOGIN-TEXT' | translate }}</span>
+        </div>
+        <app-home-buttons *ngIf="isRoute()"></app-home-buttons>
+        <app-student-login-terms *ngIf="isTermsRoute()"></app-student-login-terms>
+        <app-company-login-terms *ngIf="isCompanyTermsRoute()"></app-company-login-terms>
+        <app-credentials-generic-login *ngIf="isCredentialsRoute()"></app-credentials-generic-login>
+        <app-credentials-generic-signup *ngIf="isSignupRoute()"></app-credentials-generic-signup>
+        <app-password-reset *ngIf="isPasswordResetRoute()"></app-password-reset>
+      </div>
+      <div class="col-12 col-md-5 allomiso">
+        <div>
+          <a href="#" class="nav-link dropdown-toggle selectpicker"
+            style="color:white; position:absolute; right:100px; top: 10px;" data-toggle="dropdown">
+            <i class="fas fa-lg fa-globe"></i>
+            {{'LANGUAGE-BTN' | translate}}
+          </a>
+          <ul class="dropdown-menu">
+            <li>
+              <a (click)="changeLang('gr')" class="cursor-pointer dropdown-item"><img
+                  src="../../../assets/images/greeceIcon.png" width="24" height="24" />
+                &nbsp; {{'LANGUAGE-SELECT-GR' | translate}}</a>
+            </li>
+            <li>
+              <a (click)="changeLang('en')" class="cursor-pointer dropdown-item">
+                <img src="../../../assets/images/englishIcon.png" width="24" height="24" />
+                &nbsp; {{'LANGUAGE-SELECT-EN' | translate}}</a>
+            </li>
+          </ul>
+        </div>
+
+        <div style="text-align: justify;" class="col-content">
+          <h2 class="pt-5"><br />{{'HOME.PURPOSE' | translate}}</h2>
+          <br />
+          <p>{{'HOME.PURPOSE-INTRO' | translate}}</p>
+          <ul>
+            <li>{{'HOME.PURPOSE-LI1' | translate}}</li>
+            <li>{{'HOME.PURPOSE-LI2' | translate}}</li>
+            <li>{{'HOME.PURPOSE-LI3' | translate}}</li>
+            <li>{{'HOME.PURPOSE-LI4' | translate}}</li>
+            <li>{{'HOME.PURPOSE-LI5' | translate}}</li>
+            <li>{{'HOME.PURPOSE-LI6' | translate}}</li>
+            <li>{{'HOME.PURPOSE-LI7' | translate}}</li>
+            <li>{{'HOME.PURPOSE-LI8' | translate}}</li>
+            <li>{{'HOME.PURPOSE-LI9' | translate}}</li>
+          </ul>
+        </div>
+        <br>
+        <div id="espaLogoBottom" class="m-auto pt-0 mt-0" style="width:61%; border-radius:20px;">
+          <img src="../../../assets/images/espaImage2.jpg" class="m-auto p-auto" style="min-width:0px; width:100%;
+            border-radius:10px; background-color:rgba(255,255,255,1); ">
+        </div>
+      </div>
+      <footer>
+        <div class="v3_54"></div>
+        <div class="v3_55"></div>
+      </footer>
+      <button id="darkmodeBtn" class="v3_56">
+        <i style="color:#2c2c2c;" class="fas fa-3x fa-adjust"></i>
+      </button>
+    </div>
+  </div>
+</div>

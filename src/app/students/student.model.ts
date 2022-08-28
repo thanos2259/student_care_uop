@@ -1,0 +1,49 @@
+export interface Student {
+  id: string;
+  sso_uid: number;
+  student_uid: number;
+  sn: string;
+  givenname: string;
+  edupersonaffiliation: string;
+  edupersonprimaryaffiliation: string;
+  edupersonorgdn: string;
+  edupersonentitlement: string;
+  schacpersonaluniquecode: string,
+  schacgender: number;
+  schacyearofbirth: number;
+  schacdateofbirth: string;
+  schacpersonaluniqueid: string;
+  department_id: number;
+  city: string;
+  ssn: string;
+  skills: string;
+  post_address: string;
+  phone: string;
+  other_edu: string;
+  mother_name: string;
+  mother_last_name: string;
+  location: string;
+  languages: string;
+  interests: string;
+  iban: string;
+  honors: string;
+  father_name: string;
+  father_last_name: string;
+  experience: string;
+  education: string;
+  doy: string;
+  country: string;
+  computer_skills: string;
+  address: string;
+  phase: number;
+  military_training: boolean;
+  working_state: boolean;
+  amea_cat: boolean;
+  score?: number; // may be null
+  ranking?: number; // may be null
+  Grade?: number;
+  Semester?: number;
+  Ects?: number;
+  Praktiki?: number;
+  mail?: string;
+}

@@ -1,3 +1,51 @@
+@media screen and (max-width: 1680px) {
+  #calendar {
+    zoom: 0.8;
+  }
+}
+
+@media screen and (max-width: 1410px) {
+  #calendar {
+    zoom: 0.6;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  #calendar {
+    zoom: 0.5;
+  }
+}
+
+@media screen and (max-width: 1050px) {
+  #calendar {
+    zoom: 0.45;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  #calendar {
+    zoom: 1;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  #calendar {
+    zoom: 0.8;
+  }
+}
+
+@media screen and (max-width: 433px) {
+  #calendar {
+    zoom: 0.7;
+  }
+}
+
+@media screen and (max-width: 377px) {
+  #calendar {
+    zoom: 0.6;
+  }
+}
+
 .bg-btn-stat {
   background-color: rgba(34, 73, 87, 1);
   color: white;

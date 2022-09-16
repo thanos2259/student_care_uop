@@ -32,8 +32,7 @@ export class PracticeEnableComponent implements OnInit {
     this.firstFormGroup = this._formBuilder.group({
       nameCtrl: [],
       surnameCtrl: [],
-      fatherNameCtrl: ['', Validators.required],
-      fatherSurnameCtrl: ['', Validators.required],
+      fatherNameCtrl: ['', Validators.required]
     });
     this.secondFormGroup = this._formBuilder.group({
       ssnControl: ['', Validators.required],

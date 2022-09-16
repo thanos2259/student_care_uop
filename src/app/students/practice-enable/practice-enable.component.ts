@@ -1,7 +1,6 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { mergeMap } from 'rxjs';
-import { Utils } from 'src/app/MiscUtils';
 import Swal from 'sweetalert2';
 import { Student } from '../student.model';
 import { StudentsService } from '../student.service';
@@ -22,7 +21,6 @@ export class PracticeEnableComponent implements OnInit {
   contactFormGroup!: FormGroup;
   specialDataFormGroup!: FormGroup;
   studentsSSOData: Student[] = [];
-  gender!: String;
 
   constructor(public studentsService: StudentsService, private _formBuilder: FormBuilder) { }
 
@@ -30,19 +28,12 @@ export class PracticeEnableComponent implements OnInit {
     this.studentsService.getStudents()
       .subscribe((students: Student[]) => {
         this.studentsSSOData = students;
-        this.gender = this.studentsSSOData[0].schacgender == 1 ? 'Άνδρας' : 'Γυναίκα';
-        this.studentsSSOData[0].schacdateofbirth = Utils.reformatDateOfBirth(this.studentsSSOData[0].schacdateofbirth);
-        this.studentsSSOData[0].schacpersonaluniqueid = this.getSSN(this.studentsSSOData[0].schacpersonaluniqueid);
       });
     this.firstFormGroup = this._formBuilder.group({
-      nameCtrl: ['', Validators.required],
-      surnameCtrl: ['', Validators.required],
+      nameCtrl: [],
+      surnameCtrl: [],
       fatherNameCtrl: ['', Validators.required],
       fatherSurnameCtrl: ['', Validators.required],
-      motherNameCtrl: ['', Validators.required],
-      motherSurnameCtrl: ['', Validators.required],
-      dobCtrl: ['', Validators.required],
-      genderCtrl: ['', Validators.required]
     });
     this.secondFormGroup = this._formBuilder.group({
       ssnControl: ['', Validators.required],

@@ -38,11 +38,11 @@ const routes: Routes = [{
     component: StudentComponent
   },
   {
-    path: 'enable_intern/:id',
+    path: 'accommodation/:id',
     component: StudentComponent
   },
   {
-    path: 'myinternship/:id',
+    path: 'meals/:id',
     component: StudentComponent
   },
   {
@@ -55,10 +55,6 @@ const routes: Routes = [{
   },
   {
     path: 'manuals',
-    component: StudentComponent
-  },
-  {
-    path: 'calendar',
     component: StudentComponent
   },
   {

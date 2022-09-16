@@ -12,7 +12,6 @@ import { HomeComponent } from './home-screen/home/home.component';
 import { StudentProfileComponent } from './students/student-profile/student-profile.component';
 import { ManualsComponent } from './generic-components/manuals/manuals.component';
 import { AboutComponent } from './generic-components/about/about.component';
-import { CalendarComponent } from './students/calendar/calendar.component';
 import { StudentHomeComponent } from './students/student-home/student-home.component';
 import { StudentLoginTermsComponent } from './home-screen/student-login-terms/student-login-terms.component';
 import { HomeButtonsComponent } from './home-screen/home-buttons/home-buttons.component';
@@ -57,7 +56,6 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     StudentProfileComponent,
     ManualsComponent,
     AboutComponent,
-    CalendarComponent,
     StudentHomeComponent,
     StudentLoginTermsComponent,
     HomeButtonsComponent,

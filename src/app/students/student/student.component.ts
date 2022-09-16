@@ -22,11 +22,7 @@ export class StudentComponent implements OnInit, OnDestroy {
   private language!: string;
   dateFrom!: string;
   dateTo!: string;
-  isDeclarationEnabled!: boolean;
   areOptionsEnabled!: boolean;
-  private INTEREST_EXPRESSION_PHASE: number = 1;
-  private STUDENT_SELECTION_PHASE: number = 2;
-  private PREFERENCE_DECLARATION_PHASE: number = 3;
 
   constructor(public studentsService: StudentsService, private router: Router, public authService: AuthService, public translate: TranslateService) {
     translate.addLangs(['en', 'gr']);
@@ -55,7 +51,6 @@ export class StudentComponent implements OnInit, OnDestroy {
           .subscribe((students: Student[]) => {
             this.studentsSSOData = students;
             this.studentsSSOData[0].schacdateofbirth = Utils.reformatDateOfBirth(this.studentsSSOData[0].schacdateofbirth);
-            this.studentsSSOData[0].schacpersonaluniqueid = this.getSSN(this.studentsSSOData[0].schacpersonaluniqueid);
           });
       });
   }
@@ -64,11 +59,6 @@ export class StudentComponent implements OnInit, OnDestroy {
     this.studentSubscription?.unsubscribe();
   }
 
-  // This function is used to get the AMKA of the student
-  private getSSN(str: string): string {
-    const personalIdArray = str.split(":");
-    return personalIdArray[personalIdArray.length - 1];
-  }
 
   onLogout() {
     this.authService.logout();
@@ -104,7 +94,7 @@ export class StudentComponent implements OnInit, OnDestroy {
   }
 
   isInternshipRoute() {
-    return this.router.url === '/student/myinternship/' + this.authService.getSessionId();
+    return this.router.url === '/student/meals/' + this.authService.getSessionId();
   }
 
   isPositionsRoute() {
@@ -117,10 +107,6 @@ export class StudentComponent implements OnInit, OnDestroy {
 
   isManualsRoute() {
     return this.router.url === '/student/manuals';
-  }
-
-  isCalendarRoute() {
-    return this.router.url === '/student/calendar';
   }
 
   isSheetsRoute() {
@@ -152,6 +138,6 @@ export class StudentComponent implements OnInit, OnDestroy {
   }
 
   isPracticeEnableRoute() {
-    return this.router.url === '/student/enable_intern/' + this.authService.getSessionId();
+    return this.router.url === '/student/accommodation/' + this.authService.getSessionId();
   }
 }

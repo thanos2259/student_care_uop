@@ -1,128 +1,139 @@
-<!-- <button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
-  {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
-</button> -->
 <section class="content-header">
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1>Εκδήλωση ενδιαφέροντος για πρακτική άσκηση</h1>
+        <h1>{{'STUDENT.HOUSING-TITLE' | translate}}</h1>
       </div>
       <div class="col-sm-6">
-        <!-- <ol class=" float-sm-right">
-          <li class="breadcrumb-item"><a href="/student">student</a></li>
-          <li class="breadcrumb-item active">profile</li>
-        </ol> -->
       </div>
     </div>
   </div>
-  <!-- /.container-fluid -->
 </section>
 <div class="alert alert-danger pb-0" role="alert">
   <ul>
-    <li>Μέρος των στοιχείων αντλούνται από τo φοιτητολόγιο. Σε περίπτωση που
-      δεν συμφωνείτε επικοινωνήστε με την γραμματεία</li>
-    <li>Υπενθυμίζεται ότι η ηλεκτρονική αίτηση επέχει θέση υπεύθυνης δήλωσης</li>
+    <li>{{'STUDENT.HOUSING-DANGER1' | translate}}</li>
+    <li>{{'STUDENT.HOUSING-DANGER2' | translate}}</li>
   </ul>
 </div>
-<mat-stepper orientation="vertical" [linear]="isLinear" #stepper>
+<button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
+  {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
+</button>
+<mat-stepper orientation="horizontal" [linear]="isLinear" #stepper>
   <mat-step [stepControl]="firstFormGroup">
-    <form [formGroup]="firstFormGroup">
-      <ng-template matStepLabel>Βασικά στοιχεία</ng-template>
-      <mat-form-field class="mr-2" appearance="fill">
-        <mat-label>Όνομα</mat-label>
-        <input matInput class="inactive-field" placeholder="Όνομα" id="name" name="name"
-          [ngModel]="studentsSSOData[0]?.givenname" formControlName="nameCtrl" readonly required>
+    <form class="mt-4 center" [formGroup]="firstFormGroup">
+      <ng-template matStepLabel>{{'STUDENT.HOUSING-INFO' | translate}}</ng-template>
+      <mat-form-field class="mr-2 w-25" appearance="fill">
+        <mat-label>{{'STUDENT.HOUSING-INFO1' | translate}}</mat-label>
+        <input matInput placeholder="{{'STUDENT.HOUSING-INFO1' | translate}}" [ngModel]="studentsSSOData[0]?.givenname"
+          formControlName="nameCtrl" readonly>
       </mat-form-field>
-      <mat-form-field appearance="fill">
-        <mat-label>Επώνυμο</mat-label>
-        <input matInput class="inactive-field" placeholder="Επώνυμο" name="surname" [ngModel]="studentsSSOData[0]?.sn"
-          formControlName="surnameCtrl" readonly required>
+      <mat-form-field class="w-25" appearance="fill">
+        <mat-label>{{'STUDENT.HOUSING-INFO2' | translate}}</mat-label>
+        <input matInput placeholder="{{'STUDENT.HOUSING-INFO2' | translate}}" [ngModel]="studentsSSOData[0]?.sn"
+          formControlName="surnameCtrl" readonly>
       </mat-form-field><br>
-      <mat-form-field class="mr-2" appearance="fill">
-        <mat-label>Όνομα Πατρός</mat-label>
-        <input matInput placeholder="Όνομα Πατρός" name="father_name" ngModel
+      <mat-form-field class="mr-2 w-25">
+        <mat-label>{{'STUDENT.HOUSING-INFO3' | translate}}</mat-label>
+        <input matInput placeholder="{{'STUDENT.HOUSING-INFO3' | translate}}"
           [ngModel]="studentsSSOData[0]?.father_name" formControlName="fatherNameCtrl" required>
       </mat-form-field>
-      <mat-form-field appearance="fill">
-        <mat-label>Επώνυμο Πατρός</mat-label>
-        <input matInput placeholder="Επώνυμο Πατρός" name="father_last_name" ngModel
-          [ngModel]="studentsSSOData[0]?.father_last_name" formControlName="fatherSurnameCtrl" required>
-      </mat-form-field><br>
-      <mat-form-field class="mr-2" appearance="fill">
-        <mat-label>Όνομα Μητρός</mat-label>
-        <input matInput placeholder="Όνομα Μητρός" name="mother_name" ngModel
-          [ngModel]="studentsSSOData[0]?.mother_name" formControlName="motherNameCtrl" required>
+      <mat-form-field class="w-25" appearance="fill">
+        <mat-label>{{'STUDENT.HOUSING-INFO4' | translate}}</mat-label>
+        <input matInput placeholder="{{'STUDENT.HOUSING-INFO4' | translate}}" formControlName="firstCtrl" readonly>
       </mat-form-field>
-      <mat-form-field appearance="fill">
-        <mat-label>Επώνυμο Μητρός</mat-label>
-        <input matInput placeholder="Επώνυμο Μητρός" name="mother_last_name"
-          [ngModel]="studentsSSOData[0]?.mother_last_name" formControlName="motherSurnameCtrl" required>
+      <mat-form-field class="w-50" appearance="fill">
+        <mat-label>{{'STUDENT.HOUSING-INFO5' | translate}}</mat-label>
+        <input matInput placeholder="{{'STUDENT.HOUSING-INFO5' | translate}}" formControlName="firstCtrl" readonly>
       </mat-form-field><br>
-      <mat-form-field class="mr-2" appearance="fill">
-        <mat-label>Ημερομηνία Γέννησης</mat-label>
-        <input matInput class="inactive-field" placeholder="Ημερομηνία Γέννησης"
-          [ngModel]="studentsSSOData[0]?.schacdateofbirth" formControlName="dobCtrl" name="schacdateofbirth" readonly
-          min="1900-01-01" max="2800-01-01" required>
+      <mat-form-field class="w-50">
+        <mat-label>{{'STUDENT.HOUSING-INFO6' | translate}}</mat-label>
+        <input matInput placeholder="{{'STUDENT.HOUSING-INFO7' | translate}}" readonly>
+        <mat-select required>
+          <mat-option value="option1">Option 1</mat-option>
+          <mat-option value="option2">Option 2</mat-option>
+          <mat-option value="option3">Option 3</mat-option>
+        </mat-select>
+      </mat-form-field><br>
+      <mat-form-field class="mr-2 w-25">
+        <mat-label>{{'STUDENT.HOUSING-INFO8' | translate}}</mat-label>
+        <input matInput placeholder="{{'STUDENT.HOUSING-INFO8' | translate}}" formControlName="firstCtrl" required>
       </mat-form-field>
-      <mat-form-field appearance="fill">
-        <mat-label>Φύλο</mat-label>
-        <input matInput class="inactive-field" name="sex" placeholder="Φύλο" [ngModel]="gender"
-          formControlName="genderCtrl" readonly required>
+      <mat-form-field class="w-25">
+        <mat-label>{{'STUDENT.HOUSING-INFO9' | translate}}</mat-label>
+        <input matInput placeholder="{{'STUDENT.HOUSING-INFO9' | translate}}" formControlName="firstCtrl" required>
+      </mat-form-field><br>
+      <mat-form-field class="w-25" appearance="fill">
+        <mat-label>{{'STUDENT.HOUSING-INF10' | translate}}</mat-label>
+        <input matInput placeholder="{{'STUDENT.HOUSING-INF10' | translate}}" formControlName="firstCtrl" readonly>
       </mat-form-field>
       <div>
-        <button mat-button matStepperNext>Επόμενο</button>
+        <button mat-button matStepperNext>{{'STUDENT.HOUSING-INF11' | translate}}</button>
       </div>
     </form>
   </mat-step>
+
+
   <mat-step [stepControl]="secondFormGroup">
-    <form [formGroup]="secondFormGroup">
-      <ng-template matStepLabel>Στοιχεία Σύμβασης</ng-template>
-      <mat-form-field class="mr-2" appearance="fill">
-        <mat-label>ΑΦΜ</mat-label>
-        <input matInput name="ssn" ngModel [ngModel]="studentsSSOData[0]?.ssn" id="inputName" placeholder="ΑΦΜ"
-          formControlName="ssnControl" required>
-      </mat-form-field><br>
-      <mat-form-field appearance="fill">
-        <mat-label>ΔΟΥ</mat-label>
-        <input matInput name="doy" ngModel [ngModel]="studentsSSOData[0]?.doy" id="inputDOY" placeholder="ΔΟΥ*"
-          formControlName="doyControl" required>
-      </mat-form-field><br>
-      <mat-form-field appearance="fill">
-        <mat-label>IBAN</mat-label>
-        <input matInput name="iban" id="iban" [ngModel]="studentsSSOData[0]?.iban" ngModel placeholder="ΔΟΥ*"
-          formControlName="ibanControl" required>
-      </mat-form-field><br>
-      <mat-form-field appearance="fill">
-        <mat-label>ΑΜΚΑ</mat-label>
-        <input matInput class="inactive-field" ngModel [ngModel]="studentsSSOData[0]?.schacpersonaluniqueid" id="amka"
-          name="amka" placeholder="ΑΜΚΑ*" formControlName="amkaControl" required readonly>
-      </mat-form-field>
-      <br><br>
-      <h6>Ανεβάστε φωτογραφία που να απεικονίζεται το ΑΦΜ <i class="fa fa-info-circle fa-lg fa-icon"
-          data-toggle="tooltip" data-placement="top"
-          title="Υποστηριζόμενος τύπος αρχέιων: .pdf .jpg .png .webp .jpeg .gif .doc .docx">
-        </i></h6>
-      <mat-form-field>
-        <ngx-mat-file-input (change)="validateFiles('ssnFile')" formControlName="ssnFile" placeholder="Φωτογραφία ΑΦΜ">
-        </ngx-mat-file-input>
-        <!-- <mat-icon matSuffix>insert_photo</mat-icon> -->
-      </mat-form-field>
-      <br><br>
-      <h6>Ανεβάστε φωτογραφία που να απεικονίζεται το IBAN <i class="fa fa-info-circle fa-lg fa-icon"
-          data-toggle="tooltip" data-placement="top"
-          title="Υποστηριζόμενος τύπος αρχέιων: .pdf .jpg .png .webp .jpeg .gif .doc .docx">
-        </i></h6>
-      <mat-form-field>
-        <ngx-mat-file-input (change)="validateFiles('ibanFile')" formControlName="ibanFile"
-          placeholder="Φωτογραφία ΙΒΑΝ"></ngx-mat-file-input>
-        <!-- <mat-icon matSuffix>insert_photo</mat-icon> -->
-      </mat-form-field>
+    <form class="mt-4" [formGroup]="secondFormGroup">
+      <ng-template matStepLabel>{{'STUDENT.HOUSING-INF12' | translate}}</ng-template>
+
+      <ul>
+
+        <li>
+          {{'STUDENT.HOUSING-INF13' | translate}} <span class="font-weight-bold">{{'STUDENT.HOUSING-INF14' | translate}}
+          </span> <br>
+          <span class="font-italic">
+            {{'STUDENT.HOUSING-INFSTATIC' | translate}}
+          </span>
+          <i class="fa fa-info-circle fa-lg fa-icon" data-toggle="tooltip" data-placement="top"
+            title="{{'STUDENT.HOUSING-INFSTATIC2' | translate}}">
+          </i>
+          <mat-form-field class="w-100" appearance="fill">
+            <mat-label>{{'STUDENT.HOUSING-INFSTATIC1' | translate}}</mat-label>
+            <ngx-mat-file-input (change)="validateFiles('ssnFile')" formControlName="ssnFile">
+            </ngx-mat-file-input>
+          </mat-form-field>
+        </li>
+
+        <li>
+          {{'STUDENT.HOUSING-INF15' | translate}} <span class="font-weight-bold">{{'STUDENT.HOUSING-INF16' | translate}}
+          </span> {{'STUDENT.HOUSING-INF17' | translate}} <br>
+          <span class="font-italic">
+            {{'STUDENT.HOUSING-INFSTATIC' | translate}}
+          </span>
+          <i class="fa fa-info-circle fa-lg fa-icon" data-toggle="tooltip" data-placement="top"
+            title="{{'STUDENT.HOUSING-INFSTATIC2' | translate}}">
+          </i>
+          <mat-form-field class="w-100" appearance="fill">
+            <mat-label>{{'STUDENT.HOUSING-INFSTATIC1' | translate}}</mat-label>
+            <ngx-mat-file-input (change)="validateFiles('ssnFile')" formControlName="ssnFile">
+            </ngx-mat-file-input>
+          </mat-form-field>
+        </li>
+
+
+
+
+      </ul>
       <div>
-        <button mat-button matStepperPrevious>Προηγούμενο</button>
-        <button mat-button matStepperNext>Επόμενο</button>
+        <button mat-button matStepperPrevious>{{'STUDENT.HOUSING-BACK' | translate}}</button>
+        <button mat-button matStepperNext>{{'STUDENT.HOUSING-INF11' | translate}}</button>
       </div>
     </form>
   </mat-step>
+
+
+
+
+
+
+
+
+
+
+
+
+  <!--
   <mat-step [stepControl]="specialDataFormGroup">
     <form [formGroup]="specialDataFormGroup">
       <ng-template matStepLabel>Ειδικά στοιχεία</ng-template>
@@ -130,7 +141,7 @@
       <mat-form-field class="mr-2" appearance="fill">
         <mat-label>Επιλέξτε</mat-label>
         <mat-select formControlName="ameaCatCtrl" required>
-          <!-- <mat-option>-- None --</mat-option> -->
+
           <mat-option value="1">ΝΑΙ</mat-option>
           <mat-option value="0">ΟΧΙ</mat-option>
         </mat-select>
@@ -140,7 +151,7 @@
       <mat-form-field class="mr-2" appearance="fill">
         <mat-label>Επιλέξτε</mat-label>
         <mat-select formControlName="workingCatCtrl" required>
-          <!-- <mat-option>-- None --</mat-option> -->
+
           <mat-option value="1">ΝΑΙ</mat-option>
           <mat-option value="0">ΟΧΙ</mat-option>
         </mat-select>
@@ -150,7 +161,7 @@
       <mat-form-field class="mr-2" appearance="fill">
         <mat-label>Επιλέξτε</mat-label>
         <mat-select formControlName="armyCatCtrl" required>
-          <!-- <mat-option>-- None --</mat-option> -->
+
           <mat-option value="1">ΝΑΙ</mat-option>
           <mat-option value="0">ΟΧΙ</mat-option>
         </mat-select>
@@ -198,17 +209,18 @@
       <div>
         <button mat-button matStepperPrevious>Προηγούμενο</button>
         <button mat-button matStepperNext (click)="updateStudentsAllDetails()">Επόμενο</button>
-        <!-- <button mat-button matStepperNext>Επόμενο</button> -->
+
       </div>
     </form>
   </mat-step>
   <mat-step>
     <ng-template matStepLabel>Ολοκλήρωση αίτησης</ng-template>
-    <p><i class="fas fa-2x fa-check text-success"></i> Καταχωρήθηκε η αίτησή σας, θα γίνει ο έλεγχος και αν πληρείτε τις
+    <p><i class="fas fa-2x fa-check text-success"></i> Καταχωρήθηκε η αίτησή σας, θα γίνει ο έλεγχος και αν πληρείτε
+      τις
       προϋποθέσεις για πραγματοποίηση πρακτικής άσκησης, θα ενεργοποιήθει η πρόσβαση σας στο σύστημα.</p>
-    <div>
-      <!-- <button mat-button matStepperPrevious>Πίσω</button> -->
-      <!-- <button mat-button (click)="stepper.reset()">Καθαρισμός Φόρμας</button> -->
-    </div>
-  </mat-step>
+    <div> -->
+  <!-- <button mat-button matStepperPrevious>Πίσω</button> -->
+  <!-- <button mat-button (click)="stepper.reset()">Καθαρισμός Φόρμας</button> -->
+  <!-- </div>
+  </mat-step>-->
 </mat-stepper>

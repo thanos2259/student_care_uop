@@ -8,6 +8,8 @@ const msql = require('mssql');
 const getAllStudents = async () => {
   try {
     const resultsSSOUsers = await pool.query("SELECT * FROM sso_users \
+                                              INNER JOIN student_users \
+                                              ON sso_users.uuid = student_users.sso_uid \
                                               WHERE sso_users.edupersonprimaryaffiliation = 'student'");
     return resultsSSOUsers.rows;
   } catch (error) {
@@ -17,9 +19,20 @@ const getAllStudents = async () => {
 
 const getStudentsSecretaryDetails = async (departmentId, AM) => {
   try {
-    const procedureResults = await getStudentFactorProcedure(MiscUtils.departmentsMap[departmentId], MiscUtils.splitStudentsAM(AM));
+    let procedureResults;
+    try {
+      procedureResults = await getStudentFactorProcedure(MiscUtils.departmentsMap[departmentId], MiscUtils.splitStudentsAM(AM));
+    } catch (exc) {
+      console.log("SQLException or timeout occurred: " + exc.message);
+      return {
+        'Grade': 0,
+        'Ects': 0,
+        'Semester': 0,
+        'Praktiki': 0
+      };
+    }
 
-    if (procedureResults.Grade == null || procedureResults.Ects == null || procedureResults.Semester == null || procedureResults.Praktiki == null) {
+    if (!procedureResults.Grade || !procedureResults.Ects || !procedureResults.Semester || !procedureResults.Praktiki) {
       console.error("some student details fetched from procedure were null");
       return {
         'Grade': 0,
@@ -49,13 +62,16 @@ const getStudentFactorProcedure = async (depId, studentAM) => {
     return result.recordset[0];
   } catch (error) {
     // error checks
-    console.log("error: " + error);
+    throw Error('error' + error);
+    //console.log("error: " + error);
   }
 };
 
 const getStudentById = async (id) => {
   try {
     const resultsSSOUsers = await pool.query("SELECT * FROM sso_users \
+                                              INNER JOIN student_users \
+                                              ON sso_users.uuid = student_users.sso_uid \
                                               WHERE sso_users.uuid = $1", [id]);
     // const student = resultsSSOUsers.rows;
     // return student;
@@ -72,6 +88,8 @@ const getStudentById = async (id) => {
 const loginStudent = async (username) => {
   try {
     const resultsSSOUsers = await pool.query("SELECT * FROM sso_users \
+                                              INNER JOIN student_users \
+                                              ON sso_users.uuid = student_users.sso_uid \
                                               WHERE sso_users.edupersonprimaryaffiliation = 'student' \
                                               AND sso_users.id=$1", [username]);
     if (resultsSSOUsers.rowCount >= 1) {

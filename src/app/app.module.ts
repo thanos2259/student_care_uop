@@ -36,7 +36,7 @@ import { AuthInterceptor } from './auth/auth.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { PracticeEnableComponent } from './students/practice-enable/practice-enable.component';
+import { accommodationComponent } from './students/accommodation/accommodation.component';
 import { CredentialsGenericSignupComponent } from './home-screen/credentials-generic-signup/credentials-generic-signup.component';
 import { HomeHeaderComponent } from './home-screen/home-header/home-header.component';
 import { UopLoadingScreenComponent } from './generic-components/uop-loading-screen/uop-loading-screen.component';
@@ -62,7 +62,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     CompanyLoginTermsComponent,
     CredentialsGenericLoginComponent,
     ContactComponent,
-    PracticeEnableComponent,
+    accommodationComponent,
     CredentialsGenericSignupComponent,
     HomeHeaderComponent,
     UopLoadingScreenComponent,

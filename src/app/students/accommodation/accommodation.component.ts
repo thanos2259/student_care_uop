@@ -6,15 +6,15 @@ import { Student } from '../student.model';
 import { StudentsService } from '../student.service';
 
 @Component({
-  selector: 'app-practice-enable',
-  templateUrl: './practice-enable.component.html',
-  styleUrls: ['./practice-enable.component.css']
+  selector: 'app-accommodation',
+  templateUrl: './accommodation.component.html',
+  styleUrls: ['./accommodation.component.css']
 })
 
 /**
  * @title enable practice with vertical stepper
  */
-export class PracticeEnableComponent implements OnInit {
+export class accommodationComponent implements OnInit {
   isLinear = true;
   firstFormGroup!: FormGroup;
   secondFormGroup!: FormGroup;

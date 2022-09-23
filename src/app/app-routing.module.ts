@@ -46,41 +46,12 @@ const routes: Routes = [{
     component: StudentComponent
   },
   {
-    path: 'positions/:id',
-    component: StudentComponent
-  },
-  {
     path: 'about',
     component: StudentComponent
   },
   {
     path: 'manuals',
     component: StudentComponent
-  },
-  {
-    path: 'sheets',
-    component: StudentComponent,
-    children: [
-      {
-        path: ':id',
-        component: StudentComponent
-      },
-      {
-        path: 'input-sheet/:id',
-        component: StudentComponent
-      },
-      {
-        path: 'output-sheet/:id',
-        component: StudentComponent
-      },
-      {
-        path: 'input-sheet-preview/:id',
-        component: StudentComponent
-      },
-      {
-        path: 'evaluation-form/:id',
-        component: StudentComponent
-      }]
   },
   {
     path: 'student-contract',

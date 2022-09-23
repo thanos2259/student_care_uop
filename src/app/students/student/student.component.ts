@@ -93,14 +93,6 @@ export class StudentComponent implements OnInit, OnDestroy {
     return this.router.url === '/student/' + this.authService.getSessionId();
   }
 
-  isInternshipRoute() {
-    return this.router.url === '/student/meals/' + this.authService.getSessionId();
-  }
-
-  isPositionsRoute() {
-    return this.router.url === '/student/positions/' + this.authService.getSessionId();
-  }
-
   isAboutRoute() {
     return this.router.url === '/student/about';
   }
@@ -109,35 +101,15 @@ export class StudentComponent implements OnInit, OnDestroy {
     return this.router.url === '/student/manuals';
   }
 
-  isSheetsRoute() {
-    return this.router.url === '/student/sheets/' + this.authService.getSessionId();
-  }
-
-  isSheetInputRoute() {
-    return this.router.url === '/student/sheets/input-sheet/' + this.authService.getSessionId();
-  }
-
-  isSheetOutputRoute() {
-    return this.router.url === '/student/sheets/output-sheet/' + this.authService.getSessionId();
-  }
-
-  isSheetInputPreviewRoute() {
-    return this.router.url === '/student/sheets/input-sheet-preview/' + this.authService.getSessionId();
-  }
-
   isContactRoute() {
     return this.router.url === '/student/contact'
   }
 
-  isStudentContractRoute() {
-    return this.router.url === '/student/student-contract'
-  }
-
-  isEvaluationSheetRoute() {
-    return this.router.url === '/student/sheets/evaluation-form/' + this.authService.getSessionId()
-  }
-
   isAccommodationRoute() {
     return this.router.url === '/student/accommodation/' + this.authService.getSessionId();
+  }
+
+  isMealsRoute() {
+    return this.router.url === '/student/meals/' + this.authService.getSessionId();
   }
 }

@@ -1,0 +1,544 @@
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>{{'STUDENT.HOUSING-TITLE2' | translate}}</h1>
+      </div>
+      <div class="col-sm-6">
+      </div>
+    </div>
+  </div>
+</section>
+<div class="alert alert-danger pb-0" role="alert">
+  <ul>
+    <li>{{'STUDENT.HOUSING-DANGER1' | translate}}</li>
+    <li>{{'STUDENT.HOUSING-DANGER2' | translate}}</li>
+  </ul>
+</div>
+<button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
+  {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
+</button>
+<mat-stepper orientation="horizontal" [linear]="isLinear" #stepper>
+  <mat-step [stepControl]="firstFormGroup">
+    <form class="mt-4 center" [formGroup]="firstFormGroup">
+      <ng-template matStepLabel>{{'STUDENT.HOUSING-INFO' | translate}}</ng-template>
+      <mat-form-field class="mr-2 w-25" appearance="fill">
+        <mat-label>{{'STUDENT.HOUSING-INFO1' | translate}}</mat-label>
+        <input matInput placeholder="{{'STUDENT.HOUSING-INFO1' | translate}}" [ngModel]="studentsSSOData[0]?.givenname"
+          formControlName="nameCtrl" readonly>
+      </mat-form-field>
+      <mat-form-field class="w-25" appearance="fill">
+        <mat-label>{{'STUDENT.HOUSING-INFO2' | translate}}</mat-label>
+        <input matInput placeholder="{{'STUDENT.HOUSING-INFO2' | translate}}" [ngModel]="studentsSSOData[0]?.sn"
+          formControlName="surnameCtrl" readonly>
+      </mat-form-field><br>
+      <mat-form-field class="mr-2 w-25">
+        <mat-label>{{'STUDENT.HOUSING-INFO3' | translate}}</mat-label>
+        <input matInput placeholder="{{'STUDENT.HOUSING-INFO3' | translate}}"
+          [ngModel]="studentsSSOData[0]?.father_name" formControlName="fatherNameCtrl" required>
+      </mat-form-field>
+      <mat-form-field class="w-25" appearance="fill">
+        <mat-label>{{'STUDENT.HOUSING-INFO4' | translate}}</mat-label>
+        <input matInput placeholder="{{'STUDENT.HOUSING-INFO4' | translate}}" formControlName="firstCtrl" readonly>
+      </mat-form-field>
+      <mat-form-field class="w-50" appearance="fill">
+        <mat-label>{{'STUDENT.HOUSING-INFO5' | translate}}</mat-label>
+        <input matInput placeholder="{{'STUDENT.HOUSING-INFO5' | translate}}" formControlName="firstCtrl" readonly>
+      </mat-form-field><br>
+      <mat-form-field class="w-50">
+        <mat-label>{{'STUDENT.HOUSING-INFO6' | translate}}</mat-label>
+        <input matInput placeholder="{{'STUDENT.HOUSING-INFO7' | translate}}" readonly>
+        <mat-select required>
+          <mat-option value="option1">Option 1</mat-option>
+          <mat-option value="option2">Option 2</mat-option>
+          <mat-option value="option3">Option 3</mat-option>
+        </mat-select>
+      </mat-form-field><br>
+      <mat-form-field class="mr-2 w-25">
+        <mat-label>{{'STUDENT.HOUSING-INFO8' | translate}}</mat-label>
+        <input matInput placeholder="{{'STUDENT.HOUSING-INFO8' | translate}}" formControlName="firstCtrl" required>
+      </mat-form-field>
+      <mat-form-field class="w-25">
+        <mat-label>{{'STUDENT.HOUSING-INFO9' | translate}}</mat-label>
+        <input matInput placeholder="{{'STUDENT.HOUSING-INFO9' | translate}}" formControlName="firstCtrl" required>
+      </mat-form-field><br>
+      <mat-form-field class="w-25" appearance="fill">
+        <mat-label>{{'STUDENT.HOUSING-INF10' | translate}}</mat-label>
+        <input matInput placeholder="{{'STUDENT.HOUSING-INF10' | translate}}" formControlName="firstCtrl" readonly>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperNext>{{'STUDENT.HOUSING-INF11' | translate}}</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="secondFormGroup">
+    <form class="mt-4" [formGroup]="secondFormGroup">
+      <ng-template matStepLabel>{{'STUDENT.HOUSING-INF12' | translate}}</ng-template>
+      <ul>
+        <li>
+          {{'STUDENT.HOUSING-INF13' | translate}} <span class="font-weight-bold">{{'STUDENT.HOUSING-INF14' | translate}}
+          </span> <br>
+          <span class="font-italic">
+            {{'STUDENT.HOUSING-INFSTATIC' | translate}}
+          </span>
+          <i class="fa fa-info-circle fa-lg fa-icon" data-toggle="tooltip" data-placement="top"
+            title="{{'STUDENT.HOUSING-INFSTATIC2' | translate}}">
+          </i>
+          <mat-form-field class="w-100" appearance="fill">
+            <mat-label>{{'STUDENT.HOUSING-INFSTATIC1' | translate}}</mat-label>
+            <ngx-mat-file-input (change)="validateFiles('ssnFile')" formControlName="ssnFile">
+            </ngx-mat-file-input>
+          </mat-form-field>
+        </li>
+        <br>
+        <br>
+        <li>
+          {{'STUDENT.HOUSING-INF15' | translate}} <span class="font-weight-bold">{{'STUDENT.HOUSING-INF16' | translate}}
+          </span> <br>
+          <span class="font-italic">
+            {{'STUDENT.HOUSING-INFSTATIC' | translate}}
+          </span>
+          <i class="fa fa-info-circle fa-lg fa-icon" data-toggle="tooltip" data-placement="top"
+            title="{{'STUDENT.HOUSING-INFSTATIC2' | translate}}">
+          </i>
+          <mat-form-field class="w-100" appearance="fill">
+            <mat-label>{{'STUDENT.HOUSING-INFSTATIC1' | translate}}</mat-label>
+            <ngx-mat-file-input (change)="validateFiles('ssnFile')" formControlName="ssnFile">
+            </ngx-mat-file-input>
+          </mat-form-field>
+        </li>
+        <br>
+        <br>
+        <li>
+          <span class="font-weight-bold">{{'STUDENT.HOUSING-INF18' | translate}} </span>
+          {{'STUDENT.HOUSING-INF19' | translate}}
+          <span class="font-weight-bold">
+            {{'STUDENT.HOUSING-INF20' | translate}} </span>
+          {{'STUDENT.HOUSING-INF17' | translate}}
+          <br>
+          <span class="font-italic">
+            {{'STUDENT.HOUSING-INFSTATIC' | translate}}
+          </span>
+          <i class="fa fa-info-circle fa-lg fa-icon" data-toggle="tooltip" data-placement="top"
+            title="{{'STUDENT.HOUSING-INFSTATIC2' | translate}}">
+          </i>
+          <mat-form-field class="w-100" appearance="fill">
+            <mat-label>{{'STUDENT.HOUSING-INFSTATIC1' | translate}}</mat-label>
+            <ngx-mat-file-input (change)="validateFiles('ssnFile')" formControlName="ssnFile">
+            </ngx-mat-file-input>
+          </mat-form-field>
+        </li>
+        <br>
+        <br>
+        <li>
+          {{'STUDENT.HOUSING-INF15' | translate}}
+          <span class="font-weight-bold">{{'STUDENT.HOUSING-INF21' | translate}}</span>
+          {{'STUDENT.HOUSING-INF22' | translate}}
+          <span class="font-weight-bold">{{'STUDENT.HOUSING-INF23' | translate}}</span>
+          {{'STUDENT.HOUSING-INF17' | translate}}
+          {{'STUDENT.HOUSING-INF24' | translate}}
+          <br>
+          <span class="font-italic">
+            {{'STUDENT.HOUSING-INFSTATIC' | translate}}
+          </span>
+          <i class="fa fa-info-circle fa-lg fa-icon" data-toggle="tooltip" data-placement="top"
+            title="{{'STUDENT.HOUSING-INFSTATIC2' | translate}}">
+          </i>
+          <mat-form-field class="w-100" appearance="fill">
+            <mat-label>{{'STUDENT.HOUSING-INFSTATIC1' | translate}}</mat-label>
+            <ngx-mat-file-input (change)="validateFiles('ssnFile')" formControlName="ssnFile">
+            </ngx-mat-file-input>
+          </mat-form-field>
+        </li>
+        <br>
+        <br>
+        <li>
+          <span class="font-weight-bold">{{'STUDENT.HOUSING-INF25' | translate}}</span>
+          {{'STUDENT.HOUSING-INF26' | translate}}
+          <br>
+          <a href="src=../../../assets/images/n1599.pdf" target="_blank">{{'STUDENT.HOUSING-INF27' | translate}}</a>
+          <br>
+          <span class="font-italic">
+            {{'STUDENT.HOUSING-INFSTATIC' | translate}}
+          </span>
+          <i class="fa fa-info-circle fa-lg fa-icon" data-toggle="tooltip" data-placement="top"
+            title="{{'STUDENT.HOUSING-INFSTATIC2' | translate}}">
+          </i>
+          <mat-form-field class="w-100" appearance="fill">
+            <mat-label>{{'STUDENT.HOUSING-INFSTATIC1' | translate}}</mat-label>
+            <ngx-mat-file-input (change)="validateFiles('ssnFile')" formControlName="ssnFile">
+            </ngx-mat-file-input>
+          </mat-form-field>
+        </li>
+        <br>
+        <br>
+        <li>
+          <mat-form-field class="w-100" appearance="fill">
+            <mat-label>{{'STUDENT.HOUSING-INF28' | translate}}</mat-label>
+            <input matInput placeholder="{{'STUDENT.HOUSING-INF28' | translate}}" readonly>
+            <mat-select required>
+              <mat-option value="option1">{{'STUDENT.HOUSING-INF29' | translate}}</mat-option>
+              <mat-option value="option2">{{'STUDENT.HOUSING-INF30' | translate}}</mat-option>
+              <mat-option value="option3">{{'STUDENT.HOUSING-INF31' | translate}}</mat-option>
+              <mat-option value="option4">{{'STUDENT.HOUSING-INF32' | translate}}</mat-option>
+              <mat-option value="option5">{{'STUDENT.HOUSING-INF33' | translate}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </li>
+      </ul>
+      <div>
+        <button mat-button matStepperPrevious>{{'STUDENT.HOUSING-BACK' | translate}}</button>
+        <button mat-button matStepperNext>{{'STUDENT.HOUSING-INF11' | translate}}</button>
+      </div>
+    </form>
+  </mat-step>
+
+
+  <mat-step [stepControl]="secondFormGroup">
+    <form class="mt-4" [formGroup]="secondFormGroup">
+      <ng-template matStepLabel>{{'STUDENT.HOUSING-INF34' | translate}}</ng-template>
+      <ul>
+        <li>
+          {{'STUDENT.HOUSING-INF35' | translate}}
+          <br>
+          <span class="font-weight-bold">{{'STUDENT.HOUSING-INF36' | translate}}
+          </span> <br>
+          <span class="font-weight-bold">{{'STUDENT.HOUSING-INF37' | translate}}
+          </span>
+          {{'STUDENT.HOUSING-INF38' | translate}}
+          <br>
+          <span class="font-italic">
+            {{'STUDENT.HOUSING-INFSTATIC' | translate}}
+          </span>
+          <i class="fa fa-info-circle fa-lg fa-icon" data-toggle="tooltip" data-placement="top"
+            title="{{'STUDENT.HOUSING-INFSTATIC2' | translate}}">
+          </i>
+          <mat-form-field class="w-100" appearance="fill">
+            <mat-label>{{'STUDENT.HOUSING-INFSTATIC1' | translate}}</mat-label>
+            <ngx-mat-file-input (change)="validateFiles('ssnFile')" formControlName="ssnFile">
+            </ngx-mat-file-input>
+          </mat-form-field>
+        </li>
+        <br>
+        <br>
+        <li>
+          {{'STUDENT.HOUSING-INF39' | translate}}
+          <br>
+          <span class="font-weight-bold">{{'STUDENT.HOUSING-INF36' | translate}}
+          </span> <br>
+          <span class="font-weight-bold">{{'STUDENT.HOUSING-INF40' | translate}}
+          </span>
+          {{'STUDENT.HOUSING-INF41' | translate}}
+          <span class="font-weight-bold">{{'STUDENT.HOUSING-INF42' | translate}}
+          </span>
+          {{'STUDENT.HOUSING-INF43' | translate}}
+          <br>
+          <span class="font-italic">
+            {{'STUDENT.HOUSING-INFSTATIC' | translate}}
+          </span>
+          <i class="fa fa-info-circle fa-lg fa-icon" data-toggle="tooltip" data-placement="top"
+            title="{{'STUDENT.HOUSING-INFSTATIC2' | translate}}">
+          </i>
+          <mat-form-field class="w-100" appearance="fill">
+            <mat-label>{{'STUDENT.HOUSING-INFSTATIC1' | translate}}</mat-label>
+            <ngx-mat-file-input (change)="validateFiles('ssnFile')" formControlName="ssnFile">
+            </ngx-mat-file-input>
+          </mat-form-field>
+        </li>
+        <br>
+        <br>
+        <li>
+          {{'STUDENT.HOUSING-INF44' | translate}}
+          <br>
+          <span class="font-weight-bold">{{'STUDENT.HOUSING-INF36' | translate}}
+          </span> <br>
+          {{'STUDENT.HOUSING-INF45' | translate}}
+          <span class="font-weight-bold">{{'STUDENT.HOUSING-INF46' | translate}}
+          </span>
+          <br>
+          <span class="font-italic">
+            {{'STUDENT.HOUSING-INFSTATIC' | translate}}
+          </span>
+          <i class="fa fa-info-circle fa-lg fa-icon" data-toggle="tooltip" data-placement="top"
+            title="{{'STUDENT.HOUSING-INFSTATIC2' | translate}}">
+          </i>
+          <mat-form-field class="w-100" appearance="fill">
+            <mat-label>{{'STUDENT.HOUSING-INFSTATIC1' | translate}}</mat-label>
+            <ngx-mat-file-input (change)="validateFiles('ssnFile')" formControlName="ssnFile">
+            </ngx-mat-file-input>
+          </mat-form-field>
+        </li>
+        <br>
+        <br>
+        <li>
+          {{'STUDENT.HOUSING-INF47' | translate}}
+          <br>
+          <span class="font-weight-bold">{{'STUDENT.HOUSING-INF36' | translate}}
+          </span> <br>
+          <p id="p0">
+            <span class="font-weight-bold"> {{'STUDENT.HOUSING-INF48' | translate}}</span>
+            <br>
+            <span class="font-italic">
+              {{'STUDENT.HOUSING-INFSTATIC' | translate}}
+            </span>
+            <i class="fa fa-info-circle fa-lg fa-icon" data-toggle="tooltip" data-placement="top"
+              title="{{'STUDENT.HOUSING-INFSTATIC2' | translate}}">
+            </i>
+            <mat-form-field class="w-100" appearance="fill">
+              <mat-label>{{'STUDENT.HOUSING-INFSTATIC1' | translate}}</mat-label>
+              <ngx-mat-file-input (change)="validateFiles('ssnFile')" formControlName="ssnFile">
+              </ngx-mat-file-input>
+            </mat-form-field>
+          </p>
+          <p id="p1">
+            <span class="font-weight-bold"> {{'STUDENT.HOUSING-INF49' | translate}}</span>
+            <br>
+            <span class="font-italic">
+              {{'STUDENT.HOUSING-INFSTATIC' | translate}}
+            </span>
+            <i class="fa fa-info-circle fa-lg fa-icon" data-toggle="tooltip" data-placement="top"
+              title="{{'STUDENT.HOUSING-INFSTATIC2' | translate}}">
+            </i>
+            <mat-form-field class="w-100" appearance="fill">
+              <mat-label>{{'STUDENT.HOUSING-INFSTATIC1' | translate}}</mat-label>
+              <ngx-mat-file-input (change)="validateFiles('ssnFile')" formControlName="ssnFile">
+              </ngx-mat-file-input>
+            </mat-form-field>
+          </p>
+        </li>
+        <br>
+        <br>
+        <li>
+          {{'STUDENT.HOUSING-INF50' | translate}}
+          <br>
+          <span class="font-weight-bold">{{'STUDENT.HOUSING-INF36' | translate}}
+          </span> <br>
+          <span class="font-weight-bold">{{'STUDENT.HOUSING-INF51' | translate}}</span>
+          <br>
+          <span class="font-italic">
+            {{'STUDENT.HOUSING-INFSTATIC' | translate}}
+          </span>
+          <i class="fa fa-info-circle fa-lg fa-icon" data-toggle="tooltip" data-placement="top"
+            title="{{'STUDENT.HOUSING-INFSTATIC2' | translate}}">
+          </i>
+          <mat-form-field class="w-100" appearance="fill">
+            <mat-label>{{'STUDENT.HOUSING-INFSTATIC1' | translate}}</mat-label>
+            <ngx-mat-file-input (change)="validateFiles('ssnFile')" formControlName="ssnFile">
+            </ngx-mat-file-input>
+          </mat-form-field>
+        </li>
+        <br>
+        <br>
+        <li>
+          {{'STUDENT.HOUSING-INF52' | translate}}
+          <br>
+          <span class="font-weight-bold"> {{'STUDENT.HOUSING-INF36' | translate}}</span>
+          <br>
+          <p id="p0">
+            <span class="font-weight-bold"> {{'STUDENT.HOUSING-INF53' | translate}}</span>
+            {{'STUDENT.HOUSING-INF54' | translate}}
+            <br>
+            <span class="font-italic">
+              {{'STUDENT.HOUSING-INFSTATIC' | translate}}
+            </span>
+            <i class="fa fa-info-circle fa-lg fa-icon" data-toggle="tooltip" data-placement="top"
+              title="{{'STUDENT.HOUSING-INFSTATIC2' | translate}}">
+            </i>
+            <mat-form-field class="w-100" appearance="fill">
+              <mat-label>{{'STUDENT.HOUSING-INFSTATIC1' | translate}}</mat-label>
+              <ngx-mat-file-input (change)="validateFiles('ssnFile')" formControlName="ssnFile">
+              </ngx-mat-file-input>
+            </mat-form-field>
+          </p>
+          <p id="p1"> <span class="font-weight-bold">{{'STUDENT.HOUSING-INF55' | translate}}</span>
+            {{'STUDENT.HOUSING-INF56' | translate}}
+            <span class="font-weight-bold">{{'STUDENT.HOUSING-INF57' | translate}}</span>
+            {{'STUDENT.HOUSING-INF58' | translate}}
+            <span class="font-weight-bold">{{'STUDENT.HOUSING-INF59' | translate}}</span>
+            {{'STUDENT.HOUSING-INF60' | translate}}
+            <span class="font-weight-bold">{{'STUDENT.HOUSING-INF61' | translate}}</span>
+            {{'STUDENT.HOUSING-INF62' | translate}}
+            <br>
+            <span class="font-italic">
+              {{'STUDENT.HOUSING-INFSTATIC' | translate}}
+            </span>
+            <i class="fa fa-info-circle fa-lg fa-icon" data-toggle="tooltip" data-placement="top"
+              title="{{'STUDENT.HOUSING-INFSTATIC2' | translate}}">
+            </i>
+            <mat-form-field class="w-100" appearance="fill">
+              <mat-label>{{'STUDENT.HOUSING-INFSTATIC1' | translate}}</mat-label>
+              <ngx-mat-file-input (change)="validateFiles('ssnFile')" formControlName="ssnFile">
+              </ngx-mat-file-input>
+            </mat-form-field>
+          </p>
+        </li>
+        <br>
+        <br>
+        <li>
+          {{'STUDENT.HOUSING-INF63' | translate}}
+          <br>
+          <span class="font-weight-bold"> {{'STUDENT.HOUSING-INF36' | translate}}</span>
+          <br>
+          <p id="p0">
+            <span class="font-weight-bold"> {{'STUDENT.HOUSING-INF64' | translate}}</span>
+            <br>
+            <span class="font-italic">
+              {{'STUDENT.HOUSING-INFSTATIC' | translate}}
+            </span>
+            <i class="fa fa-info-circle fa-lg fa-icon" data-toggle="tooltip" data-placement="top"
+              title="{{'STUDENT.HOUSING-INFSTATIC2' | translate}}">
+            </i>
+            <mat-form-field class="w-100" appearance="fill">
+              <mat-label>{{'STUDENT.HOUSING-INFSTATIC1' | translate}}</mat-label>
+              <ngx-mat-file-input (change)="validateFiles('ssnFile')" formControlName="ssnFile">
+              </ngx-mat-file-input>
+            </mat-form-field>
+          </p>
+          <p id="p1">
+            <span class="font-weight-bold"> {{'STUDENT.HOUSING-INF65' | translate}}</span>
+            <br>
+            <span class="font-italic">
+              {{'STUDENT.HOUSING-INFSTATIC' | translate}}
+            </span>
+            <i class="fa fa-info-circle fa-lg fa-icon" data-toggle="tooltip" data-placement="top"
+              title="{{'STUDENT.HOUSING-INFSTATIC2' | translate}}">
+            </i>
+            <mat-form-field class="w-100" appearance="fill">
+              <mat-label>{{'STUDENT.HOUSING-INFSTATIC1' | translate}}</mat-label>
+              <ngx-mat-file-input (change)="validateFiles('ssnFile')" formControlName="ssnFile">
+              </ngx-mat-file-input>
+            </mat-form-field>
+          </p>
+        </li>
+        <br>
+        <br>
+        <li>
+          {{'STUDENT.HOUSING-INF66' | translate}}
+          <br>
+          <span class="font-weight-bold"> {{'STUDENT.HOUSING-INF36' | translate}}</span>
+          <br>
+          <span class="font-weight-bold"> {{'STUDENT.HOUSING-INF67' | translate}}</span>
+          {{'STUDENT.HOUSING-INF68' | translate}}
+          <br>
+          <span class="font-italic">
+            {{'STUDENT.HOUSING-INFSTATIC' | translate}}
+          </span>
+          <i class="fa fa-info-circle fa-lg fa-icon" data-toggle="tooltip" data-placement="top"
+            title="{{'STUDENT.HOUSING-INFSTATIC2' | translate}}">
+          </i>
+          <mat-form-field class="w-100" appearance="fill">
+            <mat-label>{{'STUDENT.HOUSING-INFSTATIC1' | translate}}</mat-label>
+            <ngx-mat-file-input (change)="validateFiles('ssnFile')" formControlName="ssnFile">
+            </ngx-mat-file-input>
+          </mat-form-field>
+        </li>
+        <br>
+        <br>
+        <li>
+          {{'STUDENT.HOUSING-INF69' | translate}}
+          <br>
+          <span class="font-weight-bold"> {{'STUDENT.HOUSING-INF36' | translate}}</span>
+          <br>
+          <p id="p0">
+            <span class="font-weight-bold"> {{'STUDENT.HOUSING-INF70' | translate}}</span>
+            <br>
+            <span class="font-italic">
+              {{'STUDENT.HOUSING-INFSTATIC' | translate}}
+            </span>
+            <i class="fa fa-info-circle fa-lg fa-icon" data-toggle="tooltip" data-placement="top"
+              title="{{'STUDENT.HOUSING-INFSTATIC2' | translate}}">
+            </i>
+            <mat-form-field class="w-100" appearance="fill">
+              <mat-label>{{'STUDENT.HOUSING-INFSTATIC1' | translate}}</mat-label>
+              <ngx-mat-file-input (change)="validateFiles('ssnFile')" formControlName="ssnFile">
+              </ngx-mat-file-input>
+            </mat-form-field>
+          </p>
+          <p id="p1">
+            <span class="font-weight-bold"> {{'STUDENT.HOUSING-INF71' | translate}}</span>
+            {{'STUDENT.HOUSING-INF72' | translate}}
+            <br>
+            <span class="font-italic">
+              {{'STUDENT.HOUSING-INFSTATIC' | translate}}
+            </span>
+            <i class="fa fa-info-circle fa-lg fa-icon" data-toggle="tooltip" data-placement="top"
+              title="{{'STUDENT.HOUSING-INFSTATIC2' | translate}}">
+            </i>
+            <mat-form-field class="w-100" appearance="fill">
+              <mat-label>{{'STUDENT.HOUSING-INFSTATIC1' | translate}}</mat-label>
+              <ngx-mat-file-input (change)="validateFiles('ssnFile')" formControlName="ssnFile">
+              </ngx-mat-file-input>
+            </mat-form-field>
+          </p>
+        </li>
+      </ul>
+      <div>
+        <button mat-button matStepperPrevious>{{'STUDENT.HOUSING-BACK' | translate}}</button>
+        <button mat-button matStepperNext>{{'STUDENT.HOUSING-INF11' | translate}}</button>
+      </div>
+    </form>
+  </mat-step>
+
+
+  <mat-step [stepControl]="specialDataFormGroup">
+    <form class="mt-4" [formGroup]="specialDataFormGroup">
+      <ng-template matStepLabel> {{'STUDENT.HOUSING-INF76' | translate}}</ng-template>
+      <ul>
+        <li>
+          <span class="font-weight-bold">{{'STUDENT.HOUSING-INF77' | translate}}</span>
+          <br>
+          <span class="font-italic">{{'STUDENT.HOUSING-INF73' | translate}}</span>
+          <br>
+          <a href="src=../../../assets/images/example.pdf" target="_blank">{{'STUDENT.HOUSING-INF74' | translate}}</a>
+          <br>
+          <mat-form-field class="w-50" appearance="fill">
+            <mat-label> {{'STUDENT.HOUSING-INF75' | translate}}</mat-label>
+            <input matInput type="number" min="0" class="example-right-align" placeholder="0" required>
+            <span matSuffix>,00 €</span>
+          </mat-form-field>
+        </li>
+        <br>
+        <br>
+        <li>
+          <span class="font-weight-bold">{{'STUDENT.HOUSING-INF84' | translate}}</span>
+          <br>
+          <br>
+          <mat-radio-group aria-label="Select an option">
+            <mat-radio-button value="1">{{'STUDENT.HOUSING-INF78' | translate}}</mat-radio-button>
+            <br>
+            <mat-form-field class="w-50" appearance="fill">
+              <mat-label> {{'STUDENT.HOUSING-INF79' | translate}}</mat-label>
+              <input matInput type="number" min="0" class="example-right-align" placeholder="0" required>
+            </mat-form-field>
+            <br>
+            <mat-form-field class="w-50" appearance="fill">
+              <mat-label> {{'STUDENT.HOUSING-INF80' | translate}}</mat-label>
+              <input matInput type="number" min="0" class="example-right-align" placeholder="0" required>
+            </mat-form-field>
+            <br>
+            <mat-radio-button value="2">{{'STUDENT.HOUSING-INF81' | translate}}</mat-radio-button>
+            <br>
+            <mat-form-field class="w-50" appearance="fill">
+              <mat-label> {{'STUDENT.HOUSING-INF82' | translate}}</mat-label>
+              <input matInput type="number" min="0" class="example-right-align" placeholder="0" required>
+            </mat-form-field>
+            <br>
+            <mat-radio-button value="3">{{'STUDENT.HOUSING-INF83' | translate}}</mat-radio-button>
+          </mat-radio-group>
+        </li>
+      </ul>
+      <div>
+        <button mat-button matStepperPrevious>{{'STUDENT.HOUSING-BACK' | translate}}</button>
+        <button mat-button matStepperNext>{{'STUDENT.HOUSING-INF11' | translate}}</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>{{'STUDENT.HOUSING-INF85' | translate}}</ng-template>
+    <p><i class="fas fa-2x fa-check text-success"></i>{{'STUDENT.HOUSING-INF86' | translate}}</p>
+    <div>
+      <button mat-button matStepperPrevious>{{'STUDENT.HOUSING-BACK' | translate}}</button>
+      <button mat-button (click)="stepper.reset()">{{'STUDENT.HOUSING-INF87' | translate}}</button>
+    </div>
+  </mat-step>
+</mat-stepper>

@@ -102,16 +102,10 @@
           </li>
           <li class="nav-item">
             <a [routerLink]="['/student/positions/' + this.authService.getSessionId()]" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
+              <i class="nav-icon fa fa-book"></i>
               <p>
                 {{'STUDENT.SIDEBAR-APPLICATIONS' | translate}}
               </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a [routerLink]="['/student/sheets/' + this.authService.getSessionId()]" class="nav-link">
-              <i class="nav-icon fa fa-book"></i>
-              <p> {{'STUDENT.SIDEBAR-SHEETS' | translate}} </p>
             </a>
           </li>
           <li class="nav-header">{{'STUDENT.SIDEBAR-SECONDARY-OPTIONS' | translate}}</li>
@@ -204,6 +198,7 @@
           <app-about *ngIf="isAboutRoute()"></app-about>
           <app-manuals *ngIf="isManualsRoute()"></app-manuals>
           <app-contact *ngIf="isContactRoute()"></app-contact>
+          <app-meals *ngIf="isMealsRoute()"></app-meals>
           <app-accommodation *ngIf="isAccommodationRoute()"></app-accommodation>
         </div>
       </div>

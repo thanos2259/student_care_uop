@@ -46,7 +46,7 @@ const routes: Routes = [{
     component: StudentComponent
   },
   {
-    path: 'about',
+    path: 'applications/:id',
     component: StudentComponent
   },
   {
@@ -54,7 +54,7 @@ const routes: Routes = [{
     component: StudentComponent
   },
   {
-    path: 'student-contract',
+    path: 'about',
     component: StudentComponent
   },
   {

@@ -43,6 +43,7 @@ import { UopLoadingScreenComponent } from './generic-components/uop-loading-scre
 import { PasswordResetComponent } from './home-screen/password-reset/password-reset.component';
 import { UsersFooterComponent } from './generic-components/users-footer/users-footer.component';
 import { MealsComponent } from './students/meals/meals.component';
+import { ApplicationsComponent } from './students/applications/applications.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -69,7 +70,8 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     UopLoadingScreenComponent,
     PasswordResetComponent,
     UsersFooterComponent,
-    MealsComponent
+    MealsComponent,
+    ApplicationsComponent
   ],
   imports: [
     BrowserModule,

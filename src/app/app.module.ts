@@ -30,6 +30,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { CompanyLoginTermsComponent } from './home-screen/company-login-terms/company-login-terms.component';
 import { CredentialsGenericLoginComponent } from './home-screen/credentials-generic-login/credentials-generic-login.component';
 import { DataTablesModule } from 'angular-datatables';
+import { MatTableModule } from '@angular/material/table';
 import { ContactComponent } from './generic-components/contact/contact.component';
 import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './auth/auth.interceptor';
@@ -91,6 +92,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     MatSelectModule,
     MatProgressSpinnerModule,
     DataTablesModule,
+    MatTableModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,

@@ -178,6 +178,7 @@
     "HOUSING-INF84": "Select marital status",
     "HOUSING-INF85": "Application completion",
     "HOUSING-INF86": "Your application has been registered, your eligibility will be checked.",
-    "HOUSING-INF87": "Form Cleaning"
+    "HOUSING-INF87": "Form Cleaning",
+    "APPLICATION-TITLE": "My applications"
   }
 }

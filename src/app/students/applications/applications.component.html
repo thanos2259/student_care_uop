@@ -11,20 +11,21 @@
 </section>
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
   <ng-container matColumnDef="application">
-    <th mat-header-cell *matHeaderCellDef> Αίτηση </th>
-    <td mat-cell *matCellDef="let element"> {{element.application}} </td>
+    <th mat-header-cell *matHeaderCellDef> {{'STUDENT.APPLICATION-TITLE1' | translate}} </th>
+    <td mat-cell *matCellDef="let element"> {{element.application}}</td>
   </ng-container>
   <ng-container matColumnDef="applicationNumber">
-    <th mat-header-cell *matHeaderCellDef> Αριθμός αίτησης </th>
+    <th mat-header-cell *matHeaderCellDef> {{'STUDENT.APPLICATION-NUMBER' | translate}} </th>
     <td mat-cell *matCellDef="let element"> {{element.applicationNumber}} </td>
   </ng-container>
   <ng-container matColumnDef="date">
-    <th mat-header-cell *matHeaderCellDef> Ημερομηνία Υποβολής </th>
+    <th mat-header-cell *matHeaderCellDef> {{'STUDENT.APPLICATION-DATE' | translate}} </th>
     <td mat-cell *matCellDef="let element"> {{element.date}} </td>
   </ng-container>
   <ng-container matColumnDef="actions">
-    <th mat-header-cell *matHeaderCellDef> Ενέργειες </th>
-    <td mat-cell *matCellDef="let element"> <i class="fa fa-eye"></i> Προβολή <br> <i class="fa fa-print"></i> Εκτύπωση
+    <th mat-header-cell *matHeaderCellDef> {{'STUDENT.APPLICATION-ACTIONS' | translate}} </th>
+    <td mat-cell *matCellDef="let element"> <i class="fa fa-eye"></i> {{'STUDENT.APPLICATION-SHOW' | translate}} <br> <i
+        class="fa fa-print"></i> {{'STUDENT.APPLICATION-PRINT' | translate}}
       {{element.actions}} </td>
   </ng-container>
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

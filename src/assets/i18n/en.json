@@ -179,6 +179,12 @@
     "HOUSING-INF85": "Application completion",
     "HOUSING-INF86": "Your application has been registered, your eligibility will be checked.",
     "HOUSING-INF87": "Form Cleaning",
-    "APPLICATION-TITLE": "My applications"
+    "APPLICATION-TITLE": "My applications",
+    "APPLICATION-TITLE1": "Application",
+    "APPLICATION-NUMBER": "Application number",
+    "APPLICATION-DATE": "Date of submission",
+    "APPLICATION-ACTIONS": "Actions",
+    "APPLICATION-SHOW": "Show",
+    "APPLICATION-PRINT": "Print"
   }
 }

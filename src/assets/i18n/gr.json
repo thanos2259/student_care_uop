@@ -93,7 +93,7 @@
     "HOUSING-INFO5": "Τμήμα",
     "HOUSING-INFO6": "Δήμος",
     "HOUSING-INFO7": "Δήμος μόνιμης κατοικίας",
-    "HOUSING-INFO8": "Πόλη",
+    "HOUSING-INFO8": "Πόλη μόνιμης κατοικίας",
     "HOUSING-INFO9": "Τηλέφωνο επικοινωνίας",
     "HOUSING-INF10": "Email ιδρύματος",
     "HOUSING-INF11": "Επόμενο",
@@ -183,6 +183,16 @@
     "APPLICATION-DATE": "Ημερομηνία Υποβολής",
     "APPLICATION-ACTIONS": "Ενέργειες",
     "APPLICATION-SHOW": "Προβολή",
-    "APPLICATION-PRINT": "Εκτύπωση"
+    "APPLICATION-PRINT": "Εκτύπωση",
+    "PROFILE-ABOUTME": "Σχετικά με εμένα",
+    "PROFILE-LOCATION": "Τοποθεσία",
+    "PROFILE-PHONE": "Τηλέφωνο",
+    "PROFILE-COMMUNICATION": "Στοιχεία Επικοινωνίας",
+    "PROFILE-FATHERS-SURNAME": "Επώνυμο Πατρός",
+    "PROFILE-MOTHERS-NAME": "Όνομα Μητρός",
+    "PROFILE-MOTHERS-SURNAME": "Επώνυμο Μητρός",
+    "PROFILE-DATEOFBIRTH": "Ημ. Γέννησης",
+    "PROFILE-SAVE": "Αποθήκευση",
+    "PROFILE-CANCEL": "Ακύρωση"
   }
 }

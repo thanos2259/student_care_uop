@@ -95,7 +95,7 @@
     "HOUSING-INFO5": "Department",
     "HOUSING-INFO6": "Μunicipality",
     "HOUSING-INFO7": "Select municipality of permanent residence",
-    "HOUSING-INFO8": "Town",
+    "HOUSING-INFO8": "City of permanent residence",
     "HOUSING-INFO9": "Contact Phone",
     "HOUSING-INF10": "Institution email",
     "HOUSING-INF11": "Next",
@@ -185,6 +185,16 @@
     "APPLICATION-DATE": "Date of submission",
     "APPLICATION-ACTIONS": "Actions",
     "APPLICATION-SHOW": "Show",
-    "APPLICATION-PRINT": "Print"
+    "APPLICATION-PRINT": "Print",
+    "PROFILE-ABOUTME": "About me",
+    "PROFILE-LOCATION": "Location",
+    "PROFILE-PHONE": "Phone",
+    "PROFILE-COMMUNICATION": "Contact info",
+    "PROFILE-FATHERS-SURNAME": "Father's surname",
+    "PROFILE-MOTHERS-NAME": "Mother's name",
+    "PROFILE-MOTHERS-SURNAME": "Mother's surname",
+    "PROFILE-DATEOFBIRTH": "Date of birth",
+    "PROFILE-SAVE": "Save",
+    "PROFILE-CANCEL": "Cancel"
   }
 }

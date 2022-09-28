@@ -193,6 +193,12 @@
     "PROFILE-MOTHERS-SURNAME": "Επώνυμο Μητρός",
     "PROFILE-DATEOFBIRTH": "Ημ. Γέννησης",
     "PROFILE-SAVE": "Αποθήκευση",
-    "PROFILE-CANCEL": "Ακύρωση"
+    "PROFILE-CANCEL": "Ακύρωση",
+    "PROFILE-STATE": "(μόνιμης κατοικίας)",
+    "PROFILE-TOWN": "Πόλη",
+    "PROFILE-STREET": "Οδός",
+    "PROFILE-POSTCODE": "Ταχυδρομικός κώδικας",
+    "PROFILE-COUNTRY": "Χώρα",
+    "HOME": "Προαιρετικά συμπληρώστε το προφίλ σας πατώντας πάνω στο όνομα σας ή πατώντας στο πάνω δεξιά μενού την επιλογή Προφίλ."
   }
 }

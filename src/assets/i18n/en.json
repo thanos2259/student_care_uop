@@ -195,6 +195,12 @@
     "PROFILE-MOTHERS-SURNAME": "Mother's surname",
     "PROFILE-DATEOFBIRTH": "Date of birth",
     "PROFILE-SAVE": "Save",
-    "PROFILE-CANCEL": "Cancel"
+    "PROFILE-CANCEL": "Cancel",
+    "PROFILE-STATE": "(permanent residence)",
+    "PROFILE-TOWN": "Town",
+    "PROFILE-STREET": "Street",
+    "PROFILE-POSTCODE": "Postcode",
+    "PROFILE-COUNTRY": "Country",
+    "HOME": "Optionally complete your profile by clicking on your name or by clicking on the Profile option in the top right menu."
   }
 }

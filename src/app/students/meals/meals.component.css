@@ -18,3 +18,46 @@ input.example-right-align::-webkit-outer-spin-button,
 input.example-right-align::-webkit-inner-spin-button {
   display: none;
 }
+
+
+/* dark mode */
+::ng-deep .dark-mode .mat-focused .mat-form-field-label {
+  /*change color of label*/
+  color: #fff !important;
+}
+
+::ng-deep .dark-mode .mat-form-field-underline {
+  /*change color of underline*/
+  color: #fff !important;
+}
+
+::ng-deep .dark-mode .mat-form-field-ripple {
+  /*change color of underline when focused*/
+  color: #fff !important;
+}
+
+::ng-deep .dark-mode .mat-step-header .mat-step-label .mat-step-text-label {
+  /*change color of label*/
+  color: #fff;
+}
+
+::ng-deep .dark-mode ::placeholder {
+  color: #fff;
+}
+
+::ng-deep .dark-mode mat-label {
+  color: #fff;
+}
+
+::ng-deep .dark-mode .mat-form-field .mat-form-field-flex {
+  background-color: #343a40;
+}
+
+::ng-deep .dark-mode .mat-form-field-appearance-fill .mat-form-field-flex {
+  background-color: #40444b
+}
+
+::ng-deep .dark-mode .dark {
+  background-color: #343a40;
+  color: #fff;
+}

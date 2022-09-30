@@ -18,7 +18,7 @@
 <button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
   {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
 </button>
-<mat-stepper orientation="horizontal" [linear]="isLinear" #stepper>
+<mat-stepper orientation="horizontal" [linear]="isLinear" #stepper class="dark">
   <mat-step [stepControl]="firstFormGroup">
     <form class="mt-4 center" [formGroup]="firstFormGroup">
       <ng-template matStepLabel>{{'STUDENT.HOUSING-INFO' | translate}}</ng-template>

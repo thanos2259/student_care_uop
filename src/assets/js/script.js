@@ -422,9 +422,10 @@ $(() => {
       }
     };
 
+    // doesnt reload on right and left arrow.  TODO
     Calendar.prototype.drawLegend = function () {
       let legend = createElement('div', 'legend');
-      let calendars = this.events.map(function (e) {
+      this.events.map(function (e) {
         return e.calendar + '|' + e.color;
       }).reduce(function (memo, e) {
         if (memo.indexOf(e) === -1) {
@@ -438,6 +439,7 @@ $(() => {
       });
       this.el.appendChild(legend);
     };
+
 
     Calendar.prototype.nextMonth = function () {
       this.current.add('months', 1);
@@ -468,7 +470,8 @@ $(() => {
   !function () {
     if (!document.getElementById("calendar")) return;
     let data = [
-      { eventName: 'Important Meeting', calendar: 'Sports', color: 'blue' },
+      { eventName: '', calendar: '', color: '' },
+      // { eventName: 'Important Meeting', calendar: 'Sports', color: 'blue' },
     ];
 
     function addDate(ev) {

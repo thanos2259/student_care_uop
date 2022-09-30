@@ -1,3 +1,16 @@
 table {
   width: 100%;
 }
+
+/* dark mode */
+::ng-deep .dark-mode table {
+  background-color: #343a40;
+}
+
+::ng-deep .dark-mode .mat-cell {
+  color: #fff;
+}
+
+::ng-deep .dark-mode .mat-header-cell {
+  color: #fff;
+}

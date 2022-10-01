@@ -73,7 +73,11 @@
        <!-- /.card-header -->
        <div class="card-body pt-0">
          <!--The calendar -->
-         <div id="calendar"></div>
+         <mat-card class="calendar">
+          <mat-calendar [(selected)]="selected"></mat-calendar>
+        </mat-card>
+        <!-- <p>Selected date: {{selected}}</p> -->
+         <!-- <div id="calendar"></div> -->
        </div>
        <!-- /.card-body -->
      </div>

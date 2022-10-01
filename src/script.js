@@ -70,6 +70,7 @@ window.addEventListener("load", () => {
     }
   }
 
+// calendar
 //   !function () {
 //     if (!document.getElementById("calendar")) return;
 //     let today = moment();

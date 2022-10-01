@@ -9,6 +9,8 @@ import { AuthService } from 'src/app/auth/auth.service';
 })
 export class StudentHomeComponent implements OnInit {
 
+  selected: Date | null | undefined;
+
   constructor(public authService: AuthService) { }
 
   ngOnInit(): void {

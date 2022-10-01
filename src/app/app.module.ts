@@ -45,6 +45,8 @@ import { PasswordResetComponent } from './home-screen/password-reset/password-re
 import { UsersFooterComponent } from './generic-components/users-footer/users-footer.component';
 import { MealsComponent } from './students/meals/meals.component';
 import { ApplicationsComponent } from './students/applications/applications.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -97,6 +99,8 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

@@ -3,14 +3,17 @@ table {
 }
 
 /* dark mode */
-::ng-deep .dark-mode table {
-  background-color: #343a40;
-}
-
 ::ng-deep .dark-mode .mat-cell {
   color: #fff;
+  font-weight: lighter;
+  border-color: rgb(175, 173, 173);
 }
 
 ::ng-deep .dark-mode .mat-header-cell {
   color: #fff;
+  border-color: #fff;
+}
+
+::ng-deep .dark-mode .mat-table{
+  background-color: #343a40;
 }

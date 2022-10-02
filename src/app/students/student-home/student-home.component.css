@@ -1,13 +1,12 @@
 .bg-btn-stat {
-  background-color: rgba(34, 73, 87, 1);
+  background: linear-gradient(45deg,rgba(34, 73, 87, 1),rgb(61, 117, 138) );
   color: white;
 }
 
  .calendar{
-  /* background-color: rgba(34, 73, 87, 1); */
   color: #fefefe;
-  border-radius: 10px;
-  background: linear-gradient(45deg,rgb(61, 117, 138),rgba(34, 73, 87, 1) );
+  border-radius: 5px;
+  background: linear-gradient(45deg,rgba(34, 73, 87, 1),rgb(61, 117, 138) );
 }
 
 ::ng-deep .mat-calendar-body-cell-content {
@@ -18,17 +17,8 @@
   color: #fefefe;
 }
 
-::ng-deep th{
-  color: #fefefe;
-}
-
 ::ng-deep .mat-calendar-table-header{
   color: #fefefe;
-}
-
-::ng-deep .mat-calendar{
-  background: linear-gradient(45deg,rgb(61, 117, 138),rgba(34, 73, 87, 1) );
-  /* background: rgba(34, 73, 87, 1);; */
 }
 
 ::ng-deep .mat-calendar-header{
@@ -39,8 +29,18 @@
   fill: #fefefe;
 }
 
+::ng-deep .mat-calendar-table-header-divider::after {
+  background: linear-gradient(45deg,#3b3f42,#5a6268 );
+}
+
+::ng-deep abbr[title], abbr[data-original-title] {
+  text-decoration: none;
+  font-weight: lighter;
+}
+
 
 /*  calendar js */
+
 /* @media screen and (max-width: 1680px) {
   #calendar {
     zoom: 0.8;

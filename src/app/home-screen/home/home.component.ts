@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { Utils } from 'src/app/MiscUtils';
 
 @Component({
   selector: 'app-home',
@@ -8,7 +9,7 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
+  public currentYear: number = Utils.getCurrentYear();
   private language!: string;
 
   constructor(private router: Router, public translate: TranslateService) {
@@ -16,7 +17,7 @@ export class HomeComponent implements OnInit {
     translate.setDefaultLang('gr');
 
     const browserLang = localStorage.getItem('language') || null;
-    translate.use((browserLang!=null) ? browserLang : 'gr');
+    translate.use((browserLang != null) ? browserLang : 'gr');
   }
 
   ngOnInit(): void {
@@ -27,7 +28,7 @@ export class HomeComponent implements OnInit {
       // $('body').css('MozTransform', 'scale(' + 0.99 + ')');
       $('body').css('zoom', ' ' + 79.75 + '%');
     }
-     this.language = localStorage.getItem('language') || 'gr';
+    this.language = localStorage.getItem('language') || 'gr';
   }
 
   changeLang(language: string) {

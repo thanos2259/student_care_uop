@@ -77,7 +77,7 @@ body {
 
 .v3_60 {
   padding-top: 40px;
-  width: 449px;
+  max-width: 449px;
   height: 289px;
   text-align: center;
   margin: auto;
@@ -93,7 +93,7 @@ body {
 }
 
 .main-heading {
-  width: 449px;
+  max-width: 449px;
   color: rgba(34, 73, 87, 1);
   font-family: Lexend Deca;
   font-weight: Regular;

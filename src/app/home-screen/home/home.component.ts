@@ -23,11 +23,11 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     // var browserZoomLevel = Math.round(window.devicePixelRatio * 100);
     // let screenCssPixelRatio = (window.devicePixelRatio)
-    if (window.devicePixelRatio > 1) {
-      // TODO: Mozilla Browser fix
-      // $('body').css('MozTransform', 'scale(' + 0.99 + ')');
-      $('body').css('zoom', ' ' + 79.75 + '%');
-    }
+    //  if (window.devicePixelRatio > 1) {
+    // TODO: Mozilla Browser fix
+    // $('body').css('MozTransform', 'scale(' + 0.99 + ')');
+    // $('body').css('zoom', ' ' + 79.75 + '%');
+    // }
     this.language = localStorage.getItem('language') || 'gr';
   }
 

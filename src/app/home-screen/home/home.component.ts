@@ -53,11 +53,4 @@ export class HomeComponent implements OnInit {
     return this.router.url === '/credentials-generic';
   }
 
-  isSignupRoute() {
-    return this.router.url === '/credentials-generic-signup';
-  }
-
-  isPasswordResetRoute() {
-    return this.router.url === '/password-reset';
-  }
 }

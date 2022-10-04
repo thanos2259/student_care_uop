@@ -13,8 +13,6 @@ import { StudentProfileComponent } from './students/student-profile/student-prof
 import { ManualsComponent } from './generic-components/manuals/manuals.component';
 import { AboutComponent } from './generic-components/about/about.component';
 import { StudentHomeComponent } from './students/student-home/student-home.component';
-import { StudentLoginTermsComponent } from './home-screen/student-login-terms/student-login-terms.component';
-import { HomeButtonsComponent } from './home-screen/home-buttons/home-buttons.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -27,8 +25,6 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { CompanyLoginTermsComponent } from './home-screen/company-login-terms/company-login-terms.component';
-import { CredentialsGenericLoginComponent } from './home-screen/credentials-generic-login/credentials-generic-login.component';
 import { DataTablesModule } from 'angular-datatables';
 import { MatTableModule } from '@angular/material/table';
 import { ContactComponent } from './generic-components/contact/contact.component';
@@ -38,10 +34,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { accommodationComponent } from './students/accommodation/accommodation.component';
-import { CredentialsGenericSignupComponent } from './home-screen/credentials-generic-signup/credentials-generic-signup.component';
 import { HomeHeaderComponent } from './home-screen/home-header/home-header.component';
 import { UopLoadingScreenComponent } from './generic-components/uop-loading-screen/uop-loading-screen.component';
-import { PasswordResetComponent } from './home-screen/password-reset/password-reset.component';
 import { UsersFooterComponent } from './generic-components/users-footer/users-footer.component';
 import { MealsComponent } from './students/meals/meals.component';
 import { ApplicationsComponent } from './students/applications/applications.component';
@@ -62,16 +56,10 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     ManualsComponent,
     AboutComponent,
     StudentHomeComponent,
-    StudentLoginTermsComponent,
-    HomeButtonsComponent,
-    CompanyLoginTermsComponent,
-    CredentialsGenericLoginComponent,
     ContactComponent,
     accommodationComponent,
-    CredentialsGenericSignupComponent,
     HomeHeaderComponent,
     UopLoadingScreenComponent,
-    PasswordResetComponent,
     UsersFooterComponent,
     MealsComponent,
     ApplicationsComponent

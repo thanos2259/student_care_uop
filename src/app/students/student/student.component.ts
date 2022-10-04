@@ -1,11 +1,9 @@
-import { Component, OnInit, OnDestroy, EventEmitter, Output, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, Subscription, takeUntil } from 'rxjs';
 import { Student } from '../student.model';
 import { StudentsService } from '../student.service';
 import { AuthService } from 'src/app/auth/auth.service';
 import { TranslateService } from '@ngx-translate/core';
-import { Utils } from 'src/app/MiscUtils';
 
 @Component({
   selector: 'app-student',
@@ -17,12 +15,10 @@ export class StudentComponent implements OnInit, OnDestroy {
   readonly darkModeSwitched = new EventEmitter<boolean>();
 
   public studentsSSOData: Student[] = [];
-  private studentSubscription!: Subscription;
   fontSize: number = 100;
   private language!: string;
   dateFrom!: string;
   dateTo!: string;
-  areOptionsEnabled!: boolean;
 
   constructor(public studentsService: StudentsService, private router: Router, public authService: AuthService, public translate: TranslateService) {
     translate.addLangs(['en', 'gr']);
@@ -35,30 +31,12 @@ export class StudentComponent implements OnInit, OnDestroy {
   async ngOnInit() {
     this.language = localStorage.getItem('language') || 'gr';
 
-    //  this.authService.login('pcst19009');
-    this.fetchStudentAndPeriod();
-  }
-
-  // ngAfterViewInit(): void { }
-
-  public fetchStudentAndPeriod() {
-    this.authService.login('pcst19003')
-      .subscribe((response) => {
-        this.authService.setToken(response.token);
-        this.authService.setSessionId(response.userId);
-        console.log(response);
-        this.studentsService.getStudents()
-          .subscribe((students: Student[]) => {
-            this.studentsSSOData = students;
-            this.studentsSSOData[0].schacdateofbirth = Utils.reformatDateOfBirth(this.studentsSSOData[0].schacdateofbirth);
-          });
-      });
+    // this.authService.login('pcst19009');
   }
 
   ngOnDestroy(): void {
-    this.studentSubscription?.unsubscribe();
-  }
 
+  }
 
   onLogout() {
     this.authService.logout();

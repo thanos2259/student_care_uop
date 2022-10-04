@@ -2,10 +2,7 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const path = require("path");
 const bodyParser = require("body-parser");
-// const cron = require('node-cron');
-const MiscUtils = require("./MiscUtils.js");
 
 // Route imports
 const studentRoutes = require("./api-routes/studentRoutes.js");
@@ -20,7 +17,7 @@ app.use(bodyParser.json());
 app.use(express.json());
 app.use(cors());
 
-app.use((_request, response, next) => {
+app.use((request, response, next) => {
   response.setHeader("Access-Control-Allow-Origin", "*");
   response.setHeader(
     "Access-Control-Allow-Headers",
@@ -33,11 +30,11 @@ app.use((_request, response, next) => {
   next();
 });
 
-app.get("/api", async (_request, response) => {
+app.get("/api", async (request, response) => {
   response.send("<h2>hello from the server!</h2>");
   // await testMSSQL();
 });
 
-app.use("/api/students", studentRoutes);
+// app.use("/api/students", studentRoutes);
 
 module.exports = app;

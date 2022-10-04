@@ -93,11 +93,6 @@ export class StudentProfileComponent implements OnInit, OnDestroy {
         ));
   }
 
-  onSubmitStudentBio(data: any) {
-    this.studentsService.updateStudentBio(data);
-    this.onSave();
-  }
-
   onSubmitStudentContact(data: any) {
     this.studentsService.updateStudentContact(data);
     this.onSave();

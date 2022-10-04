@@ -129,7 +129,7 @@ export class MealsComponent implements OnInit {
   }
 
   setPhase(phase: number) {
-    this.studentsService.updatePhase(phase);
+
   }
 
   onSubmitStudentContractDetails(data: any, contractFiles: { ssnFile: any; ibanFile: any; }) {

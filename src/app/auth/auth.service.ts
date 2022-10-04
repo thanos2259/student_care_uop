@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import {Router} from '@angular/router';
-import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -22,7 +21,7 @@ export class AuthService {
     return this.shown;
   }
 
-  setShown(value:boolean) {
+  setShown(value: boolean) {
     this.shown = value;
   }
 
@@ -40,7 +39,7 @@ export class AuthService {
     return this.isAuthenticated;
   }
 
-  public setToken(tokenParam: string|undefined) {
+  public setToken(tokenParam: string | undefined) {
     if (!this.token)
       this.token = tokenParam;
   }
@@ -53,33 +52,9 @@ export class AuthService {
   login(username: string) {
     // const id = 1;
     // this.http.post<{ token: string, userId: number }>('http://localhost:3000/api/students/login/' + id, username)
-    return this.http.post<{token: string; userId: number;}>('http://localhost:3000/api/students/login', {"username": username});
+    return this.http.post<{ token: string; userId: number; }>('http://localhost:3000/api/students/login', { "username": username });
   }
 
-  loginWithPassword(username: string, password: string) {
-    console.log(username + "|" + password);
-    this.shown = true;
-    this.http.post<{token: string; userId: number;}>('http://localhost:3000/api/company/login', {"username": username, "password": password})
-     .subscribe((response) => {
-        this.token = response.token;
-        this.sessionId = response.userId;
-        if (this.token) {
-          this.isAuthenticated = true;
-          this.authStatusListener.next(true);
-          this.saveAuthData(this.token, /*expirationDate,*/ this.sessionId);
-          this.router.navigate(['/companies/' + this.sessionId]);
-        }
-      }, error => {
-        alert("Λάθος στοιχεία χρήστη");
-        location.reload();
-    });
-  }
-
-  private saveAuthData(token: string, /*expirationDate: Date,*/ userId: number) {
-    localStorage.setItem("token", token);
-    //localStorage.setItem("expiration", expirationDate.toISOString());
-    localStorage.setItem("sessionId", userId.toString());
-  }
 
   private clearAuthData() {
     localStorage.removeItem("token");

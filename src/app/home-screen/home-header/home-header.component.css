@@ -58,26 +58,38 @@ button:active {
 }
 
 .btn-student {
-  width: 280px;
-  height: 65px;
+  width: 200px;
+  height: 60px;
   color: rgba(255, 255, 255, 1);
   background: rgba(34, 73, 87, 1);
   font-family: Lexend Deca;
   font-weight: Regular;
-  font-size: 16px;
+  font-size: 30px;
   border-radius: 10px;
   text-align: center;
 }
 
-
-@media only screen and (max-width: 799px) {
-  .div-company {
-    padding-left: 17px;
-  }
+.box{
+  margin-top:100px;
+  border:1px solid rgb(247, 239, 239);
+  border-radius:25px; padding:20px;
+  box-shadow: 5px 5px 5px rgb(247, 239, 239);
 }
 
-@media only screen and (max-width: 767px) {
-  .allomiso {
-    margin-top: 50px;
-  }
+::ng-deep  .dark-mode .box{
+ background: linear-gradient(45deg,rgb(65, 104, 111),rgb(75, 131, 141) );
+ border:1px solid rgb(65, 104, 111);
+ box-shadow: 5px 5px 5px rgb(65, 104, 111);
+}
+
+::ng-deep .dark-mode .mat-divider {
+  border-top-color: rgba(255, 255, 255, 1);
+}
+
+::ng-deep .dark-mode .main-heading {
+  color: rgba(255, 255, 255, 1);
+}
+
+::ng-deep .dark-mode .minor-heading{
+  color:  rgba(255, 255, 255, 1);
 }

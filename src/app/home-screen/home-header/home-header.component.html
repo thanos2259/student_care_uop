@@ -1,31 +1,28 @@
-<div style="margin-top: 70px">
-  <div class="container m-auto" style="width: 350px">
+<div class="box">
+  <div class="container" style="max-width: 350px">
     <div class="row" style="width: 400px">
       <div class="col-2">
         <img
           id="uopLogo"
           src="../../../assets/images/pelopas.png"
-          class="uop-logo-blue"
-        />
+          class="uop-logo-blue">
       </div>
       <div class="col-10 p-2 pl-3 ml-4 text-left" style="max-width: 280px">
-        <h3>{{ "STUDENT.FOOTER" | translate }}</h3>
-        <br />
+        <h2>{{ "STUDENT.FOOTER" | translate }}</h2>
       </div>
     </div>
+    <mat-divider></mat-divider>
+    <br>
   </div>
-  <br />
-  <h1 class="main-heading">
+  <h1 class="main-heading p-2">
     {{ "HOME.TITLE" | translate }}
   </h1>
-  <br />
-  <span id="minorHeading" class="minor-heading">{{
-    "HOME.LOGIN-TEXT" | translate
-  }}</span>
-  <br />
-  <br />
-  <br />
-  <button style="font-size: 30px" [routerLink]="['/terms']" class="btn-student">
+  <br>
+  <span class="minor-heading font-italic"> {{"HOME.LOGIN-TEXT" | translate}} </span>
+  <br>
+  <br>
+  <br>
+  <button class="btn-student">
     {{ "HOME.ENTER" | translate }}
   </button>
 </div>

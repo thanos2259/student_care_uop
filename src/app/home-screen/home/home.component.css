@@ -258,7 +258,7 @@ footer {
 
 @media only screen and (max-width: 767px) {
   .allomiso {
-    margin-top: 240px;
+    margin-top: 320px;
   }
 }
 
@@ -409,5 +409,4 @@ footer {
     background-size: cover;
     background-position: calc(1vw) center;
   }
-
 }

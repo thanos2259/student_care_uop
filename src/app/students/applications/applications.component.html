@@ -12,7 +12,10 @@
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
   <ng-container matColumnDef="application">
     <th mat-header-cell *matHeaderCellDef> {{'STUDENT.APPLICATION-TITLE1' | translate}} </th>
-    <td mat-cell *matCellDef="let element"> {{element.application}}</td>
+    <td mat-cell *matCellDef="let element">
+      <i *ngIf="element.application=='Στέγαση'"> {{'HOME.PURPOSE-LI2' | translate}}</i>
+      <i *ngIf="element.application=='Σίτιση'"> {{'HOME.PURPOSE-LI3' | translate}}</i>
+    </td>
   </ng-container>
   <ng-container matColumnDef="applicationNumber">
     <th mat-header-cell *matHeaderCellDef> {{'STUDENT.APPLICATION-NUMBER' | translate}} </th>
@@ -27,6 +30,14 @@
     <td mat-cell *matCellDef="let element"> <i class="fa fa-eye"></i> {{'STUDENT.APPLICATION-SHOW' | translate}} <br> <i
         class="fa fa-print"></i> {{'STUDENT.APPLICATION-PRINT' | translate}}
       {{element.actions}} </td>
+  </ng-container>
+  <ng-container matColumnDef="status">
+    <th mat-header-cell *matHeaderCellDef> {{'STUDENT.APPLICATION-STATUS' | translate}} </th>
+    <td mat-cell *matCellDef="let element">
+      <i *ngIf="element.status=='Υπο επεξεργασία'" class="fa fa-cog">
+        {{'STUDENT.APPLICATION-STATUS1' | translate}}</i>
+      <i *ngIf="element.status=='Εγκεκριμένη'" class="fa fa-check"> {{'STUDENT.APPLICATION-STATUS2' | translate}} </i>
+    </td>
   </ng-container>
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

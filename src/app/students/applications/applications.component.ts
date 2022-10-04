@@ -5,11 +5,12 @@ export interface PeriodicElement {
   application: string;
   date: string;
   actions: string;
+  status: string;
 }
 
 const ELEMENT_DATA: PeriodicElement[] = [
-  { application: 'Στέγαση', applicationNumber: 2259, date: '28/02/2022', actions: '' },
-  { application: 'Σίτιση', applicationNumber: 666, date: '24/09/2022', actions: '' },
+  { application: 'Στέγαση', applicationNumber: 2259, date: '28/02/2022', actions: '', status: 'Υπο επεξεργασία' },
+  { application: 'Σίτιση', applicationNumber: 666, date: '24/09/2022', actions: '', status: 'Εγκεκριμένη' },
 ];
 
 
@@ -21,7 +22,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
 
 
 export class ApplicationsComponent implements OnInit {
-  displayedColumns: string[] = ['application', 'applicationNumber', 'date', 'actions'];
+  displayedColumns: string[] = ['application', 'applicationNumber', 'date', 'status', 'actions'];
   dataSource = ELEMENT_DATA;
 
   constructor() { }

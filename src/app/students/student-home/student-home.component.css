@@ -40,7 +40,7 @@ abbr[data-original-title] {
 }
 
 .instruction-size {
-  font-size: large;
+  font-size: medium;
 }
 
 ::ng-deep .dark-mode .mat-expansion-panel {

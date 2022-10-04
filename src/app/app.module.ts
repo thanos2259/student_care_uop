@@ -41,6 +41,7 @@ import { MealsComponent } from './students/meals/meals.component';
 import { ApplicationsComponent } from './students/applications/applications.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -71,6 +72,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     MatSlideToggleModule,
     MatFormFieldModule,
     MatRadioModule,
+    MatExpansionModule,
     MatInputModule,
     MaterialFileInputModule,
     MatCardModule,

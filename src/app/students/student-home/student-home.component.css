@@ -39,6 +39,25 @@ abbr[data-original-title] {
   font-weight: lighter;
 }
 
+.instruction-size {
+  font-size: large;
+}
+
+::ng-deep .dark-mode .mat-expansion-panel {
+  background-color: #343a40;
+  color: #fff;
+}
+
+::ng-deep .dark-mode .mat-expansion-indicator::after {
+  color: #fff;
+}
+
+@media screen and (max-width: 991px) {
+  .calendar {
+    margin-top: 30px;
+  }
+}
+
 
 /*  calendar js */
 

@@ -31,7 +31,21 @@ export class StudentComponent implements OnInit, OnDestroy {
   async ngOnInit() {
     this.language = localStorage.getItem('language') || 'gr';
 
-    // this.authService.login('pcst19009');
+        //  this.authService.login('pcst19009');
+    this.fetchStudentAndPeriod();
+  }
+
+  public fetchStudentAndPeriod() {
+    this.authService.login('pcst19003')
+      .subscribe((response) => {
+        this.authService.setToken(response.token);
+        this.authService.setSessionId(response.userId);
+        console.log(response);
+        this.studentsService.getStudents()
+          .subscribe((students: Student[]) => {
+            this.studentsSSOData = students;
+          });
+      });
   }
 
   ngOnDestroy(): void {

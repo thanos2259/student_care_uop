@@ -35,6 +35,6 @@ app.get("/api", async (request, response) => {
   // await testMSSQL();
 });
 
-// app.use("/api/students", studentRoutes);
+app.use("/api/students", studentRoutes);
 
 module.exports = app;

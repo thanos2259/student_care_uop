@@ -70,8 +70,8 @@ select::-ms-expand {
   box-sizing: border-box;
 }
 
-body {
-  background: #e5e5e5;
+::ng-deep body {
+  background: #f8f8f8;
   font-size: 14px;
 }
 

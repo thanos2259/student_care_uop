@@ -42,6 +42,7 @@ import { ApplicationsComponent } from './students/applications/applications.comp
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -75,6 +76,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     MatExpansionModule,
     MatInputModule,
     MaterialFileInputModule,
+    MatCheckboxModule,
     MatCardModule,
     MatButtonModule,
     MatTabsModule,

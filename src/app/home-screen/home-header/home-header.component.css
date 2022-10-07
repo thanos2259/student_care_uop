@@ -24,29 +24,6 @@ body {
   font-size: 36px;
 }
 
-@media only screen and (max-width: 1600px) {
-  .main-heading {
-    font-size: 36px;
-  }
-}
-
-@media only screen and (min-width: 1601px) {
-  .main-heading {
-    font-size: 34px;
-  }
-}
-
-.uop-logo-blue {
-  width: 94px;
-  height: 91px;
-}
-
-@media only screen and (max-width: 1601px) {
-  .uop-logo-blue {
-    width: 80px;
-    height: 77.5px;
-  }
-}
 
 button {
   border: none;
@@ -78,6 +55,15 @@ button:active {
   background-color: white;
 }
 
+.terms-anchor {
+  color: rgb(247, 53, 53);
+  cursor: pointer;
+}
+
+::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background {
+  background-color: rgb(4, 189, 4);
+}
+
 ::ng-deep .dark-mode .box {
   background: linear-gradient(45deg, rgb(65, 104, 111), rgb(75, 131, 141));
   border: 1px solid rgb(75, 131, 141);
@@ -94,4 +80,28 @@ button:active {
 
 ::ng-deep .dark-mode .minor-heading {
   color: rgba(255, 255, 255, 1);
+}
+
+@media only screen and (max-width: 1600px) {
+  .main-heading {
+    font-size: 36px;
+  }
+}
+
+@media only screen and (min-width: 1601px) {
+  .main-heading {
+    font-size: 34px;
+  }
+}
+
+.uop-logo-blue {
+  width: 94px;
+  height: 91px;
+}
+
+@media only screen and (max-width: 1601px) {
+  .uop-logo-blue {
+    width: 80px;
+    height: 77.5px;
+  }
 }

@@ -9,7 +9,7 @@ const MiscUtils = require("../MiscUtils.js");
 const login = async (request, response, next) => {
   const uname = request.body.username;
   const userId = await studentService.loginStudent(uname);
-  console.log(userId);
+  // console.log(userId);
 
   if (userId == null) response.status(401).json({
     message: 'Unauthorized'

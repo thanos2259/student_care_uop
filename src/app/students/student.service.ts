@@ -15,10 +15,10 @@ export class StudentsService {
   getStudents(): Observable<Array<Student>> {
     let id = this.authService.getSessionId();
     const fetchedStudents = this.http.get<Array<Student>>('http://localhost:3000/api/students/getStudentById/' + id);
-    this.fetchedStudentsObservable = fetchedStudents;
-    this.fetchedStudentsObservable.subscribe((students: Student[]) => {
-      this.students = [...students];
-    });
+    // this.fetchedStudentsObservable = fetchedStudents;
+    // this.fetchedStudentsObservable.subscribe((students: Student[]) => {
+    //   this.students = [...students];
+    // });
     return fetchedStudents;
 
   }

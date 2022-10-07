@@ -28,14 +28,14 @@ export class StudentComponent implements OnInit, OnDestroy {
     translate.use((browserLang != null) ? browserLang : 'gr');
   }
 
-  async ngOnInit() {
+  ngOnInit() {
     this.language = localStorage.getItem('language') || 'gr';
 
-        //  this.authService.login('pcst19009');
-    this.fetchStudentAndPeriod();
+    //  this.authService.login('pcst19009');
+    this.fetchStudent();
   }
 
-  public fetchStudentAndPeriod() {
+  public fetchStudent() {
     this.authService.login('pcst19003')
       .subscribe((response) => {
         this.authService.setToken(response.token);

@@ -28,12 +28,16 @@ export class accommodationComponent implements OnInit {
     this.studentsService.getStudents()
       .subscribe((students: Student[]) => {
         this.studentsSSOData = students;
+        this.studentsSSOData[0].schacpersonaluniquecode = this.getRegistrationNumber(this.studentsSSOData[0].schacpersonaluniquecode);
       });
+
     this.firstFormGroup = this._formBuilder.group({
       nameCtrl: [],
       surnameCtrl: [],
-      fatherNameCtrl: ['', Validators.required]
+      fatherNameCtrl: ['', Validators.required],
+      registrationNumber: []
     });
+
     this.secondFormGroup = this._formBuilder.group({
       ssnControl: ['', Validators.required],
       doyControl: ['', Validators.required],
@@ -42,6 +46,7 @@ export class accommodationComponent implements OnInit {
       ssnFile: ['', Validators.required],
       ibanFile: ['', Validators.required]
     });
+
     this.contactFormGroup = this._formBuilder.group({
       emailCtrl: ['', Validators.required],
       phoneCtrl: [],
@@ -50,6 +55,7 @@ export class accommodationComponent implements OnInit {
       cityCtrl: [],
       postalCodeCtrl: []
     });
+
     this.specialDataFormGroup = this._formBuilder.group({
       ameaCatCtrl: ['', Validators.required],
       workingCatCtrl: ['', Validators.required],
@@ -57,10 +63,9 @@ export class accommodationComponent implements OnInit {
     });
   }
 
-  // This function is used to get the AMKA number of the student
-  private getSSN(str: string): string {
-    const personalIdArray = str.split(":");
-    return personalIdArray[personalIdArray.length - 1];
+  private getRegistrationNumber(str: string): string {
+    const registrationNumber = str.split(":");
+    return registrationNumber[registrationNumber.length - 1];
   }
 
   checkIfFieldEmpty(givenFormGroup: FormGroup, field: string): boolean {

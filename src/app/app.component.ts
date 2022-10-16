@@ -8,7 +8,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  title = 'UOPinternship';
+  title = 'uopstudent_care';
 
   constructor(private router: Router) {}
 

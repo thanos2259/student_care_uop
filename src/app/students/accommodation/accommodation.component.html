@@ -44,7 +44,8 @@
       </mat-form-field>
       <mat-form-field class="w-50" appearance="fill">
         <mat-label>{{'STUDENT.HOUSING-INFO5' | translate}}</mat-label>
-        <input matInput placeholder="{{'STUDENT.HOUSING-INFO5' | translate}}" formControlName="firstCtrl" readonly>
+        <input matInput placeholder="{{'STUDENT.HOUSING-INFO5' | translate}}" formControlName="depName"
+          [ngModel]="studentsSSOData[0]?.department_id" readonly>
       </mat-form-field><br>
       <mat-form-field class="w-50">
         <mat-label>{{'STUDENT.HOUSING-INFO6' | translate}}</mat-label>

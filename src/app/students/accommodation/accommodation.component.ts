@@ -29,13 +29,15 @@ export class accommodationComponent implements OnInit {
       .subscribe((students: Student[]) => {
         this.studentsSSOData = students;
         this.studentsSSOData[0].schacpersonaluniquecode = this.getRegistrationNumber(this.studentsSSOData[0].schacpersonaluniquecode);
+        this.studentsSSOData[0].department_id = this.departmentsMap[this.studentsSSOData[0].department_id];
       });
 
     this.firstFormGroup = this._formBuilder.group({
       nameCtrl: [],
       surnameCtrl: [],
       fatherNameCtrl: ['', Validators.required],
-      registrationNumber: []
+      registrationNumber: [],
+      depName: []
     });
 
     this.secondFormGroup = this._formBuilder.group({
@@ -65,12 +67,37 @@ export class accommodationComponent implements OnInit {
 
   private getRegistrationNumber(str: string): string {
     const registrationNumber = str.split(":");
-    return registrationNumber[registrationNumber.length - 1];
+    return registrationNumber[8];
   }
 
   checkIfFieldEmpty(givenFormGroup: FormGroup, field: string): boolean {
     const fieldValue = givenFormGroup.get(field)?.value;
     return fieldValue && fieldValue != null && fieldValue != '';
+  }
+
+  departmentsMap = {
+    '98': 'ΠΛΗΡΟΦΟΡΙΚΗΣ ΚΑΙ ΤΗΛΕΠΙΚΟΙΝΩΝΙΩΝ',
+    '104': 'ΙΣΤΟΡΙΑΣ, ΑΡΧΑΙΟΛΟΓΙΑΣ ΚΑΙ ΔΙΑΧΕΙΡΙΣΗΣ ΠΟΛΙΤΙΣΜΙΚΩΝ ΑΓΑΘΩΝ',
+    '1511': 'ΓΕΩΠΟΝΙΑΣ',
+    '1512': 'ΕΠΙΣΤΗΜΗΣ ΚΑΙ ΤΕΧΝΟΛΟΓΙΑΣ ΤΡΟΦΙΜΩΝ',
+    '1513': 'ΛΟΓΙΣΤΙΚΗΣ ΚΑΙ ΧΡΗΜΑΤΟΟΙΚΟΝΟΜΙΚΗΣ',
+    '1514': 'ΔΙΟΙΚΗΣΗΣ ΕΠΙΧΕΙΡΗΣΕΩΝ ΚΑΙ ΟΡΓΑΝΙΣΜΩΝ',
+    '1515': 'ΛΟΓΟΘΕΡΑΠΕΙΑΣ',
+    '1516': 'ΕΠΙΣΤΗΜΗΣ ΔΙΑΤΡΟΦΗΣ ΚΑΙ ΔΙΑΙΤΟΛΟΓΙΑΣ',
+    '1517': 'ΠΑΡΑΣΤΑΤΙΚΩΝ ΚΑΙ ΨΗΦΙΑΚΩΝ ΤΕΧΝΩΝ',
+    '1518': 'ΔΙΟΙΚΗΤΙΚΗΣ ΕΠΙΣΤΗΜΗΣ ΚΑΙ ΤΕΧΝΟΛΟΓΙΑΣ',
+    '1519': 'ΨΗΦΙΑΚΩΝ ΣΥΣΤΗΜΑΤΩΝ',
+    '1520': 'ΦΥΣΙΚΟΘΕΡΑΠΕΙΑΣ',
+    '1522': 'ΗΛΕΚΤΡΟΛΟΓΩΝ ΜΗΧΑΝΙΚΩΝ ΚΑΙ ΜΗΧΑΝΙΚΩΝ ΥΠΟΛΟΓΙΣΤΩΝ - ΣΧΟΛΗ ΜΗΧΑΝΙΚΩΝ',
+    '1523': 'ΜΗΧΑΝΟΛΟΓΩΝ ΜΗΧΑΝΙΚΩΝ - ΣΧΟΛΗ ΜΗΧΑΝΙΚΩΝ',
+    '1524': 'ΠΟΛΙΤΙΚΩΝ ΜΗΧΑΝΙΚΩΝ - ΣΧΟΛΗ ΜΗΧΑΝΙΚΩΝ',
+    '187': 'ΚΟΙΝΩΝΙΚΗΣ ΚΑΙ ΕΚΠΑΙΔΕΥΤΙΚΗΣ ΠΟΛΙΤΙΚΗΣ',
+    '189': 'ΦΙΛΟΛΟΓΙΑΣ',
+    '190': 'ΝΟΣΗΛΕΥΤΙΚΗΣ',
+    '361': 'ΟΙΚΟΝΟΜΙΚΩΝ ΕΠΙΣΤΗΜΩΝ',
+    '362': 'ΘΕΑΤΡΙΚΩΝ ΣΠΟΥΔΩΝ',
+    '400': 'ΟΡΓΑΝΩΣΗΣ ΚΑΙ ΔΙΑΧΕΙΡΙΣΗΣ ΑΘΛΗΤΙΣΜΟΥ',
+    '411': 'ΠΟΛΙΤΙΚΗΣ ΕΠΙΣΤΗΜΗΣ ΚΑΙ ΔΙΕΘΝΩΝ ΣΧΕΣΕΩΝ'
   }
 
   /**

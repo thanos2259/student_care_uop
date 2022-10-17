@@ -5,10 +5,6 @@ import Swal from 'sweetalert2';
 import { Student } from '../student.model';
 import { StudentsService } from '../student.service';
 
-interface municipality {
-  name: string;
-}
-
 @Component({
   selector: 'app-accommodation',
   templateUrl: './accommodation.component.html',
@@ -89,7 +85,7 @@ export class accommodationComponent implements OnInit {
     return fieldValue && fieldValue != null && fieldValue != '';
   }
 
-  location: municipality[] = [
+  location = [
     { name: 'Αβδήρων' },
     { name: 'Αγαθονησίου' },
     { name: 'Αγιάς' },

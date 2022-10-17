@@ -61,3 +61,16 @@ input.example-right-align::-webkit-inner-spin-button {
   background-color: #343a40;
   color: #fff;
 }
+
+::ng-deep .dark-mode .mat-select-value {
+  color: #fff;
+  font-size: large;
+}
+
+::ng-deep .mat-select-value {
+  font-size: large;
+}
+
+::ng-deep .dark-mode .mat-select-placeholder {
+  color: #fff;
+}

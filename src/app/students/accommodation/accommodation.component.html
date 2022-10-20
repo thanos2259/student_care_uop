@@ -22,32 +22,32 @@
   <mat-step [stepControl]="firstFormGroup">
     <form class="mt-4 center" [formGroup]="firstFormGroup">
       <ng-template matStepLabel>{{'STUDENT.HOUSING-INFO' | translate}}</ng-template>
-      <mat-form-field class="mr-2 w-25" appearance="fill">
+      <mat-form-field class="mr-1 w-25 disabled" appearance="fill">
         <mat-label>{{'STUDENT.HOUSING-INFO1' | translate}}</mat-label>
         <input matInput placeholder="{{'STUDENT.HOUSING-INFO1' | translate}}" [ngModel]="studentsSSOData[0]?.givenname"
           formControlName="nameCtrl" readonly>
       </mat-form-field>
-      <mat-form-field class="w-25" appearance="fill">
+      <mat-form-field class="w-25 disabled" appearance="fill">
         <mat-label>{{'STUDENT.HOUSING-INFO2' | translate}}</mat-label>
         <input matInput placeholder="{{'STUDENT.HOUSING-INFO2' | translate}}" [ngModel]="studentsSSOData[0]?.sn"
           formControlName="surnameCtrl" readonly>
       </mat-form-field><br>
-      <mat-form-field class="mr-2 w-25">
+      <mat-form-field class="mr-1 w-25" appearance="fill">
         <mat-label>{{'STUDENT.HOUSING-INFO3' | translate}}</mat-label>
         <input matInput placeholder="{{'STUDENT.HOUSING-INFO3' | translate}}"
           [ngModel]="studentsSSOData[0]?.father_name" formControlName="fatherNameCtrl" required>
       </mat-form-field>
-      <mat-form-field class="w-25" appearance="fill">
+      <mat-form-field class="w-25 disabled " appearance="fill">
         <mat-label>{{'STUDENT.HOUSING-INFO4' | translate}}</mat-label>
         <input matInput placeholder="{{'STUDENT.HOUSING-INFO4' | translate}}" formControlName="registrationNumber"
           [ngModel]="studentsSSOData[0]?.schacpersonaluniquecode" readonly>
       </mat-form-field>
-      <mat-form-field class="w-50" appearance="fill">
+      <mat-form-field class="w-50 disabled" appearance="fill">
         <mat-label>{{'STUDENT.HOUSING-INFO5' | translate}}</mat-label>
         <input matInput placeholder="{{'STUDENT.HOUSING-INFO5' | translate}}" formControlName="depName"
           [ngModel]="studentsSSOData[0]?.department_id" readonly>
       </mat-form-field><br>
-      <mat-form-field class="w-50">
+      <mat-form-field class="w-50" appearance="fill">
         <mat-label>{{'STUDENT.HOUSING-INFO6' | translate}}</mat-label>
         <input matInput formControlName="municipality" readonly>
         <mat-select formControlName="municipality" [ngModel]="studentsSSOData[0]?.location"
@@ -57,17 +57,17 @@
           </mat-option>
         </mat-select>
       </mat-form-field><br>
-      <mat-form-field class="mr-2 w-25">
+      <mat-form-field class="mr-1 w-25" appearance="fill">
         <mat-label>{{'STUDENT.HOUSING-INFO8' | translate}}</mat-label>
         <input matInput placeholder="{{'STUDENT.HOUSING-INFO8' | translate}}" formControlName="city" required
           [ngModel]="studentsSSOData[0]?.city">
       </mat-form-field>
-      <mat-form-field class="w-25">
+      <mat-form-field class="w-25" appearance="fill">
         <mat-label>{{'STUDENT.HOUSING-INFO9' | translate}}</mat-label>
         <input matInput placeholder="{{'STUDENT.HOUSING-INFO9' | translate}}" formControlName="phone"
           [ngModel]="studentsSSOData[0]?.phone" required>
       </mat-form-field><br>
-      <mat-form-field class="w-25" appearance="fill">
+      <mat-form-field class="w-25 disabled" appearance="fill">
         <mat-label>{{'STUDENT.HOUSING-INF10' | translate}}</mat-label>
         <input matInput placeholder="{{'STUDENT.HOUSING-INF10' | translate}}" formControlName="mail"
           [ngModel]="studentsSSOData[0]?.mail" readonly>

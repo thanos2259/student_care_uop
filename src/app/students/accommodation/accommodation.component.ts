@@ -30,19 +30,21 @@ export class accommodationComponent implements OnInit {
         this.studentsSSOData = students;
         this.studentsSSOData[0].schacpersonaluniquecode = this.getRegistrationNumber(this.studentsSSOData[0].schacpersonaluniquecode);
         this.studentsSSOData[0].department_id = this.departmentsMap[this.studentsSSOData[0].department_id];
-      });
+        this.getIndexOfLocation();
 
-    this.firstFormGroup = this._formBuilder.group({
-      nameCtrl: [],
-      surnameCtrl: [],
-      fatherNameCtrl: ['', Validators.required],
-      registrationNumber: [],
-      depName: [],
-      municipality: ['', Validators.required],
-      city: ['', Validators.required],
-      phone: ['', Validators.required],
-      mail: [],
-    });
+        // cant access getIndexOfLocation outside ngOnInit
+        this.firstFormGroup = this._formBuilder.group({
+          nameCtrl: [],
+          surnameCtrl: [],
+          fatherNameCtrl: ['', Validators.required],
+          registrationNumber: [],
+          depName: [],
+          municipality: [this.location[this.getIndexOfLocation()], Validators.required],
+          city: ['', Validators.required],
+          phone: ['', Validators.required],
+          mail: [],
+        });
+      });
 
     this.secondFormGroup = this._formBuilder.group({
       ssnControl: ['', Validators.required],
@@ -78,6 +80,18 @@ export class accommodationComponent implements OnInit {
       registrationNumber = str.split("/");
       return registrationNumber[1];
     }
+  }
+
+  getIndexOfLocation() {
+    let index = -1;
+    let val = this.studentsSSOData[0].location;
+    this.location.find(function (item, i) {
+      if (item.name === val) {
+        index = i;
+        return i;
+      }
+    });
+    return index;
   }
 
   checkIfFieldEmpty(givenFormGroup: FormGroup, field: string): boolean {

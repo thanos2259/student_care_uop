@@ -19,8 +19,7 @@
               <i class="fas fa-4x fa-user-graduate"></i>
             </div>
             <h3 class="profile-username text-center">
-              Γεώργιος Κυριακόπουλος
-              <!-- {{ studentsSSOData[0].givenname }} {{ studentsSSOData[0].sn }} -->
+              {{studentsSSOData[0].givenname}} {{studentsSSOData[0].sn}}
             </h3>
             <p class="text-muted text-center">
               {{'STUDENT.UNDERGRAD' | translate}}
@@ -34,18 +33,17 @@
           <div class="card-body">
             <strong><i class="fas fa-map-marker-alt mr-1"></i> {{'STUDENT.PROFILE-LOCATION' | translate}}</strong>
             <p class="text-muted">
-              <!-- {{ studentsSSOData[0].address }}, {{ studentsSSOData[0].city }} -->
+              {{studentsSSOData[0].address}} {{studentsSSOData[0].city}}
             </p>
             <hr />
             <strong><i class="fas fa-phone-alt mr-1"></i> {{'STUDENT.PROFILE-PHONE' | translate}}</strong>
             <p class="text-muted">
-              <!-- <span class="tag tag-danger">{{ studentsSSOData[0].skills }}
-              </span> -->
+              {{studentsSSOData[0].phone}}
             </p>
             <hr />
             <strong><i class="fas fa-envelope mr-1"></i> {{'STUDENT.HOUSING-INF10' | translate}}</strong>
             <p class="text-muted">
-              <!-- {{ studentsSSOData[0].interests }} -->
+              {{studentsSSOData[0].mail}}
             </p>
           </div>
         </div>
@@ -59,8 +57,8 @@
                   {{'STUDENT.HOUSING-INFO' | translate}}</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#studentContact"
-                  data-toggle="tab">{{'STUDENT.PROFILE-COMMUNICATION' | translate}}</a>
+                <a class="nav-link" href="#studentContact" data-toggle="tab">{{'STUDENT.PROFILE-COMMUNICATION' |
+                  translate}}</a>
               </li>
             </ul>
           </div>
@@ -79,8 +77,8 @@
                     </label>
                     <div class="col-sm-10">
                       <input type="text" class="form-control" id="inputName" name="name"
-                        placeholder="{{'STUDENT.HOUSING-INFO1' | translate}}" readonly />
-                      <!-- [value]="studentsSSOData[0].givenname" -->
+                        placeholder="{{'STUDENT.HOUSING-INFO1' | translate}}" readonly
+                        [(value)]="studentsSSOData[0].givenname" />
                     </div>
                   </div>
                   <div class="form-group row">
@@ -88,17 +86,17 @@
                     </label>
                     <div class="col-sm-10">
                       <input type="text" class="form-control" id="inputName" name="surname"
-                        placeholder="{{'STUDENT.HOUSING-INFO2' | translate}}" readonly />
-                      <!-- [value]="studentsSSOData[0].sn" -->
+                        placeholder="{{'STUDENT.HOUSING-INFO2' | translate}}" readonly
+                        [(value)]="studentsSSOData[0].sn" />
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label for="inputName2"
-                      class="col-sm-2 col-form-label">{{'STUDENT.HOUSING-INFO3' | translate}}</label>
+                    <label for="inputName2" class="col-sm-2 col-form-label">{{'STUDENT.HOUSING-INFO3' |
+                      translate}}</label>
                     <div class="col-sm-10">
                       <input type="text" name="father_name" class="form-control" id="inputName2"
-                        placeholder="{{'STUDENT.HOUSING-INFO3' | translate}}" />
-                      <!-- ngModel [ngModel]="studentsSSOData[0].father_name" -->
+                        placeholder="{{'STUDENT.HOUSING-INFO3' | translate}}" ngModel
+                        [(ngModel)]="studentsSSOData[0].father_name" />
                     </div>
                   </div>
                   <div class="form-group row">
@@ -106,8 +104,8 @@
                       {{'STUDENT.PROFILE-FATHERS-SURNAME' | translate}}</label>
                     <div class="col-sm-10">
                       <input type="text" name="father_last_name" class="form-control" id="fatherLastName"
-                        placeholder="{{'STUDENT.PROFILE-FATHERS-SURNAME' | translate}}" />
-                      <!-- ngModel [ngModel]="studentsSSOData[0].father_last_name" -->
+                        placeholder="{{'STUDENT.PROFILE-FATHERS-SURNAME' | translate}}" ngModel
+                        [(ngModel)]="studentsSSOData[0].father_last_name" />
                     </div>
                   </div>
                   <div class="form-group row">
@@ -115,27 +113,26 @@
                       {{'STUDENT.PROFILE-MOTHERS-NAME' | translate}} </label>
                     <div class="col-sm-10">
                       <input type="text" name="mother_name" class="form-control" id="inputName2"
-                        placeholder="{{'STUDENT.PROFILE-MOTHERS-NAME' | translate}}" value="" />
-                      <!-- ngModel [ngModel]="studentsSSOData[0].mother_name" -->
+                        placeholder="{{'STUDENT.PROFILE-MOTHERS-NAME' | translate}}" value="" ngModel
+                        [(ngModel)]="studentsSSOData[0].mother_name" />
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label for="inputName2"
-                      class="col-sm-2 col-form-label">{{'STUDENT.PROFILE-MOTHERS-SURNAME' | translate}}</label>
+                    <label for="inputName2" class="col-sm-2 col-form-label">{{'STUDENT.PROFILE-MOTHERS-SURNAME' |
+                      translate}}</label>
                     <div class="col-sm-10">
                       <input type="text" name="mother_last_name" class="form-control" id="inputName2"
-                        placeholder="{{'STUDENT.PROFILE-MOTHERS-SURNAME' | translate}}" value="" />
-                      <!-- ngModel [ngModel]="studentsSSOData[0].mother_last_name" -->
+                        placeholder="{{'STUDENT.PROFILE-MOTHERS-SURNAME' | translate}}" value="" ngModel
+                        [(ngModel)]="studentsSSOData[0].mother_last_name" />
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label for="inputExperience"
-                      class="col-sm-2 col-form-label">{{'STUDENT.PROFILE-DATEOFBIRTH' | translate}}</label>
+                    <label for="inputExperience" class="col-sm-2 col-form-label">{{'STUDENT.PROFILE-DATEOFBIRTH' |
+                      translate}}</label>
                     <div class="col-sm-10">
                       <input class="form-control" type="text" id="date_of_birth" name="schacdateofbirth"
                         placeholder="{{'STUDENT.PROFILE-DATEOFBIRTH' | translate}}" readonly min="1900-01-01"
-                        max="2500-01-01" />
-                      <!-- [value]="studentsSSOData[0].schacdateofbirth" -->
+                        max="2500-01-01" [(value)]="studentsSSOData[0].schacdateofbirth" />
                     </div>
                   </div>
                   <div class="form-group container-fluid row" style="width: 320px; margin: auto">
@@ -158,88 +155,82 @@
                   (ngSubmit)="onSubmitStudentContact(studentContactForm.value)">
                   <div class="fieldset-wrapper">
                     <div class="form-group row">
-                      <label for="inputEmail" class="col-sm-2 col-form-label"> {{'STUDENT.HOUSING-INF10' | translate}}
+                      <label class="col-sm-2 col-form-label"> {{'STUDENT.HOUSING-INF10' | translate}}
                       </label>
                       <div class="col-sm-10">
                         <input type="email" class="form-control" id="inputEmail"
-                          placeholder="{{'STUDENT.HOUSING-INF10' | translate}}" />
-                        <!-- [value]="this.studentsSSOData[0].id + '@uop.gr'"  -->
+                          placeholder="{{'STUDENT.HOUSING-INF10' | translate}}" [(value)]="studentsSSOData[0].mail"
+                          readonly />
                       </div>
                     </div>
                     <div class="form-group row">
-                      <label for="edit-profile-student-field-student-address-und-0-phone"
-                        class="col-sm-2 col-form-label">{{'STUDENT.PROFILE-PHONE' | translate}}</label>
+                      <label class="col-sm-2 col-form-label">{{'STUDENT.PROFILE-PHONE' | translate}}</label>
                       <div class="col-sm-10">
-                        <input type="text" class="form-control"
-                          id="edit-profile-student-field-student-address-und-0-phone" name="phone" ngModel
-                          placeholder="{{'STUDENT.PROFILE-PHONE' | translate}}" />
-                        <!-- [ngModel]="studentsSSOData[0].phone" value="" size="31" maxlength="31" -->
+                        <input type="text" class="form-control" id="phone" name="phone" ngModel
+                          placeholder="{{'STUDENT.PROFILE-PHONE' | translate}}" [(ngModel)]="studentsSSOData[0].phone"
+                          value="" size="10" maxlength="10" />
                       </div>
                     </div>
-                    <div
-                      class="form-group row form-type-textfield form-item-profile-student-field-student-address-und-0-street">
-                      <label class="col-sm-2 col-form-label"
-                        for="edit-profile-student-field-student-address-und-0-street">{{'STUDENT.HOUSING-INFO6' | translate}}
+                    <div class="form-group row">
+                      <label class="col-sm-2 col-form-label">{{'STUDENT.HOUSING-INFO6' |
+                        translate}}
                         <br>
                         <span class="font-italic font-weight-light">{{'STUDENT.PROFILE-STATE' | translate}}</span>
                       </label>
                       <div class="col-sm-10">
-                        <input type="text" id="edit-profile-student-field-student-address-und-0-street" name="address"
-                          value="" size="64" maxlength="255"
+                        <input type="text" class="form-control" id="location" name="location" ngModel
                           placeholder="{{'STUDENT.HOUSING-INFO6' | translate}} {{'STUDENT.PROFILE-STATE' | translate}}"
-                          class="form-text form-control" />
-                        <!-- ngModel [ngModel]="studentsSSOData[0].address" -->
+                          [(ngModel)]="studentsSSOData[0].location" value="" size="64" maxlength="255" />
                       </div>
                     </div>
                     <div class="form-group row">
-                      <label class="col-sm-2 col-form-label"
-                        for="edit-profile-student-field-student-address-und-0-additional">{{'STUDENT.PROFILE-TOWN' | translate}}
+                      <label class="col-sm-2 col-form-label">{{'STUDENT.PROFILE-TOWN' |
+                        translate}}
                         <br>
                         <span class="font-italic font-weight-light">{{'STUDENT.PROFILE-STATE' | translate}}</span>
                       </label>
                       <div class="col-sm-10">
-                        <input type="text" id="edit-profile-student-field-student-address-und-0-additional"
-                          name="location" size="64" maxlength="255" class="form-text form-control"
-                          placeholder="{{'STUDENT.PROFILE-TOWN' | translate}} {{'STUDENT.PROFILE-STATE' | translate}}" />
-                        <!-- ngModel [ngModel]="studentsSSOData[0].location" -->
+                        <input type="text" id="city" name="city" size="64" maxlength="255"
+                          class="form-text form-control"
+                          placeholder="{{'STUDENT.PROFILE-TOWN' | translate}} {{'STUDENT.PROFILE-STATE' | translate}}"
+                          ngModel [(ngModel)]="studentsSSOData[0].city" />
                       </div>
                     </div>
                     <div class="form-group row">
-                      <label class="col-sm-2 col-form-label"
-                        for="edit-profile-student-field-student-address-und-0-city">{{'STUDENT.PROFILE-STREET' | translate}}
+                      <label class="col-sm-2 col-form-label">{{'STUDENT.PROFILE-STREET' |
+                        translate}}
                         <br>
                         <span class="font-italic font-weight-light">{{'STUDENT.PROFILE-STATE' | translate}}</span>
                       </label>
                       <div class="col-sm-10">
-                        <input type="text" id="edit-profile-student-field-student-address-und-0-city" name="city"
-                          ngModel value="" size="64" maxlength="255" class="form-text form-control"
-                          placeholder="{{'STUDENT.PROFILE-STREET' | translate}} {{'STUDENT.PROFILE-STATE' | translate}}" />
-                        <!-- [ngModel]="studentsSSOData[0].city" -->
+                        <input type="text" id="address" name="address" ngModel value="" size="64" maxlength="255"
+                          class="form-text form-control"
+                          placeholder="{{'STUDENT.PROFILE-STREET' | translate}} {{'STUDENT.PROFILE-STATE' | translate}}"
+                          [(ngModel)]="studentsSSOData[0].address" />
                       </div>
                     </div>
                     <div class="form-group row">
-                      <label class="col-sm-2 col-form-label"
-                        for="edit-profile-student-field-student-address-und-0-postal-code">{{'STUDENT.PROFILE-POSTCODE' | translate}}
+                      <label class="col-sm-2 col-form-label">{{'STUDENT.PROFILE-POSTCODE'
+                        | translate}}
                         <br>
                         <span class="font-italic font-weight-light">{{'STUDENT.PROFILE-STATE' | translate}}</span>
                       </label>
                       <div class="col-sm-10">
-                        <input type="text" id="edit-profile-student-field-student-address-und-0-postal-code"
-                          name="post_address" value="" size="16" maxlength="16" class="form-text form-control"
-                          placeholder="{{'STUDENT.PROFILE-POSTCODE' | translate}} {{'STUDENT.PROFILE-STATE' | translate}}" />
-                        <!-- ngModel [ngModel]="studentsSSOData[0].post_address" -->
+                        <input type="text" id="post_address" name="post_address" value="" size="5" maxlength="5"
+                          class="form-text form-control"
+                          placeholder="{{'STUDENT.PROFILE-POSTCODE' | translate}} {{'STUDENT.PROFILE-STATE' | translate}}"
+                          ngModel [(ngModel)]="studentsSSOData[0].post_address" />
                       </div>
                     </div>
                     <div class="form-group row">
-                      <label class="col-sm-2 col-form-label"
-                        for="edit-profile-student-field-student-address-und-0-country">{{'STUDENT.PROFILE-COUNTRY' | translate}}
+                      <label class="col-sm-2 col-form-label">{{'STUDENT.PROFILE-COUNTRY' |
+                        translate}}
                         <br>
                         <span class="font-italic font-weight-light">{{'STUDENT.PROFILE-STATE' | translate}}</span>
                       </label>
                       <div class="col-sm-10">
-                        <select name="country" class="location_auto_country form-select ajax-processed"
-                          id="edit-profile-student-field-student-address-und-0-country">
-                          <!-- ngModel [ngModel]="studentsSSOData[0].country" -->
+                        <select name="country" class="location_auto_country form-select ajax-processed" id="country"
+                          ngModel [(ngModel)]="studentsSSOData[0].country">
                           <option value="xx">ΕΚΤΟΣ ΛΙΣΤΑΣ</option>
                           <option value="bl">Άγιος Βαρθολομαίος</option>
                           <option value="vc">

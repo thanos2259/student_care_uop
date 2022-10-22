@@ -30,9 +30,7 @@ export class accommodationComponent implements OnInit {
         this.studentsSSOData = students;
         this.studentsSSOData[0].schacpersonaluniquecode = this.getRegistrationNumber(this.studentsSSOData[0].schacpersonaluniquecode);
         this.studentsSSOData[0].department_id = this.departmentsMap[this.studentsSSOData[0].department_id];
-        this.getIndexOfLocation();
 
-        // cant access getIndexOfLocation outside ngOnInit
         this.firstFormGroup = this._formBuilder.group({
           nameCtrl: [],
           surnameCtrl: [],
@@ -71,7 +69,7 @@ export class accommodationComponent implements OnInit {
     });
   }
 
-  private getRegistrationNumber(str: string): string {
+  getRegistrationNumber(str: string): string {
     let registrationNumber = [''];
     if (str.indexOf('/') == -1) {
       registrationNumber = str.split(":");

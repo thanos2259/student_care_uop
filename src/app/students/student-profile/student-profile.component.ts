@@ -34,6 +34,7 @@ export class StudentProfileComponent implements OnInit, OnDestroy {
   }
 
   location = Utils.location;
+  countries = Utils.countries;
 
   // This function is used to get the AMKA of the student
   private getSSN(str: string): string {

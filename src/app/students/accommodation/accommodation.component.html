@@ -62,7 +62,8 @@
       </mat-form-field>
       <mat-form-field class="w-25" appearance="fill">
         <mat-label>{{'STUDENT.HOUSING-INFO9' | translate}}</mat-label>
-        <input matInput placeholder="{{'STUDENT.HOUSING-INFO9' | translate}}" formControlName="phone" value="" size="10"
+        <input type="number" matInput placeholder="{{'STUDENT.HOUSING-INFO9' | translate}}" formControlName="phone"
+          oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
           maxlength="10" [(ngModel)]="studentsSSOData[0].phone" required>
       </mat-form-field><br>
       <mat-form-field class="w-25 disabled" appearance="fill">

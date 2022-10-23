@@ -3,6 +3,7 @@ import { Student } from '../student.model';
 import { StudentsService } from '../student.service';
 import { mergeMap, Observable, Subscription, takeUntil } from 'rxjs';
 import Swal from 'sweetalert2';
+import { Utils } from 'src/app/MiscUtils';
 
 @Component({
   selector: 'app-student-profile',
@@ -31,6 +32,8 @@ export class StudentProfileComponent implements OnInit, OnDestroy {
       });
     // this.studentSubscription = this.studentsService.getStudentUpdateListener()
   }
+
+  location = Utils.location;
 
   // This function is used to get the AMKA of the student
   private getSSN(str: string): string {

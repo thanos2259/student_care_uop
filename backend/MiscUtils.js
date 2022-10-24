@@ -1,14 +1,11 @@
 // All the accepted file types
 const FILE_TYPES = [
-  'png', 'jpg', 'gif', 'jpeg', 'pdf', 'webp', 'doc', 'docx'
+  'pdf'
 ];
 
 const FILE_TYPES_WITH_DOT = [
-  '.png', '.jpg', '.gif', '.jpeg', '.pdf', '.webp', '.doc', '.docx'
+  '.pdf'
 ];
-
-// salt rounds for bcrypt algorithm
-const SALT_ROUNDS = 10;
 
 const departmentsMap = {
   '104': 555, //ΙΣΤΟΡΙΑΣ, ΑΡΧΑΙΟΛΟΓΙΑΣ ΚΑΙ ΔΙΑΧΕΙΡΙΣΗΣ ΠΟΛΙΤΙΣΜΙΚΩΝ ΑΓΑΘΩΝ
@@ -39,50 +36,9 @@ const departmentsMap = {
   '98': 560 //ΠΛΗΡΟΦΟΡΙΚΗΣ ΚΑΙ ΤΗΛΕΠΙΚΟΙΝΩΝΙΩΝ
 };
 
-/**
- * Format file extensions such as doc and docx, if needed
- *
- * @param {*} ext - The file extension of the uploaded file
- * @returns ext - A string which refers to the extension of the file after formatting.
- * e.g. msword needs to be changed to doc format
- */
-function formatDocExtension(ext) {
-  if (ext == 'msword') {
-    ext = 'doc';
-  } else if (ext == 'vnd.openxmlformats-officedocument.wordprocessingml.document') {
-    ext = 'docx';
-  }
-  return ext;
-}
-
-const splitStudentsAM = (splitString) => {
-  const splitArray = splitString.split(':');
-  return splitArray[splitArray.length - 1];
-};
-
-const splitScholarsPersonalData = (splitString) => {
-  const splitArray = splitString.split(':');
-  return splitArray[splitArray.length - 2];
-};
-
-/**
- * This functions determines whether the passed value is an Array
- * and whether the array is empty.
- * @param {*} arrayParam
- * @returns true if the value is an Array and it is not empty; otherwise, false.
- */
-const isArrayNotEmpty = (arrayParam) => {
-  return Array.isArray(arrayParam) && arrayParam.length > 0;
-};
-
 // Export list
 module.exports = {
   FILE_TYPES,
   FILE_TYPES_WITH_DOT,
-  SALT_ROUNDS,
-  departmentsMap,
-  formatDocExtension,
-  splitStudentsAM,
-  splitScholarsPersonalData,
-  isArrayNotEmpty
+  departmentsMap
 };

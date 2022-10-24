@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { mergeMap } from 'rxjs';
 import { Utils } from 'src/app/MiscUtils';
-import Swal from 'sweetalert2';
 import { Student } from '../student.model';
 import { StudentsService } from '../student.service';
 
@@ -12,9 +11,6 @@ import { StudentsService } from '../student.service';
   styleUrls: ['./accommodation.component.css']
 })
 
-/**
- * @title enable practice with vertical stepper
- */
 export class accommodationComponent implements OnInit {
   isLinear = true;
   firstFormGroup!: FormGroup;
@@ -29,13 +25,13 @@ export class accommodationComponent implements OnInit {
     this.studentsService.getStudents()
       .subscribe((students: Student[]) => {
         this.studentsSSOData = students;
-        this.studentsSSOData[0].schacpersonaluniquecode = this.getRegistrationNumber(this.studentsSSOData[0].schacpersonaluniquecode);
+        this.studentsSSOData[0].schacpersonaluniquecode = Utils.getRegistrationNumber(this.studentsSSOData[0].schacpersonaluniquecode);
         this.studentsSSOData[0].department_id = this.departmentsMap[this.studentsSSOData[0].department_id];
 
         this.firstFormGroup = this._formBuilder.group({
-          nameCtrl: [],
-          surnameCtrl: [],
-          fatherNameCtrl: ['', Validators.required],
+          name: [],
+          surname: [],
+          fatherName: ['', Validators.required],
           registrationNumber: [],
           depName: [],
           municipality: [this.location[this.getIndexOfLocation()], Validators.required],
@@ -70,17 +66,6 @@ export class accommodationComponent implements OnInit {
     });
   }
 
-  getRegistrationNumber(str: string): string {
-    let registrationNumber = [''];
-    if (str.indexOf('/') == -1) {
-      registrationNumber = str.split(":");
-      return registrationNumber[8];
-    } else {
-      registrationNumber = str.split("/");
-      return registrationNumber[1];
-    }
-  }
-
   getIndexOfLocation() {
     let index = -1;
     let val = this.studentsSSOData[0].location;
@@ -112,10 +97,10 @@ export class accommodationComponent implements OnInit {
       return;
     }
     const generalDetailsData: any = {
-      father_name: this.firstFormGroup.get('fatherNameCtrl')?.value,
-      father_last_name: this.firstFormGroup.get('fatherSurnameCtrl')?.value,
-      mother_name: this.firstFormGroup.get('motherNameCtrl')?.value,
-      mother_last_name: this.firstFormGroup.get('motherSurnameCtrl')?.value
+      father_name: this.firstFormGroup.get('fatherName')?.value,
+      municipality: this.firstFormGroup.get('municipality')?.value,
+      city: this.firstFormGroup.get('city')?.value,
+      phone: this.firstFormGroup.get('phone')?.value
     };
     const contractsData: any = {
       ssn: this.secondFormGroup.get('ssnControl')?.value,
@@ -145,7 +130,7 @@ export class accommodationComponent implements OnInit {
     this.onSubmitStudentContractDetails(contractsData, contractFiles);
     this.onSubmitStudentContact(contactDetails);
     this.onSubmitStudentSpecialDetails(specialDetails);
-    this.onSave();
+    Utils.onSave();
   }
 
   uploadFile(fileValue: any): FormData {
@@ -162,8 +147,6 @@ export class accommodationComponent implements OnInit {
   onSubmitStudentSpecialDetails(data: any) {
     this.studentsService.updateStudentSpecialDetails(data);
   }
-
-
 
   onSubmitStudentContractDetails(data: any, contractFiles: { ssnFile: any; ibanFile: any; }) {
     const fileSSN = this.uploadFile(contractFiles.ssnFile);
@@ -183,29 +166,6 @@ export class accommodationComponent implements OnInit {
     this.studentsService.updateStudentContact(data);
   }
 
-  onSave() {
-    Swal.fire({
-      title: 'Ενημέρωση στοιχείων',
-      text: 'Τα στοιχεία σας ενημερώθηκαν επιτυχώς',
-      icon: 'success',
-      showCancelButton: false,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'ΟΚ'
-    });
-  }
-
-  onErr() {
-    Swal.fire({
-      title: 'Ενημέρωση στοιχείων',
-      text: 'Μη έγκυρος τύπος αρχείων. Υποστηριζόμενος τύπος αρχέιων: .pdf .jpg .png .webp .jpeg .gif .doc .docx',
-      icon: 'warning',
-      showCancelButton: false,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'ΟΚ'
-    });
-  }
 
   validateFiles(docType: string) {
     let ssnFile = this.secondFormGroup.get(docType)?.value;
@@ -215,18 +175,11 @@ export class accommodationComponent implements OnInit {
     let fileName = ssnFile._fileNames;
     let ext = fileName.match(/\.([^\.]+)$/)[1];
     switch (ext) {
-      case 'jpg':
-      case 'jpeg':
       case 'pdf':
-      case 'png':
-      case 'doc':
-      case 'docx':
-      case 'gif':
-      case 'webp':
         console.log('Allowed file format');
         break;
       default:
-        this.onErr();
+        Utils.onError();
         this.secondFormGroup.get(docType)?.setValue(null);
         break;
     }

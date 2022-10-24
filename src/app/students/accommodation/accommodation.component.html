@@ -23,17 +23,17 @@
       <mat-form-field class="mr-1 w-25 disabled" appearance="fill">
         <mat-label>{{'STUDENT.HOUSING-INFO1' | translate}}</mat-label>
         <input matInput placeholder="{{'STUDENT.HOUSING-INFO1' | translate}}" [(ngModel)]="studentsSSOData[0].givenname"
-          formControlName="nameCtrl" readonly>
+          formControlName="name" readonly>
       </mat-form-field>
       <mat-form-field class="w-25 disabled" appearance="fill">
         <mat-label>{{'STUDENT.HOUSING-INFO2' | translate}}</mat-label>
         <input matInput placeholder="{{'STUDENT.HOUSING-INFO2' | translate}}" [(ngModel)]="studentsSSOData[0].sn"
-          formControlName="surnameCtrl" readonly>
+          formControlName="surname" readonly>
       </mat-form-field><br>
       <mat-form-field class="mr-1 w-25" appearance="fill">
         <mat-label>{{'STUDENT.HOUSING-INFO3' | translate}}</mat-label>
         <input matInput placeholder="{{'STUDENT.HOUSING-INFO3' | translate}}"
-          [(ngModel)]="studentsSSOData[0].father_name" formControlName="fatherNameCtrl" required>
+          [(ngModel)]="studentsSSOData[0].father_name" formControlName="fatherName" required>
       </mat-form-field>
       <mat-form-field class="w-25 disabled " appearance="fill">
         <mat-label>{{'STUDENT.HOUSING-INFO4' | translate}}</mat-label>

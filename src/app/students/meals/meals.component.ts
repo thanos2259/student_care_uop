@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { mergeMap } from 'rxjs';
-import Swal from 'sweetalert2';
+import { Utils } from 'src/app/MiscUtils';
 import { Student } from '../student.model';
 import { StudentsService } from '../student.service';
-
 
 @Component({
   selector: 'app-meals',
   templateUrl: './meals.component.html',
   styleUrls: ['./meals.component.css']
 })
+
 export class MealsComponent implements OnInit {
   isLinear = true;
   firstFormGroup!: FormGroup;
@@ -25,15 +25,21 @@ export class MealsComponent implements OnInit {
     this.studentsService.getStudents()
       .subscribe((students: Student[]) => {
         this.studentsSSOData = students;
-        this.studentsSSOData[0].schacpersonaluniquecode = this.getRegistrationNumber(this.studentsSSOData[0].schacpersonaluniquecode);
-      });
+        this.studentsSSOData[0].schacpersonaluniquecode = Utils.getRegistrationNumber(this.studentsSSOData[0].schacpersonaluniquecode);
+        this.studentsSSOData[0].department_id = this.departmentsMap[this.studentsSSOData[0].department_id];
 
-    this.firstFormGroup = this._formBuilder.group({
-      nameCtrl: [],
-      surnameCtrl: [],
-      fatherNameCtrl: ['', Validators.required],
-      registrationNumber: []
-    });
+        this.firstFormGroup = this._formBuilder.group({
+          name: [],
+          surname: [],
+          fatherName: ['', Validators.required],
+          registrationNumber: [],
+          depName: [],
+          municipality: [this.location[this.getIndexOfLocation()], Validators.required],
+          city: ['', Validators.required],
+          phone: ['', Validators.required],
+          mail: [],
+        });
+      });
 
     this.secondFormGroup = this._formBuilder.group({
       ssnControl: ['', Validators.required],
@@ -60,15 +66,36 @@ export class MealsComponent implements OnInit {
     });
   }
 
-  private getRegistrationNumber(str: string): string {
-    const registrationNumber = str.split(":");
-    return registrationNumber[registrationNumber.length - 1];
+  getRegistrationNumber(str: string): string {
+    let registrationNumber = [''];
+    if (str.indexOf('/') == -1) {
+      registrationNumber = str.split(":");
+      return registrationNumber[8];
+    } else {
+      registrationNumber = str.split("/");
+      return registrationNumber[1];
+    }
+  }
+
+  getIndexOfLocation() {
+    let index = -1;
+    let val = this.studentsSSOData[0].location;
+    this.location.find(function (item, i) {
+      if (item.name === val) {
+        index = i;
+        return i;
+      }
+    });
+    return index;
   }
 
   checkIfFieldEmpty(givenFormGroup: FormGroup, field: string): boolean {
     const fieldValue = givenFormGroup.get(field)?.value;
     return fieldValue && fieldValue != null && fieldValue != '';
   }
+
+  location = Utils.location;
+  departmentsMap = Utils.departmentsMap;
 
   /**
    * Used to update student general, contract and contact details,
@@ -81,10 +108,10 @@ export class MealsComponent implements OnInit {
       return;
     }
     const generalDetailsData: any = {
-      father_name: this.firstFormGroup.get('fatherNameCtrl')?.value,
-      father_last_name: this.firstFormGroup.get('fatherSurnameCtrl')?.value,
-      mother_name: this.firstFormGroup.get('motherNameCtrl')?.value,
-      mother_last_name: this.firstFormGroup.get('motherSurnameCtrl')?.value
+      father_name: this.firstFormGroup.get('fatherName')?.value,
+      municipality: this.firstFormGroup.get('municipality')?.value,
+      city: this.firstFormGroup.get('city')?.value,
+      phone: this.firstFormGroup.get('phone')?.value
     };
     const contractsData: any = {
       ssn: this.secondFormGroup.get('ssnControl')?.value,
@@ -114,8 +141,7 @@ export class MealsComponent implements OnInit {
     this.onSubmitStudentContractDetails(contractsData, contractFiles);
     this.onSubmitStudentContact(contactDetails);
     this.onSubmitStudentSpecialDetails(specialDetails);
-    this.setPhase(1);
-    this.onSave();
+    Utils.onSave();
   }
 
   uploadFile(fileValue: any): FormData {
@@ -131,10 +157,6 @@ export class MealsComponent implements OnInit {
 
   onSubmitStudentSpecialDetails(data: any) {
     this.studentsService.updateStudentSpecialDetails(data);
-  }
-
-  setPhase(phase: number) {
-
   }
 
   onSubmitStudentContractDetails(data: any, contractFiles: { ssnFile: any; ibanFile: any; }) {
@@ -155,30 +177,6 @@ export class MealsComponent implements OnInit {
     this.studentsService.updateStudentContact(data);
   }
 
-  onSave() {
-    Swal.fire({
-      title: 'Ενημέρωση στοιχείων',
-      text: 'Τα στοιχεία σας ενημερώθηκαν επιτυχώς',
-      icon: 'success',
-      showCancelButton: false,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'ΟΚ'
-    });
-  }
-
-  onErr() {
-    Swal.fire({
-      title: 'Ενημέρωση στοιχείων',
-      text: 'Μη έγκυρος τύπος αρχείων. Υποστηριζόμενος τύπος αρχέιων: .pdf .jpg .png .webp .jpeg .gif .doc .docx',
-      icon: 'warning',
-      showCancelButton: false,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'ΟΚ'
-    });
-  }
-
   validateFiles(docType: string) {
     let ssnFile = this.secondFormGroup.get(docType)?.value;
     if (ssnFile == null) {
@@ -187,18 +185,11 @@ export class MealsComponent implements OnInit {
     let fileName = ssnFile._fileNames;
     let ext = fileName.match(/\.([^\.]+)$/)[1];
     switch (ext) {
-      case 'jpg':
-      case 'jpeg':
       case 'pdf':
-      case 'png':
-      case 'doc':
-      case 'docx':
-      case 'gif':
-      case 'webp':
         console.log('Allowed file format');
         break;
       default:
-        this.onErr();
+        Utils.onError();
         this.secondFormGroup.get(docType)?.setValue(null);
         break;
     }

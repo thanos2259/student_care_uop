@@ -19,6 +19,10 @@ input.example-right-align::-webkit-inner-spin-button {
   display: none;
 }
 
+.disabled {
+  color: rgb(197, 197, 197);
+}
+
 
 /* dark mode */
 ::ng-deep .dark-mode .mat-focused .mat-form-field-label {
@@ -60,4 +64,29 @@ input.example-right-align::-webkit-inner-spin-button {
 ::ng-deep .dark-mode .dark {
   background-color: #343a40;
   color: #fff;
+}
+
+::ng-deep .dark-mode .mat-select-value {
+  color: #fff;
+  font-size: large;
+}
+
+::ng-deep .mat-select-value {
+  font-size: large;
+}
+
+::ng-deep .dark-mode .mat-select-placeholder {
+  color: #fff;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
 }

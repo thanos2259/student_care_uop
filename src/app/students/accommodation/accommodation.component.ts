@@ -107,12 +107,17 @@ export class accommodationComponent implements OnInit {
     Utils.onSaveApplication();
   }
 
-  // uploadFile(fileValue: any): FormData {
-  //   const imageBlob = fileValue?.files[0];
-  //   const file = new FormData();
-  //   file.set('file', imageBlob);
-  //   return file;
-  // }
+  uploadFile(fileValue: any): FormData {
+    const imageBlob = fileValue?.files[0];
+    const file = new FormData();
+    file.set('file', imageBlob);
+    return file;
+  }
+
+  onSubmitTestFile(data: any, testFile: any) {
+    const file = this.uploadFile(testFile);
+  }
+
 
   onSubmitStudentBasicInfo(data: any) {
     this.studentsService.updateStudentBasicInfo(data);

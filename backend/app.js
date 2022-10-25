@@ -3,6 +3,8 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const bodyParser = require("body-parser");
+const fs = require('fs');
+const formidable = require('formidable');
 
 // Route imports
 const studentRoutes = require("./api-routes/studentRoutes.js");
@@ -36,5 +38,20 @@ app.get("/api", async (request, response) => {
 });
 
 app.use("/api/students", studentRoutes);
+
+
+app.post("/api/upload", async (request, response) => {
+  let form = new formidable.IncomingForm();
+  form.parse(request, function (error, fields, files) {
+    let oldpath = files.filetoupload.filepath;
+    let newpath = './uploads/' + files.filetoupload.originalFilename;
+    fs.rename(oldpath, newpath, function (error) {
+      if (error) throw error;
+      response.write('File uploaded and moved!');
+      response.end();
+    });
+  });
+});
+
 
 module.exports = app;

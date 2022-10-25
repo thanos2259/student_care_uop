@@ -98,7 +98,7 @@ export class accommodationComponent implements OnInit {
     // }
     const basicInfo: any = {
       father_name: this.firstFormGroup.get('fatherName')?.value,
-      municipality: this.firstFormGroup.get('municipality')?.value,
+      location: this.firstFormGroup.get('municipality')?.value,
       city: this.firstFormGroup.get('city')?.value,
       phone: this.firstFormGroup.get('phone')?.value
     };

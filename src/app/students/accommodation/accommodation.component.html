@@ -47,8 +47,8 @@
       </mat-form-field><br>
       <mat-form-field class="w-50" appearance="fill">
         <mat-label>{{'STUDENT.HOUSING-INFO7' | translate}}</mat-label>
-        <mat-select formControlName="municipality" required>
-          <mat-option *ngFor="let element of location" [value]="element">
+        <mat-select formControlName="municipality" [(ngModel)]="studentsSSOData[0].location" required>
+          <mat-option *ngFor="let element of location" [value]="element.name">
             {{element.name}}
           </mat-option>
         </mat-select>

@@ -76,26 +76,6 @@ const updateStudentDetails = async (request, response, next) => {
   }
 };
 
-const updateStudentContractDetails = async (request, response, next) => {
-  try {
-    const id = request.params.id;
-    const student = request.body;
-
-    const updateResults = await studentService.updateStudentContractDetails(student, id);
-
-    response
-      .status(200)
-      .json({
-        message: 'Student contract details updated successfully'
-      });
-  } catch (error) {
-    console.error(error.message);
-    response.send({
-      message: error.message
-    });
-  }
-};
-
 const updateStudentContact = async (request, response, next) => {
   try {
     const id = request.params.id;
@@ -107,6 +87,26 @@ const updateStudentContact = async (request, response, next) => {
       .status(200)
       .json({
         message: 'Student contact updated successfully'
+      });
+  } catch (error) {
+    console.error(error.message);
+    response.send({
+      message: error.message
+    });
+  }
+};
+
+const updateStudentBasicInfo = async (request, response, next) => {
+  try {
+    const id = request.params.id;
+    const student = request.body;
+
+    await studentService.updateStudentBasicInfo(student, id);
+
+    response
+      .status(200)
+      .json({
+        message: 'Student basic information updated successfully'
       });
   } catch (error) {
     console.error(error.message);
@@ -135,8 +135,6 @@ const updateStudentSpecialDetails = async (request, response, next) => {
     });
   }
 };
-
-
 
 const validateFile = async (request, response, err, fileType) => {
   try {
@@ -275,10 +273,9 @@ module.exports = {
   getAllStudents,
   getStudentById,
   updateStudentDetails,
-  updateStudentContractDetails,
   updateStudentContact,
   updateStudentSpecialDetails,
-  //dummy login
+  updateStudentBasicInfo,
   login,
   insertSSNFile,
   insertIbanFile,

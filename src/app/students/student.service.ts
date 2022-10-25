@@ -35,33 +35,13 @@ export class StudentsService {
       });
   }
 
-  updateStudentContractDetails(data: any) {
+  updateStudentBasicInfo(data: any) {
     const id = this.authService.getSessionId();
     this.http
-      .put<{ message: string }>("http://localhost:3000/api/students/updateStudentContractDetails/" + id, data)
+      .put<{ message: string }>("http://localhost:3000/api/students/updateStudentBasicInfo/" + id, data)
       .subscribe(responseData => {
         console.log(responseData.message);
       });
-  }
-
-  updateStudentContractSSNFile(file: any): any {
-    const id = this.authService.getSessionId();
-    return this.http
-      .post<{ message: string }>("http://localhost:3000/api/students/updateStudentSSNFile/" + id, file);
-    // .subscribe(responseData => {
-    // console.log("ssn " + responseData.message);
-    // return responseData.message;
-    // });
-  }
-
-  updateStudentContractIbanFile(file: any): any {
-    const id = this.authService.getSessionId();
-    return this.http
-      .post<{ message: string }>("http://localhost:3000/api/students/updateStudentIbanFile/" + id, file);
-    // .subscribe(responseData => {
-    //   console.log(responseData.message);
-    //   return responseData.message;
-    // });
   }
 
   updateStudentContact(data: any) {

@@ -81,7 +81,7 @@ const getStudentById = async (id) => {
     const student = resultsSSOUsers.rows;
     return student;
   } catch (error) {
-    throw Error('Error while fetching students');
+    throw Error('Error while fetching students by id');
   }
 };
 
@@ -102,7 +102,6 @@ const loginStudent = async (username) => {
   }
 };
 
-
 const getFileMetadataByStudentId = async (userId, docType) => {
   try {
     const fileMetadata = await pool.query("SELECT * FROM sso_user_files \
@@ -111,7 +110,7 @@ const getFileMetadataByStudentId = async (userId, docType) => {
                                           ORDER BY file_id DESC", [userId, docType]);
     return fileMetadata;
   } catch (error) {
-    throw Error('Error while fetching students');
+    throw Error('Error while fetching students files');
   }
 };
 
@@ -124,23 +123,9 @@ const updateStudentDetails = async (student, id) => {
 
     return updateResults;
   } catch (error) {
-    throw Error('Error while updating students');
+    throw Error('Error while updating student details');
   }
 };
-
-const updateStudentContractDetails = async (student, id) => {
-  try {
-    const updateResults = await pool.query("UPDATE student_users \
-     SET " + "ssn = $1, doy = $2, iban = $3 WHERE sso_uid = $4",
-      [student.ssn, student.doy, student.iban, id]
-    );
-
-    return updateResults;
-  } catch (error) {
-    throw Error('Error while updating students');
-  }
-};
-
 
 const updateStudentContact = async (student, id) => {
   try {
@@ -150,10 +135,21 @@ const updateStudentContact = async (student, id) => {
 
     return updateResults;
   } catch (error) {
-    throw Error('Error while updating contact details from students');
+    throw Error('Error while updating student contact details');
   }
 };
 
+const updateStudentBasicInfo = async (student, id) => {
+  try {
+    const updateResults = await pool.query("UPDATE student_users \
+     SET " + "father_name = $1, location = $2, city = $3, phone = $4 WHERE sso_uid = $5",
+      [student.father_name, student.location, student.city, student.phone, id]);
+
+    return updateResults;
+  } catch (error) {
+    throw Error('Error while updating student basic information');
+  }
+};
 
 const insertOrUpdateMetadataBySSOUid = async (studentId, docType, filePath, fileName, fileExtension) => {
   try {
@@ -199,9 +195,8 @@ module.exports = {
   getStudentById,
   getFileMetadataByStudentId,
   updateStudentDetails,
-  updateStudentContractDetails,
   updateStudentContact,
-  // dummy login
+  updateStudentBasicInfo,
   loginStudent,
   insertOrUpdateMetadataBySSOUid
 };

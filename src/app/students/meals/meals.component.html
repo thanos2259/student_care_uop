@@ -529,16 +529,13 @@
       </ul>
       <div>
         <button mat-button matStepperPrevious>{{'STUDENT.HOUSING-BACK' | translate}}</button>
-        <button mat-button matStepperNext>{{'STUDENT.HOUSING-INF11' | translate}}</button>
+        <button mat-button matStepperNext (click)="updateStudentsAllDetails()">{{'STUDENT.HOUSING-INF11' |
+          translate}}</button>
       </div>
     </form>
   </mat-step>
   <mat-step>
     <ng-template matStepLabel>{{'STUDENT.HOUSING-INF85' | translate}}</ng-template>
     <p><i class="fas fa-2x fa-check text-success"></i>{{'STUDENT.HOUSING-INF86' | translate}}</p>
-    <div>
-      <button mat-button matStepperPrevious>{{'STUDENT.HOUSING-BACK' | translate}}</button>
-      <button mat-button (click)="stepper.reset()">{{'STUDENT.HOUSING-INF87' | translate}}</button>
-    </div>
   </mat-step>
 </mat-stepper>

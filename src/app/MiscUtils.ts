@@ -2,6 +2,18 @@ import Swal from 'sweetalert2';
 
 export abstract class Utils {
 
+  public static onSaveApplication() {
+    Swal.fire({
+      title: 'Αίτηση',
+      text: 'Η αίτησή σας καταχωρήθηκε, θα γίνει ο έλεγχος για το αν πληρείτε τις προϋποθέσεις',
+      icon: 'success',
+      showCancelButton: false,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'ΟΚ'
+    })
+  }
+
   public static onSave() {
     Swal.fire({
       title: 'Ενημέρωση στοιχείων',

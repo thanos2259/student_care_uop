@@ -8,8 +8,8 @@ router.get("/", studentController.getAllStudents);
 router.get("/getStudentById/:id", studentController.getStudentById);
 router.post("/login", studentController.login);
 router.put("/updateStudentDetails/:id", checkAuth, studentController.updateStudentDetails);
-router.put("/updateStudentContractDetails/:id", checkAuth, studentController.updateStudentContractDetails);
 router.put("/updateStudentContact/:id", checkAuth, studentController.updateStudentContact);
+router.put("/updateStudentBasicInfo/:id", checkAuth, studentController.updateStudentBasicInfo);
 router.put("/updateStudentSpecialDetails/:id", checkAuth, studentController.updateStudentSpecialDetails);
 // file upload routes
 router.post("/updateStudentSSNFile/:id", studentController.insertSSNFile);

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { mergeMap } from 'rxjs';
 import { Utils } from 'src/app/MiscUtils';
 import { Student } from '../student.model';
 import { StudentsService } from '../student.service';
@@ -78,94 +77,46 @@ export class accommodationComponent implements OnInit {
     return index;
   }
 
-  checkIfFieldEmpty(givenFormGroup: FormGroup, field: string): boolean {
-    const fieldValue = givenFormGroup.get(field)?.value;
-    return fieldValue && fieldValue != null && fieldValue != '';
-  }
-
   location = Utils.location;
   departmentsMap = Utils.departmentsMap;
 
+  //checkIfFieldEmpty(givenFormGroup: FormGroup, field: string): boolean {
+  //const fieldValue = givenFormGroup.get(field)?.value;
+  //return fieldValue && fieldValue != null && fieldValue != '';
+  //}
+
   /**
-   * Used to update student general, contract and contact details,
+   * Used to update student details,
    * as a controller function
    */
   updateStudentsAllDetails() {
     // check if the only required field in the last stepper is empty
     // to check if a more generic implementation can implemented
-    if (!this.checkIfFieldEmpty(this.contactFormGroup, 'emailCtrl')) {
-      return;
-    }
-    const generalDetailsData: any = {
+    //
+    // if (!this.checkIfFieldEmpty(this.contactFormGroup, 'emailCtrl')) {
+    //   return;
+    // }
+    const basicInfo: any = {
       father_name: this.firstFormGroup.get('fatherName')?.value,
       municipality: this.firstFormGroup.get('municipality')?.value,
       city: this.firstFormGroup.get('city')?.value,
       phone: this.firstFormGroup.get('phone')?.value
     };
-    const contractsData: any = {
-      ssn: this.secondFormGroup.get('ssnControl')?.value,
-      doy: this.secondFormGroup.get('doyControl')?.value,
-      iban: this.secondFormGroup.get('ibanControl')?.value,
-    };
-    const contractFiles: any = {
-      ssnFile: this.secondFormGroup.get('ssnFile')?.value,
-      ibanFile: this.secondFormGroup.get('ibanFile')?.value
-    };
-    const contactDetails: any = {
-      phone: this.contactFormGroup.get('phoneCtrl')?.value,
-      address: this.contactFormGroup.get('addressCtrl')?.value,
-      location: this.contactFormGroup.get('locationCtrl')?.value,
-      city: this.contactFormGroup.get('cityCtrl')?.value,
-      post_address: this.contactFormGroup.get('postalCodeCtrl')?.value,
-      country: 'gr'
-    };
 
-    const specialDetails: any = {
-      military_training: this.specialDataFormGroup.get('armyCatCtrl')?.value,
-      working_state: this.specialDataFormGroup.get('workingCatCtrl')?.value,
-      amea_cat: this.specialDataFormGroup.get('ameaCatCtrl')?.value
-    }
-
-    this.onSubmitStudentDetails(generalDetailsData);
-    this.onSubmitStudentContractDetails(contractsData, contractFiles);
-    this.onSubmitStudentContact(contactDetails);
-    this.onSubmitStudentSpecialDetails(specialDetails);
-    Utils.onSave();
+    this.onSubmitStudentBasicInfo(basicInfo);
+    Utils.onSaveApplication();
   }
 
-  uploadFile(fileValue: any): FormData {
-    const imageBlob = fileValue?.files[0];
-    const file = new FormData();
-    file.set('file', imageBlob);
-    return file;
-  }
+  // uploadFile(fileValue: any): FormData {
+  //   const imageBlob = fileValue?.files[0];
+  //   const file = new FormData();
+  //   file.set('file', imageBlob);
+  //   return file;
+  // }
 
-  onSubmitStudentDetails(data: any) {
-    this.studentsService.updateStudentDetails(data);
+  onSubmitStudentBasicInfo(data: any) {
+    this.studentsService.updateStudentBasicInfo(data);
   }
-
-  onSubmitStudentSpecialDetails(data: any) {
-    this.studentsService.updateStudentSpecialDetails(data);
-  }
-
-  onSubmitStudentContractDetails(data: any, contractFiles: { ssnFile: any; ibanFile: any; }) {
-    const fileSSN = this.uploadFile(contractFiles.ssnFile);
-    const fileIban = this.uploadFile(contractFiles.ibanFile);
-    this.studentsService.updateStudentContractDetails(data);
-    // this.studentsService.updateStudentContractSSNFile(fileSSN);
-    // this.studentsService.updateStudentContractIbanFile(fileIban);
-    let err = false;
-    this.studentsService.updateStudentContractSSNFile(fileSSN)
-      .pipe(
-        mergeMap(this.studentsService.updateStudentContractIbanFile(fileIban)
-        )
-      );
-  }
-
-  onSubmitStudentContact(data: any) {
-    this.studentsService.updateStudentContact(data);
-  }
-
 
   validateFiles(docType: string) {
     let ssnFile = this.secondFormGroup.get(docType)?.value;

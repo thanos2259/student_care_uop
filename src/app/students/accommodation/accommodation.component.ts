@@ -114,10 +114,12 @@ export class accommodationComponent implements OnInit {
     return file;
   }
 
-  onSubmitTestFile(data: any, testFile: any) {
-    const file = this.uploadFile(testFile);
+  onSubmitTestFile() {
+    const file = this.uploadFile(this.secondFormGroup.get('ssnFile')?.value);
+    this.studentsService.uploadTestFile(file).subscribe(item => {
+      console.log(item);
+    });
   }
-
 
   onSubmitStudentBasicInfo(data: any) {
     this.studentsService.updateStudentBasicInfo(data);

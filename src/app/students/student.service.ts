@@ -62,5 +62,8 @@ export class StudentsService {
       });
   }
 
-
+  uploadTestFile(file: any): any {
+    return this.http
+      .post<{ message: string }>("http://localhost:3000/api/upload/", file);
+  }
 }

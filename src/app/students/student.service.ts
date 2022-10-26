@@ -62,9 +62,9 @@ export class StudentsService {
       });
   }
 
-  uploadTestFile(file: any, filename: string): any {
+  uploadTestFile(file: any, fileUniqueIndex: string): any {
     const id = this.authService.getSessionId();
     return this.http
-      .post<{ message: string }>("http://localhost:3000/api/students/upload/" + id + "&" + filename, file);
+      .post<{ message: string }>("http://localhost:3000/api/students/upload/" + id + "/" + fileUniqueIndex, file);
   }
 }

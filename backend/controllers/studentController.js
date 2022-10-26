@@ -164,10 +164,7 @@ const uploadFile = async (request, response) => {
   const studentId = request.params.id;
   const fileDir = "./uploads/";
   const path = fileDir + studentId;
-  console.log(request.query.filename);
-  const fileIndex = request.params.filename;
-  console.log(request.query);
-
+  const fileIndex = request.params.fileIndex;
 
   try {
     fs.mkdirSync(path, { recursive: true });

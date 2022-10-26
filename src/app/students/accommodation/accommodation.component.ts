@@ -116,13 +116,13 @@ export class accommodationComponent implements OnInit {
 
   onSubmitFile(fileParam: string) {
     const filename = this.secondFormGroup.get(fileParam)?.value._fileNames;
-    console.log(filename);
+
     if (filename.length > 100) {
       Utils.onFileLengthError();
       return;
     }
     const file = this.uploadFile(this.secondFormGroup.get(fileParam)?.value);
-    this.studentsService.uploadTestFile(file, filename).subscribe((res: { status: any; }) => {
+    this.studentsService.uploadTestFile(file, fileParam).subscribe((res: { status: any; }) => {
       console.log("debug upload" + res.status);
       if (res.status == "success") {
         Utils.onFileUpload();

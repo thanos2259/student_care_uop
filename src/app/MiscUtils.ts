@@ -26,6 +26,30 @@ export abstract class Utils {
     })
   }
 
+  public static onFileUpload() {
+    Swal.fire({
+      title: 'Ανέβασμα αρχείου',
+      text: 'Το αρχείο σας ανέβηκε επιτυχώς',
+      icon: 'success',
+      showCancelButton: false,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'ΟΚ'
+    })
+  }
+
+  public static onFileLengthError() {
+    Swal.fire({
+      title: 'Ανέβασμα αρχείου',
+      text: 'Το αρχείο σας δεν ανέβηκε επειδή το όνομα του περιέχει περισσότερους από 100 χαρακτήρες',
+      icon: 'warning',
+      showCancelButton: false,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'ΟΚ'
+    })
+  }
+
   public static onSaveAndReload() {
     Swal.fire({
       title: 'Ενημέρωση στοιχείων',

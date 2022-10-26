@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Student } from "./student.model";
 import { Observable } from "rxjs";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { AuthService } from 'src/app/auth/auth.service';
 
 @Injectable({ providedIn: 'root' })
@@ -62,8 +62,9 @@ export class StudentsService {
       });
   }
 
-  uploadTestFile(file: any): any {
+  uploadTestFile(file: any, filename: string): any {
+    const id = this.authService.getSessionId();
     return this.http
-      .post<{ message: string }>("http://localhost:3000/api/upload/", file);
+      .post<{ message: string }>("http://localhost:3000/api/students/upload/" + id + "&" + filename, file);
   }
 }

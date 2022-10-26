@@ -45,8 +45,8 @@ export class accommodationComponent implements OnInit {
       doyControl: ['', Validators.required],
       amkaControl: ['', Validators.required],
       ibanControl: ['', Validators.required],
-      ssnFile: ['', Validators.required],
-      ibanFile: ['', Validators.required]
+      file1: ['', Validators.required],
+      file2: ['', Validators.required]
     });
 
     this.contactFormGroup = this._formBuilder.group({
@@ -114,10 +114,19 @@ export class accommodationComponent implements OnInit {
     return file;
   }
 
-  onSubmitTestFile() {
-    const file = this.uploadFile(this.secondFormGroup.get('ssnFile')?.value);
-    this.studentsService.uploadTestFile(file).subscribe(item => {
-      console.log(item);
+  onSubmitFile(fileParam: string) {
+    const filename = this.secondFormGroup.get(fileParam)?.value._fileNames;
+    console.log(filename);
+    if (filename.length > 100) {
+      Utils.onFileLengthError();
+      return;
+    }
+    const file = this.uploadFile(this.secondFormGroup.get(fileParam)?.value);
+    this.studentsService.uploadTestFile(file, filename).subscribe((res: { status: any; }) => {
+      console.log("debug upload" + res.status);
+      if (res.status == "success") {
+        Utils.onFileUpload();
+      }
     });
   }
 

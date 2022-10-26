@@ -4,6 +4,7 @@ const multer = require("multer");
 const upload = require("../middleware/file.js");
 const formidable = require('formidable');
 const MiscUtils = require("../MiscUtils.js");
+const fs = require('fs');
 
 // app.post("/api/students/login/:id", (request, response, next) => {
 const login = async (request, response, next) => {
@@ -136,116 +137,6 @@ const updateStudentSpecialDetails = async (request, response, next) => {
   }
 };
 
-const validateFile = async (request, response, err, fileType) => {
-  try {
-    if (err instanceof multer.MulterError) {
-      // A Multer error occurred when uploading.
-
-      // File type not valid
-      if (err.message.includes("This file type is not valid")) {
-        throw new Error("Multer error: The file type was not valid for" + fileType + "upload");
-      }
-
-      throw new Error("A generic Multer error occurred");
-    } else if (err) {
-      // An unknown error occurred when uploading.
-
-      // File type not valid
-      if (err.message.includes("This file type is not valid")) {
-        throw new Error("Unkown Error: The file type was not valid for" + fileType + " upload");
-      }
-
-      throw new Error("An unknown error occurred");
-    }
-    response
-      .status(201)
-      .json({
-        message: "FILE ADDED"
-      });
-  } catch (error) {
-    // return (err.message);
-    console.log(err.message);
-    response.status(201).json({
-      message: 'ERROR'
-    });
-  }
-};
-
-const insertToDB = async (request, response, ssoUserId, fileType, filePath, fileName) => {
-  let form = new formidable.IncomingForm();
-  let fileExtension;
-
-  await new Promise(function (resolve, reject) {
-    form.parse(request, (err, fields, files) => {
-      if (err) {
-        console.log("An error on form parsing occurred");
-        reject(err);
-        return;
-      }
-      let mimetype = files.file.mimetype;
-      fileExtension = mimetype.split("/")[1];
-      console.log("In form.parse method, file extension is: " + fileExtension);
-      resolve(fileExtension);
-    });
-  });
-
-  fileExtension = MiscUtils.formatDocExtension(fileExtension);
-  fileName += '.' + fileExtension;
-
-  await studentService.insertOrUpdateMetadataBySSOUid(ssoUserId, fileType, filePath, fileName, fileExtension);
-};
-
-const insertSSNFile = async (request, response, next) => {
-  try {
-    const ssoUserId = request.params.id;
-    const docType = "SSN";
-    const userType = "student";
-    let fileName = userType + ssoUserId + "_" + docType;
-    const filePath = `./uploads/ssns/${ssoUserId}`;
-
-    insertToDB(request, response, ssoUserId, docType, filePath, fileName);
-    await upload.ssn(request, response, (err) => validateFile(request, response, err, docType));
-
-    response
-      .status(201)
-      .json({
-        message: "FILE ADDED SSN"
-      });
-
-  } catch (err) {
-    console.log(err);
-    response
-      .status(201)
-      .json({
-        message: "ERROR"
-      });
-  }
-};
-
-const insertIbanFile = async (request, response, next) => {
-  try {
-    const ssoUserId = request.params.id;
-    const docType = "IBAN";
-    const userType = "student";
-    const fileName = userType + ssoUserId + "_" + docType;
-    const filePath = `./uploads/ibans/${ssoUserId}`;
-
-    insertToDB(request, response, ssoUserId, docType, filePath, fileName);
-    await upload.iban(request, response, (err) => validateFile(request, response, err, docType));
-
-    response
-      .status(201)
-      .json({
-        message: "FILE ADDED IBAN"
-      });
-  } catch (error) {
-    console.error(error.message);
-    response.status(201).json({
-      message: "ERROR"
-    });
-  }
-};
-
 const sendFile = async (request, response) => {
   try {
     const id = request.params.id;
@@ -269,6 +160,49 @@ const sendFile = async (request, response) => {
   }
 };
 
+const uploadFile = async (request, response) => {
+  const studentId = request.params.id;
+  const fileDir = "./uploads/";
+  const path = fileDir + studentId;
+  console.log(request.query.filename);
+  const fileIndex = request.params.filename;
+  console.log(request.query);
+
+
+  try {
+    fs.mkdirSync(path, { recursive: true });
+
+    let form = new formidable.IncomingForm();
+    form.parse(request, function (error, fields, files) {
+      console.log(files);
+      let oldpath = files.file.filepath;
+      let newName = fileIndex;
+      const maxFileLength = 110;
+
+      if (files.file.originalFilename.length >= maxFileLength) {
+        newName += files.file.originalFilename.slice(0, maxFileLength);
+      } else {
+        newName += files.file.originalFilename;
+      }
+
+      let newpath = path + "/" + newName;
+      fs.rename(oldpath, newpath, function (error) {
+        if (error) {
+          return response.status(400).json({
+            status: "Failure",
+            message: "File was not uploaded",
+          });
+        } else {
+          return response.status(200).json({
+            status: "success",
+            message: "File uploaded and moved!",
+          });
+        }
+      });
+    });
+  } catch (error) { console.log(error); }
+};
+
 module.exports = {
   getAllStudents,
   getStudentById,
@@ -277,7 +211,6 @@ module.exports = {
   updateStudentSpecialDetails,
   updateStudentBasicInfo,
   login,
-  insertSSNFile,
-  insertIbanFile,
-  sendFile
+  sendFile,
+  uploadFile
 };

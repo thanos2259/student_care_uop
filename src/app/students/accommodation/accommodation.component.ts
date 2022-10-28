@@ -14,6 +14,7 @@ export class accommodationComponent implements OnInit {
   isLinear = true;
   firstFormGroup!: FormGroup;
   secondFormGroup!: FormGroup;
+  thirdFormGroup!: FormGroup;
   contactFormGroup!: FormGroup;
   specialDataFormGroup!: FormGroup;
   studentsSSOData: Student[] = [];
@@ -53,13 +54,21 @@ export class accommodationComponent implements OnInit {
       file1: ['', Validators.required]
     });
 
-    this.contactFormGroup = this._formBuilder.group({
-      emailCtrl: ['', Validators.required],
-      phoneCtrl: [],
-      addressCtrl: [],
-      locationCtrl: [],
-      cityCtrl: [],
-      postalCodeCtrl: []
+    this.thirdFormGroup = this._formBuilder.group({
+      filePolutekneia: [''],
+      fileBebaioshSpoudonAderfwn: [''],
+      filePistopoihtikoGoneaFoithth: [''],
+      fileLhksiarxikhPrakshThanatouGoneaA: [''],
+      fileLhksiarxikhPrakshThanatouGoneaB: [''],
+      fileAgamhMhtera: [''],
+      fileGoneisAMEA: [''],
+      fileGoneisAMEAIatrikhGnomateush: [''],
+      fileGoneisThumataTromokratias1: [''],
+      fileGoneisThumataTromokratias2: [''],
+      fileBebaioshEpidothsdhsAnergeias: [''],
+      fileDiazevgmenoiGoneis1: [''],
+      fileDiazevgmenoiGoneis2: [''],
+      file1: ['']
     });
 
     this.specialDataFormGroup = this._formBuilder.group({

@@ -208,8 +208,8 @@
       </div>
     </form>
   </mat-step>
-  <mat-step [stepControl]="secondFormGroup">
-    <form class="mt-4" [formGroup]="secondFormGroup">
+  <mat-step [stepControl]="thirdFormGroup">
+    <form class="mt-4" [formGroup]="thirdFormGroup">
       <ng-template matStepLabel>{{'STUDENT.HOUSING-INF34' | translate}}</ng-template>
       <ul>
         <li>
@@ -233,6 +233,9 @@
             </ngx-mat-file-input>
           </mat-form-field>
         </li>
+        <button class="btn btn-secondary" (click)="onSubmitFile('file1')"><i class="fa fa-upload mr-2"
+            aria-hidden="true"></i>{{'STUDENT.HOUSING-FILE-UPLOAD' | translate}}</button>
+        <br>
         <br>
         <br>
         <li>
@@ -259,6 +262,9 @@
             </ngx-mat-file-input>
           </mat-form-field>
         </li>
+        <button class="btn btn-secondary" (click)="onSubmitFile('file1')"><i class="fa fa-upload mr-2"
+            aria-hidden="true"></i>{{'STUDENT.HOUSING-FILE-UPLOAD' | translate}}</button>
+        <br>
         <br>
         <br>
         <li>
@@ -282,6 +288,9 @@
             </ngx-mat-file-input>
           </mat-form-field>
         </li>
+        <button class="btn btn-secondary" (click)="onSubmitFile('file1')"><i class="fa fa-upload mr-2"
+            aria-hidden="true"></i>{{'STUDENT.HOUSING-FILE-UPLOAD' | translate}}</button>
+        <br>
         <br>
         <br>
         <li>
@@ -289,39 +298,48 @@
           <br>
           <span class="font-weight-bold">{{'STUDENT.HOUSING-INF36' | translate}}
           </span> <br>
-          <p id="p0">
-            <span class="font-weight-bold"> {{'STUDENT.HOUSING-INF48' | translate}}</span>
+          <ol>
+            <li>
+              <span class="font-weight-bold"> {{'STUDENT.HOUSING-INF48' | translate}}</span>
+              <br>
+              <span class="font-italic">
+                {{'STUDENT.HOUSING-INFSTATIC' | translate}}
+              </span>
+              <i class="fa fa-info-circle fa-lg fa-icon" data-toggle="tooltip" data-placement="top"
+                title="{{'STUDENT.HOUSING-INFSTATIC2' | translate}}">
+              </i>
+              <mat-form-field class="w-100" appearance="fill">
+                <mat-label>{{'STUDENT.HOUSING-INFSTATIC1' | translate}}</mat-label>
+                <ngx-mat-file-input (change)="validateFiles('file1')" formControlName="file1">
+                </ngx-mat-file-input>
+              </mat-form-field>
+
+              <button class="btn btn-secondary" (click)="onSubmitFile('file1')"><i class="fa fa-upload mr-2"
+                  aria-hidden="true"></i>{{'STUDENT.HOUSING-FILE-UPLOAD' | translate}}</button>
+            </li>
             <br>
-            <span class="font-italic">
-              {{'STUDENT.HOUSING-INFSTATIC' | translate}}
-            </span>
-            <i class="fa fa-info-circle fa-lg fa-icon" data-toggle="tooltip" data-placement="top"
-              title="{{'STUDENT.HOUSING-INFSTATIC2' | translate}}">
-            </i>
-            <mat-form-field class="w-100" appearance="fill">
-              <mat-label>{{'STUDENT.HOUSING-INFSTATIC1' | translate}}</mat-label>
-              <ngx-mat-file-input (change)="validateFiles('file1')" formControlName="file1">
-              </ngx-mat-file-input>
-            </mat-form-field>
-          </p>
-          <p id="p1">
-            <span class="font-weight-bold"> {{'STUDENT.HOUSING-INF49' | translate}}</span>
+            <li>
+              <span class="font-weight-bold"> {{'STUDENT.HOUSING-INF49' | translate}}</span>
+              <br>
+              <span class="font-italic">
+                {{'STUDENT.HOUSING-INFSTATIC' | translate}}
+              </span>
+              <i class="fa fa-info-circle fa-lg fa-icon" data-toggle="tooltip" data-placement="top"
+                title="{{'STUDENT.HOUSING-INFSTATIC2' | translate}}">
+              </i>
+              <mat-form-field class="w-100" appearance="fill">
+                <mat-label>{{'STUDENT.HOUSING-INFSTATIC1' | translate}}</mat-label>
+                <ngx-mat-file-input (change)="validateFiles('file1')" formControlName="file1">
+                </ngx-mat-file-input>
+              </mat-form-field>
+
+            </li>
+            <button class="btn btn-secondary" (click)="onSubmitFile('file1')"><i class="fa fa-upload mr-2"
+                aria-hidden="true"></i>{{'STUDENT.HOUSING-FILE-UPLOAD' | translate}}</button>
             <br>
-            <span class="font-italic">
-              {{'STUDENT.HOUSING-INFSTATIC' | translate}}
-            </span>
-            <i class="fa fa-info-circle fa-lg fa-icon" data-toggle="tooltip" data-placement="top"
-              title="{{'STUDENT.HOUSING-INFSTATIC2' | translate}}">
-            </i>
-            <mat-form-field class="w-100" appearance="fill">
-              <mat-label>{{'STUDENT.HOUSING-INFSTATIC1' | translate}}</mat-label>
-              <ngx-mat-file-input (change)="validateFiles('file1')" formControlName="file1">
-              </ngx-mat-file-input>
-            </mat-form-field>
-          </p>
-        </li>
-        <br>
-        <br>
+          </ol>
+          <br>
+          <br>
         <li>
           {{'STUDENT.HOUSING-INF50' | translate}}
           <br>
@@ -341,6 +359,9 @@
             </ngx-mat-file-input>
           </mat-form-field>
         </li>
+        <button class="btn btn-secondary" (click)="onSubmitFile('file1')"><i class="fa fa-upload mr-2"
+            aria-hidden="true"></i>{{'STUDENT.HOUSING-FILE-UPLOAD' | translate}}</button>
+        <br>
         <br>
         <br>
         <li>
@@ -348,43 +369,51 @@
           <br>
           <span class="font-weight-bold"> {{'STUDENT.HOUSING-INF36' | translate}}</span>
           <br>
-          <p id="p0">
-            <span class="font-weight-bold"> {{'STUDENT.HOUSING-INF53' | translate}}</span>
-            {{'STUDENT.HOUSING-INF54' | translate}}
+          <ol>
+            <li>
+              <span class="font-weight-bold"> {{'STUDENT.HOUSING-INF53' | translate}}</span>
+              {{'STUDENT.HOUSING-INF54' | translate}}
+              <br>
+              <span class="font-italic">
+                {{'STUDENT.HOUSING-INFSTATIC' | translate}}
+              </span>
+              <i class="fa fa-info-circle fa-lg fa-icon" data-toggle="tooltip" data-placement="top"
+                title="{{'STUDENT.HOUSING-INFSTATIC2' | translate}}">
+              </i>
+              <mat-form-field class="w-100" appearance="fill">
+                <mat-label>{{'STUDENT.HOUSING-INFSTATIC1' | translate}}</mat-label>
+                <ngx-mat-file-input (change)="validateFiles('file1')" formControlName="file1">
+                </ngx-mat-file-input>
+              </mat-form-field>
+              <button class="btn btn-secondary" (click)="onSubmitFile('file1')"><i class="fa fa-upload mr-2"
+                  aria-hidden="true"></i>{{'STUDENT.HOUSING-FILE-UPLOAD' | translate}}</button>
+            </li>
             <br>
-            <span class="font-italic">
-              {{'STUDENT.HOUSING-INFSTATIC' | translate}}
-            </span>
-            <i class="fa fa-info-circle fa-lg fa-icon" data-toggle="tooltip" data-placement="top"
-              title="{{'STUDENT.HOUSING-INFSTATIC2' | translate}}">
-            </i>
-            <mat-form-field class="w-100" appearance="fill">
-              <mat-label>{{'STUDENT.HOUSING-INFSTATIC1' | translate}}</mat-label>
-              <ngx-mat-file-input (change)="validateFiles('file1')" formControlName="file1">
-              </ngx-mat-file-input>
-            </mat-form-field>
-          </p>
-          <p id="p1"> <span class="font-weight-bold">{{'STUDENT.HOUSING-INF55' | translate}}</span>
-            {{'STUDENT.HOUSING-INF56' | translate}}
-            <span class="font-weight-bold">{{'STUDENT.HOUSING-INF57' | translate}}</span>
-            {{'STUDENT.HOUSING-INF58' | translate}}
-            <span class="font-weight-bold">{{'STUDENT.HOUSING-INF59' | translate}}</span>
-            {{'STUDENT.HOUSING-INF60' | translate}}
-            <span class="font-weight-bold">{{'STUDENT.HOUSING-INF61' | translate}}</span>
-            {{'STUDENT.HOUSING-INF62' | translate}}
-            <br>
-            <span class="font-italic">
-              {{'STUDENT.HOUSING-INFSTATIC' | translate}}
-            </span>
-            <i class="fa fa-info-circle fa-lg fa-icon" data-toggle="tooltip" data-placement="top"
-              title="{{'STUDENT.HOUSING-INFSTATIC2' | translate}}">
-            </i>
-            <mat-form-field class="w-100" appearance="fill">
-              <mat-label>{{'STUDENT.HOUSING-INFSTATIC1' | translate}}</mat-label>
-              <ngx-mat-file-input (change)="validateFiles('file1')" formControlName="file1">
-              </ngx-mat-file-input>
-            </mat-form-field>
-          </p>
+            <li>
+              <span class="font-weight-bold">{{'STUDENT.HOUSING-INF55' | translate}}</span>
+              {{'STUDENT.HOUSING-INF56' | translate}}
+              <span class="font-weight-bold">{{'STUDENT.HOUSING-INF57' | translate}}</span>
+              {{'STUDENT.HOUSING-INF58' | translate}}
+              <span class="font-weight-bold">{{'STUDENT.HOUSING-INF59' | translate}}</span>
+              {{'STUDENT.HOUSING-INF60' | translate}}
+              <span class="font-weight-bold">{{'STUDENT.HOUSING-INF61' | translate}}</span>
+              {{'STUDENT.HOUSING-INF62' | translate}}
+              <br>
+              <span class="font-italic">
+                {{'STUDENT.HOUSING-INFSTATIC' | translate}}
+              </span>
+              <i class="fa fa-info-circle fa-lg fa-icon" data-toggle="tooltip" data-placement="top"
+                title="{{'STUDENT.HOUSING-INFSTATIC2' | translate}}">
+              </i>
+              <mat-form-field class="w-100" appearance="fill">
+                <mat-label>{{'STUDENT.HOUSING-INFSTATIC1' | translate}}</mat-label>
+                <ngx-mat-file-input (change)="validateFiles('file1')" formControlName="file1">
+                </ngx-mat-file-input>
+              </mat-form-field>
+              <button class="btn btn-secondary" (click)="onSubmitFile('file1')"><i class="fa fa-upload mr-2"
+                  aria-hidden="true"></i>{{'STUDENT.HOUSING-FILE-UPLOAD' | translate}}</button>
+            </li>
+          </ol>
         </li>
         <br>
         <br>
@@ -393,36 +422,43 @@
           <br>
           <span class="font-weight-bold"> {{'STUDENT.HOUSING-INF36' | translate}}</span>
           <br>
-          <p id="p0">
-            <span class="font-weight-bold"> {{'STUDENT.HOUSING-INF64' | translate}}</span>
+          <ol>
+            <li>
+              <span class="font-weight-bold"> {{'STUDENT.HOUSING-INF64' | translate}}</span>
+              <br>
+              <span class="font-italic">
+                {{'STUDENT.HOUSING-INFSTATIC' | translate}}
+              </span>
+              <i class="fa fa-info-circle fa-lg fa-icon" data-toggle="tooltip" data-placement="top"
+                title="{{'STUDENT.HOUSING-INFSTATIC2' | translate}}">
+              </i>
+              <mat-form-field class="w-100" appearance="fill">
+                <mat-label>{{'STUDENT.HOUSING-INFSTATIC1' | translate}}</mat-label>
+                <ngx-mat-file-input (change)="validateFiles('file1')" formControlName="file1">
+                </ngx-mat-file-input>
+              </mat-form-field>
+              <button class="btn btn-secondary" (click)="onSubmitFile('file1')"><i class="fa fa-upload mr-2"
+                  aria-hidden="true"></i>{{'STUDENT.HOUSING-FILE-UPLOAD' | translate}}</button>
+            </li>
             <br>
-            <span class="font-italic">
-              {{'STUDENT.HOUSING-INFSTATIC' | translate}}
-            </span>
-            <i class="fa fa-info-circle fa-lg fa-icon" data-toggle="tooltip" data-placement="top"
-              title="{{'STUDENT.HOUSING-INFSTATIC2' | translate}}">
-            </i>
-            <mat-form-field class="w-100" appearance="fill">
-              <mat-label>{{'STUDENT.HOUSING-INFSTATIC1' | translate}}</mat-label>
-              <ngx-mat-file-input (change)="validateFiles('file1')" formControlName="file1">
-              </ngx-mat-file-input>
-            </mat-form-field>
-          </p>
-          <p id="p1">
-            <span class="font-weight-bold"> {{'STUDENT.HOUSING-INF65' | translate}}</span>
-            <br>
-            <span class="font-italic">
-              {{'STUDENT.HOUSING-INFSTATIC' | translate}}
-            </span>
-            <i class="fa fa-info-circle fa-lg fa-icon" data-toggle="tooltip" data-placement="top"
-              title="{{'STUDENT.HOUSING-INFSTATIC2' | translate}}">
-            </i>
-            <mat-form-field class="w-100" appearance="fill">
-              <mat-label>{{'STUDENT.HOUSING-INFSTATIC1' | translate}}</mat-label>
-              <ngx-mat-file-input (change)="validateFiles('file1')" formControlName="file1">
-              </ngx-mat-file-input>
-            </mat-form-field>
-          </p>
+            <li>
+              <span class="font-weight-bold"> {{'STUDENT.HOUSING-INF65' | translate}}</span>
+              <br>
+              <span class="font-italic">
+                {{'STUDENT.HOUSING-INFSTATIC' | translate}}
+              </span>
+              <i class="fa fa-info-circle fa-lg fa-icon" data-toggle="tooltip" data-placement="top"
+                title="{{'STUDENT.HOUSING-INFSTATIC2' | translate}}">
+              </i>
+              <mat-form-field class="w-100" appearance="fill">
+                <mat-label>{{'STUDENT.HOUSING-INFSTATIC1' | translate}}</mat-label>
+                <ngx-mat-file-input (change)="validateFiles('file1')" formControlName="file1">
+                </ngx-mat-file-input>
+              </mat-form-field>
+              <button class="btn btn-secondary" (click)="onSubmitFile('file1')"><i class="fa fa-upload mr-2"
+                  aria-hidden="true"></i>{{'STUDENT.HOUSING-FILE-UPLOAD' | translate}}</button>
+            </li>
+          </ol>
         </li>
         <br>
         <br>
@@ -446,6 +482,9 @@
             </ngx-mat-file-input>
           </mat-form-field>
         </li>
+        <button class="btn btn-secondary" (click)="onSubmitFile('file1')"><i class="fa fa-upload mr-2"
+            aria-hidden="true"></i>{{'STUDENT.HOUSING-FILE-UPLOAD' | translate}}</button>
+        <br>
         <br>
         <br>
         <li>
@@ -453,39 +492,47 @@
           <br>
           <span class="font-weight-bold"> {{'STUDENT.HOUSING-INF36' | translate}}</span>
           <br>
-          <p id="p0">
-            <span class="font-weight-bold"> {{'STUDENT.HOUSING-INF70' | translate}}</span>
+          <ol>
+            <li>
+              <span class="font-weight-bold"> {{'STUDENT.HOUSING-INF70' | translate}}</span>
+              <br>
+              <span class="font-italic">
+                {{'STUDENT.HOUSING-INFSTATIC' | translate}}
+              </span>
+              <i class="fa fa-info-circle fa-lg fa-icon" data-toggle="tooltip" data-placement="top"
+                title="{{'STUDENT.HOUSING-INFSTATIC2' | translate}}">
+              </i>
+              <mat-form-field class="w-100" appearance="fill">
+                <mat-label>{{'STUDENT.HOUSING-INFSTATIC1' | translate}}</mat-label>
+                <ngx-mat-file-input (change)="validateFiles('file1')" formControlName="file1">
+                </ngx-mat-file-input>
+              </mat-form-field>
+              <button class="btn btn-secondary" (click)="onSubmitFile('file1')"><i class="fa fa-upload mr-2"
+                  aria-hidden="true"></i>{{'STUDENT.HOUSING-FILE-UPLOAD' | translate}}</button>
+            </li>
             <br>
-            <span class="font-italic">
-              {{'STUDENT.HOUSING-INFSTATIC' | translate}}
-            </span>
-            <i class="fa fa-info-circle fa-lg fa-icon" data-toggle="tooltip" data-placement="top"
-              title="{{'STUDENT.HOUSING-INFSTATIC2' | translate}}">
-            </i>
-            <mat-form-field class="w-100" appearance="fill">
-              <mat-label>{{'STUDENT.HOUSING-INFSTATIC1' | translate}}</mat-label>
-              <ngx-mat-file-input (change)="validateFiles('file1')" formControlName="file1">
-              </ngx-mat-file-input>
-            </mat-form-field>
-          </p>
-          <p id="p1">
-            <span class="font-weight-bold"> {{'STUDENT.HOUSING-INF71' | translate}}</span>
-            {{'STUDENT.HOUSING-INF72' | translate}}
-            <br>
-            <span class="font-italic">
-              {{'STUDENT.HOUSING-INFSTATIC' | translate}}
-            </span>
-            <i class="fa fa-info-circle fa-lg fa-icon" data-toggle="tooltip" data-placement="top"
-              title="{{'STUDENT.HOUSING-INFSTATIC2' | translate}}">
-            </i>
-            <mat-form-field class="w-100" appearance="fill">
-              <mat-label>{{'STUDENT.HOUSING-INFSTATIC1' | translate}}</mat-label>
-              <ngx-mat-file-input (change)="validateFiles('file1')" formControlName="file1">
-              </ngx-mat-file-input>
-            </mat-form-field>
-          </p>
+            <li>
+              <span class="font-weight-bold"> {{'STUDENT.HOUSING-INF71' | translate}}</span>
+              {{'STUDENT.HOUSING-INF72' | translate}}
+              <br>
+              <span class="font-italic">
+                {{'STUDENT.HOUSING-INFSTATIC' | translate}}
+              </span>
+              <i class="fa fa-info-circle fa-lg fa-icon" data-toggle="tooltip" data-placement="top"
+                title="{{'STUDENT.HOUSING-INFSTATIC2' | translate}}">
+              </i>
+              <mat-form-field class="w-100" appearance="fill">
+                <mat-label>{{'STUDENT.HOUSING-INFSTATIC1' | translate}}</mat-label>
+                <ngx-mat-file-input (change)="validateFiles('file1')" formControlName="file1">
+                </ngx-mat-file-input>
+              </mat-form-field>
+              <button class="btn btn-secondary" (click)="onSubmitFile('file1')"><i class="fa fa-upload mr-2"
+                  aria-hidden="true"></i>{{'STUDENT.HOUSING-FILE-UPLOAD' | translate}}</button>
+            </li>
+          </ol>
         </li>
       </ul>
+      <br>
       <div>
         <button mat-button matStepperPrevious>{{'STUDENT.HOUSING-BACK' | translate}}</button>
         <button mat-button matStepperNext>{{'STUDENT.HOUSING-INF11' | translate}}</button>
@@ -539,6 +586,7 @@
           </mat-radio-group>
         </li>
       </ul>
+      <br>
       <div>
         <button mat-button matStepperPrevious>{{'STUDENT.HOUSING-BACK' | translate}}</button>
         <button mat-button matStepperNext (click)="updateStudentsAllDetails()">{{'STUDENT.HOUSING-INF11' |

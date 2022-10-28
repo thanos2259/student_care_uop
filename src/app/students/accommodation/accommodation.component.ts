@@ -15,7 +15,6 @@ export class accommodationComponent implements OnInit {
   firstFormGroup!: FormGroup;
   secondFormGroup!: FormGroup;
   thirdFormGroup!: FormGroup;
-  contactFormGroup!: FormGroup;
   specialDataFormGroup!: FormGroup;
   studentsSSOData: Student[] = [];
 
@@ -50,7 +49,8 @@ export class accommodationComponent implements OnInit {
       fileTautotita: ['', Validators.required],
       fileToposMonimhsKatoikias: ['', Validators.required],
       fileEka8aristiko: ['', Validators.required],
-      fileYpeu8unhDilosi: ['', Validators.required]
+      fileYpeu8unhDilosi: ['', Validators.required],
+      studentCategory: ['', Validators.required]
     });
 
     this.thirdFormGroup = this._formBuilder.group({

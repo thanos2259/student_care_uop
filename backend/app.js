@@ -37,5 +37,4 @@ app.get("/api", async (request, response) => {
 
 app.use("/api/students", studentRoutes);
 
-
 module.exports = app;

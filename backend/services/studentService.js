@@ -4,6 +4,8 @@ const pool = require("../db_config.js");
 const MiscUtils = require("../MiscUtils.js");
 const mssql = require("../secretariat_db_config.js");
 const msql = require('mssql');
+const fs = require('fs');
+const JSZip = require('jszip');
 
 const getAllStudents = async () => {
   try {
@@ -190,6 +192,29 @@ const updateFileDataBySSOUid = async (studentId, docType, filePath, fileName) =>
   }
 };
 
+const combineToZIP = (id) => {
+  try {
+    const zip = new JSZip();
+    let directory = './uploads/' + id + '/';
+    filenames = fs.readdirSync(directory, { withFileTypes: true });
+
+    console.log("\nCurrent directory filenames:");
+    filenames.forEach(file => {
+      console.log(file);
+      const pdfData = fs.readFileSync(directory + file.name);
+      zip.file(file.name, pdfData);
+    });
+
+    zip.generateNodeStream({ type: 'nodebuffer', streamFiles: true })
+      .pipe(fs.createWriteStream(directory + 'dikaiologitika_student_' + id + '.zip'))
+      .on('finish', function () {
+        console.log("ZIP written.");
+      });
+  } catch (error) {
+    throw Error(error.message);
+  }
+};
+
 module.exports = {
   getAllStudents,
   getStudentById,
@@ -198,5 +223,6 @@ module.exports = {
   updateStudentContact,
   updateStudentBasicInfo,
   loginStudent,
-  insertOrUpdateMetadataBySSOUid
+  insertOrUpdateMetadataBySSOUid,
+  combineToZIP
 };

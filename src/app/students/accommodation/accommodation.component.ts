@@ -45,8 +45,12 @@ export class accommodationComponent implements OnInit {
       doyControl: ['', Validators.required],
       amkaControl: ['', Validators.required],
       ibanControl: ['', Validators.required],
-      file1: ['', Validators.required],
-      file2: ['', Validators.required]
+      fileOikogeneiakhKatastasi: ['', Validators.required],
+      fileTautotita: ['', Validators.required],
+      fileToposMonimhsKatoikias: ['', Validators.required],
+      fileEka8aristiko: ['', Validators.required],
+      fileYpeu8unhDilosi: ['', Validators.required],
+      file1: ['', Validators.required]
     });
 
     this.contactFormGroup = this._formBuilder.group({

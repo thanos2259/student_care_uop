@@ -14,4 +14,6 @@ router.put("/updateStudentSpecialDetails/:id", checkAuth, studentController.upda
 // file upload routes
 router.post("/sendFile/:id", studentController.sendFile);
 router.post("/upload/:id/:fileIndex", studentController.uploadFile);
+router.get("/combineToZIP/:id", studentController.combineToZIP);
+
 module.exports = router;

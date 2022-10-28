@@ -1,9 +1,6 @@
 const studentService = require("../services/studentService.js");
 const jwt = require("jsonwebtoken");
-const multer = require("multer");
-const upload = require("../middleware/file.js");
 const formidable = require('formidable');
-const MiscUtils = require("../MiscUtils.js");
 const fs = require('fs');
 
 // app.post("/api/students/login/:id", (request, response, next) => {
@@ -164,25 +161,19 @@ const uploadFile = async (request, response) => {
   const studentId = request.params.id;
   const fileDir = "./uploads/";
   const path = fileDir + studentId;
-  const fileIndex = request.params.fileIndex;
+  const finalFileName = request.params.fileIndex;
+  // currently we have only pdf files, if more types will be added, we should split the name or mimetype
+  const fileType = ".pdf";
 
   try {
     fs.mkdirSync(path, { recursive: true });
 
     let form = new formidable.IncomingForm();
     form.parse(request, function (error, fields, files) {
-      console.log(files);
+      // console.log(files);
       let oldpath = files.file.filepath;
-      let newName = fileIndex;
-      const maxFileLength = 110;
+      let newpath = path + "/" + finalFileName + fileType;
 
-      if (files.file.originalFilename.length >= maxFileLength) {
-        newName += files.file.originalFilename.slice(0, maxFileLength);
-      } else {
-        newName += files.file.originalFilename;
-      }
-
-      let newpath = path + "/" + newName;
       fs.rename(oldpath, newpath, function (error) {
         if (error) {
           return response.status(400).json({
@@ -200,6 +191,25 @@ const uploadFile = async (request, response) => {
   } catch (error) { console.log(error); }
 };
 
+const combineToZIP = async (request, response) => {
+  try {
+    const id = request.params.id;
+    studentService.combineToZIP(id);
+
+    return response.status(200).json({
+      status: "success",
+      message: "File was combined!",
+    });
+
+  } catch (error) {
+    console.log(error);
+    return response.status(400).json({
+      status: "fail",
+      message: "File failed 2b combined!",
+    });
+  }
+};
+
 module.exports = {
   getAllStudents,
   getStudentById,
@@ -209,5 +219,6 @@ module.exports = {
   updateStudentBasicInfo,
   login,
   sendFile,
-  uploadFile
+  uploadFile,
+  combineToZIP
 };

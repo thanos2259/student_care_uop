@@ -50,8 +50,7 @@ export class accommodationComponent implements OnInit {
       fileTautotita: ['', Validators.required],
       fileToposMonimhsKatoikias: ['', Validators.required],
       fileEka8aristiko: ['', Validators.required],
-      fileYpeu8unhDilosi: ['', Validators.required],
-      file1: ['', Validators.required]
+      fileYpeu8unhDilosi: ['', Validators.required]
     });
 
     this.thirdFormGroup = this._formBuilder.group({
@@ -67,8 +66,7 @@ export class accommodationComponent implements OnInit {
       fileGoneisThumataTromokratias2: [''],
       fileBebaioshEpidothsdhsAnergeias: [''],
       fileDiazevgmenoiGoneis1: [''],
-      fileDiazevgmenoiGoneis2: [''],
-      file1: ['']
+      fileDiazevgmenoiGoneis2: ['']
     });
 
     this.specialDataFormGroup = this._formBuilder.group({
@@ -128,13 +126,14 @@ export class accommodationComponent implements OnInit {
   }
 
   onSubmitFile(fileParam: string) {
-    const filename = this.secondFormGroup.get(fileParam)?.value._fileNames;
+    let formGroup = (this.secondFormGroup.contains(fileParam)) ? this.secondFormGroup : this.thirdFormGroup;
+    const filename = formGroup.get(fileParam)?.value._fileNames;
 
     if (filename.length > 100) {
       Utils.onFileLengthError();
       return;
     }
-    const file = this.uploadFile(this.secondFormGroup.get(fileParam)?.value);
+    const file = this.uploadFile(formGroup.get(fileParam)?.value);
     this.studentsService.uploadTestFile(file, fileParam).subscribe((res: { status: any; }) => {
       console.log("debug upload" + res.status);
       if (res.status == "success") {

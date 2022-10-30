@@ -66,7 +66,10 @@ export class accommodationComponent implements OnInit {
     });
 
     this.specialDataFormGroup = this._formBuilder.group({
-      familyIncome: ['', Validators.required]
+      familyIncome: ['', Validators.required],
+      option1: ['', Validators.required],
+      option2: ['', Validators.required],
+      option3: ['', Validators.required],
     });
   }
 
@@ -159,11 +162,21 @@ export class accommodationComponent implements OnInit {
   }
 
   validateFiles(docType: string) {
-    let ssnFile = this.secondFormGroup.get(docType)?.value;
-    if (ssnFile == null) {
+    let formGroup = (this.secondFormGroup.contains(docType)) ? this.secondFormGroup : this.thirdFormGroup;
+    let formFile = formGroup.get(docType)?.value;
+
+    if (formFile == null) {
       return;
     }
-    let fileName = ssnFile._fileNames;
+
+    let fileName = formFile._fileNames;
+    if (!this.getExtensionExists(fileName)) {
+      Utils.onError();
+      formGroup.get(docType)?.setValue(null);
+      formGroup.get(docType).reset();
+      return;
+    }
+
     let ext = fileName.match(/\.([^\.]+)$/)[1];
     switch (ext) {
       case 'pdf':
@@ -171,9 +184,14 @@ export class accommodationComponent implements OnInit {
         break;
       default:
         Utils.onError();
-        this.secondFormGroup.get(docType)?.setValue(null);
+        formGroup.get(docType)?.setValue(null);
+        formGroup.get(docType).reset();
         break;
     }
+  }
+
+  getExtensionExists(filename: string) {
+    return !(filename.split('.').pop() ==  filename);
   }
 
 }

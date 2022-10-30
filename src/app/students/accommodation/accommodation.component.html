@@ -192,7 +192,7 @@
           <mat-form-field class="w-100" appearance="fill">
             <mat-label>{{'STUDENT.HOUSING-INF28' | translate}}
             </mat-label>
-            <mat-select formControlName="studentCategory" required>
+            <mat-select formControlName="studentCategory">
               <mat-option value="{{'STUDENT.HOUSING-INF29' | translate}}">{{'STUDENT.HOUSING-INF29' | translate}}
               </mat-option>
               <mat-option value="{{'STUDENT.HOUSING-INF30' | translate}}">{{'STUDENT.HOUSING-INF30' | translate}}
@@ -213,7 +213,7 @@
       </div>
     </form>
   </mat-step>
-  <mat-step [stepControl]="thirdFormGroup">
+  <mat-step [stepControl]="thirdFormGroup" [optional]="true">
     <form class="mt-4" [formGroup]="thirdFormGroup">
       <ng-template matStepLabel>{{'STUDENT.HOUSING-INF34' | translate}}</ng-template>
       <ul>
@@ -574,7 +574,7 @@
           <mat-form-field class="w-50" appearance="fill">
             <mat-label> {{'STUDENT.HOUSING-INF75' | translate}}</mat-label>
             <input matInput type="number" min="0" class="example-right-align" placeholder="0"
-              formControlName="familyIncome" required>
+              formControlName="familyIncome">
             <span matSuffix>,00 €</span>
           </mat-form-field>
         </li>
@@ -584,22 +584,24 @@
           <span class="font-weight-bold">{{'STUDENT.HOUSING-INF84' | translate}}</span>
           <br>
           <br>
-          <mat-radio-group aria-label="Select an option">
-            <mat-radio-button value="1">{{'STUDENT.HOUSING-INF78' | translate}}</mat-radio-button>
+          <mat-radio-group aria-label="Select an option" name="radio">
+            <mat-radio-button [checked]="false" #option1 value="1">{{'STUDENT.HOUSING-INF78' | translate}}
+            </mat-radio-button>
             <br>
-            <mat-form-field class="w-50" appearance="fill">
+            <mat-form-field *ngIf="option1.checked" class="w-50" appearance="fill">
               <mat-label> {{'STUDENT.HOUSING-INF79' | translate}}</mat-label>
               <input matInput type="number" min="0" class="example-right-align" placeholder="0" required>
             </mat-form-field>
             <br>
-            <mat-form-field class="w-50" appearance="fill">
+            <mat-form-field *ngIf="option1.checked" class="w-50" appearance="fill">
               <mat-label> {{'STUDENT.HOUSING-INF80' | translate}}</mat-label>
               <input matInput type="number" min="0" class="example-right-align" placeholder="0" required>
             </mat-form-field>
+            <br *ngIf="option1.checked">
+            <mat-radio-button [checked]="false" #option2 value="2">{{'STUDENT.HOUSING-INF81' | translate}}
+            </mat-radio-button>
             <br>
-            <mat-radio-button value="2">{{'STUDENT.HOUSING-INF81' | translate}}</mat-radio-button>
-            <br>
-            <mat-form-field class="w-50" appearance="fill">
+            <mat-form-field *ngIf="option2.checked" class="w-50" appearance="fill">
               <mat-label> {{'STUDENT.HOUSING-INF82' | translate}}</mat-label>
               <input matInput type="number" min="0" class="example-right-align" placeholder="0" required>
             </mat-form-field>
@@ -611,13 +613,16 @@
       <br>
       <div>
         <button mat-button matStepperPrevious>{{'STUDENT.HOUSING-BACK' | translate}}</button>
-        <button mat-button matStepperNext (click)="updateStudentsAllDetails()">{{'STUDENT.HOUSING-INF11' |
-          translate}}</button>
+        <button mat-button matStepperNext>{{'STUDENT.HOUSING-INF11' | translate}}</button>
       </div>
     </form>
   </mat-step>
   <mat-step>
+    <p>{{'STUDENT.SUBMIT-APPLICATION-DESCR' | translate}}</p>
     <ng-template matStepLabel>{{'STUDENT.HOUSING-INF85' | translate}}</ng-template>
-    <p><i class="fas fa-2x fa-check text-success"></i>{{'STUDENT.HOUSING-INF86' | translate}}</p>
+    <button mat-button class="btn btn-primary" matStepperNext (click)="updateStudentsAllDetails()">{{'STUDENT.SUBMIT-APPLICATION' |
+          translate}}</button>
+    <p style="display:none;"><i class="fas fa-2x fa-check text-success"></i>{{'STUDENT.HOUSING-INF86' | translate}}
+    </p>
   </mat-step>
 </mat-stepper>

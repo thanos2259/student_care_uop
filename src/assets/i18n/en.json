@@ -198,7 +198,9 @@
     "PROFILE-POSTCODE": "Postal code",
     "PROFILE-COUNTRY": "Country",
     "HOME": "Optionally complete your profile by clicking on your name or by clicking on the Profile option in the top right menu.",
-    "FOOTER": "University of Peloponnese"
+    "FOOTER": "University of Peloponnese",
+    "SUBMIT-APPLICATION": "Submit application",
+    "SUBMIT-APPLICATION-DESCR": "If you want to finalise your application, click the button below."
   },
   "GENERIC": {
     "CONTACT": "Contact"

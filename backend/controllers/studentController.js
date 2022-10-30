@@ -134,17 +134,17 @@ const updateStudentBasicDocuments = async (request, response, next) => {
   }
 };
 
-const updateStudentSpecialDetails = async (request, response, next) => {
+const updateStudentSpecialData = async (request, response, next) => {
   try {
     const id = request.params.id;
     const student = request.body;
 
-    const updateResults = await studentService.updateStudentSpecialDetails(student, id);
+    await studentService.updateStudentSpecialData(student, id);
 
     response
       .status(200)
       .json({
-        message: 'Student contact updated successfully'
+        message: 'Student special data updated successfully'
       });
   } catch (error) {
     console.error(error.message);
@@ -235,7 +235,7 @@ module.exports = {
   getStudentById,
   updateStudentDetails,
   updateStudentContact,
-  updateStudentSpecialDetails,
+  updateStudentSpecialData,
   updateStudentBasicInfo,
   updateStudentBasicDocuments,
   login,

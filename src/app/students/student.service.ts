@@ -53,19 +53,19 @@ export class StudentsService {
       });
   }
 
-  updateStudentContact(data: any) {
+  updateStudentSpecialData(data: any) {
     const id = this.authService.getSessionId();
     this.http
-      .put<{ message: string }>("http://localhost:3000/api/students/updateStudentContact/" + id, data)
+      .put<{ message: string }>("http://localhost:3000/api/students/updateStudentSpecialData/" + id, data)
       .subscribe(responseData => {
         console.log(responseData.message);
       });
   }
 
-  updateStudentSpecialDetails(data: any) {
+  updateStudentContact(data: any) {
     const id = this.authService.getSessionId();
     this.http
-      .put<{ message: string }>("http://localhost:3000/api/students/updateStudentSpecialDetails/" + id, data)
+      .put<{ message: string }>("http://localhost:3000/api/students/updateStudentContact/" + id, data)
       .subscribe(responseData => {
         console.log(responseData.message);
       });

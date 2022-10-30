@@ -9,13 +9,11 @@ export interface Student {
   edupersonorgdn: string;
   edupersonentitlement: string;
   schacpersonaluniquecode: string,
-  schacgender: number;
   schacyearofbirth: number;
   schacdateofbirth: string;
   schacpersonaluniqueid: string;
   department_id: string;
   city: string;
-  ssn: string;
   post_address: string;
   phone: string;
   mother_name: string;
@@ -26,5 +24,4 @@ export interface Student {
   country: string;
   address: string;
   mail: string;
-  category: string;
 }

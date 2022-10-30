@@ -41,10 +41,6 @@ export class accommodationComponent implements OnInit {
       });
 
     this.secondFormGroup = this._formBuilder.group({
-      ssnControl: ['', Validators.required],
-      doyControl: ['', Validators.required],
-      amkaControl: ['', Validators.required],
-      ibanControl: ['', Validators.required],
       fileOikogeneiakhKatastasi: ['', Validators.required],
       fileTautotita: ['', Validators.required],
       fileToposMonimhsKatoikias: ['', Validators.required],
@@ -70,9 +66,7 @@ export class accommodationComponent implements OnInit {
     });
 
     this.specialDataFormGroup = this._formBuilder.group({
-      ameaCatCtrl: ['', Validators.required],
-      workingCatCtrl: ['', Validators.required],
-      armyCatCtrl: ['', Validators.required]
+      familyIncome: ['', Validators.required]
     });
   }
 
@@ -118,8 +112,13 @@ export class accommodationComponent implements OnInit {
       category: this.secondFormGroup.get('studentCategory')?.value,
     };
 
+    const specialData: any = {
+      family_income: this.specialDataFormGroup.get('familyIncome')?.value,
+    };
+
     this.onSubmitStudentBasicInfo(basicInfo);
     this.onSubmitStudentBasicDocuments(basicDocs);
+    this.onSubmitStudentSpecialData(specialData);
     Utils.onSaveApplication();
   }
 
@@ -153,6 +152,10 @@ export class accommodationComponent implements OnInit {
 
   onSubmitStudentBasicDocuments(data: any) {
     this.studentsService.updateStudentBasicDocuments(data);
+  }
+
+  onSubmitStudentSpecialData(data: any) {
+    this.studentsService.updateStudentSpecialData(data);
   }
 
   validateFiles(docType: string) {

@@ -26,4 +26,5 @@ export interface Student {
   country: string;
   address: string;
   mail: string;
+  category: string;
 }

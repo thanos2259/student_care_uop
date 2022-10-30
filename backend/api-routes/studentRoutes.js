@@ -10,6 +10,7 @@ router.post("/login", studentController.login);
 router.put("/updateStudentDetails/:id", checkAuth, studentController.updateStudentDetails);
 router.put("/updateStudentContact/:id", checkAuth, studentController.updateStudentContact);
 router.put("/updateStudentBasicInfo/:id", checkAuth, studentController.updateStudentBasicInfo);
+router.put("/updateStudentBasicDocuments/:id", checkAuth, studentController.updateStudentBasicDocuments);
 router.put("/updateStudentSpecialDetails/:id", checkAuth, studentController.updateStudentSpecialDetails);
 // file upload routes
 router.post("/sendFile/:id", studentController.sendFile);

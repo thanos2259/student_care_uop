@@ -114,7 +114,12 @@ export class accommodationComponent implements OnInit {
       phone: this.firstFormGroup.get('phone')?.value
     };
 
+    const basicDocs: any = {
+      category: this.secondFormGroup.get('studentCategory')?.value,
+    };
+
     this.onSubmitStudentBasicInfo(basicInfo);
+    this.onSubmitStudentBasicDocuments(basicDocs);
     Utils.onSaveApplication();
   }
 
@@ -144,6 +149,10 @@ export class accommodationComponent implements OnInit {
 
   onSubmitStudentBasicInfo(data: any) {
     this.studentsService.updateStudentBasicInfo(data);
+  }
+
+  onSubmitStudentBasicDocuments(data: any) {
+    this.studentsService.updateStudentBasicDocuments(data);
   }
 
   validateFiles(docType: string) {

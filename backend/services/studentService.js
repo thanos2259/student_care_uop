@@ -153,6 +153,18 @@ const updateStudentBasicInfo = async (student, id) => {
   }
 };
 
+const updateStudentBasicDocuments = async (student, id) => {
+  try {
+    const updateResults = await pool.query("UPDATE student_users \
+     SET " + "category = $1 WHERE sso_uid = $2",
+      [student.category, id]);
+
+    return updateResults;
+  } catch (error) {
+    throw Error('Error while updating student basic documents');
+  }
+};
+
 const insertOrUpdateMetadataBySSOUid = async (studentId, docType, filePath, fileName, fileExtension) => {
   try {
     const filesData = await getFileMetadataByStudentId(studentId, docType);
@@ -222,6 +234,7 @@ module.exports = {
   updateStudentDetails,
   updateStudentContact,
   updateStudentBasicInfo,
+  updateStudentBasicDocuments,
   loginStudent,
   insertOrUpdateMetadataBySSOUid,
   combineToZIP

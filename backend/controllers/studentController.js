@@ -114,6 +114,26 @@ const updateStudentBasicInfo = async (request, response, next) => {
   }
 };
 
+const updateStudentBasicDocuments = async (request, response, next) => {
+  try {
+    const id = request.params.id;
+    const student = request.body;
+
+    await studentService.updateStudentBasicDocuments(student, id);
+
+    response
+      .status(200)
+      .json({
+        message: 'Student basic documents updated successfully'
+      });
+  } catch (error) {
+    console.error(error.message);
+    response.send({
+      message: error.message
+    });
+  }
+};
+
 const updateStudentSpecialDetails = async (request, response, next) => {
   try {
     const id = request.params.id;
@@ -217,6 +237,7 @@ module.exports = {
   updateStudentContact,
   updateStudentSpecialDetails,
   updateStudentBasicInfo,
+  updateStudentBasicDocuments,
   login,
   sendFile,
   uploadFile,

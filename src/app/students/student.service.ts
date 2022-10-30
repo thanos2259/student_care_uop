@@ -44,6 +44,15 @@ export class StudentsService {
       });
   }
 
+  updateStudentBasicDocuments(data: any) {
+    const id = this.authService.getSessionId();
+    this.http
+      .put<{ message: string }>("http://localhost:3000/api/students/updateStudentBasicDocuments/" + id, data)
+      .subscribe(responseData => {
+        console.log(responseData.message);
+      });
+  }
+
   updateStudentContact(data: any) {
     const id = this.authService.getSessionId();
     this.http

@@ -168,12 +168,13 @@ const updateStudentBasicDocuments = async (student, id) => {
 const updateStudentSpecialData = async (student, id) => {
   try {
     const updateResults = await pool.query("UPDATE student_users \
-     SET " + "family_income = $1 WHERE sso_uid = $2",
-      [student.family_income, id]);
+     SET " + "family_income = $1, family_state = $2, protected_members = $3, siblings_students = $4, children = $5 WHERE sso_uid = $6",
+      [student.family_income, student.family_state, student.protected_members, student.siblings_students, student.children, id]);
 
     return updateResults;
   } catch (error) {
     throw Error('Error while updating student special data');
+
   }
 };
 

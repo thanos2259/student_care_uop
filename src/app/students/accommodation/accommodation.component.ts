@@ -66,10 +66,11 @@ export class accommodationComponent implements OnInit {
     });
 
     this.specialDataFormGroup = this._formBuilder.group({
-      familyIncome: ['', Validators.required],
-      option1: ['', Validators.required],
-      option2: ['', Validators.required],
-      option3: ['', Validators.required],
+      familyIncome: ['0', Validators.required],
+      familyState: ['', Validators.required],
+      protectedMembers: ['0', Validators.required],
+      siblingsStudents: ['0', Validators.required],
+      children: ['0', Validators.required]
     });
   }
 
@@ -88,22 +89,7 @@ export class accommodationComponent implements OnInit {
   location = Utils.location;
   departmentsMap = Utils.departmentsMap;
 
-  //checkIfFieldEmpty(givenFormGroup: FormGroup, field: string): boolean {
-  //const fieldValue = givenFormGroup.get(field)?.value;
-  //return fieldValue && fieldValue != null && fieldValue != '';
-  //}
-
-  /**
-   * Used to update student details,
-   * as a controller function
-   */
   updateStudentsAllDetails() {
-    // check if the only required field in the last stepper is empty
-    // to check if a more generic implementation can implemented
-    //
-    // if (!this.checkIfFieldEmpty(this.contactFormGroup, 'emailCtrl')) {
-    //   return;
-    // }
     const basicInfo: any = {
       father_name: this.firstFormGroup.get('fatherName')?.value,
       location: this.firstFormGroup.get('municipality')?.value,
@@ -117,6 +103,10 @@ export class accommodationComponent implements OnInit {
 
     const specialData: any = {
       family_income: this.specialDataFormGroup.get('familyIncome')?.value,
+      family_state: this.specialDataFormGroup.get('familyState')?.value,
+      protected_members: this.specialDataFormGroup.get('protectedMembers')?.value,
+      siblings_students: this.specialDataFormGroup.get('siblingsStudents')?.value,
+      children: this.specialDataFormGroup.get('children')?.value
     };
 
     this.onSubmitStudentBasicInfo(basicInfo);
@@ -191,7 +181,7 @@ export class accommodationComponent implements OnInit {
   }
 
   getExtensionExists(filename: string) {
-    return !(filename.split('.').pop() ==  filename);
+    return !(filename.split('.').pop() == filename);
   }
 
 }

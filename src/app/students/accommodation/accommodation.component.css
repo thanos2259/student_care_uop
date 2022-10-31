@@ -2,15 +2,7 @@
   text-align: center;
 }
 
-#p0 {
-  margin-left: 0.5em;
-}
-
-#p1 {
-  margin-left: 2.5em;
-}
-
-.example-right-align {
+.right-align {
   text-align: right;
 }
 
@@ -23,6 +15,11 @@ input.example-right-align::-webkit-inner-spin-button {
   color: rgb(197, 197, 197);
 }
 
+@media screen and (max-width: 575px) {
+  .backButton {
+    padding-bottom: 15px;
+  }
+}
 
 /* dark mode */
 ::ng-deep .dark-mode .mat-focused .mat-form-field-label {

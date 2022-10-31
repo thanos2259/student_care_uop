@@ -573,40 +573,50 @@
           <br>
           <mat-form-field class="w-50" appearance="fill">
             <mat-label> {{'STUDENT.HOUSING-INF75' | translate}}</mat-label>
-            <input matInput type="number" min="0" class="example-right-align" placeholder="0"
-              formControlName="familyIncome">
+            <input matInput type="number" min="0" maxlength="9" class="right-align" placeholder="0"
+              formControlName="familyIncome"
+              oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+              oninput="this.value = Math.abs(this.value)">
             <span matSuffix>,00 €</span>
           </mat-form-field>
         </li>
-        <br>
         <br>
         <li>
           <span class="font-weight-bold">{{'STUDENT.HOUSING-INF84' | translate}}</span>
           <br>
           <br>
-          <mat-radio-group aria-label="Select an option" name="radio">
-            <mat-radio-button [checked]="false" #option1 value="1">{{'STUDENT.HOUSING-INF78' | translate}}
+          <mat-radio-group aria-label="Select an option" name="radio" formControlName="familyState">
+            <mat-radio-button [checked]="false" #option1 value="{{'STUDENT.HOUSING-INF78' | translate}}">
+              {{'STUDENT.HOUSING-INF78' | translate}}
             </mat-radio-button>
             <br>
             <mat-form-field *ngIf="option1.checked" class="w-50" appearance="fill">
               <mat-label> {{'STUDENT.HOUSING-INF79' | translate}}</mat-label>
-              <input matInput type="number" min="0" class="example-right-align" placeholder="0" required>
+              <input matInput type="number" min="0" maxlength="2" class="right-align" placeholder="0"
+                oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                oninput="this.value = Math.abs(this.value)" formControlName="protectedMembers" required>
             </mat-form-field>
             <br>
             <mat-form-field *ngIf="option1.checked" class="w-50" appearance="fill">
               <mat-label> {{'STUDENT.HOUSING-INF80' | translate}}</mat-label>
-              <input matInput type="number" min="0" class="example-right-align" placeholder="0" required>
+              <input matInput type="number" min="0" maxlength="2" class="right-align" placeholder="0"
+                oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                oninput="this.value = Math.abs(this.value)" formControlName="siblingsStudents" required>
             </mat-form-field>
             <br *ngIf="option1.checked">
-            <mat-radio-button [checked]="false" #option2 value="2">{{'STUDENT.HOUSING-INF81' | translate}}
+            <mat-radio-button [checked]="false" #option2 value="{{'STUDENT.HOUSING-INF81' | translate}}">
+              {{'STUDENT.HOUSING-INF81' | translate}}
             </mat-radio-button>
             <br>
             <mat-form-field *ngIf="option2.checked" class="w-50" appearance="fill">
               <mat-label> {{'STUDENT.HOUSING-INF82' | translate}}</mat-label>
-              <input matInput type="number" min="0" class="example-right-align" placeholder="0" required>
+              <input matInput type="number" min="0" maxlength="2" class="right-align" placeholder="0"
+                oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                oninput="this.value = Math.abs(this.value)" formControlName="children" required>
             </mat-form-field>
             <br>
-            <mat-radio-button value="3">{{'STUDENT.HOUSING-INF83' | translate}}</mat-radio-button>
+            <mat-radio-button value="{{'STUDENT.HOUSING-INF83' | translate}}">{{'STUDENT.HOUSING-INF83' | translate}}
+            </mat-radio-button>
           </mat-radio-group>
         </li>
       </ul>
@@ -620,9 +630,18 @@
   <mat-step>
     <p>{{'STUDENT.SUBMIT-APPLICATION-DESCR' | translate}}</p>
     <ng-template matStepLabel>{{'STUDENT.HOUSING-INF85' | translate}}</ng-template>
-    <button mat-button class="btn btn-primary" matStepperNext (click)="updateStudentsAllDetails()">{{'STUDENT.SUBMIT-APPLICATION' |
+    <div class="form-group container-fluid row" style="width: 500px;">
+      <div class="col-sm-6 backButton">
+        <button mat-button class="btn btn-secondary" style="width: 210px;" matStepperPrevious>{{'STUDENT.HOUSING-BACK' |
           translate}}</button>
-    <p style="display:none;"><i class="fas fa-2x fa-check text-success"></i>{{'STUDENT.HOUSING-INF86' | translate}}
-    </p>
+      </div>
+      <div class="col-sm-6">
+        <button mat-button class="btn btn-primary" style="width: 210px;" matStepperNext
+          (click)="updateStudentsAllDetails()">{{'STUDENT.SUBMIT-APPLICATION' |
+          translate}}</button>
+      </div>
+    </div>
+    <!-- <p style="display:none;"><i class="fas fa-2x fa-check text-success"></i>{{'STUDENT.HOUSING-INF86' | translate}}
+    </p> -->
   </mat-step>
 </mat-stepper>

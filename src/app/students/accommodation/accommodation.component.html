@@ -94,8 +94,13 @@
             </ngx-mat-file-input>
           </mat-form-field>
         </li>
-        <button class="btn btn-secondary" (click)="onSubmitFile('fileOikogeneiakhKatastasi')"><i
+        <button class="btn btn-secondary" (click)="onSubmitFile('fileOikogeneiakhKatastasi')" style="width:185px"> <i
             class="fa fa-upload mr-2" aria-hidden="true"></i>{{'STUDENT.HOUSING-FILE-UPLOAD' | translate}}</button>
+        <br>
+        <br>
+        <button class="btn btn-warning" id="test1" style="width:185px;"><a
+            href="src=../../../../uploads/1/fileOikogeneiakhKatastasi.pdf" target="_blank">
+            <i class="fa fa-eye mr-2"></i>{{'STUDENT.HOUSING-FILE-VIEW' | translate}}</a></button>
         <br>
         <br>
         <li>

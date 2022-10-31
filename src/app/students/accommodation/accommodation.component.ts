@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Utils } from 'src/app/MiscUtils';
+import Swal from 'sweetalert2';
 import { Student } from '../student.model';
 import { StudentsService } from '../student.service';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-accommodation',
@@ -18,7 +20,7 @@ export class accommodationComponent implements OnInit {
   specialDataFormGroup!: FormGroup;
   studentsSSOData: Student[] = [];
 
-  constructor(public studentsService: StudentsService, private _formBuilder: FormBuilder) { }
+  constructor(public studentsService: StudentsService, private _formBuilder: FormBuilder, public authService: AuthService) { }
 
   ngOnInit() {
     this.studentsService.getStudents()
@@ -112,7 +114,17 @@ export class accommodationComponent implements OnInit {
     this.onSubmitStudentBasicInfo(basicInfo);
     this.onSubmitStudentBasicDocuments(basicDocs);
     this.onSubmitStudentSpecialData(specialData);
-    Utils.onSaveApplication();
+    Swal.fire({
+      title: 'Αίτηση',
+      text: 'Η αίτησή σας καταχωρήθηκε, θα γίνει ο έλεγχος για το αν πληρείτε τις προϋποθέσεις',
+      icon: 'success',
+      showCancelButton: false,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'ΟΚ'
+    }).then((result) => {
+      window.location.href = "//localhost:4200/student/applications/" + this.authService.getSessionId();
+    });
   }
 
   uploadFile(fileValue: any): FormData {

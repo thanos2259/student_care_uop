@@ -104,18 +104,6 @@ const loginStudent = async (username) => {
   }
 };
 
-const getFileMetadataByStudentId = async (userId, docType) => {
-  try {
-    const fileMetadata = await pool.query("SELECT * FROM sso_user_files \
-                                          WHERE sso_uid = $1 \
-                                          AND doc_type = $2 \
-                                          ORDER BY file_id DESC", [userId, docType]);
-    return fileMetadata;
-  } catch (error) {
-    throw Error('Error while fetching students files');
-  }
-};
-
 const updateStudentDetails = async (student, id) => {
   try {
     const updateResults = await pool.query("UPDATE student_users \
@@ -178,45 +166,6 @@ const updateStudentSpecialData = async (student, id) => {
   }
 };
 
-const insertOrUpdateMetadataBySSOUid = async (studentId, docType, filePath, fileName, fileExtension) => {
-  try {
-    const filesData = await getFileMetadataByStudentId(studentId, docType);
-
-    if (!MiscUtils.FILE_TYPES.includes(fileExtension)) {
-      return 'Incorrect File Type';
-    }
-
-    if (filesData.rowCount != 0) {
-      await updateFileDataBySSOUid(studentId, docType, filePath, fileName, fileExtension);
-    } else {
-      await insertFileMetadataBySSOUid(studentId, docType, filePath, fileName, fileExtension);
-    }
-
-  } catch (error) {
-    throw Error("Error while inserting file data for: " + docType + " student: " + studentId);
-  }
-};
-
-const insertFileMetadataBySSOUid = async (studentId, docType, filePath, fileName) => {
-  console.log("to be inserted " + docType);
-  try {
-    await pool.query("INSERT INTO sso_user_files(sso_uid, file_name, file_path, doc_type, date_uploaded) \
-                      VALUES ($1, $2, $3, $4, now())", [studentId, fileName, filePath, docType]);
-  } catch (error) {
-    throw Error("Error while updating file data for: " + docType + " student: " + studentId);
-  }
-};
-
-const updateFileDataBySSOUid = async (studentId, docType, filePath, fileName) => {
-  console.log("to be updated " + docType);
-  try {
-    await pool.query("UPDATE sso_user_files SET file_name = $1, file_path = $2, date_uploaded = now() \
-    WHERE sso_uid = $3 AND doc_type = $4", [fileName, filePath, studentId, docType]);
-  } catch (error) {
-    throw Error("Error while updating file data for: " + docType + " student: " + studentId);
-  }
-};
-
 const combineToZIP = (id) => {
   try {
     const zip = new JSZip();
@@ -243,13 +192,11 @@ const combineToZIP = (id) => {
 module.exports = {
   getAllStudents,
   getStudentById,
-  getFileMetadataByStudentId,
   updateStudentDetails,
   updateStudentContact,
   updateStudentBasicInfo,
   updateStudentBasicDocuments,
   updateStudentSpecialData,
   loginStudent,
-  insertOrUpdateMetadataBySSOUid,
   combineToZIP
 };

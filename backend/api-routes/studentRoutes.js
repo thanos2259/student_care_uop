@@ -13,7 +13,6 @@ router.put("/updateStudentBasicInfo/:id", checkAuth, studentController.updateStu
 router.put("/updateStudentBasicDocuments/:id", checkAuth, studentController.updateStudentBasicDocuments);
 router.put("/updateStudentSpecialData/:id", checkAuth, studentController.updateStudentSpecialData);
 // file upload routes
-router.post("/sendFile/:id", studentController.sendFile);
 router.post("/upload/:id/:fileIndex", studentController.uploadFile);
 router.get("/combineToZIP/:id", studentController.combineToZIP);
 

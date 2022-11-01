@@ -15,14 +15,9 @@ export class StudentsService {
   getStudents(): Observable<Array<Student>> {
     let id = this.authService.getSessionId();
     const fetchedStudents = this.http.get<Array<Student>>('http://localhost:3000/api/students/getStudentById/' + id);
-    // this.fetchedStudentsObservable = fetchedStudents;
-    // this.fetchedStudentsObservable.subscribe((students: Student[]) => {
-    //   this.students = [...students];
-    // });
     return fetchedStudents;
-
   }
-  // this functions adds a new bio and details to a student
+
   updateStudentDetails(data: any) {
     const id = this.authService.getSessionId();
     // const student: string = modelStudent;
@@ -30,8 +25,6 @@ export class StudentsService {
       .put<{ message: string }>("http://localhost:3000/api/students/updateStudentDetails/" + id, data)
       .subscribe(responseData => {
         console.log(responseData.message);
-        // this.students.push(student);
-        // this.studentsUpdated.next([...this.students]);
       });
   }
 
@@ -71,9 +64,15 @@ export class StudentsService {
       });
   }
 
-  uploadTestFile(file: any, fileUniqueIndex: string): any {
+  uploadFile(file: any, fileUniqueIndex: string): any {
     const id = this.authService.getSessionId();
     return this.http
       .post<{ message: string }>("http://localhost:3000/api/students/upload/" + id + "/" + fileUniqueIndex, file);
+  }
+
+  combineToZIP() {
+    const id = this.authService.getSessionId();
+    return this.http
+      .get<{ message: string }>("http://localhost:3000/api/students/combineToZIP/" + id)
   }
 }

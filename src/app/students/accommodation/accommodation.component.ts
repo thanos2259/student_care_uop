@@ -114,6 +114,7 @@ export class accommodationComponent implements OnInit {
     this.onSubmitStudentBasicInfo(basicInfo);
     this.onSubmitStudentBasicDocuments(basicDocs);
     this.onSubmitStudentSpecialData(specialData);
+    this.onSubmitStudentZip();
     Swal.fire({
       title: 'Αίτηση',
       text: 'Η αίτησή σας καταχωρήθηκε, θα γίνει ο έλεγχος για το αν πληρείτε τις προϋποθέσεις',
@@ -143,7 +144,7 @@ export class accommodationComponent implements OnInit {
       return;
     }
     const file = this.uploadFile(formGroup.get(fileParam)?.value);
-    this.studentsService.uploadTestFile(file, fileParam).subscribe((res: { status: any; }) => {
+    this.studentsService.uploadFile(file, fileParam).subscribe((res: { status: any; }) => {
       console.log("debug upload" + res.status);
       if (res.status == "success") {
         Utils.onFileUpload();
@@ -161,6 +162,10 @@ export class accommodationComponent implements OnInit {
 
   onSubmitStudentSpecialData(data: any) {
     this.studentsService.updateStudentSpecialData(data);
+  }
+
+  onSubmitStudentZip() {
+    this.studentsService.combineToZIP;
   }
 
   validateFiles(docType: string) {

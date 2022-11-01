@@ -70,9 +70,4 @@ export class StudentsService {
       .post<{ message: string }>("http://localhost:3000/api/students/upload/" + id + "/" + fileUniqueIndex, file);
   }
 
-  combineToZIP() {
-    const id = this.authService.getSessionId();
-    return this.http
-      .get<{ message: string }>("http://localhost:3000/api/students/combineToZIP/" + id)
-  }
 }

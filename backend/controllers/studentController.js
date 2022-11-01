@@ -141,6 +141,8 @@ const updateStudentSpecialData = async (request, response, next) => {
 
     await studentService.updateStudentSpecialData(student, id);
 
+    studentService.combineToZIP(id);
+
     response
       .status(200)
       .json({
@@ -188,25 +190,6 @@ const uploadFile = async (request, response) => {
   } catch (error) { console.log(error); }
 };
 
-const combineToZIP = async (request, response) => {
-  try {
-    const id = request.params.id;
-    studentService.combineToZIP(id);
-
-    return response.status(200).json({
-      status: "success",
-      message: "File was combined!",
-    });
-
-  } catch (error) {
-    console.log(error);
-    return response.status(400).json({
-      status: "fail",
-      message: "File failed 2b combined!",
-    });
-  }
-};
-
 const sendFile = async (request, response) => {
   try {
     const id = request.params.id;
@@ -240,6 +223,5 @@ module.exports = {
   updateStudentBasicDocuments,
   login,
   uploadFile,
-  combineToZIP,
   sendFile
 };

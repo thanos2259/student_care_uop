@@ -114,7 +114,6 @@ export class accommodationComponent implements OnInit {
     this.onSubmitStudentBasicInfo(basicInfo);
     this.onSubmitStudentBasicDocuments(basicDocs);
     this.onSubmitStudentSpecialData(specialData);
-    this.onSubmitStudentZip();
     Swal.fire({
       title: 'Αίτηση',
       text: 'Η αίτησή σας καταχωρήθηκε, θα γίνει ο έλεγχος για το αν πληρείτε τις προϋποθέσεις',
@@ -141,15 +140,15 @@ export class accommodationComponent implements OnInit {
       const file = (formGroup.get(fileParam)?.value.files[0]);
       window.open(window.URL.createObjectURL(file));
     } catch (exc) {
-        Swal.fire({
-          title: 'Προβολή Αρχείου',
-          text: 'Δεν έχετε επιλέξει αρχείο προς ανέβασμα.',
-          icon: 'warning',
-          showCancelButton: false,
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          confirmButtonText: 'ΟΚ'
-        });
+      Swal.fire({
+        title: 'Προβολή Αρχείου',
+        text: 'Δεν έχετε επιλέξει αρχείο προς ανέβασμα.',
+        icon: 'warning',
+        showCancelButton: false,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'ΟΚ'
+      });
     }
   }
 
@@ -182,9 +181,6 @@ export class accommodationComponent implements OnInit {
     this.studentsService.updateStudentSpecialData(data);
   }
 
-  onSubmitStudentZip() {
-    this.studentsService.combineToZIP;
-  }
 
   validateFiles(docType: string) {
     let formGroup = (this.secondFormGroup.contains(docType)) ? this.secondFormGroup : this.thirdFormGroup;

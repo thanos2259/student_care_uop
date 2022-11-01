@@ -135,6 +135,24 @@ export class accommodationComponent implements OnInit {
     return file;
   }
 
+  receiveFile(fileParam: string) {
+    try {
+      let formGroup = (this.secondFormGroup.contains(fileParam)) ? this.secondFormGroup : this.thirdFormGroup;
+      const file = (formGroup.get(fileParam)?.value.files[0]);
+      window.open(window.URL.createObjectURL(file));
+    } catch (exc) {
+        Swal.fire({
+          title: 'Προβολή Αρχείου',
+          text: 'Δεν έχετε επιλέξει αρχείο προς ανέβασμα.',
+          icon: 'warning',
+          showCancelButton: false,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'ΟΚ'
+        });
+    }
+  }
+
   onSubmitFile(fileParam: string) {
     let formGroup = (this.secondFormGroup.contains(fileParam)) ? this.secondFormGroup : this.thirdFormGroup;
     const filename = formGroup.get(fileParam)?.value._fileNames;

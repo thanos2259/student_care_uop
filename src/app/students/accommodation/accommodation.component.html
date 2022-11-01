@@ -94,13 +94,11 @@
             </ngx-mat-file-input>
           </mat-form-field>
         </li>
-        <button class="btn btn-secondary" (click)="onSubmitFile('fileOikogeneiakhKatastasi')" style="width:185px"> <i
-            class="fa fa-upload mr-2" aria-hidden="true"></i>{{'STUDENT.HOUSING-FILE-UPLOAD' | translate}}</button>
-        <br>
-        <br>
-        <button class="btn btn-warning" id="test1" style="width:185px;"><a
-            href="src=../../../../uploads/1/fileOikogeneiakhKatastasi.pdf" target="_blank">
+        <button class="btn view-btn btn-margin-bottom mr-3" style="width:185px;"><a class="view-link"
+            (click)="receiveFile('fileOikogeneiakhKatastasi')" target="_blank">
             <i class="fa fa-eye mr-2"></i>{{'STUDENT.HOUSING-FILE-VIEW' | translate}}</a></button>
+        <button class="btn btn-secondary" (click)="onSubmitFile('fileOikogeneiakhKatastasi')" style="width:185px">
+          <i class="fa fa-upload mr-2" aria-hidden="true"></i>{{'STUDENT.HOUSING-FILE-UPLOAD' | translate}}</button>
         <br>
         <br>
         <li>
@@ -118,6 +116,9 @@
             </ngx-mat-file-input>
           </mat-form-field>
         </li>
+        <button class="btn view-btn btn-margin-bottom mr-3" style="width:185px;"><a class="view-link"
+            (click)="receiveFile('fileTautotita')" target="_blank">
+            <i class="fa fa-eye mr-2"></i>{{'STUDENT.HOUSING-FILE-VIEW' | translate}}</a></button>
         <button class="btn btn-secondary" (click)="onSubmitFile('fileTautotita')"><i class="fa fa-upload mr-2"
             aria-hidden="true"></i>{{'STUDENT.HOUSING-FILE-UPLOAD' | translate}}</button>
         <br>
@@ -142,6 +143,9 @@
             </ngx-mat-file-input>
           </mat-form-field>
         </li>
+        <button class="btn view-btn btn-margin-bottom mr-3" style="width:185px;"><a class="view-link"
+            (click)="receiveFile('fileToposMonimhsKatoikias')" target="_blank">
+            <i class="fa fa-eye mr-2"></i>{{'STUDENT.HOUSING-FILE-VIEW' | translate}}</a></button>
         <button class="btn btn-secondary" (click)="onSubmitFile('fileToposMonimhsKatoikias')"><i
             class="fa fa-upload mr-2" aria-hidden="true"></i>{{'STUDENT.HOUSING-FILE-UPLOAD' | translate}}</button>
         <br>
@@ -166,6 +170,9 @@
             </ngx-mat-file-input>
           </mat-form-field>
         </li>
+        <button class="btn view-btn btn-margin-bottom mr-3" style="width:185px;"><a class="view-link"
+            (click)="receiveFile('fileEka8aristiko')" target="_blank">
+            <i class="fa fa-eye mr-2"></i>{{'STUDENT.HOUSING-FILE-VIEW' | translate}}</a></button>
         <button class="btn btn-secondary" (click)="onSubmitFile('fileEka8aristiko')"><i class="fa fa-upload mr-2"
             aria-hidden="true"></i>{{'STUDENT.HOUSING-FILE-UPLOAD' | translate}}</button>
         <br>
@@ -188,6 +195,9 @@
             </ngx-mat-file-input>
           </mat-form-field>
         </li>
+        <button class="btn view-btn btn-margin-bottom mr-3" style="width:185px;"><a class="view-link"
+            (click)="receiveFile('fileYpeu8unhDilosi')" target="_blank">
+            <i class="fa fa-eye mr-2"></i>{{'STUDENT.HOUSING-FILE-VIEW' | translate}}</a></button>
         <button class="btn btn-secondary" (click)="onSubmitFile('fileYpeu8unhDilosi')"><i class="fa fa-upload mr-2"
             aria-hidden="true"></i>{{'STUDENT.HOUSING-FILE-UPLOAD' | translate}}</button>
         <br>

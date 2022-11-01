@@ -207,6 +207,29 @@ const combineToZIP = async (request, response) => {
   }
 };
 
+const sendFile = async (request, response) => {
+  try {
+    const id = request.params.id;
+    // let initialPath = 'C:/Users/thanos/Documents/Github/student_care_uop/';
+    let initialPath = 'C:/Users/losNasos/Documents/workspace/student_care_uop/';
+    // let initialPath = 'C:/xampp/htdocs/student_care_uop/uploads/';
+    const fileName = request.body.fileName + '.pdf';
+    const filePath = './uploads/' + id + '/';
+
+    let metadata = { file_path: filePath, file_name: fileName };
+
+    response
+      .status(200)
+      .sendFile(initialPath + metadata.file_path + metadata.file_name);
+
+  } catch (error) {
+    console.error(error.message);
+    response.send({
+      message: error.message
+    });
+  }
+};
+
 module.exports = {
   getAllStudents,
   getStudentById,
@@ -217,5 +240,6 @@ module.exports = {
   updateStudentBasicDocuments,
   login,
   uploadFile,
-  combineToZIP
+  combineToZIP,
+  sendFile
 };

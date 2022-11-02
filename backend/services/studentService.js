@@ -172,9 +172,9 @@ const combineToZIP = (id) => {
     let directory = './uploads/' + id + '/';
     filenames = fs.readdirSync(directory, { withFileTypes: true });
 
-    console.log("\nCurrent directory filenames:");
+    // console.log("\nCurrent directory filenames:");
     filenames.forEach(file => {
-      console.log(file);
+      // console.log(file);
       const pdfData = fs.readFileSync(directory + file.name);
       zip.file(file.name, pdfData);
     });
@@ -182,7 +182,7 @@ const combineToZIP = (id) => {
     zip.generateNodeStream({ type: 'nodebuffer', streamFiles: true })
       .pipe(fs.createWriteStream(directory + 'dikaiologitika_student_' + id + '.zip'))
       .on('finish', function () {
-        console.log("ZIP written.");
+        // console.log("ZIP written.");
       });
   } catch (error) {
     throw Error(error.message);

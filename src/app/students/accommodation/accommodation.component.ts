@@ -193,7 +193,6 @@ export class accommodationComponent implements OnInit {
     this.studentsService.updateStudentSpecialData(data);
   }
 
-
   validateFiles(docType: string) {
     let formGroup = (this.secondFormGroup.contains(docType)) ? this.secondFormGroup : this.thirdFormGroup;
     let formFile = formGroup.get(docType)?.value;

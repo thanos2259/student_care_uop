@@ -153,20 +153,32 @@ export class accommodationComponent implements OnInit {
   }
 
   onSubmitFile(fileParam: string) {
-    let formGroup = (this.secondFormGroup.contains(fileParam)) ? this.secondFormGroup : this.thirdFormGroup;
-    const filename = formGroup.get(fileParam)?.value._fileNames;
+    try {
+      let formGroup = (this.secondFormGroup.contains(fileParam)) ? this.secondFormGroup : this.thirdFormGroup;
+      const filename = formGroup.get(fileParam)?.value._fileNames;
 
-    if (filename.length > 100) {
-      Utils.onFileLengthError();
-      return;
-    }
-    const file = this.uploadFile(formGroup.get(fileParam)?.value);
-    this.studentsService.uploadFile(file, fileParam).subscribe((res: { status: any; }) => {
-      console.log("debug upload" + res.status);
-      if (res.status == "success") {
-        Utils.onFileUpload();
+      if (filename.length > 100) {
+        Utils.onFileLengthError();
+        return;
       }
-    });
+      const file = this.uploadFile(formGroup.get(fileParam)?.value);
+      this.studentsService.uploadFile(file, fileParam).subscribe((res: { status: any; }) => {
+        console.log("debug upload" + res.status);
+        if (res.status == "success") {
+          Utils.onFileUpload();
+        }
+      });
+    } catch (error) {
+      Swal.fire({
+        title: 'Ανέβασμα Αρχείου',
+        text: 'Δεν έχετε επιλέξει αρχείο. Παρακαλώ πατήστε στην αναζήτηση και επιλέξτε το αρχείο που επιθυμείτε να ανεβάσετε.',
+        icon: 'warning',
+        showCancelButton: false,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'ΟΚ'
+      });
+    }
   }
 
   onSubmitStudentBasicInfo(data: any) {

@@ -180,15 +180,17 @@ const insertNewApplication = async (student, uid) => {
   }
 };
 
-const getApplication = async (id) => {
+const getApplicationById = async (id) => {
   try {
-    const results = await pool.query("SELECT * FROM applications WHERE uid=$1", [id])
+    const results = await pool.query("SELECT id, status, to_char(\"submit_date\", 'DD/MM/YYYY') as submit_date, application_type, uid \
+                                      FROM applications \
+                                      WHERE uid=$1", [id]);
 
-    return results;
+    return results.rows;
   } catch (error) {
     throw Error('Error while fetching student application' + error.message);
   }
-}
+};
 
 const combineToZIP = (id) => {
   try {
@@ -196,7 +198,6 @@ const combineToZIP = (id) => {
     let directory = './uploads/' + id + '/';
     filenames = fs.readdirSync(directory, { withFileTypes: true });
 
-    // console.log("\nCurrent directory filenames:");
     filenames.forEach(file => {
       // console.log(file);
       const pdfData = fs.readFileSync(directory + file.name);
@@ -206,7 +207,7 @@ const combineToZIP = (id) => {
     zip.generateNodeStream({ type: 'nodebuffer', streamFiles: true })
       .pipe(fs.createWriteStream(directory + 'dikaiologitika_student_' + id + '.zip'))
       .on('finish', function () {
-        // console.log("ZIP written.");
+        console.log('ZIP written for student with id' + id);
       });
   } catch (error) {
     throw Error(error.message);
@@ -222,7 +223,7 @@ module.exports = {
   updateStudentBasicDocuments,
   updateStudentSpecialData,
   insertNewApplication,
-  getApplication,
+  getApplicationById,
   loginStudent,
   combineToZIP
 };

@@ -3,6 +3,7 @@ import { Student } from "./student.model";
 import { Observable } from "rxjs";
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { AuthService } from 'src/app/auth/auth.service';
+import { Application } from "./application.model";
 
 @Injectable({ providedIn: 'root' })
 export class StudentsService {
@@ -11,16 +12,15 @@ export class StudentsService {
 
   constructor(private http: HttpClient, public authService: AuthService) { }
 
-
   getStudents(): Observable<Array<Student>> {
     let id = this.authService.getSessionId();
     const fetchedStudents = this.http.get<Array<Student>>('http://localhost:3000/api/students/getStudentById/' + id);
     return fetchedStudents;
   }
 
-  getApplication(): Observable<Array<Student>> {
+  getApplication(): Observable<Array<Application>> {
     let id = this.authService.getSessionId();
-    const fetchedStudents = this.http.get<Array<Student>>('http://localhost:3000/api/students/getStudentApplicationById/' + id);
+    const fetchedStudents = this.http.get<Array<Application>>('http://localhost:3000/api/students/getStudentApplicationById/' + id);
     return fetchedStudents;
   }
 

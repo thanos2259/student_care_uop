@@ -183,6 +183,7 @@
     "APPLICATION-STATUS": "Status",
     "APPLICATION-STATUS1": "Being processed",
     "APPLICATION-STATUS2": "Approved",
+    "APPLICATION-STATUS3": "Rejected",
     "PROFILE-ABOUTME": "About me",
     "PROFILE-LOCATION": "Location",
     "PROFILE-PHONE": "Phone",

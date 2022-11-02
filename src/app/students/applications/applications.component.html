@@ -11,17 +11,17 @@
   <ng-container matColumnDef="application">
     <th mat-header-cell *matHeaderCellDef> {{'STUDENT.APPLICATION-TITLE1' | translate}} </th>
     <td mat-cell *matCellDef="let element">
-      <i *ngIf="element.application=='Στέγαση'"> {{'HOME.PURPOSE-LI2' | translate}}</i>
-      <i *ngIf="element.application=='Σίτιση'"> {{'HOME.PURPOSE-LI3' | translate}}</i>
+      <i *ngIf="element.application_type=='meals'"> {{'HOME.PURPOSE-LI2' | translate}}</i>
+      <i *ngIf="element.application_type=='accommodation'"> {{'HOME.PURPOSE-LI3' | translate}}</i>
     </td>
   </ng-container>
   <ng-container matColumnDef="applicationNumber">
     <th mat-header-cell *matHeaderCellDef> {{'STUDENT.APPLICATION-NUMBER' | translate}} </th>
-    <td mat-cell *matCellDef="let element"> {{element.applicationNumber}} </td>
+    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
   </ng-container>
   <ng-container matColumnDef="date">
     <th mat-header-cell *matHeaderCellDef> {{'STUDENT.APPLICATION-DATE' | translate}} </th>
-    <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+    <td mat-cell *matCellDef="let element"> {{element.submit_date}} </td>
   </ng-container>
   <ng-container matColumnDef="actions">
     <th mat-header-cell *matHeaderCellDef> {{'STUDENT.APPLICATION-ACTIONS' | translate}} </th>
@@ -33,9 +33,10 @@
   <ng-container matColumnDef="status">
     <th mat-header-cell *matHeaderCellDef> {{'STUDENT.APPLICATION-STATUS' | translate}} </th>
     <td mat-cell *matCellDef="let element">
-      <i *ngIf="element.status=='Υπο επεξεργασία'" class="fa fa-cog">
+      <i *ngIf="element.status==0" class="fa fa-cog">
         {{'STUDENT.APPLICATION-STATUS1' | translate}}</i>
-      <i *ngIf="element.status=='Εγκεκριμένη'" class="fa fa-check"> {{'STUDENT.APPLICATION-STATUS2' | translate}} </i>
+      <i *ngIf="element.status==1" class="fa fa-check"> {{'STUDENT.APPLICATION-STATUS2' | translate}} </i>
+      <i *ngIf="element.status==-1" class="fa fa-check"> {{'STUDENT.APPLICATION-STATUS3' | translate}} </i>
     </td>
   </ng-container>
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

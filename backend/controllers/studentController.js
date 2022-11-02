@@ -44,7 +44,7 @@ const getAllStudents = async (request, response) => {
 const getApplicationsById = async (request, response) => {
   try {
     const studentId = request.params.id;
-    const student = await studentService.getApplication(studentId);
+    const student = await studentService.getApplicationById(studentId);
     response.status(200).json(student);
   } catch (error) {
     console.error(error.message);
@@ -226,14 +226,14 @@ const deleteFiles = (studentId) => {
       files.forEach((file) => {
         // Check if the file is with a PDF extension, remove it
         if (file.split('.').pop().toLowerCase() == 'pdf') {
-          fs.unlinkSync(path + file)
+          fs.unlinkSync(path + file);
         }
       });
     });
   } catch (err) {
     console.error(err);
   }
-}
+};
 
 const sendFile = async (request, response) => {
   try {

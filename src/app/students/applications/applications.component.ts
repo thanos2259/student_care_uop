@@ -1,18 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-
-export interface PeriodicElement {
-  applicationNumber: number;
-  application: string;
-  date: string;
-  actions: string;
-  status: string;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  { application: 'Στέγαση', applicationNumber: 2259, date: '28/02/2022', actions: '', status: 'Υπο επεξεργασία' },
-  { application: 'Σίτιση', applicationNumber: 666, date: '24/09/2022', actions: '', status: 'Εγκεκριμένη' },
-];
-
+import {Application} from '../application.model';
+import { StudentsService } from '../student.service';
 
 @Component({
   selector: 'app-applications',
@@ -20,17 +8,20 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ['./applications.component.css']
 })
 
-
 export class ApplicationsComponent implements OnInit {
   displayedColumns: string[] = ['application', 'applicationNumber', 'date', 'status', 'actions'];
-  dataSource = ELEMENT_DATA;
+  studentApplications!: Application[];
+  dataSource!: any;
 
-  constructor() { }
+  constructor(public studentService: StudentsService) { }
 
   ngOnInit(): void {
-
+    this.studentService.getApplication()
+      .subscribe((applications: Application[]) => {
+        this.studentApplications = applications;
+        this.dataSource = this.studentApplications;
+      })
   }
-
 }
 
 

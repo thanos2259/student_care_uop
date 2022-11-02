@@ -174,6 +174,15 @@ const uploadFile = async (request, response) => {
       let oldpath = files.file.filepath;
       let newpath = path + "/" + finalFileName + fileType;
 
+      let size = fs.statSync(oldpath).size;
+      let sizeToMb = (size / (1024 * 1024)).toFixed(2);
+
+      if (sizeToMb > 4) {
+        return response.status(400).json({
+          status: "Failure",
+          message: "File was too big",
+        });
+      }
       fs.rename(oldpath, newpath, function (error) {
         if (error) {
           return response.status(400).json({

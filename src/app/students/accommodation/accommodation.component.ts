@@ -220,6 +220,22 @@ export class accommodationComponent implements OnInit {
         formGroup.get(docType).reset();
         break;
     }
+
+    let fileSize = Number((formFile.files[0].size / (1024 * 1024)).toFixed(2));
+
+    if (fileSize > 4) {
+      Swal.fire({
+        title: 'Ανέβασμα Αρχείου',
+        text: 'Το αρχείο είναι μεγαλύτερο απο 4 Mb.',
+        icon: 'warning',
+        showCancelButton: false,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'ΟΚ'
+      });
+      formGroup.get(docType)?.setValue(null);
+      formGroup.get(docType).reset();
+    }
   }
 
   getExtensionExists(filename: string) {

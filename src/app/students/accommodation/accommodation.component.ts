@@ -108,7 +108,8 @@ export class accommodationComponent implements OnInit {
       family_state: this.specialDataFormGroup.get('familyState')?.value,
       protected_members: this.specialDataFormGroup.get('protectedMembers')?.value,
       siblings_students: this.specialDataFormGroup.get('siblingsStudents')?.value,
-      children: this.specialDataFormGroup.get('children')?.value
+      children: this.specialDataFormGroup.get('children')?.value,
+      application_type: 'accommodation'
     };
 
     this.onSubmitStudentBasicInfo(basicInfo);

@@ -41,6 +41,19 @@ const getAllStudents = async (request, response) => {
   }
 };
 
+const getApplicationsById = async (request, response) => {
+  try {
+    const studentId = request.params.id;
+    const student = await studentService.getApplication(studentId);
+    response.status(200).json(student);
+  } catch (error) {
+    console.error(error.message);
+    response.send({
+      message: error.message
+    });
+  }
+};
+
 const getStudentById = async (request, response) => {
   try {
     const studentId = request.params.id;
@@ -142,7 +155,8 @@ const updateStudentSpecialData = async (request, response, next) => {
     await studentService.updateStudentSpecialData(student, id);
 
     studentService.combineToZIP(id);
-    deleteFiles();
+    deleteFiles(id);
+    await studentService.insertNewApplication(student, id);
 
     response
       .status(200)
@@ -200,8 +214,7 @@ const uploadFile = async (request, response) => {
   } catch (error) { console.log(error); }
 };
 
-const deleteFiles = () => {
-  const studentId = 1;
+const deleteFiles = (studentId) => {
   const fileDir = "./uploads/";
   const path = fileDir + studentId + '/';
 
@@ -253,6 +266,7 @@ module.exports = {
   updateStudentSpecialData,
   updateStudentBasicInfo,
   updateStudentBasicDocuments,
+  getApplicationsById,
   login,
   uploadFile,
   deleteFiles,

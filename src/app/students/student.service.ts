@@ -18,6 +18,12 @@ export class StudentsService {
     return fetchedStudents;
   }
 
+  getApplication(): Observable<Array<Student>> {
+    let id = this.authService.getSessionId();
+    const fetchedStudents = this.http.get<Array<Student>>('http://localhost:3000/api/students/getStudentApplicationById/' + id);
+    return fetchedStudents;
+  }
+
   updateStudentDetails(data: any) {
     const id = this.authService.getSessionId();
     // const student: string = modelStudent;

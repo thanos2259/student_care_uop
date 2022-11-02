@@ -6,6 +6,7 @@ const mssql = require("../secretariat_db_config.js");
 const msql = require('mssql');
 const fs = require('fs');
 const JSZip = require('jszip');
+const { async } = require("rxjs");
 
 const getAllStudents = async () => {
   try {
@@ -166,6 +167,29 @@ const updateStudentSpecialData = async (student, id) => {
   }
 };
 
+const insertNewApplication = async (student, uid) => {
+  try {
+    const insertApp = await pool.query("INSERT INTO applications \
+       (status, submit_date, application_type, uid) VALUES ($1, now(), $2, $3)",
+      [0, student.application_type, uid]);
+
+    return insertApp;
+  } catch (error) {
+    throw Error('Error while inserting student application' + error.message);
+
+  }
+};
+
+const getApplication = async (id) => {
+  try {
+    const results = await pool.query("SELECT * FROM applications WHERE uid=$1", [id])
+
+    return results;
+  } catch (error) {
+    throw Error('Error while fetching student application' + error.message);
+  }
+}
+
 const combineToZIP = (id) => {
   try {
     const zip = new JSZip();
@@ -197,6 +221,8 @@ module.exports = {
   updateStudentBasicInfo,
   updateStudentBasicDocuments,
   updateStudentSpecialData,
+  insertNewApplication,
+  getApplication,
   loginStudent,
   combineToZIP
 };

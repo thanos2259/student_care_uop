@@ -68,7 +68,7 @@ export class accommodationComponent implements OnInit {
     });
 
     this.specialDataFormGroup = this._formBuilder.group({
-      familyIncome: ['0', Validators.required],
+      familyIncome: ['', Validators.required],
       familyState: ['', Validators.required],
       protectedMembers: ['0', Validators.required],
       siblingsStudents: ['0', Validators.required],

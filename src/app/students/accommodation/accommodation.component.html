@@ -622,8 +622,7 @@
             <mat-label> {{'STUDENT.HOUSING-INF75' | translate}}</mat-label>
             <input matInput type="number" min="0" maxlength="9" class="right-align" placeholder="0"
               formControlName="familyIncome"
-              oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-              oninput="this.value = Math.abs(this.value)">
+              oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength); this.value = Math.abs(this.value);">
             <span matSuffix>,00 €</span>
           </mat-form-field>
         </li>
@@ -640,15 +639,15 @@
             <mat-form-field *ngIf="option1.checked" class="w-50" appearance="fill">
               <mat-label> {{'STUDENT.HOUSING-INF79' | translate}}</mat-label>
               <input matInput type="number" min="0" maxlength="2" class="right-align" placeholder="0"
-                oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-                oninput="this.value = Math.abs(this.value)" formControlName="protectedMembers" required>
+                oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength); this.value = Math.abs(this.value);"
+                formControlName="protectedMembers" required>
             </mat-form-field>
             <br>
             <mat-form-field *ngIf="option1.checked" class="w-50" appearance="fill">
               <mat-label> {{'STUDENT.HOUSING-INF80' | translate}}</mat-label>
               <input matInput type="number" min="0" maxlength="2" class="right-align" placeholder="0"
-                oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-                oninput="this.value = Math.abs(this.value)" formControlName="siblingsStudents" required>
+                oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength); this.value = Math.abs(this.value);"
+                formControlName="siblingsStudents" required>
             </mat-form-field>
             <br *ngIf="option1.checked">
             <mat-radio-button [checked]="false" #option2 value="{{'STUDENT.HOUSING-INF81' | translate}}">
@@ -658,8 +657,8 @@
             <mat-form-field *ngIf="option2.checked" class="w-50" appearance="fill">
               <mat-label> {{'STUDENT.HOUSING-INF82' | translate}}</mat-label>
               <input matInput type="number" min="0" maxlength="2" class="right-align" placeholder="0"
-                oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-                oninput="this.value = Math.abs(this.value)" formControlName="children" required>
+                oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength); this.value = Math.abs(this.value);"
+                formControlName="children" required>
             </mat-form-field>
             <br>
             <mat-radio-button value="{{'STUDENT.HOUSING-INF83' | translate}}">{{'STUDENT.HOUSING-INF83' | translate}}

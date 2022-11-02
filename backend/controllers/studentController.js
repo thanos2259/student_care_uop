@@ -142,6 +142,7 @@ const updateStudentSpecialData = async (request, response, next) => {
     await studentService.updateStudentSpecialData(student, id);
 
     studentService.combineToZIP(id);
+    deleteFiles();
 
     response
       .status(200)
@@ -190,6 +191,28 @@ const uploadFile = async (request, response) => {
   } catch (error) { console.log(error); }
 };
 
+const deleteFiles = () => {
+  const studentId = 1;
+  const fileDir = "./uploads/";
+  const path = fileDir + studentId + '/';
+
+  try {
+    // Read the directory given in `path`
+    const files = fs.readdir(path, (err, files) => {
+      if (err)
+        throw err;
+      files.forEach((file) => {
+        // Check if the file is with a PDF extension, remove it
+        if (file.split('.').pop().toLowerCase() == 'pdf') {
+          fs.unlinkSync(path + file)
+        }
+      });
+    });
+  } catch (err) {
+    console.error(err);
+  }
+}
+
 const sendFile = async (request, response) => {
   try {
     const id = request.params.id;
@@ -223,5 +246,6 @@ module.exports = {
   updateStudentBasicDocuments,
   login,
   uploadFile,
+  deleteFiles,
   sendFile
 };

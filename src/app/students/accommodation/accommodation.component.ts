@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Utils } from 'src/app/MiscUtils';
 import Swal from 'sweetalert2';
 import { Student } from '../student.model';
 import { StudentsService } from '../student.service';
 import { AuthService } from 'src/app/auth/auth.service';
+import {MatStepper} from '@angular/material/stepper';
 
 @Component({
   selector: 'app-accommodation',
@@ -13,12 +14,20 @@ import { AuthService } from 'src/app/auth/auth.service';
 })
 
 export class accommodationComponent implements OnInit {
+  filesSubmitted: any = {
+    "fileOikogeneiakhKatastasi": false,
+    "fileTautotita": false,
+    "fileToposMonimhsKatoikias": false,
+    "fileEka8aristiko": false,
+    "fileYpeu8unhDilosi": false
+  };
   isLinear = true;
   firstFormGroup!: FormGroup;
   secondFormGroup!: FormGroup;
   thirdFormGroup!: FormGroup;
   specialDataFormGroup!: FormGroup;
   studentsSSOData: Student[] = [];
+ @ViewChild('stepper') stepper: MatStepper;
 
   constructor(public studentsService: StudentsService, private _formBuilder: FormBuilder, public authService: AuthService) { }
 
@@ -128,6 +137,29 @@ export class accommodationComponent implements OnInit {
     });
   }
 
+  areFilesUploaded() {
+    let falseElements = Object.keys(this.filesSubmitted).filter(el => this.filesSubmitted[el] == false);
+    let falseElementsCount = falseElements.length;
+
+    if (falseElementsCount == 0) {
+      this.stepper.selected.completed = true;
+      this.stepper.next(); // Move to next step
+      return;
+    }
+
+    Swal.fire({
+      title: 'Αποτυχία',
+      text: 'Πρέπει να ανεβάσετε όλα τα αρχεία που ζητούνται',
+      icon: 'error',
+      showCancelButton: false,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'ΟΚ'
+    });
+
+    this.stepper.selected.completed = false;
+  }
+
   uploadFile(fileValue: any): FormData {
     const imageBlob = fileValue?.files[0];
     const file = new FormData();
@@ -166,6 +198,8 @@ export class accommodationComponent implements OnInit {
       this.studentsService.uploadFile(file, fileParam).subscribe((res: { status: any; }) => {
         console.log("debug upload" + res.status);
         if (res.status == "success") {
+          this.filesSubmitted[fileParam] = true;
+          console.log(this.filesSubmitted[fileParam]);
           Utils.onFileUpload();
         }
       });
@@ -194,9 +228,10 @@ export class accommodationComponent implements OnInit {
     this.studentsService.updateStudentSpecialData(data);
   }
 
-  validateFiles(docType: string) {
-    let formGroup = (this.secondFormGroup.contains(docType)) ? this.secondFormGroup : this.thirdFormGroup;
-    let formFile = formGroup.get(docType)?.value;
+  validateFiles(formFileName: string) {
+    this.filesSubmitted[formFileName] = false;
+    let formGroup = (this.secondFormGroup.contains(formFileName)) ? this.secondFormGroup : this.thirdFormGroup;
+    let formFile = formGroup.get(formFileName)?.value;
 
     if (formFile == null) {
       return;
@@ -205,8 +240,8 @@ export class accommodationComponent implements OnInit {
     let fileName = formFile._fileNames;
     if (!this.getExtensionExists(fileName)) {
       Utils.onError();
-      formGroup.get(docType)?.setValue(null);
-      formGroup.get(docType).reset();
+      formGroup.get(formFileName)?.setValue(null);
+      formGroup.get(formFileName).reset();
       return;
     }
 
@@ -217,8 +252,8 @@ export class accommodationComponent implements OnInit {
         break;
       default:
         Utils.onError();
-        formGroup.get(docType)?.setValue(null);
-        formGroup.get(docType).reset();
+        formGroup.get(formFileName)?.setValue(null);
+        formGroup.get(formFileName).reset();
         break;
     }
 
@@ -234,8 +269,8 @@ export class accommodationComponent implements OnInit {
         cancelButtonColor: '#d33',
         confirmButtonText: 'ΟΚ'
       });
-      formGroup.get(docType)?.setValue(null);
-      formGroup.get(docType).reset();
+      formGroup.get(formFileName)?.setValue(null);
+      formGroup.get(formFileName).reset();
     }
   }
 

@@ -34,8 +34,8 @@ export class ApplicationsComponent implements OnInit {
   }
 
   // make html printable
-  printToPdf(): void {
-    let printContents = "", popupWin: Window;
+  printToPdf(idx: number): void {
+    let popupWin: Window;
     popupWin = window.open('', '_blank', 'top=0,left=0,height=1000px,width=auto');
     popupWin!.document.open();
     popupWin!.document.write(`
@@ -46,7 +46,7 @@ export class ApplicationsComponent implements OnInit {
           tr, td, th { border: none; }
           </style>
         </head>
-        <body onload="window.print();window.close()">${printContents}
+        <body onload="window.print();window.close()">
           <p style="text-align: center;"><strong><u>ΑΙΤΗΣΗ ΠΑΡΟΧΗΣ ΔΩΡΕΑΝ ΣΤΕΓΑΣΗΣ ΓΙΑ ΤΟ ΑΚΑΔ. ΕΤΟΣ ${new Date().getFullYear() - 1} - ${new Date().getFullYear()} </u></strong></p>
           <table style="width: 100%;">
               <tbody>
@@ -107,7 +107,9 @@ export class ApplicationsComponent implements OnInit {
                                   </tr>
                               </tbody>
                           </table><br><br>
-                          <div style="text-align: center;"><strong>ΟΙΚΟΓΕΝΕΙΑΚΗ ΚΑΤΑΣΤΑΣΗ</strong></div><br><input type="checkbox" id="vehicle1" name="vehicle1" value="Bike" checked="true"><label for="vehicle1">&nbsp;Άγαμος Φοιτητής κάτω των 25 ετών</label><br>
+                          <div style="text-align: center;"><strong>ΟΙΚΟΓΕΝΕΙΑΚΗ ΚΑΤΑΣΤΑΣΗ</strong></div><br>
+                          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike" checked="true"><label for="vehicle1">&nbsp;${this.studentsSSOData[0].family_state}</label><br>
+                          <div>${this.getFamilyStateSubfields()}</div>
                           <table style="width: 100%;"></table><br><br>
                           <div style="text-align: center;"><strong>ΕΤΗΣΙΟ ΟΙΚΟΓΕΝΕΙΑΚΟ ΕΙΣΟΔΗΜΑ</strong></div>
                           <p>Δηλωθέν εισόδημα: ${this.studentsSSOData[0].family_income} &euro;</p>
@@ -128,7 +130,7 @@ export class ApplicationsComponent implements OnInit {
                                       <td style="border: none; width: 33.4894%;">
                                           <div style="text-align: center;"><strong>ΠΡΟΣ&nbsp;</strong></div>
                                       </td>
-                                      <td style="border: none; width: 33.4895%;">Αρ. Αιτ: ${this.studentApplications[0].id} <br>${this.studentApplications[0].submit_date}<br><br></td>
+                                      <td style="border: none; width: 33.4895%;">Αρ. Αιτ: ${this.studentApplications[idx].id} <br>${this.studentApplications[idx].submit_date}<br><br></td>
                                   </tr>
                               </tbody>
                           </table>
@@ -171,6 +173,29 @@ export class ApplicationsComponent implements OnInit {
     );
     popupWin!.document.close();
   }
+
+  getFamilyStateSubfields() {
+    switch (this.studentsSSOData[0].family_state) {
+      case 'Άγαμος φοιτητής/φοιτήτρια κάτω των 25 ετών':
+        return `<ul>
+          <li>
+            Αριθμός προστατευόμενων τέκνων οικογένειας: ${this.studentsSSOData[0].protected_members}
+          </li>
+          <li>
+            Αριθμός αδελφών που είναι ενεργοί φοιτητές / φοιτήτριες πρώτου κύκλου σπουδών: ${this.studentsSSOData[0].siblings_students}
+          </li>
+        </ul>`;
+      case 'Έγγαμος φοιτητής/φοιτήτρια':
+        return `<ul>
+          <li>
+            Αριθμός ανήλικων τέκνων: ${this.studentsSSOData[0].children}
+          </li>
+        </ul>`;
+      default:
+        return '';
+    }
+  }
+
 }
 
 

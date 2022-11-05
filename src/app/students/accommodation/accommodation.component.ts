@@ -19,7 +19,20 @@ export class accommodationComponent implements OnInit {
     "fileTautotita": false,
     "fileToposMonimhsKatoikias": false,
     "fileEka8aristiko": false,
-    "fileYpeu8unhDilosi": false
+    "fileYpeu8unhDilosi": false,
+    "filePolutekneia": false,
+    "fileBebaioshSpoudonAderfwn": false,
+    "filePistopoihtikoGoneaFoithth": false,
+    "fileLhksiarxikhPrakshThanatouGoneaA": false,
+    "fileLhksiarxikhPrakshThanatouGoneaB": false,
+    "fileAgamhMhtera": false,
+    "fileGoneisAMEA": false,
+    "fileGoneisAMEAIatrikhGnomateush": false,
+    "fileGoneisThumataTromokratias1": false,
+    "fileGoneisThumataTromokratias2": false,
+    "fileBebaioshEpidothsdhsAnergeias": false,
+    "fileDiazevgmenoiGoneis1": false,
+    "fileDiazevgmenoiGoneis2": false
   };
   isLinear = true;
   firstFormGroup!: FormGroup;
@@ -137,10 +150,11 @@ export class accommodationComponent implements OnInit {
   }
 
   areFilesUploaded() {
-    let falseElements = Object.keys(this.filesSubmitted).filter(el => this.filesSubmitted[el] == false);
-    let falseElementsCount = falseElements.length;
+    // TODO check if it's right
+    let trueElements = Object.keys(this.filesSubmitted).filter(el => this.filesSubmitted[el] == true);
+    let trueElementsCount = trueElements.length;
 
-    if (falseElementsCount == 0) {
+    if (trueElementsCount == 5) {
       this.stepper.selected.completed = true;
       this.stepper.next(); // Move to next step
       return;

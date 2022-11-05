@@ -46,18 +46,18 @@ const filesSubmitted = [
     filename: "fileEka8aristiko", description: "Εκκαθαριστικό σημείωμα εφορίας(άρθρο 1, παρ.5, περ.ζ)", type: 'required',
     filename: "fileYpeu8unhDilosi", description: "Υπεύθυνη δήλωση Ν.1599(βάσει υποδείγματος) (άρθρο 5, παρ 1, κατ.ε)", type: 'required',
     filename: "filePolutekneia", description: "Πιστοποιητικό πολυτεκνίας(άρθρο1, παρ.9, κατ.α)", type: 'optional',
-    filename: "fileBebaioshSpoudonAderfwn", description: "Βεβαίωση σπουδών αδελφού / ης(άρθρο 1, παρ.9, κατ.γ)", type: 'optional',
+    filename: "fileBebaioshSpoudonAderfwn", description: "Βεβαίωση σπουδών αδελφού/ης(άρθρο 1, παρ.9, κατ.γ)", type: 'optional',
     filename: "filePistopoihtikoGoneaFoithth", description: "Πιστοποιητικό οικογενειακής κατάστασης(τρίτεκνος)(άρθρο 1, παρ. 9, κατ.β)", type: 'optional',
     filename: "fileLhksiarxikhPrakshThanatouGoneaA", description: "Ληξιαρχική πράξη θανάτου γονέα(άρθρο 1, παρ9, κατ.δ)", type: 'optional',
-    filename: "fileLhksiarxikhPrakshThanatouGoneaB", description: "Ληξιαρχική πράξη γέννησης φοιτητή(άρθρο 1, παρ.9, κατ.η)", type: 'optional',
+    filename: "fileLhksiarxikhPrakshThanatouGoneaB", description: "Ληξιαρχική πράξη γέννησης φοιτητή(άρθρο 1, παρ.9, κατ.δ)", type: 'optional',
     filename: "fileAgamhMhtera", description: "Ληξιαρχική πράξη γέννησης φοιτητή(άρθρο 1, παρ.9, κατ.ε)", type: 'optional',
-    filename: "fileGoneisAMEA", description: "1)Πιστοποιητικό υγειονομικής επιτροπής(αναπηρία)(άρθρο 1, παρ.9, περ.στ)", type: 'optional',
-    filename: "fileGoneisAMEAIatrikhGnomateush", description: "2)Ιατρική γνωμάτευση από Δημόσιο Νοσοκομείο(άρθρο 1, παρ.9, περ.στ)", type: 'optional',
-    filename: "fileGoneisThumataTromokratias1", description: "Ληξιαρχική πράξη γέννησης φοιτητή(άρθρο 1, παρ.9, κατ.δ)", type: 'optional',
+    filename: "fileGoneisAMEA", description: "Πιστοποιητικό υγειονομικής επιτροπής(αναπηρία)(άρθρο 1, παρ.9, περ.στ)", type: 'optional',
+    filename: "fileGoneisAMEAIatrikhGnomateush", description: "Ιατρική γνωμάτευση από Δημόσιο Νοσοκομείο(άρθρο 1, παρ.9, περ.στ)", type: 'optional',
+    filename: "fileGoneisThumataTromokratias1", description: "Ληξιαρχική πράξη γέννησης φοιτητή(άρθρο 1, παρ.9, κατ.η)", type: 'optional',
     filename: "fileGoneisThumataTromokratias2", description: "Αντίγραφο πράξης συνταξιοδότησης Ν1897(άρθρο 1, παρ.9, κατ.η)", type: 'optional',
     filename: "fileBebaioshEpidothsdhsAnergeias", description: "Βεβαίωση επιδότησης ανεργίας(άρθρο 1, παρ5)", type: 'optional',
-    filename: "fileDiazevgmenoiGoneis1", description: "1. Διαζευκτήριο", type: 'optional',
-    filename: "fileDiazevgmenoiGoneis2", description: "2. Eπιμέλεια φοιτητή", type: 'optional'
+    filename: "fileDiazevgmenoiGoneis1", description: "Διαζευκτήριο", type: 'optional',
+    filename: "fileDiazevgmenoiGoneis2", description: "Eπιμέλεια φοιτητή", type: 'optional'
   }
 ];
 

@@ -5,7 +5,7 @@ import Swal from 'sweetalert2';
 import { Student } from '../student.model';
 import { StudentsService } from '../student.service';
 import { AuthService } from 'src/app/auth/auth.service';
-import {MatStepper} from '@angular/material/stepper';
+import { MatStepper } from '@angular/material/stepper';
 
 @Component({
   selector: 'app-accommodation',
@@ -27,7 +27,9 @@ export class accommodationComponent implements OnInit {
   thirdFormGroup!: FormGroup;
   specialDataFormGroup!: FormGroup;
   studentsSSOData: Student[] = [];
- @ViewChild('stepper') stepper: MatStepper;
+  location = Utils.location;
+  departmentsMap = Utils.departmentsMap;
+  @ViewChild('stepper') stepper: MatStepper;
 
   constructor(public studentsService: StudentsService, private _formBuilder: FormBuilder, public authService: AuthService) { }
 
@@ -96,9 +98,6 @@ export class accommodationComponent implements OnInit {
     });
     return index;
   }
-
-  location = Utils.location;
-  departmentsMap = Utils.departmentsMap;
 
   updateStudentsAllDetails() {
     const basicInfo: any = {

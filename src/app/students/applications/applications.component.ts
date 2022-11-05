@@ -1,35 +1,44 @@
 import { Component, OnInit } from '@angular/core';
+import { Utils } from 'src/app/MiscUtils';
 import { Application } from '../application.model';
+import { Student } from '../student.model';
 import { StudentsService } from '../student.service';
 
 @Component({
-  selector: 'app-applications',
-  templateUrl: './applications.component.html',
-  styleUrls: ['./applications.component.css']
+    selector: 'app-applications',
+    templateUrl: './applications.component.html',
+    styleUrls: ['./applications.component.css']
 })
 
 export class ApplicationsComponent implements OnInit {
-  displayedColumns: string[] = ['application', 'applicationNumber', 'date', 'status', 'actions'];
-  studentApplications!: Application[];
-  dataSource!: any;
+    displayedColumns: string[] = ['application', 'applicationNumber', 'date', 'status', 'actions'];
+    studentApplications!: Application[];
+    dataSource!: any;
+    studentsSSOData: any;
+    departmentsMap = Utils.departmentsMap;
 
-  constructor(public studentService: StudentsService) { }
+    constructor(public studentService: StudentsService) { }
 
-  ngOnInit(): void {
-    this.studentService.getApplication()
-      .subscribe((applications: Application[]) => {
-        this.studentApplications = applications;
-        this.dataSource = this.studentApplications;
-      })
-  }
+    ngOnInit(): void {
+        this.studentService.getApplication()
+            .subscribe((applications: Application[]) => {
+                this.studentApplications = applications;
+                this.dataSource = this.studentApplications;
+            })
+        this.studentService.getStudents()
+            .subscribe((students: Student[]) => {
+                this.studentsSSOData = students;
+                this.studentsSSOData[0].schacpersonaluniquecode = Utils.getRegistrationNumber(this.studentsSSOData[0].schacpersonaluniquecode);
+                this.studentsSSOData[0].department_id = this.departmentsMap[this.studentsSSOData[0].department_id];
+            })
+    }
 
-// make html printable
-  printToPdf(): void {
-    let printContents="", popupWin;
-
-    popupWin = window.open('', '_blank', 'top=0,left=0,height=1000px,width=auto');
-    popupWin!.document.open();
-    popupWin!.document.write(`
+    // make html printable
+    printToPdf(): void {
+        let printContents = "", popupWin: Window;
+        popupWin = window.open('', '_blank', 'top=0,left=0,height=1000px,width=auto');
+        popupWin!.document.open();
+        popupWin!.document.write(`
       <html>
         <head>
           <title>Print tab</title>
@@ -38,8 +47,7 @@ export class ApplicationsComponent implements OnInit {
           </style>
         </head>
         <body onload="window.print();window.close()">${printContents}
-
-          <p style="text-align: center;"><strong><u>ΑΙΤΗΣΗ ΠΑΡΟΧΗΣ ΔΩΡΕΑΝ ΣΤΕΓΑΣΗΣ ΓΙΑ ΤΟ ΑΚΑΔ. ΕΤΟΣ 2019-2020</u></strong></p>
+          <p style="text-align: center;"><strong><u>ΑΙΤΗΣΗ ΠΑΡΟΧΗΣ ΔΩΡΕΑΝ ΣΤΕΓΑΣΗΣ ΓΙΑ ΤΟ ΑΚΑΔ. ΕΤΟΣ ${new Date().getFullYear() - 1} - ${new Date().getFullYear()} </u></strong></p>
           <table style="width: 100%;">
               <tbody>
                   <tr style="vertical-align: top;">
@@ -49,15 +57,15 @@ export class ApplicationsComponent implements OnInit {
                               <tbody>
                                   <tr>
                                       <td style="width: 50.0000%;">Επώνυμο</td>
-                                      <td style="width: 50.0000%;">Georgiou</td>
+                                      <td style="width: 50.0000%;">${this.studentsSSOData[0].sn}</td>
                                   </tr>
                                   <tr>
                                       <td style="width: 50.0000%;">Όνομα</td>
-                                      <td style="width: 50.0000%;">Kostas</td>
+                                      <td style="width: 50.0000%;">${this.studentsSSOData[0].givenname}</td>
                                   </tr>
                                   <tr>
                                       <td style="width: 50.0000%;">Πατρώνυμο</td>
-                                      <td style="width: 50.0000%;">Hlias</td>
+                                      <td style="width: 50.0000%;">${this.studentsSSOData[0].father_name}</td>
                                   </tr>
                               </tbody>
                           </table><br>
@@ -67,42 +75,42 @@ export class ApplicationsComponent implements OnInit {
                               <tbody>
                                   <tr>
                                       <td style="width: 50.0000%;">Τμήμα</td>
-                                      <td style="width: 50.0000%;">plhroforikhs</td>
+                                      <td style="width: 50.0000%;">${this.studentsSSOData[0].department_id}</td>
                                   </tr>
                                   <tr>
                                       <td style="width: 50.0000%;">Αρ. Μητρ.</td>
-                                      <td style="width: 50.0000%;">20231010110</td>
+                                      <td style="width: 50.0000%;">${this.studentsSSOData[0].schacpersonaluniquecode}</td>
                                   </tr>
                                   <tr>
                                       <td style="width: 50.0000%;">Εγγραφή</td>
-                                      <td style="width: 50.0000%;">01/09/15</td>
+                                      <td style="width: 50.0000%;"></td>
                                   </tr>
                                   <tr>
                                       <td style="width: 50.0000%;">Εισαγωγή</td>
-                                      <td style="width: 50.0000%;">13/09/15</td>
+                                      <td style="width: 50.0000%;"></td>
                                   </tr>
                                   <tr>
                                       <td style="width: 50.0000%;">Δικαιούχος</td>
-                                      <td style="width: 50.0000%;">Hlias Georgiou</td>
+                                      <td style="width: 50.0000%;">${this.studentsSSOData[0].displayname}</td>
                                   </tr>
                                   <tr>
                                       <td style="width: 50.0000%;">Δήμος</td>
-                                      <td style="width: 50.0000%;">Patron</td>
+                                      <td style="width: 50.0000%;">${this.studentsSSOData[0].location}</td>
                                   </tr>
                                   <tr>
                                       <td style="width: 50.0000%;">Διεύθυνση</td>
-                                      <td style="width: 50.0000%;">Karaiskou 34</td>
+                                      <td style="width: 50.0000%;">${this.studentsSSOData[0].address}</td>
                                   </tr>
                                   <tr>
                                       <td style="width: 50.0000%;">Τηλέφωνο</td>
-                                      <td style="width: 50.0000%;">69736282234</td>
+                                      <td style="width: 50.0000%;">${this.studentsSSOData[0].phone}</td>
                                   </tr>
                               </tbody>
                           </table><br><br>
                           <div style="text-align: center;"><strong>ΟΙΚΟΓΕΝΕΙΑΚΗ ΚΑΤΑΣΤΑΣΗ</strong></div><br><input type="checkbox" id="vehicle1" name="vehicle1" value="Bike" checked="true"><label for="vehicle1">&nbsp;Άγαμος Φοιτητής κάτω των 25 ετών</label><br>
                           <table style="width: 100%;"></table><br><br>
                           <div style="text-align: center;"><strong>ΕΤΗΣΙΟ ΟΙΚΟΓΕΝΕΙΑΚΟ ΕΙΣΟΔΗΜΑ</strong></div>
-                          <p>Δηλωθέν εισόδημα: 10000 &euro;</p>
+                          <p>Δηλωθέν εισόδημα: ${this.studentsSSOData[0].family_income} &euro;</p>
                           <p><br></p>
                           <table style="width: 100%;">
                               <tbody>
@@ -120,7 +128,7 @@ export class ApplicationsComponent implements OnInit {
                                       <td style="border: none; width: 33.4894%;">
                                           <div style="text-align: center;"><strong>ΠΡΟΣ&nbsp;</strong></div>
                                       </td>
-                                      <td style="border: none; width: 33.4895%;">Αρ. Αιτ: 3432<br>22/08/2022<br><br></td>
+                                      <td style="border: none; width: 33.4895%;">Αρ. Αιτ: ${this.studentApplications[0].id} <br>${this.studentApplications[0].submit_date}<br><br></td>
                                   </tr>
                               </tbody>
                           </table>
@@ -149,7 +157,7 @@ export class ApplicationsComponent implements OnInit {
                           <table style="width: 100%;">
                               <tbody>
                                   <tr>
-                                      <td style="width: 100.0000%;">Σημείωση: Τα άρθρα αναφέρονται στην Κ.Υ.Α "Καθαρισμός όρων, προϋποθέσεων και διαδικασίας για την παροχή δωρεάν στέγασης στους φοιτητές των Α.Ε.Ι" ΦΕΚ' τ. Β' 1965/18-06-2012</td>
+                                      <td style="width: 100.0000%; font-size: 10px;">Σημείωση: Τα άρθρα αναφέρονται στην Κ.Υ.Α "Καθαρισμός όρων, προϋποθέσεων και διαδικασίας για την παροχή δωρεάν στέγασης στους φοιτητές των Α.Ε.Ι" ΦΕΚ' τ. Β' 1965/18-06-2012</td>
                                   </tr>
                               </tbody>
                           </table>
@@ -160,10 +168,9 @@ export class ApplicationsComponent implements OnInit {
           <p><br></p>
         </body>
       </html>`
-    );
-    popupWin!.document.close();
-  }
-
+        );
+        popupWin!.document.close();
+    }
 }
 
 

@@ -5,40 +5,40 @@ import { Student } from '../student.model';
 import { StudentsService } from '../student.service';
 
 @Component({
-    selector: 'app-applications',
-    templateUrl: './applications.component.html',
-    styleUrls: ['./applications.component.css']
+  selector: 'app-applications',
+  templateUrl: './applications.component.html',
+  styleUrls: ['./applications.component.css']
 })
 
 export class ApplicationsComponent implements OnInit {
-    displayedColumns: string[] = ['application', 'applicationNumber', 'date', 'status', 'actions'];
-    studentApplications!: Application[];
-    dataSource!: any;
-    studentsSSOData: any;
-    departmentsMap = Utils.departmentsMap;
+  displayedColumns: string[] = ['application', 'applicationNumber', 'date', 'status', 'actions'];
+  studentApplications!: Application[];
+  dataSource!: any;
+  studentsSSOData: any;
+  departmentsMap = Utils.departmentsMap;
 
-    constructor(public studentService: StudentsService) { }
+  constructor(public studentService: StudentsService) { }
 
-    ngOnInit(): void {
-        this.studentService.getApplication()
-            .subscribe((applications: Application[]) => {
-                this.studentApplications = applications;
-                this.dataSource = this.studentApplications;
-            })
-        this.studentService.getStudents()
-            .subscribe((students: Student[]) => {
-                this.studentsSSOData = students;
-                this.studentsSSOData[0].schacpersonaluniquecode = Utils.getRegistrationNumber(this.studentsSSOData[0].schacpersonaluniquecode);
-                this.studentsSSOData[0].department_id = this.departmentsMap[this.studentsSSOData[0].department_id];
-            })
-    }
+  ngOnInit(): void {
+    this.studentService.getApplication()
+      .subscribe((applications: Application[]) => {
+        this.studentApplications = applications;
+        this.dataSource = this.studentApplications;
+      })
+    this.studentService.getStudents()
+      .subscribe((students: Student[]) => {
+        this.studentsSSOData = students;
+        this.studentsSSOData[0].schacpersonaluniquecode = Utils.getRegistrationNumber(this.studentsSSOData[0].schacpersonaluniquecode);
+        this.studentsSSOData[0].department_id = this.departmentsMap[this.studentsSSOData[0].department_id];
+      })
+  }
 
-    // make html printable
-    printToPdf(): void {
-        let printContents = "", popupWin: Window;
-        popupWin = window.open('', '_blank', 'top=0,left=0,height=1000px,width=auto');
-        popupWin!.document.open();
-        popupWin!.document.write(`
+  // make html printable
+  printToPdf(): void {
+    let printContents = "", popupWin: Window;
+    popupWin = window.open('', '_blank', 'top=0,left=0,height=1000px,width=auto');
+    popupWin!.document.open();
+    popupWin!.document.write(`
       <html>
         <head>
           <title>Print tab</title>
@@ -168,9 +168,9 @@ export class ApplicationsComponent implements OnInit {
           <p><br></p>
         </body>
       </html>`
-        );
-        popupWin!.document.close();
-    }
+    );
+    popupWin!.document.close();
+  }
 }
 
 

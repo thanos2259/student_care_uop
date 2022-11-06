@@ -16,6 +16,7 @@ export class ApplicationsComponent implements OnInit {
   dataSource!: any;
   studentsSSOData: any;
   departmentsMap = Utils.departmentsMap;
+  accommodationFiles!: any[];
 
   constructor(public studentService: StudentsService) { }
 
@@ -24,13 +25,23 @@ export class ApplicationsComponent implements OnInit {
       .subscribe((applications: Application[]) => {
         this.studentApplications = applications;
         this.dataSource = this.studentApplications;
-      })
+        // needs refactoring
+        // it's fetch accommodation files for each application only when needed
+        // (when the user clicks on the button)
+        for (let i = 0; i < this.studentApplications.length; i++) {
+            this.studentService.getAccommodationFiles(this.studentApplications[i].id)
+              .subscribe((files: any) => {
+                this.accommodationFiles = files;
+                console.log(files);
+              });
+        }
+      });
     this.studentService.getStudents()
       .subscribe((students: Student[]) => {
         this.studentsSSOData = students;
         this.studentsSSOData[0].schacpersonaluniquecode = Utils.getRegistrationNumber(this.studentsSSOData[0].schacpersonaluniquecode);
         this.studentsSSOData[0].department_id = this.departmentsMap[this.studentsSSOData[0].department_id];
-      })
+      });
   }
 
   // make html printable
@@ -48,6 +59,7 @@ export class ApplicationsComponent implements OnInit {
         </head>
         <body onload="window.print();window.close()">
           <p style="text-align: center;"><strong><u>ΑΙΤΗΣΗ ΠΑΡΟΧΗΣ ΔΩΡΕΑΝ ΣΤΕΓΑΣΗΣ ΓΙΑ ΤΟ ΑΚΑΔ. ΕΤΟΣ ${new Date().getFullYear() - 1} - ${new Date().getFullYear()} </u></strong></p>
+
           <table style="width: 100%;">
               <tbody>
                   <tr style="vertical-align: top;">
@@ -153,7 +165,8 @@ export class ApplicationsComponent implements OnInit {
                                       </td>
                                   </tr>
                               </tbody>
-                          </table><br><input type="checkbox" id="vehicle1" name="vehicle1" value="Bike" checked="true"><label for="vehicle1">&nbsp;Pistopoihtiko Oikogeneiakhs Katastashs</label><br><label for="vehicle1"><input type="checkbox" name="vehicle1" value="Bike" checked="true"><label for="vehicle1">&nbsp;Antigrafo Astunomikhs Tautothtas</label></label><br><label for="vehicle1"><label for="vehicle1"><input type="checkbox" name="vehicle1" value="Bike" checked="true"><label for="vehicle1">&nbsp;Eggrafo pistopoihshs tupou monimhs katoikias</label></label></label><br><label for="vehicle1"><label for="vehicle1"><label for="vehicle1"><input type="checkbox" name="vehicle1" value="Bike" checked="true"><label for="vehicle1">&nbsp;Ypeuthunh Dhlwsh N 1599</label></label></label></label><br><label for="vehicle1"><label for="vehicle1"><label for="vehicle1"><label for="vehicle1"><input type="checkbox" name="vehicle1" value="Bike" checked="true"><label for="vehicle1">&nbspEkka8aristiko shmeioma eforias</label></label></label></label></label>
+                          </table><br>
+                          ${this.getApplicationsAllFilesSubmitted()}
                           <table style="width: 100%;"></table>
                           <p><br></p>
                           <table style="width: 100%;">
@@ -194,6 +207,14 @@ export class ApplicationsComponent implements OnInit {
       default:
         return '';
     }
+  }
+
+  getApplicationsAllFilesSubmitted() {
+    let text: string;
+    for (let i = 0; i < this.accommodationFiles.length; i++) {
+      text += `<input type="checkbox" id="file${i}" name="file${i}" checked="true"><label for="file${i}">&nbsp;${this.accommodationFiles[i].description}</label><br>`;
+    }
+    return text.replace('undefined', ' ');
   }
 
 }

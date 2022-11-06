@@ -19,6 +19,16 @@ const getAllStudents = async () => {
   }
 };
 
+const getAccommodationFilesByAppID = async (appID) => {
+  try {
+    const results = await pool.query("SELECT * FROM accommodation_files \
+                                      WHERE app_id = $1 AND value = true", [appID]);
+    return results.rows;
+  } catch (error) {
+    throw Error('Error while fetching accommodation files: ' + error.message);
+  }
+};
+
 // const getStudentsSecretaryDetails = async (departmentId, AM) => {
 //   try {
 //     let procedureResults;
@@ -245,6 +255,7 @@ insertAccommodationFilesSubmittedData = async (appID, files) => {
 module.exports = {
   getAllStudents,
   getStudentById,
+  getAccommodationFilesByAppID,
   updateStudentDetails,
   updateStudentContact,
   updateStudentBasicInfo,

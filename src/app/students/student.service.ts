@@ -24,6 +24,11 @@ export class StudentsService {
     return fetchedStudents;
   }
 
+  getAccommodationFiles(applicationId): Observable<Array<any>> {
+    const fetchedFiles = this.http.get<Array<any>>('http://localhost:3000/api/students/getAccommodationFiles/' + applicationId);
+    return fetchedFiles;
+  }
+
   updateStudentDetails(data: any) {
     const id = this.authService.getSessionId();
     // const student: string = modelStudent;
@@ -76,5 +81,4 @@ export class StudentsService {
     return this.http
       .post<{ message: string }>("http://localhost:3000/api/students/upload/" + id + "/" + fileUniqueIndex, file);
   }
-
 }

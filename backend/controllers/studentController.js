@@ -54,6 +54,20 @@ const getApplicationsById = async (request, response) => {
   }
 };
 
+// get accommodation files information by application id
+const getAccommodationFiles = async (request, response) => {
+  try {
+    const appID = request.params.id;
+    const files = await studentService.getAccommodationFilesByAppID(appID);
+    response.status(200).json(files);
+  } catch (error) {
+    console.error(error.message);
+    response.send({
+      message: error.message
+    });
+  }
+};
+
 const getStudentById = async (request, response) => {
   try {
     const studentId = request.params.id;
@@ -262,6 +276,7 @@ const sendFile = async (request, response) => {
 module.exports = {
   getAllStudents,
   getStudentById,
+  getAccommodationFiles,
   updateStudentDetails,
   updateStudentContact,
   updateStudentSpecialData,

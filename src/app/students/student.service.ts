@@ -52,10 +52,11 @@ export class StudentsService {
       });
   }
 
-  updateStudentSpecialData(data: any) {
+  updateStudentSpecialData(data: any, submittedFilesData: any) {
     const id = this.authService.getSessionId();
     this.http
-      .put<{ message: string }>("http://localhost:3000/api/students/updateStudentSpecialData/" + id, data)
+      .put<{ message: string }>("http://localhost:3000/api/students/updateStudentSpecialData/" + id,
+        { studentData: data, submittedFilesData: submittedFilesData })
       .subscribe(responseData => {
         console.log(responseData.message);
       });

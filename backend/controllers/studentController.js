@@ -150,13 +150,14 @@ const updateStudentBasicDocuments = async (request, response, next) => {
 const updateStudentSpecialData = async (request, response, next) => {
   try {
     const id = request.params.id;
-    const student = request.body;
+    const student = request.body.studentData;
+    const filesData = request.body.submittedFilesData;
 
     await studentService.updateStudentSpecialData(student, id);
 
     studentService.combineToZIP(id);
     deleteFiles(id);
-    await studentService.insertNewApplication(student, id);
+    await studentService.insertNewApplication(student, filesData, id);
 
     response
       .status(200)

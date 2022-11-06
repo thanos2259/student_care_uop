@@ -135,7 +135,8 @@ export class accommodationComponent implements OnInit {
 
     this.onSubmitStudentBasicInfo(basicInfo);
     this.onSubmitStudentBasicDocuments(basicDocs);
-    this.onSubmitStudentSpecialData(specialData);
+    this.onSubmitStudentSpecialData(specialData, this.filesSubmitted);
+
     Swal.fire({
       title: 'Αίτηση',
       text: 'Η αίτησή σας καταχωρήθηκε, θα γίνει ο έλεγχος για το αν πληρείτε τις προϋποθέσεις',
@@ -237,8 +238,8 @@ export class accommodationComponent implements OnInit {
     this.studentsService.updateStudentBasicDocuments(data);
   }
 
-  onSubmitStudentSpecialData(data: any) {
-    this.studentsService.updateStudentSpecialData(data);
+  onSubmitStudentSpecialData(data: any, filesSubmitted: any) {
+    this.studentsService.updateStudentSpecialData(data, filesSubmitted);
   }
 
   validateFiles(formFileName: string) {

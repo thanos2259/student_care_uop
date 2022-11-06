@@ -36,27 +36,43 @@ const departmentsMap = {
   '98': 560 //ΠΛΗΡΟΦΟΡΙΚΗΣ ΚΑΙ ΤΗΛΕΠΙΚΟΙΝΩΝΙΩΝ
 };
 
-
 // TODO check if filenames do indeed match the description
 const filesSubmitted = [
   {
-    filename: "fileOikogeneiakhKatastasi", description: "Πιστοποιητικό οικογενειακής κατάστασης(άρθρο 5, παρ.1, κατ.β)", type: 'required',
-    filename: "fileTautotita", description: "Αντίγραφο Αστυνομικής Ταυτότητας ή Διαβατηρίου(άρθρο 5, παρ.1, κατ.γ)", type: 'required',
-    filename: "fileToposMonimhsKatoikias", description: "Έγγραφο πιστοποίησης τόπου μόνιμης κατοικίας(άρθρο 5, παρ.1, κατ.δ)", type: 'required',
-    filename: "fileEka8aristiko", description: "Εκκαθαριστικό σημείωμα εφορίας(άρθρο 1, παρ.5, περ.ζ)", type: 'required',
-    filename: "fileYpeu8unhDilosi", description: "Υπεύθυνη δήλωση Ν.1599(βάσει υποδείγματος) (άρθρο 5, παρ 1, κατ.ε)", type: 'required',
-    filename: "filePolutekneia", description: "Πιστοποιητικό πολυτεκνίας(άρθρο1, παρ.9, κατ.α)", type: 'optional',
-    filename: "fileBebaioshSpoudonAderfwn", description: "Βεβαίωση σπουδών αδελφού/ης(άρθρο 1, παρ.9, κατ.γ)", type: 'optional',
-    filename: "filePistopoihtikoGoneaFoithth", description: "Πιστοποιητικό οικογενειακής κατάστασης(τρίτεκνος)(άρθρο 1, παρ. 9, κατ.β)", type: 'optional',
-    filename: "fileLhksiarxikhPrakshThanatouGoneaA", description: "Ληξιαρχική πράξη θανάτου γονέα(άρθρο 1, παρ9, κατ.δ)", type: 'optional',
-    filename: "fileLhksiarxikhPrakshThanatouGoneaB", description: "Ληξιαρχική πράξη γέννησης φοιτητή(άρθρο 1, παρ.9, κατ.δ)", type: 'optional',
-    filename: "fileAgamhMhtera", description: "Ληξιαρχική πράξη γέννησης φοιτητή(άρθρο 1, παρ.9, κατ.ε)", type: 'optional',
-    filename: "fileGoneisAMEA", description: "Πιστοποιητικό υγειονομικής επιτροπής(αναπηρία)(άρθρο 1, παρ.9, περ.στ)", type: 'optional',
-    filename: "fileGoneisAMEAIatrikhGnomateush", description: "Ιατρική γνωμάτευση από Δημόσιο Νοσοκομείο(άρθρο 1, παρ.9, περ.στ)", type: 'optional',
-    filename: "fileGoneisThumataTromokratias1", description: "Ληξιαρχική πράξη γέννησης φοιτητή(άρθρο 1, παρ.9, κατ.η)", type: 'optional',
-    filename: "fileGoneisThumataTromokratias2", description: "Αντίγραφο πράξης συνταξιοδότησης Ν1897(άρθρο 1, παρ.9, κατ.η)", type: 'optional',
-    filename: "fileBebaioshEpidothsdhsAnergeias", description: "Βεβαίωση επιδότησης ανεργίας(άρθρο 1, παρ5)", type: 'optional',
-    filename: "fileDiazevgmenoiGoneis1", description: "Διαζευκτήριο", type: 'optional',
+    filename: "fileOikogeneiakhKatastasi", description: "Πιστοποιητικό οικογενειακής κατάστασης(άρθρο 5, παρ.1, κατ.β)", type: 'required'
+  }, {
+    filename: "fileTautotita", description: "Αντίγραφο Αστυνομικής Ταυτότητας ή Διαβατηρίου(άρθρο 5, παρ.1, κατ.γ)", type: 'required'
+  }, {
+    filename: "fileToposMonimhsKatoikias", description: "Έγγραφο πιστοποίησης τόπου μόνιμης κατοικίας(άρθρο 5, παρ.1, κατ.δ)", type: 'required'
+  }, {
+    filename: "fileEka8aristiko", description: "Εκκαθαριστικό σημείωμα εφορίας(άρθρο 1, παρ.5, περ.ζ)", type: 'required'
+  }, {
+    filename: "fileYpeu8unhDilosi", description: "Υπεύθυνη δήλωση Ν.1599(βάσει υποδείγματος) (άρθρο 5, παρ 1, κατ.ε)", type: 'required'
+  }, {
+    filename: "filePolutekneia", description: "Πιστοποιητικό πολυτεκνίας(άρθρο1, παρ.9, κατ.α)", type: 'optional'
+  }, {
+    filename: "fileBebaioshSpoudonAderfwn", description: "Βεβαίωση σπουδών αδελφού/ης(άρθρο 1, παρ.9, κατ.γ)", type: 'optional'
+  }, {
+    filename: "filePistopoihtikoGoneaFoithth", description: "Πιστοποιητικό οικογενειακής κατάστασης(τρίτεκνος)(άρθρο 1, παρ. 9, κατ.β)", type: 'optional'
+  }, {
+    filename: "fileLhksiarxikhPrakshThanatouGoneaA", description: "Ληξιαρχική πράξη θανάτου γονέα(άρθρο 1, παρ9, κατ.δ)", type: 'optional'
+  }, {
+    filename: "fileLhksiarxikhPrakshThanatouGoneaB", description: "Ληξιαρχική πράξη γέννησης φοιτητή(άρθρο 1, παρ.9, κατ.δ)", type: 'optional'
+  }, {
+    filename: "fileAgamhMhtera", description: "Ληξιαρχική πράξη γέννησης φοιτητή(άρθρο 1, παρ.9, κατ.ε)", type: 'optional'
+  }, {
+    filename: "fileGoneisAMEA", description: "Πιστοποιητικό υγειονομικής επιτροπής(αναπηρία)(άρθρο 1, παρ.9, περ.στ)", type: 'optional'
+  }, {
+    filename: "fileGoneisAMEAIatrikhGnomateush", description: "Ιατρική γνωμάτευση από Δημόσιο Νοσοκομείο(άρθρο 1, παρ.9, περ.στ)", type: 'optional'
+  }, {
+    filename: "fileGoneisThumataTromokratias1", description: "Ληξιαρχική πράξη γέννησης φοιτητή(άρθρο 1, παρ.9, κατ.η)", type: 'optional'
+  }, {
+    filename: "fileGoneisThumataTromokratias2", description: "Αντίγραφο πράξης συνταξιοδότησης Ν1897(άρθρο 1, παρ.9, κατ.η)", type: 'optional'
+  }, {
+    filename: "fileBebaioshEpidothsdhsAnergeias", description: "Βεβαίωση επιδότησης ανεργίας(άρθρο 1, παρ5)", type: 'optional'
+  }, {
+    filename: "fileDiazevgmenoiGoneis1", description: "Διαζευκτήριο", type: 'optional'
+  }, {
     filename: "fileDiazevgmenoiGoneis2", description: "Eπιμέλεια φοιτητή", type: 'optional'
   }
 ];

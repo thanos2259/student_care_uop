@@ -6,7 +6,6 @@ const mssql = require("../secretariat_db_config.js");
 const msql = require('mssql');
 const fs = require('fs');
 const JSZip = require('jszip');
-const { async } = require("rxjs");
 
 const getAllStudents = async () => {
   try {
@@ -167,19 +166,6 @@ const updateStudentSpecialData = async (student, id) => {
   }
 };
 
-const insertNewApplication = async (student, uid) => {
-  try {
-    const insertApp = await pool.query("INSERT INTO applications \
-       (status, submit_date, application_type, uid) VALUES ($1, now(), $2, $3)",
-      [0, student.application_type, uid]);
-
-    return insertApp;
-  } catch (error) {
-    throw Error('Error while inserting student application' + error.message);
-
-  }
-};
-
 const getApplicationById = async (id) => {
   try {
     const results = await pool.query("SELECT id, status, to_char(\"submit_date\", 'DD/MM/YYYY') as submit_date, application_type, uid \
@@ -211,6 +197,48 @@ const combineToZIP = (id) => {
       });
   } catch (error) {
     throw Error(error.message);
+  }
+};
+
+const insertNewApplication = async (student, filesData, uid) => {
+  try {
+    const insertAppResult = await pool.query("INSERT INTO applications \
+       (status, submit_date, application_type, uid) VALUES ($1, now(), $2, $3) RETURNING id",
+      [0, student.application_type, uid]);
+
+    if (!insertAppResult) {
+      throw Error('No application inserted');
+    }
+
+    const insertFilesDetailsResult = await insertAccommodationFilesSubmittedData(insertAppResult.rows[0].id, filesData);
+    // if (!insertFilesDetailsResult) {
+    //   throw Error('No submitted files data inserted');
+    // }
+
+    return true;
+  } catch (error) {
+    throw Error('Error while inserting student application' + error.message);
+  }
+};
+
+insertAccommodationFilesSubmittedData = async (appID, files) => {
+  try {
+    // traverse files as key value pairs
+    for (const [key, value] of Object.entries(files)) {
+      //console.log('key ' + key + ' val ' + value);
+      let itemFoundDetails = MiscUtils.filesSubmitted.find(element => element.filename == key);
+      //console.log(itemFoundDetails);
+      if (!itemFoundDetails)
+        return false;
+
+      const insertFiles = await pool.query("INSERT INTO accommodation_files \
+        (name, description, app_id, type, value) VALUES ($1, $2, $3, $4, $5)",
+        [itemFoundDetails.filename, itemFoundDetails.description, appID, itemFoundDetails.type, value]);
+    }
+
+    return true;
+  } catch (error) {
+    throw Error('Error while inserting student files: ' + error.message);
   }
 };
 

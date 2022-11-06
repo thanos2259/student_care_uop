@@ -17,6 +17,7 @@ export class ApplicationsComponent implements OnInit {
   studentsSSOData: any;
   departmentsMap = Utils.departmentsMap;
   accommodationFiles!: any[];
+  fileFieldsText:string;
 
   constructor(public studentService: StudentsService) { }
 
@@ -29,11 +30,18 @@ export class ApplicationsComponent implements OnInit {
         // it's fetch accommodation files for each application only when needed
         // (when the user clicks on the button)
         for (let i = 0; i < this.studentApplications.length; i++) {
-            this.studentService.getAccommodationFiles(this.studentApplications[i].id)
-              .subscribe((files: any) => {
-                this.accommodationFiles = files;
-                console.log(files);
-              });
+          this.studentService.getAccommodationFiles(this.studentApplications[i].id)
+            .subscribe((files: any[]) => {
+              this.accommodationFiles = files;
+              //console.log(files);
+              // function did not properly worked after redirecting to another component
+              // so we finally implemented it with another for
+              for (let j = 0; j < this.accommodationFiles.length; j++) {
+                this.fileFieldsText += `<input type="checkbox" id="file${j}" name="file${j}" checked="true">
+                <label for="file${j}">&nbsp;${this.accommodationFiles[j].description}</label><br>`;
+                this.fileFieldsText = this.fileFieldsText.replace('undefined', ' ');
+              }
+            });
         }
       });
     this.studentService.getStudents()
@@ -59,7 +67,6 @@ export class ApplicationsComponent implements OnInit {
         </head>
         <body onload="window.print();window.close()">
           <p style="text-align: center;"><strong><u>ΑΙΤΗΣΗ ΠΑΡΟΧΗΣ ΔΩΡΕΑΝ ΣΤΕΓΑΣΗΣ ΓΙΑ ΤΟ ΑΚΑΔ. ΕΤΟΣ ${new Date().getFullYear() - 1} - ${new Date().getFullYear()} </u></strong></p>
-
           <table style="width: 100%;">
               <tbody>
                   <tr style="vertical-align: top;">
@@ -166,7 +173,7 @@ export class ApplicationsComponent implements OnInit {
                                   </tr>
                               </tbody>
                           </table><br>
-                          ${this.getApplicationsAllFilesSubmitted()}
+                          ${this.fileFieldsText}
                           <table style="width: 100%;"></table>
                           <p><br></p>
                           <table style="width: 100%;">
@@ -207,14 +214,6 @@ export class ApplicationsComponent implements OnInit {
       default:
         return '';
     }
-  }
-
-  getApplicationsAllFilesSubmitted() {
-    let text: string;
-    for (let i = 0; i < this.accommodationFiles.length; i++) {
-      text += `<input type="checkbox" id="file${i}" name="file${i}" checked="true"><label for="file${i}">&nbsp;${this.accommodationFiles[i].description}</label><br>`;
-    }
-    return text.replace('undefined', ' ');
   }
 
 }

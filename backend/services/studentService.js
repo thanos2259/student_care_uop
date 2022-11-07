@@ -165,9 +165,10 @@ const updateStudentSpecialData = async (student, id) => {
 
 const getApplicationById = async (id) => {
   try {
-    const results = await pool.query("SELECT id, status, to_char(\"submit_date\", 'DD/MM/YYYY') as submit_date, application_type, uid \
-                                      FROM applications \
-                                      WHERE uid=$1", [id]);
+    const results = await pool.query("SELECT id, status, to_char(\"submit_date\", 'DD/MM/YYYY') as submit_date, application_type, uid, \
+                                     father_name, location, city, phone, category, family_income, family_state, protected_members, siblings_students, children \
+                                     FROM applications \
+                                     WHERE uid = $1", [id]);
 
     return results.rows;
   } catch (error) {

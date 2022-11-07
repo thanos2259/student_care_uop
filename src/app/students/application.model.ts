@@ -9,4 +9,9 @@ export interface Application {
   city: string;
   phone: string;
   category: string;
+  family_income: string;
+  family_state: string;
+  protected_members: number;
+  siblings_students: number;
+  children: number;
 }

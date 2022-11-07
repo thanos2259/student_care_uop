@@ -17,7 +17,7 @@ export class ApplicationsComponent implements OnInit {
   studentsSSOData: any;
   departmentsMap = Utils.departmentsMap;
   accommodationFiles!: any[];
-  fileFieldsText:string;
+  fileFieldsText: string[] = [];
 
   constructor(public studentService: StudentsService) { }
 
@@ -26,6 +26,7 @@ export class ApplicationsComponent implements OnInit {
       .subscribe((applications: Application[]) => {
         this.studentApplications = applications;
         this.dataSource = this.studentApplications;
+
         // needs refactoring
         // it's fetch accommodation files for each application only when needed
         // (when the user clicks on the button)
@@ -33,13 +34,12 @@ export class ApplicationsComponent implements OnInit {
           this.studentService.getAccommodationFiles(this.studentApplications[i].id)
             .subscribe((files: any[]) => {
               this.accommodationFiles = files;
-              //console.log(files);
               // function did not properly worked after redirecting to another component
               // so we finally implemented it with another for
               for (let j = 0; j < this.accommodationFiles.length; j++) {
-                this.fileFieldsText += `<input type="checkbox" id="file${j}" name="file${j}" checked="true">
+                this.fileFieldsText[i] += `<input type="checkbox" id="file${j}" name="file${j}" checked="true">
                 <label for="file${j}">&nbsp;${this.accommodationFiles[j].description}</label><br>`;
-                this.fileFieldsText = this.fileFieldsText.replace('undefined', ' ');
+                this.fileFieldsText[i] = this.fileFieldsText[i].replace('undefined', ' ');
               }
             });
         }
@@ -84,7 +84,7 @@ export class ApplicationsComponent implements OnInit {
                                   </tr>
                                   <tr>
                                       <td style="width: 50.0000%;">Πατρώνυμο</td>
-                                      <td style="width: 50.0000%;">${this.studentsSSOData[0].father_name}</td>
+                                      <td style="width: 50.0000%;">${this.studentApplications[idx].father_name}</td>
                                   </tr>
                               </tbody>
                           </table><br>
@@ -114,7 +114,7 @@ export class ApplicationsComponent implements OnInit {
                                   </tr>
                                   <tr>
                                       <td style="width: 50.0000%;">Δήμος</td>
-                                      <td style="width: 50.0000%;">${this.studentsSSOData[0].location}</td>
+                                      <td style="width: 50.0000%;">${this.studentApplications[idx].location}</td>
                                   </tr>
                                   <tr>
                                       <td style="width: 50.0000%;">Διεύθυνση</td>
@@ -122,16 +122,16 @@ export class ApplicationsComponent implements OnInit {
                                   </tr>
                                   <tr>
                                       <td style="width: 50.0000%;">Τηλέφωνο</td>
-                                      <td style="width: 50.0000%;">${this.studentsSSOData[0].phone}</td>
+                                      <td style="width: 50.0000%;">${this.studentApplications[idx].phone}</td>
                                   </tr>
                               </tbody>
                           </table><br><br>
                           <div style="text-align: center;"><strong>ΟΙΚΟΓΕΝΕΙΑΚΗ ΚΑΤΑΣΤΑΣΗ</strong></div><br>
-                          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike" checked="true"><label for="vehicle1">&nbsp;${this.studentsSSOData[0].family_state}</label><br>
-                          <div>${this.getFamilyStateSubfields()}</div>
+                          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike" checked="true"><label for="vehicle1">&nbsp;${this.studentApplications[idx].family_state}</label><br>
+                          <div>${this.getFamilyStateSubfields(idx)}</div>
                           <table style="width: 100%;"></table><br><br>
                           <div style="text-align: center;"><strong>ΕΤΗΣΙΟ ΟΙΚΟΓΕΝΕΙΑΚΟ ΕΙΣΟΔΗΜΑ</strong></div>
-                          <p>Δηλωθέν εισόδημα: ${this.studentsSSOData[0].family_income} &euro;</p>
+                          <p>Δηλωθέν εισόδημα: ${this.studentApplications[idx].family_income} &euro;</p>
                           <p><br></p>
                           <table style="width: 100%;">
                               <tbody>
@@ -173,7 +173,7 @@ export class ApplicationsComponent implements OnInit {
                                   </tr>
                               </tbody>
                           </table><br>
-                          ${this.fileFieldsText}
+                          ${this.fileFieldsText[idx]}
                           <table style="width: 100%;"></table>
                           <p><br></p>
                           <table style="width: 100%;">
@@ -194,21 +194,21 @@ export class ApplicationsComponent implements OnInit {
     popupWin!.document.close();
   }
 
-  getFamilyStateSubfields() {
-    switch (this.studentsSSOData[0].family_state) {
+  getFamilyStateSubfields(appArrayIndex: number) {
+    switch (this.studentApplications[appArrayIndex].family_state) {
       case 'Άγαμος φοιτητής/φοιτήτρια κάτω των 25 ετών':
         return `<ul>
           <li>
-            Αριθμός προστατευόμενων τέκνων οικογένειας: ${this.studentsSSOData[0].protected_members}
+            Αριθμός προστατευόμενων τέκνων οικογένειας: ${this.studentApplications[appArrayIndex].protected_members}
           </li>
           <li>
-            Αριθμός αδελφών που είναι ενεργοί φοιτητές / φοιτήτριες πρώτου κύκλου σπουδών: ${this.studentsSSOData[0].siblings_students}
+            Αριθμός αδελφών που είναι ενεργοί φοιτητές / φοιτήτριες πρώτου κύκλου σπουδών: ${this.studentApplications[appArrayIndex].siblings_students}
           </li>
         </ul>`;
       case 'Έγγαμος φοιτητής/φοιτήτρια':
         return `<ul>
           <li>
-            Αριθμός ανήλικων τέκνων: ${this.studentsSSOData[0].children}
+            Αριθμός ανήλικων τέκνων: ${this.studentApplications[appArrayIndex].children}
           </li>
         </ul>`;
       default:

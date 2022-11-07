@@ -291,5 +291,11 @@ export class accommodationComponent implements OnInit {
     return !(filename.split('.').pop() == filename);
   }
 
+  clearState() {
+    this.specialDataFormGroup.get('siblingsStudents')?.setValue(0);
+    this.specialDataFormGroup.get('protectedMembers')?.setValue(0);
+    this.specialDataFormGroup.get('children')?.setValue(0);
+  }
+
 }
 

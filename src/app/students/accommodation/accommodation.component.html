@@ -634,7 +634,8 @@
           <br>
           <br>
           <mat-radio-group aria-label="Select an option" name="radio" formControlName="familyState">
-            <mat-radio-button [checked]="false" #option1 value="{{'STUDENT.HOUSING-INF78' | translate}}">
+            <mat-radio-button (change)="clearState()" [checked]="false" #option1
+              value="{{'STUDENT.HOUSING-INF78' | translate}}">
               {{'STUDENT.HOUSING-INF78' | translate}}
             </mat-radio-button>
             <br>
@@ -652,7 +653,8 @@
                 formControlName="siblingsStudents" required>
             </mat-form-field>
             <br *ngIf="option1.checked">
-            <mat-radio-button [checked]="false" #option2 value="{{'STUDENT.HOUSING-INF81' | translate}}">
+            <mat-radio-button (change)="clearState()" [checked]="false" #option2
+              value="{{'STUDENT.HOUSING-INF81' | translate}}">
               {{'STUDENT.HOUSING-INF81' | translate}}
             </mat-radio-button>
             <br>
@@ -663,7 +665,8 @@
                 formControlName="children" required>
             </mat-form-field>
             <br>
-            <mat-radio-button value="{{'STUDENT.HOUSING-INF83' | translate}}">{{'STUDENT.HOUSING-INF83' | translate}}
+            <mat-radio-button (change)="clearState()" value="{{'STUDENT.HOUSING-INF83' | translate}}">
+              {{'STUDENT.HOUSING-INF83' | translate}}
             </mat-radio-button>
           </mat-radio-group>
         </li>

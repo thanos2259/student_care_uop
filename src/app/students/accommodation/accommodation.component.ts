@@ -117,14 +117,12 @@ export class accommodationComponent implements OnInit {
       father_name: this.firstFormGroup.get('fatherName')?.value,
       location: this.firstFormGroup.get('municipality')?.value,
       city: this.firstFormGroup.get('city')?.value,
-      phone: this.firstFormGroup.get('phone')?.value
+      phone: this.firstFormGroup.get('phone')?.value,
+      category: this.secondFormGroup.get('studentCategory')?.value
     };
 
-    const basicDocs: any = {
+    const applicationData: any = {
       category: this.secondFormGroup.get('studentCategory')?.value,
-    };
-
-    const specialData: any = {
       family_income: this.specialDataFormGroup.get('familyIncome')?.value,
       family_state: this.specialDataFormGroup.get('familyState')?.value,
       protected_members: this.specialDataFormGroup.get('protectedMembers')?.value,
@@ -133,9 +131,10 @@ export class accommodationComponent implements OnInit {
       application_type: 'accommodation'
     };
 
+    let applicationDetails = Object.assign(basicInfo, applicationData);
+
     this.onSubmitStudentBasicInfo(basicInfo);
-    this.onSubmitStudentBasicDocuments(basicDocs);
-    this.onSubmitStudentSpecialData(specialData, this.filesSubmitted);
+    this.onSubmitApplicationData(applicationDetails, this.filesSubmitted);
 
     Swal.fire({
       title: 'Αίτηση',
@@ -238,7 +237,7 @@ export class accommodationComponent implements OnInit {
     this.studentsService.updateStudentBasicDocuments(data);
   }
 
-  onSubmitStudentSpecialData(data: any, filesSubmitted: any) {
+  onSubmitApplicationData(data: any, filesSubmitted: any) {
     this.studentsService.updateStudentSpecialData(data, filesSubmitted);
   }
 

@@ -141,24 +141,12 @@ const updateStudentContact = async (student, id) => {
 const updateStudentBasicInfo = async (student, id) => {
   try {
     const updateResults = await pool.query("UPDATE student_users \
-     SET " + "father_name = $1, location = $2, city = $3, phone = $4 WHERE sso_uid = $5",
-      [student.father_name, student.location, student.city, student.phone, id]);
+     SET " + "father_name = $1, location = $2, city = $3, phone = $4, category=$5 WHERE sso_uid = $6",
+      [student.father_name, student.location, student.city, student.phone, student.category, id]);
 
     return updateResults;
   } catch (error) {
     throw Error('Error while updating student basic information');
-  }
-};
-
-const updateStudentBasicDocuments = async (student, id) => {
-  try {
-    const updateResults = await pool.query("UPDATE student_users \
-     SET " + "category = $1 WHERE sso_uid = $2",
-      [student.category, id]);
-
-    return updateResults;
-  } catch (error) {
-    throw Error('Error while updating student basic documents');
   }
 };
 
@@ -259,7 +247,6 @@ module.exports = {
   updateStudentDetails,
   updateStudentContact,
   updateStudentBasicInfo,
-  updateStudentBasicDocuments,
   updateStudentSpecialData,
   insertNewApplication,
   getApplicationById,

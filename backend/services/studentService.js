@@ -212,8 +212,9 @@ const combineToZIP = (id) => {
 const insertNewApplication = async (student, filesData, uid) => {
   try {
     const insertAppResult = await pool.query("INSERT INTO applications \
-       (status, submit_date, application_type, uid) VALUES ($1, now(), $2, $3) RETURNING id",
-      [0, student.application_type, uid]);
+       (status, submit_date, application_type, uid, father_name, location, city, phone, category, family_income, family_state, protected_members, siblings_students, children) \
+        VALUES ($1, now(), $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) RETURNING id",
+      [0, student.application_type, uid, student.father_name, student.location, student.city, student.phone, student.category, student.family_income, student.family_state, student.protected_members, student.siblings_students, student.children]);
 
     if (!insertAppResult) {
       throw Error('No application inserted');
@@ -226,7 +227,7 @@ const insertNewApplication = async (student, filesData, uid) => {
 
     return true;
   } catch (error) {
-    throw Error('Error while inserting student application' + error.message);
+    throw Error('Error while inserting student application ' + error.message);
   }
 };
 

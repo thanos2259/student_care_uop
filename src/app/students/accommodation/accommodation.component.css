@@ -33,9 +33,26 @@ a {
   color: red;
 }
 
+.success {
+  line-height: 40px;
+  vertical-align: top;
+}
+
 @media screen and (max-width: 575px) {
   .backButton {
     padding-bottom: 15px;
+  }
+}
+
+@media screen and (max-width: 565px) {
+  .success {
+    padding-top: 15px;
+  }
+}
+
+@media screen and (max-width: 505px) {
+  .success {
+    padding-top: 0px;
   }
 }
 

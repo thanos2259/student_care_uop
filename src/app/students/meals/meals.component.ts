@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {MatStepper} from '@angular/material/stepper';
+import {AuthService} from 'src/app/auth/auth.service';
 import { Utils } from 'src/app/MiscUtils';
+import Swal from 'sweetalert2';
 import { Student } from '../student.model';
 import { StudentsService } from '../student.service';
 
@@ -11,14 +14,37 @@ import { StudentsService } from '../student.service';
 })
 
 export class MealsComponent implements OnInit {
+  filesSubmitted: any = {
+    "fileOikogeneiakhKatastasi": false,
+    "fileTautotita": false,
+    "fileToposMonimhsKatoikias": false,
+    "fileEka8aristiko": false,
+    "fileYpeu8unhDilosi": false,
+    "filePolutekneia": false,
+    "fileBebaioshSpoudonAderfwn": false,
+    "filePistopoihtikoGoneaFoithth": false,
+    "fileLhksiarxikhPrakshThanatouGoneaA": false,
+    "fileLhksiarxikhPrakshThanatouGoneaB": false,
+    "fileAgamhMhtera": false,
+    "fileGoneisAMEA": false,
+    "fileGoneisAMEAIatrikhGnomateush": false,
+    "fileGoneisThumataTromokratias1": false,
+    "fileGoneisThumataTromokratias2": false,
+    "fileBebaioshEpidothsdhsAnergeias": false,
+    "fileDiazevgmenoiGoneis1": false,
+    "fileDiazevgmenoiGoneis2": false
+  };
   isLinear = true;
   firstFormGroup!: FormGroup;
   secondFormGroup!: FormGroup;
-  contactFormGroup!: FormGroup;
+  thirdFormGroup!: FormGroup;
   specialDataFormGroup!: FormGroup;
   studentsSSOData: Student[] = [];
+  location = Utils.location;
+  departmentsMap = Utils.departmentsMap;
+  @ViewChild('stepper') stepper: MatStepper;
 
-  constructor(public studentsService: StudentsService, private _formBuilder: FormBuilder) { }
+  constructor(public studentsService: StudentsService, private _formBuilder: FormBuilder, public authService: AuthService) { }
 
   ngOnInit() {
     this.studentsService.getStudents()
@@ -41,27 +67,36 @@ export class MealsComponent implements OnInit {
       });
 
     this.secondFormGroup = this._formBuilder.group({
-      ssnControl: ['', Validators.required],
-      doyControl: ['', Validators.required],
-      amkaControl: ['', Validators.required],
-      ibanControl: ['', Validators.required],
-      ssnFile: ['', Validators.required],
-      ibanFile: ['', Validators.required]
+      fileOikogeneiakhKatastasi: ['', Validators.required],
+      fileTautotita: ['', Validators.required],
+      fileToposMonimhsKatoikias: ['', Validators.required],
+      fileEka8aristiko: ['', Validators.required],
+      fileYpeu8unhDilosi: ['', Validators.required],
+      studentCategory: ['', Validators.required]
     });
 
-    this.contactFormGroup = this._formBuilder.group({
-      emailCtrl: ['', Validators.required],
-      phoneCtrl: [],
-      addressCtrl: [],
-      locationCtrl: [],
-      cityCtrl: [],
-      postalCodeCtrl: []
+    this.thirdFormGroup = this._formBuilder.group({
+      filePolutekneia: [''],
+      fileBebaioshSpoudonAderfwn: [''],
+      filePistopoihtikoGoneaFoithth: [''],
+      fileLhksiarxikhPrakshThanatouGoneaA: [''],
+      fileLhksiarxikhPrakshThanatouGoneaB: [''],
+      fileAgamhMhtera: [''],
+      fileGoneisAMEA: [''],
+      fileGoneisAMEAIatrikhGnomateush: [''],
+      fileGoneisThumataTromokratias1: [''],
+      fileGoneisThumataTromokratias2: [''],
+      fileBebaioshEpidothsdhsAnergeias: [''],
+      fileDiazevgmenoiGoneis1: [''],
+      fileDiazevgmenoiGoneis2: ['']
     });
 
     this.specialDataFormGroup = this._formBuilder.group({
-      ameaCatCtrl: ['', Validators.required],
-      workingCatCtrl: ['', Validators.required],
-      armyCatCtrl: ['', Validators.required]
+      familyIncome: ['', Validators.required],
+      familyState: ['', Validators.required],
+      protectedMembers: ['0', Validators.required],
+      siblingsStudents: ['0', Validators.required],
+      children: ['0', Validators.required]
     });
   }
 
@@ -77,53 +112,154 @@ export class MealsComponent implements OnInit {
     return index;
   }
 
-  location = Utils.location;
-  departmentsMap = Utils.departmentsMap;
-
-  //checkIfFieldEmpty(givenFormGroup: FormGroup, field: string): boolean {
-  //const fieldValue = givenFormGroup.get(field)?.value;
-  //return fieldValue && fieldValue != null && fieldValue != '';
-  //}
-
-  /**
-   * Used to update student details,
-   * as a controller function
-   */
   updateStudentsAllDetails() {
-    // check if the only required field in the last stepper is empty
-    // to check if a more generic implementation can implemented
-    //
-    // if (!this.checkIfFieldEmpty(this.contactFormGroup, 'emailCtrl')) {
-    //   return;
-    // }
     const basicInfo: any = {
       father_name: this.firstFormGroup.get('fatherName')?.value,
       location: this.firstFormGroup.get('municipality')?.value,
       city: this.firstFormGroup.get('city')?.value,
-      phone: this.firstFormGroup.get('phone')?.value
+      phone: this.firstFormGroup.get('phone')?.value,
+      category: this.secondFormGroup.get('studentCategory')?.value
     };
 
+    const applicationData: any = {
+      category: this.secondFormGroup.get('studentCategory')?.value,
+      family_income: this.specialDataFormGroup.get('familyIncome')?.value,
+      family_state: this.specialDataFormGroup.get('familyState')?.value,
+      protected_members: this.specialDataFormGroup.get('protectedMembers')?.value,
+      siblings_students: this.specialDataFormGroup.get('siblingsStudents')?.value,
+      children: this.specialDataFormGroup.get('children')?.value,
+      application_type: 'meals'
+    };
+
+    let applicationDetails = Object.assign(basicInfo, applicationData);
+
     this.onSubmitStudentBasicInfo(basicInfo);
-    Utils.onSaveApplication();
+    this.onSubmitApplicationData(applicationDetails, this.filesSubmitted);
+
+    Swal.fire({
+      title: 'Αίτηση',
+      text: 'Η αίτησή σας καταχωρήθηκε, θα γίνει ο έλεγχος για το αν πληρείτε τις προϋποθέσεις',
+      icon: 'success',
+      showCancelButton: false,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'ΟΚ'
+    }).then((result) => {
+      window.location.href = "//localhost:4200/student/applications/" + this.authService.getSessionId();
+    });
   }
 
-  // uploadFile(fileValue: any): FormData {
-  //   const imageBlob = fileValue?.files[0];
-  //   const file = new FormData();
-  //   file.set('file', imageBlob);
-  //   return file;
-  // }
+  areFilesUploaded() {
+    // TODO check if it's right
+    let trueElements = Object.keys(this.filesSubmitted).filter(el => this.filesSubmitted[el] == true);
+    let trueElementsCount = trueElements.length;
+
+    if (trueElementsCount == 5) {
+      this.stepper.selected.completed = true;
+      this.stepper.next(); // Move to next step
+      return;
+    }
+
+    Swal.fire({
+      title: 'Αποτυχία',
+      text: 'Πρέπει να ανεβάσετε όλα τα αρχεία που ζητούνται',
+      icon: 'error',
+      showCancelButton: false,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'ΟΚ'
+    });
+
+    this.stepper.selected.completed = false;
+  }
+
+  uploadFile(fileValue: any): FormData {
+    const imageBlob = fileValue?.files[0];
+    const file = new FormData();
+    file.set('file', imageBlob);
+    return file;
+  }
+
+  receiveFile(fileParam: string) {
+    try {
+      let formGroup = (this.secondFormGroup.contains(fileParam)) ? this.secondFormGroup : this.thirdFormGroup;
+      const file = (formGroup.get(fileParam)?.value.files[0]);
+      window.open(window.URL.createObjectURL(file));
+    } catch (exc) {
+      Swal.fire({
+        title: 'Προβολή Αρχείου',
+        text: 'Δεν έχετε επιλέξει αρχείο προς ανέβασμα.',
+        icon: 'warning',
+        showCancelButton: false,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'ΟΚ'
+      });
+    }
+  }
+
+  onSubmitFile(fileParam: string) {
+    try {
+      let formGroup = (this.secondFormGroup.contains(fileParam)) ? this.secondFormGroup : this.thirdFormGroup;
+      const filename = formGroup.get(fileParam)?.value._fileNames;
+
+      if (filename.length > 100) {
+        Utils.onFileLengthError();
+        return;
+      }
+      const file = this.uploadFile(formGroup.get(fileParam)?.value);
+      const fileToSend = "mea" + fileParam;
+
+      this.studentsService.uploadFile(file, fileToSend).subscribe((res: { status: any; }) => {
+        console.log("debug upload" + res.status);
+        if (res.status == "success") {
+          this.filesSubmitted[fileParam] = true;
+          console.log(this.filesSubmitted[fileParam]);
+          Utils.onFileUpload();
+        }
+      });
+    } catch (error) {
+      Swal.fire({
+        title: 'Ανέβασμα Αρχείου',
+        text: 'Δεν έχετε επιλέξει αρχείο. Παρακαλώ πατήστε στην αναζήτηση και επιλέξτε το αρχείο που επιθυμείτε να ανεβάσετε.',
+        icon: 'warning',
+        showCancelButton: false,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'ΟΚ'
+      });
+    }
+  }
 
   onSubmitStudentBasicInfo(data: any) {
     this.studentsService.updateStudentBasicInfo(data);
   }
 
-  validateFiles(docType: string) {
-    let ssnFile = this.secondFormGroup.get(docType)?.value;
-    if (ssnFile == null) {
+  onSubmitStudentBasicDocuments(data: any) {
+    this.studentsService.updateStudentBasicDocuments(data);
+  }
+
+  onSubmitApplicationData(data: any, filesSubmitted: any) {
+    this.studentsService.updateStudentSpecialData(data, filesSubmitted);
+  }
+
+  validateFiles(formFileName: string) {
+    this.filesSubmitted[formFileName] = false;
+    let formGroup = (this.secondFormGroup.contains(formFileName)) ? this.secondFormGroup : this.thirdFormGroup;
+    let formFile = formGroup.get(formFileName)?.value;
+
+    if (formFile == null) {
       return;
     }
-    let fileName = ssnFile._fileNames;
+
+    let fileName = formFile._fileNames;
+    if (!this.getExtensionExists(fileName)) {
+      Utils.onError();
+      formGroup.get(formFileName)?.setValue(null);
+      formGroup.get(formFileName).reset();
+      return;
+    }
+
     let ext = fileName.match(/\.([^\.]+)$/)[1];
     switch (ext) {
       case 'pdf':
@@ -131,9 +267,35 @@ export class MealsComponent implements OnInit {
         break;
       default:
         Utils.onError();
-        this.secondFormGroup.get(docType)?.setValue(null);
+        formGroup.get(formFileName)?.setValue(null);
+        formGroup.get(formFileName).reset();
         break;
+    }
+
+    let fileSize = Number((formFile.files[0].size / (1024 * 1024)).toFixed(2));
+
+    if (fileSize > 4) {
+      Swal.fire({
+        title: 'Ανέβασμα Αρχείου',
+        text: 'Το αρχείο είναι μεγαλύτερο απο 4 Mb.',
+        icon: 'warning',
+        showCancelButton: false,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'ΟΚ'
+      });
+      formGroup.get(formFileName)?.setValue(null);
+      formGroup.get(formFileName).reset();
     }
   }
 
+  getExtensionExists(filename: string) {
+    return !(filename.split('.').pop() == filename);
+  }
+
+  clearState() {
+    this.specialDataFormGroup.get('siblingsStudents')?.setValue(0);
+    this.specialDataFormGroup.get('protectedMembers')?.setValue(0);
+    this.specialDataFormGroup.get('children')?.setValue(0);
+  }
 }

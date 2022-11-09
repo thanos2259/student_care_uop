@@ -149,8 +149,9 @@ const updateStudentSpecialData = async (request, response, next) => {
 
     await studentService.updateStudentSpecialData(student, id);
 
-    studentService.combineToZIP(id);
-    deleteFiles(id);
+    console.log(student.application_type);
+    studentService.combineToZIP(id, student.application_type);
+    studentService.deleteFiles(id, student.application_type);
     await studentService.insertNewApplication(student, filesData, id);
 
     response
@@ -169,8 +170,9 @@ const updateStudentSpecialData = async (request, response, next) => {
 const uploadFile = async (request, response) => {
   const studentId = request.params.id;
   const fileDir = "./uploads/";
-  const path = fileDir + studentId;
   const finalFileName = request.params.fileIndex;
+  const applicationType = finalFileName.slice(0, 3);
+  const path = fileDir + studentId + "/" + applicationType + "/";
   // currently we have only pdf files, if more types will be added, we should split the name or mimetype
   const fileType = ".pdf";
 
@@ -181,7 +183,7 @@ const uploadFile = async (request, response) => {
     form.parse(request, function (error, fields, files) {
       // console.log(files);
       let oldpath = files.file.filepath;
-      let newpath = path + "/" + finalFileName + fileType;
+      let newpath = path + finalFileName + fileType;
 
       let size = fs.statSync(oldpath).size;
       let sizeToMb = (size / (1024 * 1024)).toFixed(2);
@@ -209,26 +211,6 @@ const uploadFile = async (request, response) => {
   } catch (error) { console.log(error); }
 };
 
-const deleteFiles = (studentId) => {
-  const fileDir = "./uploads/";
-  const path = fileDir + studentId + '/';
-
-  try {
-    // Read the directory given in `path`
-    const files = fs.readdir(path, (err, files) => {
-      if (err)
-        throw err;
-      files.forEach((file) => {
-        // Check if the file is with a PDF extension, remove it
-        if (file.split('.').pop().toLowerCase() == 'pdf') {
-          fs.unlinkSync(path + file);
-        }
-      });
-    });
-  } catch (err) {
-    console.error(err);
-  }
-};
 
 const sendFile = async (request, response) => {
   try {
@@ -264,6 +246,5 @@ module.exports = {
   getApplicationsById,
   login,
   uploadFile,
-  deleteFiles,
   sendFile
 };

@@ -208,7 +208,9 @@ export class accommodationComponent implements OnInit {
         return;
       }
       const file = this.uploadFile(formGroup.get(fileParam)?.value);
-      this.studentsService.uploadFile(file, fileParam).subscribe((res: { status: any; }) => {
+      const fileToSend = "acc" + fileParam;
+
+      this.studentsService.uploadFile(file, fileToSend).subscribe((res: { status: any; }) => {
         console.log("debug upload" + res.status);
         if (res.status == "success") {
           this.filesSubmitted[fileParam] = true;

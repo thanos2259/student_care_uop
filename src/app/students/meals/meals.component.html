@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1>{{'STUDENT.HOUSING-TITLE' | translate}}</h1>
+        <h1>{{'STUDENT.MEALS-TITLE' | translate}}</h1>
       </div>
     </div>
   </div>
@@ -89,10 +89,20 @@
           </i>
           <mat-form-field class="w-100" appearance="fill">
             <mat-label>{{'STUDENT.HOUSING-INFSTATIC1' | translate}}</mat-label>
-            <ngx-mat-file-input (change)="validateFiles('ssnFile')" formControlName="ssnFile">
+            <ngx-mat-file-input (change)="validateFiles('fileOikogeneiakhKatastasi')"
+              formControlName="fileOikogeneiakhKatastasi">
             </ngx-mat-file-input>
           </mat-form-field>
         </li>
+        <button class="btn btn-secondary btn-margin-bottom mr-3" style="width:185px;"><a class="view-link"
+            (click)="receiveFile('fileOikogeneiakhKatastasi')" target="_blank">
+            <i class="fa fa-eye mr-2"></i>{{'STUDENT.HOUSING-FILE-VIEW' | translate}}</a></button>
+        <button class="btn btn-secondary view-btn" (click)="onSubmitFile('fileOikogeneiakhKatastasi')"
+          style="width:185px">
+          <i class="fa fa-upload mr-2" aria-hidden="true"></i>{{'STUDENT.HOUSING-FILE-UPLOAD' | translate}}</button>
+        <i *ngIf="filesSubmitted.fileOikogeneiakhKatastasi==true"> &nbsp; <i
+            class="success fas fa-3x fa-check text-success">
+          </i> </i>
         <br>
         <br>
         <li>
@@ -106,10 +116,17 @@
           </i>
           <mat-form-field class="w-100" appearance="fill">
             <mat-label>{{'STUDENT.HOUSING-INFSTATIC1' | translate}}</mat-label>
-            <ngx-mat-file-input (change)="validateFiles('ssnFile')" formControlName="ssnFile">
+            <ngx-mat-file-input (change)="validateFiles('fileTautotita')" formControlName="fileTautotita">
             </ngx-mat-file-input>
           </mat-form-field>
         </li>
+        <button class="btn btn-secondary btn-margin-bottom mr-3" style="width:185px;"><a class="view-link"
+            (click)="receiveFile('fileTautotita')" target="_blank">
+            <i class="fa fa-eye mr-2"></i>{{'STUDENT.HOUSING-FILE-VIEW' | translate}}</a></button>
+        <button class="btn btn-secondary view-btn" (click)="onSubmitFile('fileTautotita')" style="width:185px">
+          <i class="fa fa-upload mr-2" aria-hidden="true"></i>{{'STUDENT.HOUSING-FILE-UPLOAD' | translate}}</button>
+        <i *ngIf="filesSubmitted.fileTautotita==true"> &nbsp; <i class="success fas fa-3x fa-check text-success">
+          </i> </i>
         <br>
         <br>
         <li>
@@ -127,10 +144,20 @@
           </i>
           <mat-form-field class="w-100" appearance="fill">
             <mat-label>{{'STUDENT.HOUSING-INFSTATIC1' | translate}}</mat-label>
-            <ngx-mat-file-input (change)="validateFiles('ssnFile')" formControlName="ssnFile">
+            <ngx-mat-file-input (change)="validateFiles('fileToposMonimhsKatoikias')"
+              formControlName="fileToposMonimhsKatoikias">
             </ngx-mat-file-input>
           </mat-form-field>
         </li>
+        <button class="btn btn-secondary btn-margin-bottom mr-3" style="width:185px;"><a class="view-link"
+            (click)="receiveFile('fileToposMonimhsKatoikias')" target="_blank">
+            <i class="fa fa-eye mr-2"></i>{{'STUDENT.HOUSING-FILE-VIEW' | translate}}</a></button>
+        <button class="btn btn-secondary view-btn" (click)="onSubmitFile('fileToposMonimhsKatoikias')"
+          style="width:185px">
+          <i class="fa fa-upload mr-2" aria-hidden="true"></i>{{'STUDENT.HOUSING-FILE-UPLOAD' | translate}}</button>
+        <i *ngIf="filesSubmitted.fileToposMonimhsKatoikias==true"> &nbsp; <i
+            class="success fas fa-3x fa-check text-success">
+          </i> </i>
         <br>
         <br>
         <li>
@@ -149,10 +176,17 @@
           </i>
           <mat-form-field class="w-100" appearance="fill">
             <mat-label>{{'STUDENT.HOUSING-INFSTATIC1' | translate}}</mat-label>
-            <ngx-mat-file-input (change)="validateFiles('ssnFile')" formControlName="ssnFile">
+            <ngx-mat-file-input (change)="validateFiles('fileEka8aristiko')" formControlName="fileEka8aristiko">
             </ngx-mat-file-input>
           </mat-form-field>
         </li>
+        <button class="btn btn-secondary btn-margin-bottom mr-3" style="width:185px;"><a class="view-link"
+            (click)="receiveFile('fileEka8aristiko')" target="_blank">
+            <i class="fa fa-eye mr-2"></i>{{'STUDENT.HOUSING-FILE-VIEW' | translate}}</a></button>
+        <button class="btn btn-secondary view-btn" (click)="onSubmitFile('fileEka8aristiko')" style="width:185px">
+          <i class="fa fa-upload mr-2" aria-hidden="true"></i>{{'STUDENT.HOUSING-FILE-UPLOAD' | translate}}</button>
+        <i *ngIf="filesSubmitted.fileEka8aristiko==true"> &nbsp; <i class="success fas fa-3x fa-check text-success">
+          </i> </i>
         <br>
         <br>
         <li>
@@ -169,10 +203,17 @@
           </i>
           <mat-form-field class="w-100" appearance="fill">
             <mat-label>{{'STUDENT.HOUSING-INFSTATIC1' | translate}}</mat-label>
-            <ngx-mat-file-input (change)="validateFiles('ssnFile')" formControlName="ssnFile">
+            <ngx-mat-file-input (change)="validateFiles('fileYpeu8unhDilosi')" formControlName="fileYpeu8unhDilosi">
             </ngx-mat-file-input>
           </mat-form-field>
         </li>
+        <button class="btn btn-secondary btn-margin-bottom mr-3" style="width:185px;"><a class="view-link"
+            (click)="receiveFile('fileYpeu8unhDilosi')" target="_blank">
+            <i class="fa fa-eye mr-2"></i>{{'STUDENT.HOUSING-FILE-VIEW' | translate}}</a></button>
+        <button class="btn btn-secondary view-btn" (click)="onSubmitFile('fileYpeu8unhDilosi')" style="width:185px">
+          <i class="fa fa-upload mr-2" aria-hidden="true"></i>{{'STUDENT.HOUSING-FILE-UPLOAD' | translate}}</button>
+        <i *ngIf="filesSubmitted.fileYpeu8unhDilosi==true"> &nbsp; <i class="success fas fa-3x fa-check text-success">
+          </i> </i>
         <br>
         <br>
         <li>
@@ -180,24 +221,29 @@
           <mat-form-field class="w-100" appearance="fill">
             <mat-label>{{'STUDENT.HOUSING-INF28' | translate}}
             </mat-label>
-            <mat-select required>
-              <mat-option value="option1">{{'STUDENT.HOUSING-INF29' | translate}}</mat-option>
-              <mat-option value="option2">{{'STUDENT.HOUSING-INF30' | translate}}</mat-option>
-              <mat-option value="option3">{{'STUDENT.HOUSING-INF31' | translate}}</mat-option>
-              <mat-option value="option4">{{'STUDENT.HOUSING-INF32' | translate}}</mat-option>
-              <mat-option value="option5">{{'STUDENT.HOUSING-INF33' | translate}}</mat-option>
+            <mat-select formControlName="studentCategory">
+              <mat-option value="{{'STUDENT.HOUSING-INF29' | translate}}">{{'STUDENT.HOUSING-INF29' | translate}}
+              </mat-option>
+              <mat-option value="{{'STUDENT.HOUSING-INF30' | translate}}">{{'STUDENT.HOUSING-INF30' | translate}}
+              </mat-option>
+              <mat-option value="{{'STUDENT.HOUSING-INF31' | translate}}">{{'STUDENT.HOUSING-INF31' | translate}}
+              </mat-option>
+              <mat-option value="{{'STUDENT.HOUSING-INF32' | translate}}">{{'STUDENT.HOUSING-INF32' | translate}}
+              </mat-option>
+              <mat-option value="{{'STUDENT.HOUSING-INF33' | translate}}">{{'STUDENT.HOUSING-INF33' | translate}}
+              </mat-option>
             </mat-select>
           </mat-form-field>
         </li>
       </ul>
       <div>
         <button mat-button matStepperPrevious>{{'STUDENT.HOUSING-BACK' | translate}}</button>
-        <button mat-button matStepperNext>{{'STUDENT.HOUSING-INF11' | translate}}</button>
+        <button mat-button (click)="areFilesUploaded();">{{'STUDENT.HOUSING-INF11' | translate}}</button>
       </div>
     </form>
   </mat-step>
-  <mat-step [stepControl]="secondFormGroup">
-    <form class="mt-4" [formGroup]="secondFormGroup">
+  <mat-step [stepControl]="thirdFormGroup" [optional]="true">
+    <form class="mt-4" [formGroup]="thirdFormGroup">
       <ng-template matStepLabel>{{'STUDENT.HOUSING-INF34' | translate}}</ng-template>
       <ul>
         <li>
@@ -217,10 +263,17 @@
           </i>
           <mat-form-field class="w-100" appearance="fill">
             <mat-label>{{'STUDENT.HOUSING-INFSTATIC1' | translate}}</mat-label>
-            <ngx-mat-file-input (change)="validateFiles('ssnFile')" formControlName="ssnFile">
+            <ngx-mat-file-input (change)="validateFiles('filePolutekneia')" formControlName="filePolutekneia">
             </ngx-mat-file-input>
           </mat-form-field>
         </li>
+        <button class="btn btn-secondary btn-margin-bottom mr-3" style="width:185px;"><a class="view-link"
+            (click)="receiveFile('filePolutekneia')" target="_blank">
+            <i class="fa fa-eye mr-2"></i>{{'STUDENT.HOUSING-FILE-VIEW' | translate}}</a></button>
+        <button class="btn btn-secondary view-btn" (click)="onSubmitFile('filePolutekneia')" style="width: 185px;">
+          <i class="fa fa-upload mr-2" aria-hidden="true"></i>{{'STUDENT.HOUSING-FILE-UPLOAD' | translate}}</button>
+        <i *ngIf="filesSubmitted.filePolutekneia==true"> &nbsp; <i class="success fas fa-3x fa-check text-success">
+          </i> </i>
         <br>
         <br>
         <li>
@@ -243,10 +296,20 @@
           </i>
           <mat-form-field class="w-100" appearance="fill">
             <mat-label>{{'STUDENT.HOUSING-INFSTATIC1' | translate}}</mat-label>
-            <ngx-mat-file-input (change)="validateFiles('ssnFile')" formControlName="ssnFile">
+            <ngx-mat-file-input (change)="validateFiles('fileBebaioshSpoudonAderfwn')"
+              formControlName="fileBebaioshSpoudonAderfwn">
             </ngx-mat-file-input>
           </mat-form-field>
         </li>
+        <button class="btn btn-secondary btn-margin-bottom mr-3" style="width:185px;"><a class="view-link"
+            (click)="receiveFile('fileBebaioshSpoudonAderfwn')" target="_blank">
+            <i class="fa fa-eye mr-2"></i>{{'STUDENT.HOUSING-FILE-VIEW' | translate}}</a></button>
+        <button class="btn btn-secondary view-btn" (click)="onSubmitFile('fileBebaioshSpoudonAderfwn')"
+          style="width: 185px;">
+          <i class="fa fa-upload mr-2" aria-hidden="true"></i>{{'STUDENT.HOUSING-FILE-UPLOAD' | translate}}</button>
+        <i *ngIf="filesSubmitted.fileBebaioshSpoudonAderfwn==true"> &nbsp; <i
+            class="success fas fa-3x fa-check text-success">
+          </i> </i>
         <br>
         <br>
         <li>
@@ -266,10 +329,20 @@
           </i>
           <mat-form-field class="w-100" appearance="fill">
             <mat-label>{{'STUDENT.HOUSING-INFSTATIC1' | translate}}</mat-label>
-            <ngx-mat-file-input (change)="validateFiles('ssnFile')" formControlName="ssnFile">
+            <ngx-mat-file-input (change)="validateFiles('filePistopoihtikoGoneaFoithth')"
+              formControlName="filePistopoihtikoGoneaFoithth">
             </ngx-mat-file-input>
           </mat-form-field>
         </li>
+        <button class="btn btn-secondary btn-margin-bottom mr-3" style="width:185px;"><a class="view-link"
+            (click)="receiveFile('filePistopoihtikoGoneaFoithth')" target="_blank">
+            <i class="fa fa-eye mr-2"></i>{{'STUDENT.HOUSING-FILE-VIEW' | translate}}</a></button>
+        <button class="btn btn-secondary view-btn" (click)="onSubmitFile('filePistopoihtikoGoneaFoithth')"
+          style="width:185px;">
+          <i class="fa fa-upload mr-2" aria-hidden="true"></i>{{'STUDENT.HOUSING-FILE-UPLOAD' | translate}}</button>
+        <i *ngIf="filesSubmitted.filePistopoihtikoGoneaFoithth==true"> &nbsp; <i
+            class="success fas fa-3x fa-check text-success">
+          </i> </i>
         <br>
         <br>
         <li>
@@ -277,39 +350,62 @@
           <br>
           <span class="font-weight-bold">{{'STUDENT.HOUSING-INF36' | translate}}
           </span> <br>
-          <p id="p0">
-            <span class="font-weight-bold"> {{'STUDENT.HOUSING-INF48' | translate}}</span>
+          <ol>
+            <li>
+              <span class="font-weight-bold"> {{'STUDENT.HOUSING-INF48' | translate}}</span>
+              <br>
+              <span class="font-italic">
+                {{'STUDENT.HOUSING-INFSTATIC' | translate}}
+              </span>
+              <i class="fa fa-info-circle fa-lg fa-icon" data-toggle="tooltip" data-placement="top"
+                title="{{'STUDENT.HOUSING-INFSTATIC2' | translate}}">
+              </i>
+              <mat-form-field class="w-100" appearance="fill">
+                <mat-label>{{'STUDENT.HOUSING-INFSTATIC1' | translate}}</mat-label>
+                <ngx-mat-file-input (change)="validateFiles('fileLhksiarxikhPrakshThanatouGoneaA')"
+                  formControlName="fileLhksiarxikhPrakshThanatouGoneaA">
+                </ngx-mat-file-input>
+              </mat-form-field>
+              <button class="btn btn-secondary btn-margin-bottom mr-3" style="width:185px;"><a class="view-link"
+                  (click)="receiveFile('fileLhksiarxikhPrakshThanatouGoneaA')" target="_blank">
+                  <i class="fa fa-eye mr-2"></i>{{'STUDENT.HOUSING-FILE-VIEW' | translate}}</a></button>
+              <button class="btn btn-secondary view-btn" (click)="onSubmitFile('fileLhksiarxikhPrakshThanatouGoneaA')"
+                style="width:185px;">
+                <i class="fa fa-upload mr-2" aria-hidden="true"></i>{{'STUDENT.HOUSING-FILE-UPLOAD' |
+                translate}}</button>
+              <i *ngIf="filesSubmitted.fileLhksiarxikhPrakshThanatouGoneaA==true"> &nbsp; <i
+                  class="success fas fa-3x fa-check text-success">
+                </i> </i>
+            </li>
             <br>
-            <span class="font-italic">
-              {{'STUDENT.HOUSING-INFSTATIC' | translate}}
-            </span>
-            <i class="fa fa-info-circle fa-lg fa-icon" data-toggle="tooltip" data-placement="top"
-              title="{{'STUDENT.HOUSING-INFSTATIC2' | translate}}">
-            </i>
-            <mat-form-field class="w-100" appearance="fill">
-              <mat-label>{{'STUDENT.HOUSING-INFSTATIC1' | translate}}</mat-label>
-              <ngx-mat-file-input (change)="validateFiles('ssnFile')" formControlName="ssnFile">
-              </ngx-mat-file-input>
-            </mat-form-field>
-          </p>
-          <p id="p1">
-            <span class="font-weight-bold"> {{'STUDENT.HOUSING-INF49' | translate}}</span>
+            <li>
+              <span class="font-weight-bold"> {{'STUDENT.HOUSING-INF49' | translate}}</span>
+              <br>
+              <span class="font-italic">
+                {{'STUDENT.HOUSING-INFSTATIC' | translate}}
+              </span>
+              <i class="fa fa-info-circle fa-lg fa-icon" data-toggle="tooltip" data-placement="top"
+                title="{{'STUDENT.HOUSING-INFSTATIC2' | translate}}">
+              </i>
+              <mat-form-field class="w-100" appearance="fill">
+                <mat-label>{{'STUDENT.HOUSING-INFSTATIC1' | translate}}</mat-label>
+                <ngx-mat-file-input (change)="validateFiles('fileLhksiarxikhPrakshThanatouGoneaB')"
+                  formControlName="fileLhksiarxikhPrakshThanatouGoneaB">
+                </ngx-mat-file-input>
+              </mat-form-field>
+            </li>
+            <button class="btn btn-secondary btn-margin-bottom mr-3" style="width:185px;"><a class="view-link"
+                (click)="receiveFile('fileLhksiarxikhPrakshThanatouGoneaB')" target="_blank">
+                <i class="fa fa-eye mr-2"></i>{{'STUDENT.HOUSING-FILE-VIEW' | translate}}</a></button>
+            <button class="btn btn-secondary view-btn" (click)="onSubmitFile('fileLhksiarxikhPrakshThanatouGoneaB')"
+              style="width:185px;">
+              <i class="fa fa-upload mr-2" aria-hidden="true"></i>{{'STUDENT.HOUSING-FILE-UPLOAD' | translate}}</button>
+            <i *ngIf="filesSubmitted.fileLhksiarxikhPrakshThanatouGoneaB==true"> &nbsp; <i
+                class="success fas fa-3x fa-check text-success">
+              </i> </i>
             <br>
-            <span class="font-italic">
-              {{'STUDENT.HOUSING-INFSTATIC' | translate}}
-            </span>
-            <i class="fa fa-info-circle fa-lg fa-icon" data-toggle="tooltip" data-placement="top"
-              title="{{'STUDENT.HOUSING-INFSTATIC2' | translate}}">
-            </i>
-            <mat-form-field class="w-100" appearance="fill">
-              <mat-label>{{'STUDENT.HOUSING-INFSTATIC1' | translate}}</mat-label>
-              <ngx-mat-file-input (change)="validateFiles('ssnFile')" formControlName="ssnFile">
-              </ngx-mat-file-input>
-            </mat-form-field>
-          </p>
-        </li>
-        <br>
-        <br>
+          </ol>
+          <br>
         <li>
           {{'STUDENT.HOUSING-INF50' | translate}}
           <br>
@@ -325,10 +421,17 @@
           </i>
           <mat-form-field class="w-100" appearance="fill">
             <mat-label>{{'STUDENT.HOUSING-INFSTATIC1' | translate}}</mat-label>
-            <ngx-mat-file-input (change)="validateFiles('ssnFile')" formControlName="ssnFile">
+            <ngx-mat-file-input (change)="validateFiles('fileAgamhMhtera')" formControlName="fileAgamhMhtera">
             </ngx-mat-file-input>
           </mat-form-field>
         </li>
+        <button class="btn btn-secondary btn-margin-bottom mr-3" style="width:185px;"><a class="view-link"
+            (click)="receiveFile('fileAgamhMhtera')" target="_blank">
+            <i class="fa fa-eye mr-2"></i>{{'STUDENT.HOUSING-FILE-VIEW' | translate}}</a></button>
+        <button class="btn btn-secondary view-btn" (click)="onSubmitFile('fileAgamhMhtera')" style="width:185px;">
+          <i class="fa fa-upload mr-2" aria-hidden="true"></i>{{'STUDENT.HOUSING-FILE-UPLOAD' | translate}}</button>
+        <i *ngIf="filesSubmitted.fileAgamhMhtera==true"> &nbsp; <i class="success fas fa-3x fa-check text-success">
+          </i> </i>
         <br>
         <br>
         <li>
@@ -336,83 +439,129 @@
           <br>
           <span class="font-weight-bold"> {{'STUDENT.HOUSING-INF36' | translate}}</span>
           <br>
-          <p id="p0">
-            <span class="font-weight-bold"> {{'STUDENT.HOUSING-INF53' | translate}}</span>
-            {{'STUDENT.HOUSING-INF54' | translate}}
+          <ol>
+            <li>
+              <span class="font-weight-bold"> {{'STUDENT.HOUSING-INF53' | translate}}</span>
+              {{'STUDENT.HOUSING-INF54' | translate}}
+              <br>
+              <span class="font-italic">
+                {{'STUDENT.HOUSING-INFSTATIC' | translate}}
+              </span>
+              <i class="fa fa-info-circle fa-lg fa-icon" data-toggle="tooltip" data-placement="top"
+                title="{{'STUDENT.HOUSING-INFSTATIC2' | translate}}">
+              </i>
+              <mat-form-field class="w-100" appearance="fill">
+                <mat-label>{{'STUDENT.HOUSING-INFSTATIC1' | translate}}</mat-label>
+                <ngx-mat-file-input (change)="validateFiles('fileGoneisAMEA')" formControlName="fileGoneisAMEA">
+                </ngx-mat-file-input>
+              </mat-form-field>
+              <button class="btn btn-secondary btn-margin-bottom mr-3" style="width:185px;"><a class="view-link"
+                  (click)="receiveFile('fileGoneisAMEA')" target="_blank">
+                  <i class="fa fa-eye mr-2"></i>{{'STUDENT.HOUSING-FILE-VIEW' | translate}}</a></button>
+              <button class="btn btn-secondary view-btn" (click)="onSubmitFile('fileGoneisAMEA')" style="width:185px;">
+                <i class="fa fa-upload mr-2" aria-hidden="true"></i>{{'STUDENT.HOUSING-FILE-UPLOAD' |
+                translate}}</button>
+              <i *ngIf="filesSubmitted.fileGoneisAMEA==true"> &nbsp; <i class="success fas fa-3x fa-check text-success">
+                </i> </i>
+            </li>
             <br>
-            <span class="font-italic">
-              {{'STUDENT.HOUSING-INFSTATIC' | translate}}
-            </span>
-            <i class="fa fa-info-circle fa-lg fa-icon" data-toggle="tooltip" data-placement="top"
-              title="{{'STUDENT.HOUSING-INFSTATIC2' | translate}}">
-            </i>
-            <mat-form-field class="w-100" appearance="fill">
-              <mat-label>{{'STUDENT.HOUSING-INFSTATIC1' | translate}}</mat-label>
-              <ngx-mat-file-input (change)="validateFiles('ssnFile')" formControlName="ssnFile">
-              </ngx-mat-file-input>
-            </mat-form-field>
-          </p>
-          <p id="p1"> <span class="font-weight-bold">{{'STUDENT.HOUSING-INF55' | translate}}</span>
-            {{'STUDENT.HOUSING-INF56' | translate}}
-            <span class="font-weight-bold">{{'STUDENT.HOUSING-INF57' | translate}}</span>
-            {{'STUDENT.HOUSING-INF58' | translate}}
-            <span class="font-weight-bold">{{'STUDENT.HOUSING-INF59' | translate}}</span>
-            {{'STUDENT.HOUSING-INF60' | translate}}
-            <span class="font-weight-bold">{{'STUDENT.HOUSING-INF61' | translate}}</span>
-            {{'STUDENT.HOUSING-INF62' | translate}}
-            <br>
-            <span class="font-italic">
-              {{'STUDENT.HOUSING-INFSTATIC' | translate}}
-            </span>
-            <i class="fa fa-info-circle fa-lg fa-icon" data-toggle="tooltip" data-placement="top"
-              title="{{'STUDENT.HOUSING-INFSTATIC2' | translate}}">
-            </i>
-            <mat-form-field class="w-100" appearance="fill">
-              <mat-label>{{'STUDENT.HOUSING-INFSTATIC1' | translate}}</mat-label>
-              <ngx-mat-file-input (change)="validateFiles('ssnFile')" formControlName="ssnFile">
-              </ngx-mat-file-input>
-            </mat-form-field>
-          </p>
+            <li>
+              <span class="font-weight-bold">{{'STUDENT.HOUSING-INF55' | translate}}</span>
+              {{'STUDENT.HOUSING-INF56' | translate}}
+              <span class="font-weight-bold">{{'STUDENT.HOUSING-INF57' | translate}}</span>
+              {{'STUDENT.HOUSING-INF58' | translate}}
+              <span class="font-weight-bold">{{'STUDENT.HOUSING-INF59' | translate}}</span>
+              {{'STUDENT.HOUSING-INF60' | translate}}
+              <span class="font-weight-bold">{{'STUDENT.HOUSING-INF61' | translate}}</span>
+              {{'STUDENT.HOUSING-INF62' | translate}}
+              <br>
+              <span class="font-italic">
+                {{'STUDENT.HOUSING-INFSTATIC' | translate}}
+              </span>
+              <i class="fa fa-info-circle fa-lg fa-icon" data-toggle="tooltip" data-placement="top"
+                title="{{'STUDENT.HOUSING-INFSTATIC2' | translate}}">
+              </i>
+              <mat-form-field class="w-100" appearance="fill">
+                <mat-label>{{'STUDENT.HOUSING-INFSTATIC1' | translate}}</mat-label>
+                <ngx-mat-file-input (change)="validateFiles('fileGoneisAMEAIatrikhGnomateush')"
+                  formControlName="fileGoneisAMEAIatrikhGnomateush">
+                </ngx-mat-file-input>
+              </mat-form-field>
+              <button class="btn btn-secondary btn-margin-bottom mr-3" style="width:185px;"><a class="view-link"
+                  (click)="receiveFile('fileGoneisAMEAIatrikhGnomateush')" target="_blank">
+                  <i class="fa fa-eye mr-2"></i>{{'STUDENT.HOUSING-FILE-VIEW' | translate}}</a></button>
+              <button class="btn btn-secondary view-btn" (click)="onSubmitFile('fileGoneisAMEAIatrikhGnomateush')"
+                style="width:185px;">
+                <i class="fa fa-upload mr-2" aria-hidden="true"></i>{{'STUDENT.HOUSING-FILE-UPLOAD' |
+                translate}}</button>
+              <i *ngIf="filesSubmitted.fileGoneisAMEAIatrikhGnomateush==true"> &nbsp; <i
+                  class="success fas fa-3x fa-check text-success">
+                </i> </i>
+            </li>
+          </ol>
         </li>
-        <br>
         <br>
         <li>
           {{'STUDENT.HOUSING-INF63' | translate}}
           <br>
           <span class="font-weight-bold"> {{'STUDENT.HOUSING-INF36' | translate}}</span>
           <br>
-          <p id="p0">
-            <span class="font-weight-bold"> {{'STUDENT.HOUSING-INF64' | translate}}</span>
+          <ol>
+            <li>
+              <span class="font-weight-bold"> {{'STUDENT.HOUSING-INF64' | translate}}</span>
+              <br>
+              <span class="font-italic">
+                {{'STUDENT.HOUSING-INFSTATIC' | translate}}
+              </span>
+              <i class="fa fa-info-circle fa-lg fa-icon" data-toggle="tooltip" data-placement="top"
+                title="{{'STUDENT.HOUSING-INFSTATIC2' | translate}}">
+              </i>
+              <mat-form-field class="w-100" appearance="fill">
+                <mat-label>{{'STUDENT.HOUSING-INFSTATIC1' | translate}}</mat-label>
+                <ngx-mat-file-input (change)="validateFiles('fileGoneisThumataTromokratias1')"
+                  formControlName="fileGoneisThumataTromokratias1">
+                </ngx-mat-file-input>
+              </mat-form-field>
+              <button class="btn btn-secondary btn-margin-bottom mr-3" style="width:185px;"><a class="view-link"
+                  (click)="receiveFile('fileGoneisThumataTromokratias1')" target="_blank">
+                  <i class="fa fa-eye mr-2"></i>{{'STUDENT.HOUSING-FILE-VIEW' | translate}}</a></button>
+              <button class="btn btn-secondary view-btn" (click)="onSubmitFile('fileGoneisThumataTromokratias1')"
+                style="width:185px;">
+                <i class="fa fa-upload mr-2" aria-hidden="true"></i>{{'STUDENT.HOUSING-FILE-UPLOAD' |
+                translate}}</button>
+              <i *ngIf="filesSubmitted.fileGoneisThumataTromokratias1==true"> &nbsp; <i
+                  class="success fas fa-3x fa-check text-success">
+                </i> </i>
+            </li>
             <br>
-            <span class="font-italic">
-              {{'STUDENT.HOUSING-INFSTATIC' | translate}}
-            </span>
-            <i class="fa fa-info-circle fa-lg fa-icon" data-toggle="tooltip" data-placement="top"
-              title="{{'STUDENT.HOUSING-INFSTATIC2' | translate}}">
-            </i>
-            <mat-form-field class="w-100" appearance="fill">
-              <mat-label>{{'STUDENT.HOUSING-INFSTATIC1' | translate}}</mat-label>
-              <ngx-mat-file-input (change)="validateFiles('ssnFile')" formControlName="ssnFile">
-              </ngx-mat-file-input>
-            </mat-form-field>
-          </p>
-          <p id="p1">
-            <span class="font-weight-bold"> {{'STUDENT.HOUSING-INF65' | translate}}</span>
-            <br>
-            <span class="font-italic">
-              {{'STUDENT.HOUSING-INFSTATIC' | translate}}
-            </span>
-            <i class="fa fa-info-circle fa-lg fa-icon" data-toggle="tooltip" data-placement="top"
-              title="{{'STUDENT.HOUSING-INFSTATIC2' | translate}}">
-            </i>
-            <mat-form-field class="w-100" appearance="fill">
-              <mat-label>{{'STUDENT.HOUSING-INFSTATIC1' | translate}}</mat-label>
-              <ngx-mat-file-input (change)="validateFiles('ssnFile')" formControlName="ssnFile">
-              </ngx-mat-file-input>
-            </mat-form-field>
-          </p>
+            <li>
+              <span class="font-weight-bold"> {{'STUDENT.HOUSING-INF65' | translate}}</span>
+              <br>
+              <span class="font-italic">
+                {{'STUDENT.HOUSING-INFSTATIC' | translate}}
+              </span>
+              <i class="fa fa-info-circle fa-lg fa-icon" data-toggle="tooltip" data-placement="top"
+                title="{{'STUDENT.HOUSING-INFSTATIC2' | translate}}">
+              </i>
+              <mat-form-field class="w-100" appearance="fill">
+                <mat-label>{{'STUDENT.HOUSING-INFSTATIC1' | translate}}</mat-label>
+                <ngx-mat-file-input (change)="validateFiles('fileGoneisThumataTromokratias2')"
+                  formControlName="fileGoneisThumataTromokratias2">
+                </ngx-mat-file-input>
+              </mat-form-field>
+              <button class="btn btn-secondary btn-margin-bottom mr-3" style="width:185px;"><a class="view-link"
+                  (click)="receiveFile('fileGoneisThumataTromokratias2')" target="_blank">
+                  <i class="fa fa-eye mr-2"></i>{{'STUDENT.HOUSING-FILE-VIEW' | translate}}</a></button>
+              <button class="btn btn-secondary view-btn" (click)="onSubmitFile('fileGoneisThumataTromokratias2')"
+                style="width:185px;">
+                <i class="fa fa-upload mr-2" aria-hidden="true"></i>{{'STUDENT.HOUSING-FILE-UPLOAD' |
+                translate}}</button>
+              <i *ngIf="filesSubmitted.fileGoneisThumataTromokratias2==true"> &nbsp; <i
+                  class="success fas fa-3x fa-check text-success">
+                </i> </i>
+            </li>
+          </ol>
         </li>
-        <br>
         <br>
         <li>
           {{'STUDENT.HOUSING-INF66' | translate}}
@@ -430,10 +579,20 @@
           </i>
           <mat-form-field class="w-100" appearance="fill">
             <mat-label>{{'STUDENT.HOUSING-INFSTATIC1' | translate}}</mat-label>
-            <ngx-mat-file-input (change)="validateFiles('ssnFile')" formControlName="ssnFile">
+            <ngx-mat-file-input (change)="validateFiles('fileBebaioshEpidothsdhsAnergeias')"
+              formControlName="fileBebaioshEpidothsdhsAnergeias">
             </ngx-mat-file-input>
           </mat-form-field>
         </li>
+        <button class="btn btn-secondary btn-margin-bottom mr-3" style="width:185px;"><a class="view-link"
+            (click)="receiveFile('fileBebaioshEpidothsdhsAnergeias')" target="_blank">
+            <i class="fa fa-eye mr-2"></i>{{'STUDENT.HOUSING-FILE-VIEW' | translate}}</a></button>
+        <button class="btn btn-secondary view-btn" (click)="onSubmitFile('fileBebaioshEpidothsdhsAnergeias')"
+          style="width:185px;"><i class="fa fa-upload mr-2" aria-hidden="true"></i>{{'STUDENT.HOUSING-FILE-UPLOAD' |
+          translate}}</button>
+        <i *ngIf="filesSubmitted.fileBebaioshEpidothsdhsAnergeias==true"> &nbsp; <i
+            class="success fas fa-3x fa-check text-success">
+          </i> </i>
         <br>
         <br>
         <li>
@@ -441,39 +600,65 @@
           <br>
           <span class="font-weight-bold"> {{'STUDENT.HOUSING-INF36' | translate}}</span>
           <br>
-          <p id="p0">
-            <span class="font-weight-bold"> {{'STUDENT.HOUSING-INF70' | translate}}</span>
+          <ol>
+            <li>
+              <span class="font-weight-bold"> {{'STUDENT.HOUSING-INF70' | translate}}</span>
+              <br>
+              <span class="font-italic">
+                {{'STUDENT.HOUSING-INFSTATIC' | translate}}
+              </span>
+              <i class="fa fa-info-circle fa-lg fa-icon" data-toggle="tooltip" data-placement="top"
+                title="{{'STUDENT.HOUSING-INFSTATIC2' | translate}}">
+              </i>
+              <mat-form-field class="w-100" appearance="fill">
+                <mat-label>{{'STUDENT.HOUSING-INFSTATIC1' | translate}}</mat-label>
+                <ngx-mat-file-input (change)="validateFiles('fileDiazevgmenoiGoneis1')"
+                  formControlName="fileDiazevgmenoiGoneis1">
+                </ngx-mat-file-input>
+              </mat-form-field>
+              <button class="btn btn-secondary btn-margin-bottom mr-3" style="width:185px;"><a class="view-link"
+                  (click)="receiveFile('fileDiazevgmenoiGoneis1')" target="_blank">
+                  <i class="fa fa-eye mr-2"></i>{{'STUDENT.HOUSING-FILE-VIEW' | translate}}</a></button>
+              <button class="btn btn-secondary view-btn" (click)="onSubmitFile('fileDiazevgmenoiGoneis1')"
+                style="width:185px;">
+                <i class="fa fa-upload mr-2" aria-hidden="true"></i>{{'STUDENT.HOUSING-FILE-UPLOAD' |
+                translate}}</button>
+              <i *ngIf="filesSubmitted.fileDiazevgmenoiGoneis1==true"> &nbsp; <i
+                  class="success fas fa-3x fa-check text-success">
+                </i> </i>
+            </li>
             <br>
-            <span class="font-italic">
-              {{'STUDENT.HOUSING-INFSTATIC' | translate}}
-            </span>
-            <i class="fa fa-info-circle fa-lg fa-icon" data-toggle="tooltip" data-placement="top"
-              title="{{'STUDENT.HOUSING-INFSTATIC2' | translate}}">
-            </i>
-            <mat-form-field class="w-100" appearance="fill">
-              <mat-label>{{'STUDENT.HOUSING-INFSTATIC1' | translate}}</mat-label>
-              <ngx-mat-file-input (change)="validateFiles('ssnFile')" formControlName="ssnFile">
-              </ngx-mat-file-input>
-            </mat-form-field>
-          </p>
-          <p id="p1">
-            <span class="font-weight-bold"> {{'STUDENT.HOUSING-INF71' | translate}}</span>
-            {{'STUDENT.HOUSING-INF72' | translate}}
-            <br>
-            <span class="font-italic">
-              {{'STUDENT.HOUSING-INFSTATIC' | translate}}
-            </span>
-            <i class="fa fa-info-circle fa-lg fa-icon" data-toggle="tooltip" data-placement="top"
-              title="{{'STUDENT.HOUSING-INFSTATIC2' | translate}}">
-            </i>
-            <mat-form-field class="w-100" appearance="fill">
-              <mat-label>{{'STUDENT.HOUSING-INFSTATIC1' | translate}}</mat-label>
-              <ngx-mat-file-input (change)="validateFiles('ssnFile')" formControlName="ssnFile">
-              </ngx-mat-file-input>
-            </mat-form-field>
-          </p>
+            <li>
+              <span class="font-weight-bold"> {{'STUDENT.HOUSING-INF71' | translate}}</span>
+              {{'STUDENT.HOUSING-INF72' | translate}}
+              <br>
+              <span class="font-italic">
+                {{'STUDENT.HOUSING-INFSTATIC' | translate}}
+              </span>
+              <i class="fa fa-info-circle fa-lg fa-icon" data-toggle="tooltip" data-placement="top"
+                title="{{'STUDENT.HOUSING-INFSTATIC2' | translate}}">
+              </i>
+              <mat-form-field class="w-100" appearance="fill">
+                <mat-label>{{'STUDENT.HOUSING-INFSTATIC1' | translate}}</mat-label>
+                <ngx-mat-file-input (change)="validateFiles('fileDiazevgmenoiGoneis2')"
+                  formControlName="fileDiazevgmenoiGoneis2">
+                </ngx-mat-file-input>
+              </mat-form-field>
+              <button class="btn btn-secondary btn-margin-bottom mr-3" style="width:185px;"><a class="view-link"
+                  (click)="receiveFile('fileDiazevgmenoiGoneis2')" target="_blank">
+                  <i class="fa fa-eye mr-2"></i>{{'STUDENT.HOUSING-FILE-VIEW' | translate}}</a></button>
+              <button class="btn btn-secondary view-btn" (click)="onSubmitFile('fileDiazevgmenoiGoneis2')"
+                style="width:185px;">
+                <i class="fa fa-upload mr-2" aria-hidden="true"></i>{{'STUDENT.HOUSING-FILE-UPLOAD' |
+                translate}}</button>
+              <i *ngIf="filesSubmitted.fileDiazevgmenoiGoneis2==true"> &nbsp; <i
+                  class="success fas fa-3x fa-check text-success">
+                </i> </i>
+            </li>
+          </ol>
         </li>
       </ul>
+      <br>
       <div>
         <button mat-button matStepperPrevious>{{'STUDENT.HOUSING-BACK' | translate}}</button>
         <button mat-button matStepperNext>{{'STUDENT.HOUSING-INF11' | translate}}</button>
@@ -493,49 +678,77 @@
           <br>
           <mat-form-field class="w-50" appearance="fill">
             <mat-label> {{'STUDENT.HOUSING-INF75' | translate}}</mat-label>
-            <input matInput type="number" min="0" class="example-right-align" placeholder="0" required>
+            <input matInput type="number" min="0" maxlength="9" class="right-align" placeholder="0"
+              formControlName="familyIncome"
+              oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength); this.value = Math.abs(this.value);">
             <span matSuffix>,00 €</span>
           </mat-form-field>
         </li>
-        <br>
         <br>
         <li>
           <span class="font-weight-bold">{{'STUDENT.HOUSING-INF84' | translate}}</span>
           <br>
           <br>
-          <mat-radio-group aria-label="Select an option">
-            <mat-radio-button value="1">{{'STUDENT.HOUSING-INF78' | translate}}</mat-radio-button>
+          <mat-radio-group aria-label="Select an option" name="radio" formControlName="familyState">
+            <mat-radio-button (change)="clearState()" [checked]="false" #option1
+              value="{{'STUDENT.HOUSING-INF78' | translate}}">
+              {{'STUDENT.HOUSING-INF78' | translate}}
+            </mat-radio-button>
             <br>
-            <mat-form-field class="w-50" appearance="fill">
+            <mat-form-field *ngIf="option1.checked" class="w-50" appearance="fill">
               <mat-label> {{'STUDENT.HOUSING-INF79' | translate}}</mat-label>
-              <input matInput type="number" min="0" class="example-right-align" placeholder="0" required>
+              <input matInput type="number" min="0" maxlength="2" class="right-align" placeholder="0"
+                oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength); this.value = Math.abs(this.value);"
+                formControlName="protectedMembers" required>
             </mat-form-field>
             <br>
-            <mat-form-field class="w-50" appearance="fill">
+            <mat-form-field *ngIf="option1.checked" class="w-50" appearance="fill">
               <mat-label> {{'STUDENT.HOUSING-INF80' | translate}}</mat-label>
-              <input matInput type="number" min="0" class="example-right-align" placeholder="0" required>
+              <input matInput type="number" min="0" maxlength="2" class="right-align" placeholder="0"
+                oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength); this.value = Math.abs(this.value);"
+                formControlName="siblingsStudents" required>
             </mat-form-field>
+            <br *ngIf="option1.checked">
+            <mat-radio-button (change)="clearState()" [checked]="false" #option2
+              value="{{'STUDENT.HOUSING-INF81' | translate}}">
+              {{'STUDENT.HOUSING-INF81' | translate}}
+            </mat-radio-button>
             <br>
-            <mat-radio-button value="2">{{'STUDENT.HOUSING-INF81' | translate}}</mat-radio-button>
-            <br>
-            <mat-form-field class="w-50" appearance="fill">
+            <mat-form-field *ngIf="option2.checked" class="w-50" appearance="fill">
               <mat-label> {{'STUDENT.HOUSING-INF82' | translate}}</mat-label>
-              <input matInput type="number" min="0" class="example-right-align" placeholder="0" required>
+              <input matInput type="number" min="0" maxlength="2" class="right-align" placeholder="0"
+                oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength); this.value = Math.abs(this.value);"
+                formControlName="children" required>
             </mat-form-field>
             <br>
-            <mat-radio-button value="3">{{'STUDENT.HOUSING-INF83' | translate}}</mat-radio-button>
+            <mat-radio-button (change)="clearState()" value="{{'STUDENT.HOUSING-INF83' | translate}}">
+              {{'STUDENT.HOUSING-INF83' | translate}}
+            </mat-radio-button>
           </mat-radio-group>
         </li>
       </ul>
+      <br>
       <div>
         <button mat-button matStepperPrevious>{{'STUDENT.HOUSING-BACK' | translate}}</button>
-        <button mat-button matStepperNext (click)="updateStudentsAllDetails()">{{'STUDENT.HOUSING-INF11' |
-          translate}}</button>
+        <button mat-button matStepperNext>{{'STUDENT.HOUSING-INF11' | translate}}</button>
       </div>
     </form>
   </mat-step>
   <mat-step>
+    <p>{{'STUDENT.SUBMIT-APPLICATION-DESCR' | translate}}</p>
     <ng-template matStepLabel>{{'STUDENT.HOUSING-INF85' | translate}}</ng-template>
-    <p><i class="fas fa-2x fa-check text-success"></i>{{'STUDENT.HOUSING-INF86' | translate}}</p>
+    <div class="form-group container-fluid row" style="width: 500px;">
+      <div class="col-sm-6 backButton">
+        <button mat-button class="btn btn-secondary" style="width: 210px;" matStepperPrevious>{{'STUDENT.HOUSING-BACK' |
+          translate}}</button>
+      </div>
+      <div class="col-sm-6">
+        <button mat-button class="btn btn-primary" style="width: 210px;" matStepperNext
+          (click)="updateStudentsAllDetails()">{{'STUDENT.SUBMIT-APPLICATION' |
+          translate}}</button>
+      </div>
+    </div>
+    <!-- <p style="display:none;"><i class="fas fa-2x fa-check text-success"></i>{{'STUDENT.HOUSING-INF86' | translate}}
+    </p> -->
   </mat-step>
 </mat-stepper>

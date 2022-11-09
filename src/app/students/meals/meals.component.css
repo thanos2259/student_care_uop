@@ -2,15 +2,7 @@
   text-align: center;
 }
 
-#p0 {
-  margin-left: 0.5em;
-}
-
-#p1 {
-  margin-left: 2.5em;
-}
-
-.example-right-align {
+.right-align {
   text-align: right;
 }
 
@@ -19,10 +11,56 @@ input.example-right-align::-webkit-inner-spin-button {
   display: none;
 }
 
+.view-link {
+  color: #fff !important;
+}
+
+.view-btn {
+  background-color: #224957 !important;
+  border: 1px solid #1b3c47;
+  opacity: 0.96;
+}
+
+.view-btn:hover {
+  opacity: 1;
+}
+
 .disabled {
   color: rgb(197, 197, 197);
 }
 
+a {
+  color: red;
+}
+
+.success {
+  line-height: 40px;
+  vertical-align: top;
+}
+
+@media screen and (max-width: 575px) {
+  .backButton {
+    padding-bottom: 15px;
+  }
+}
+
+@media screen and (max-width: 565px) {
+  .success {
+    padding-top: 15px;
+  }
+}
+
+@media screen and (max-width: 505px) {
+  .success {
+    padding-top: 0px;
+  }
+}
+
+@media screen and (max-width: 505px) {
+  .btn-margin-bottom {
+    margin-bottom: 5px;
+  }
+}
 
 /* dark mode */
 ::ng-deep .dark-mode .mat-focused .mat-form-field-label {

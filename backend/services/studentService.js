@@ -176,10 +176,10 @@ const getApplicationById = async (id) => {
   }
 };
 
-const combineToZIP = (id) => {
+const combineToZIP = (id, applicationType) => {
   try {
     const zip = new JSZip();
-    let directory = './uploads/' + id + '/';
+    let directory = './uploads/' + id + "/" + applicationType.slice(0, 3) + '/';
     filenames = fs.readdirSync(directory, { withFileTypes: true });
 
     filenames.forEach(file => {
@@ -195,6 +195,27 @@ const combineToZIP = (id) => {
       });
   } catch (error) {
     throw Error(error.message);
+  }
+};
+
+const deleteFiles = (studentId, applicationType) => {
+  const fileDir = "./uploads/";
+  const path = fileDir + studentId + '/' + applicationType.slice(0, 3) + '/';
+
+  try {
+    // Read the directory given in `path`
+    const files = fs.readdir(path, (err, files) => {
+      if (err)
+        throw err;
+      files.forEach((file) => {
+        // Check if the file is with a PDF extension, remove it
+        if (file.split('.').pop().toLowerCase() == 'pdf') {
+          fs.unlinkSync(path + file);
+        }
+      });
+    });
+  } catch (err) {
+    console.error(err);
   }
 };
 
@@ -252,5 +273,6 @@ module.exports = {
   insertNewApplication,
   getApplicationById,
   loginStudent,
-  combineToZIP
+  combineToZIP,
+  deleteFiles
 };

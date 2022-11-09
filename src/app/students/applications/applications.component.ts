@@ -66,7 +66,9 @@ export class ApplicationsComponent implements OnInit {
           </style>
         </head>
         <body onload="window.print();window.close()">
-          <p style="text-align: center;"><strong><u>ΑΙΤΗΣΗ ΠΑΡΟΧΗΣ ΔΩΡΕΑΝ ΣΤΕΓΑΣΗΣ ΓΙΑ ΤΟ ΑΚΑΔ. ΕΤΟΣ ${new Date().getFullYear() - 1} - ${new Date().getFullYear()} </u></strong></p>
+          <p style="text-align: center;"><strong><u>ΑΙΤΗΣΗ ΠΑΡΟΧΗΣ ΔΩΡΕΑΝ
+          ${this.studentApplications[idx].application_type == 'accommodation' ? 'ΣΤΕΓΑΣΗΣ' : 'ΣΙΤΙΣΗΣ'}
+           ΓΙΑ ΤΟ ΑΚΑΔ. ΕΤΟΣ ${new Date().getFullYear() - 1} - ${new Date().getFullYear()} </u></strong></p>
           <table style="width: 100%;">
               <tbody>
                   <tr style="vertical-align: top;">
@@ -179,7 +181,7 @@ export class ApplicationsComponent implements OnInit {
                           <table style="width: 100%;">
                               <tbody>
                                   <tr>
-                                      <td style="width: 100.0000%; font-size: 10px;">Σημείωση: Τα άρθρα αναφέρονται στην Κ.Υ.Α "Καθαρισμός όρων, προϋποθέσεων και διαδικασίας για την παροχή δωρεάν στέγασης στους φοιτητές των Α.Ε.Ι" ΦΕΚ' τ. Β' 1965/18-06-2012</td>
+                                      <td style="width: 100.0000%; font-size: 10px; ${this.studentApplications[idx].application_type == 'accommodation' ? 'display:none;' : ''}">Σημείωση: Τα άρθρα αναφέρονται στην Κ.Υ.Α "Καθαρισμός όρων, προϋποθέσεων και διαδικασίας για την παροχή δωρεάν σίτισης στους φοιτητές των Α.Ε.Ι" ΦΕΚ' τ. Β' 1965/18-06-2012</td>
                                   </tr>
                               </tbody>
                           </table>

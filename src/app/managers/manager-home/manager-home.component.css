@@ -1,0 +1,15 @@
+.lang-div {
+    border-radius: 4px;
+    background-color: #224957;
+}
+
+.lang-anchor {
+    color: white;
+    text-align: center;
+}
+
+.period {
+    border-radius: 4px;
+    border: #DEE2E6 solid 1px;
+    background-color: white;
+}

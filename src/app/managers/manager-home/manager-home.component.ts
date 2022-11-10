@@ -7,7 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ManagerHomeComponent implements OnInit {
 
+  ngSelect = "";
+  ngSelectPhase = "";
+
   constructor() { }
+
 
   ngOnInit(): void {
   }

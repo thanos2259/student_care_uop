@@ -1,1 +1,57 @@
-<p>manager-home works!</p>
+<div class="card-body">
+    <div class="tab-content p-0">
+        <h5 class="font-weight-normal pt-2 pb-2">Περίοδος Αιτήσεων</h5>
+        <div class="chart tab-pane active period" id="revenue-chart">
+            <form ngNativeValidate #periodForm="ngForm">
+                <div class="form-group row pb-2 pt-2" style="border-bottom: 1px solid #DEE2E6;">
+                    <div class="col-sm-4 m-auto" style="max-width:200px;">
+                        <div class="lang-div">
+                            <a href="#" class="nav-link dropdown-toggle selectpicker lang-anchor"
+                                data-toggle="dropdown">
+                                <span>
+                                    Τύπος Αίτησης
+                                </span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a class="cursor-pointer dropdown-item">
+                                        Σίτιση</a>
+                                </li>
+                                <li>
+                                    <a class="cursor-pointer dropdown-item">
+                                        Στέγαση</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-3">
+                    <div class="form-group row">
+                        <div class="col-sm-6">
+                            <div class="container row">
+                                <label for="inputPassword" class="col-sm-1 col-form-label">Από:</label>
+                                <input type="date" name="date_to" ngModel id="date_to" class="form-control col-sm-11"
+                                    placeholder="Λήξη" required>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="container row">
+                                <label for="inputPassword" class="col-sm-1 col-form-label">Έως:</label>
+                                <input type="date" name="date_to" ngModel id="date_to" class="form-control col-sm-11"
+                                    placeholder="Λήξη" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                    </div>
+                    <strong> &nbsp; Τρέχουσα Περίοδος: </strong> 11/09/2022 - 11/10/2022
+                    <br>
+                    <br>
+                    <div class="m-auto" style="max-width:100px;">
+                        <button class="btn btn-primary">Δημιουργία</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

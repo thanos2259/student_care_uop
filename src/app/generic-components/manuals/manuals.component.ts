@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Student } from 'src/app/students/student.model';
-import { StudentsService } from 'src/app/students/student.service';
+import { Manager } from 'src/app/managers/manager.model';
+import { ManagerService } from 'src/app/managers/manager.service';
 
 @Component({
   selector: 'app-manuals',
@@ -9,14 +9,15 @@ import { StudentsService } from 'src/app/students/student.service';
 })
 export class ManualsComponent implements OnInit {
 
-  constructor(public studentsService: StudentsService) { }
+  length = 0;
 
-  studentsSSOData: Student[] = [];
+  constructor(public managerService: ManagerService) { }
+
 
   ngOnInit(): void {
-    this.studentsService.getStudents()
-      .subscribe((students: Student[]) => {
-        this.studentsSSOData = students;
+    this.managerService.getManager()
+      .subscribe((managers: Manager[]) => {
+        this.length = managers.length;
       });
   }
 }

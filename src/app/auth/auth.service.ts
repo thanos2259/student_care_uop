@@ -55,6 +55,13 @@ export class AuthService {
     return this.http.post<{ token: string; userId: number; }>('http://localhost:3000/api/students/login', { "username": username });
   }
 
+  loginManager(username: string) {
+    // const id = 1;
+    // this.http.post<{ token: string, userId: number }>('http://localhost:3000/api/students/login/' + id, username)
+    return this.http.post<{ token: string; userId: number; }>('http://localhost:3000/api/managers/login', { "username": username });
+  }
+
+
 
   private clearAuthData() {
     localStorage.removeItem("token");

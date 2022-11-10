@@ -15,7 +15,7 @@
                 <li class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
                         <i class="fas fa-lg fa-user-graduate"></i>
-                        {{ studentsSSOData[0]?.givenname }} {{ studentsSSOData[0]?.sn }}
+                        {{ managerSSOData[0]?.givenname }} {{ managerSSOData[0]?.sn }}
                     </a>
                     <div class="dropdown-menu dropdown-menu-end">
                         <a (click)="onLogout()" class="cursor-pointer dropdown-item">
@@ -89,8 +89,8 @@
               overflow: hidden;
               text-overflow: ellipsis;
             " class="d-block">
-                        {{ studentsSSOData[0]?.givenname?.charAt(0) }}.
-                        {{ studentsSSOData[0]?.sn }}</a>
+                        {{ managerSSOData[0]?.givenname?.charAt(0) }}.
+                        {{ managerSSOData[0]?.sn }}</a>
                 </div>
             </div>
             <nav class="mt-2">

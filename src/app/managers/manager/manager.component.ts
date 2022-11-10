@@ -3,7 +3,8 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
 import { TranslateService } from '@ngx-translate/core';
 import { StudentsService } from 'src/app/students/student.service';
-import { Student } from 'src/app/students/student.model';
+import { Student as Manager } from 'src/app/students/student.model';
+import { ManagerService } from '../manager.service';
 
 @Component({
   selector: 'app-manager',
@@ -14,13 +15,13 @@ export class ManagerComponent implements OnInit, OnDestroy {
   @Output()
   readonly darkModeSwitched = new EventEmitter<boolean>();
 
-  public studentsSSOData: Student[] = [];
+  public managerSSOData: Manager[] = [];
   fontSize: number = 100;
   private language!: string;
   dateFrom!: string;
   dateTo!: string;
 
-  constructor(public studentsService: StudentsService, private router: Router, public authService: AuthService, public translate: TranslateService) {
+  constructor(public studentsService: StudentsService, private router: Router, public authService: AuthService, public translate: TranslateService, public managerService: ManagerService) {
     translate.addLangs(['en', 'gr']);
     translate.setDefaultLang('gr');
 
@@ -35,14 +36,14 @@ export class ManagerComponent implements OnInit, OnDestroy {
   }
 
   public fetchManager() {
-    this.authService.login('pcst19009')
+    this.authService.loginManager('pcst19009')
       .subscribe((response) => {
         this.authService.setToken(response.token);
         this.authService.setSessionId(response.userId);
         console.log(response);
-        this.studentsService.getStudents()
-          .subscribe((students: Student[]) => {
-            this.studentsSSOData = students;
+        this.managerService.getManager()
+          .subscribe((managers: Manager[]) => {
+            this.managerSSOData = managers;
           });
       });
   }

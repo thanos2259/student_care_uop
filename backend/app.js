@@ -6,6 +6,7 @@ const bodyParser = require("body-parser");
 
 // Route imports
 const studentRoutes = require("./api-routes/studentRoutes.js");
+const managerRoutes = require("./api-routes/managerRoutes.js");
 
 app.use(
   bodyParser.urlencoded({
@@ -36,5 +37,6 @@ app.get("/api", async (request, response) => {
 });
 
 app.use("/api/students", studentRoutes);
+app.use("/api/managers", managerRoutes);
 
 module.exports = app;

@@ -71,6 +71,18 @@ const routes: Routes = [{
     path: 'meals/:id',
     component: ManagerComponent
   },
+  {
+    path: 'manuals',
+    component: StudentComponent
+  },
+  {
+    path: 'about',
+    component: StudentComponent
+  },
+  {
+    path: 'contact',
+    component: StudentComponent
+  }
   ]
 }
 

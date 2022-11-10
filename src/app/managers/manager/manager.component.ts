@@ -89,23 +89,16 @@ export class ManagerComponent implements OnInit, OnDestroy {
     return this.router.url === '/manager/meals/' + this.authService.getSessionId();
   }
 
-  // isProfileRoute() {
-  //   return this.router.url === '/student/profile/' + this.authService.getSessionId();
-  // }
+  isAboutRoute() {
+    return this.router.url === '/manager/about';
+  }
 
-  // isAboutRoute() {
-  //   return this.router.url === '/student/about';
-  // }
+  isManualsRoute() {
+    return this.router.url === '/manager/manuals';
+  }
 
-  // isManualsRoute() {
-  //   return this.router.url === '/student/manuals';
-  // }
+  isContactRoute() {
+    return this.router.url === '/manager/contact'
+  }
 
-  // isContactRoute() {
-  //   return this.router.url === '/student/contact'
-  // }
-
-  // isApplicationssRoute() {
-  //   return this.router.url === '/student/applications/' + this.authService.getSessionId();
-  // }
 }

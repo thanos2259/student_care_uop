@@ -121,13 +121,13 @@
                         {{ "STUDENT.SIDEBAR-SECONDARY-OPTIONS" | translate }}
                     </li>
                     <li class="nav-item">
-                        <a [routerLink]="['/student/manuals']" class="nav-link">
+                        <a [routerLink]="['/manager/manuals']" class="nav-link">
                             <i class="nav-icon fa fa-video"></i>
                             <p>{{ "STUDENT.SIDEBAR-MANUALS" | translate }}</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a [routerLink]="['/student/about']" class="nav-link">
+                        <a [routerLink]="['/manager/about']" class="nav-link">
                             <i class="nav-icon fa fa-credit-card"></i>
                             <p>
                                 {{ "STUDENT.SIDEBAR-ABOUT" | translate }}
@@ -135,7 +135,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a [routerLink]="['/student/contact']" class="nav-link">
+                        <a [routerLink]="['/manager/contact']" class="nav-link">
                             <i class="nav-icon fa fa-phone"></i>
                             <p>
                                 {{ "STUDENT.SIDEBAR-CONTACT" | translate }}
@@ -208,7 +208,10 @@
                 <div class="row mb-2">
                     <app-manager-home *ngIf="isManagerRoute()"></app-manager-home>
                     <app-manager-accommodation *ngIf="isManagerAccommodationRoute()"></app-manager-accommodation>
-                    <app-meals *ngIf="isManagerMealsRoute()"></app-meals>
+                    <app-manager-meals *ngIf="isManagerMealsRoute()"></app-manager-meals>
+                    <app-about *ngIf="isAboutRoute()"></app-about>
+                    <app-manuals *ngIf="isManualsRoute()"></app-manuals>
+                    <app-contact *ngIf="isContactRoute()"></app-contact>
                 </div>
             </div>
         </div>

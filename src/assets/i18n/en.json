@@ -204,6 +204,10 @@
     "SUBMIT-APPLICATION": "Submit application",
     "SUBMIT-APPLICATION-DESCR": "If you want to finalise your application, select Finalise Application or click Previous to edit the data you uploaded"
   },
+  "MANAGER": {
+    "FACULTY": "Manager",
+    "APPLICATIONS": "Applications"
+  },
   "GENERIC": {
     "CONTACT": "Contact"
   },

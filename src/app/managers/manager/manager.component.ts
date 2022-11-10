@@ -31,12 +31,11 @@ export class ManagerComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.language = localStorage.getItem('language') || 'gr';
 
-    //  this.authService.login('pcst19009');
-    this.fetchStudent();
+    this.fetchManager();
   }
 
-  public fetchStudent() {
-    this.authService.login('pcst19003')
+  public fetchManager() {
+    this.authService.login('pcst19009')
       .subscribe((response) => {
         this.authService.setToken(response.token);
         this.authService.setSessionId(response.userId);

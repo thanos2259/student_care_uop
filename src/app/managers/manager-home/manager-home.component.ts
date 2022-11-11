@@ -61,7 +61,10 @@ export class CustomDateParserFormatter extends NgbDateParserFormatter {
 export class ManagerHomeComponent implements OnInit {
   ngSelect = "";
   ngSelectPhase = "";
-  model2: string;
+  modelMealsDateFrom: string;
+  modelMealsDateTo: string;
+  modelAccommodationDateFrom: string;
+  modelAccommodationDateTo: string;
 
 	constructor(private ngbCalendar: NgbCalendar, private dateAdapter: NgbDateAdapter<string>) {}
 

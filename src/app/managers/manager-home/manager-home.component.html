@@ -26,8 +26,8 @@
                     <div class="container row">
                       <div class="pl-0 ml-0 input-group col-12">
                         <input class="form-control" placeholder="dd/mm/yyyy" id="date_from" name="date_from"
-                          #c2="ngModel" [(ngModel)]="model2" ngbDatepicker #d2="ngbDatepicker" />
-                        <button class="btn btn-outline-secondary" (click)="d2.toggle()" type="button">
+                          #c1="ngModel" [(ngModel)]="modelMealsDateFrom" ngbDatepicker #datepicker1="ngbDatepicker" />
+                        <button class="btn btn-outline-secondary" (click)="datepicker1.toggle()" type="button">
                           <i class="fas fa-calendar-alt"></i>
                         </button>
                       </div>
@@ -38,8 +38,8 @@
                     <div class="container row">
                       <div class="pl-0 ml-0 input-group col-12">
                         <input class="form-control" placeholder="dd/mm/yyyy" id="date_to" name="date_to" #c2="ngModel"
-                          [(ngModel)]="model2" ngbDatepicker #d2="ngbDatepicker" />
-                        <button class="btn btn-outline-secondary" (click)="d2.toggle()" type="button">
+                          [(ngModel)]="modelMealsDateTo" ngbDatepicker #datepicker2="ngbDatepicker" />
+                        <button class="btn btn-outline-secondary" (click)="datepicker2.toggle()" type="button">
                           <i class="fas fa-calendar-alt"></i>
                         </button>
                       </div>
@@ -73,8 +73,9 @@
                       <div class="container row">
                         <div class="pl-0 ml-0 input-group col-12">
                           <input class="form-control" placeholder="dd/mm/yyyy" id="date_from" name="date_from"
-                            #c2="ngModel" [(ngModel)]="model2" ngbDatepicker #d2="ngbDatepicker" />
-                          <button class="btn btn-outline-secondary" (click)="d2.toggle()" type="button">
+                            #c3="ngModel" [(ngModel)]="modelAccommodationDateFrom" ngbDatepicker
+                            #datepicker3="ngbDatepicker" />
+                          <button class="btn btn-outline-secondary" (click)="datepicker3.toggle()" type="button">
                             <i class="fas fa-calendar-alt"></i>
                           </button>
                         </div>
@@ -84,9 +85,9 @@
                       <label for="date" class="col-form-label">Έως:</label>
                       <div class="container row">
                         <div class="pl-0 ml-0 input-group col-12">
-                          <input class="form-control" placeholder="dd/mm/yyyy" id="date_to" name="date_to" #c2="ngModel"
-                            [(ngModel)]="model2" ngbDatepicker #d2="ngbDatepicker" />
-                          <button class="btn btn-outline-secondary" (click)="d2.toggle()" type="button">
+                          <input class="form-control" placeholder="dd/mm/yyyy" id="date_to" name="date_to" #c4="ngModel"
+                            [(ngModel)]="modelAccommodationDateTo" ngbDatepicker #datepicker4="ngbDatepicker" />
+                          <button class="btn btn-outline-secondary" (click)="datepicker4.toggle()" type="button">
                             <i class="fas fa-calendar-alt"></i>
                           </button>
                         </div>

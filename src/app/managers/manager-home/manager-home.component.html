@@ -1,57 +1,107 @@
 <div class="card-body">
-    <div class="tab-content p-0">
-        <h5 class="font-weight-normal pt-2 pb-2">Περίοδος Αιτήσεων</h5>
-        <div class="chart tab-pane active period" id="revenue-chart">
-            <form ngNativeValidate #periodForm="ngForm">
-                <div class="form-group row pb-2 pt-2" style="border-bottom: 1px solid #DEE2E6;">
-                    <div class="col-sm-4 m-auto" style="max-width:200px;">
-                        <div class="lang-div">
-                            <a href="#" class="nav-link dropdown-toggle selectpicker lang-anchor"
-                                data-toggle="dropdown">
-                                <span>
-                                    Τύπος Αίτησης
-                                </span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a class="cursor-pointer dropdown-item">
-                                        Σίτιση</a>
-                                </li>
-                                <li>
-                                    <a class="cursor-pointer dropdown-item">
-                                        Στέγαση</a>
-                                </li>
-                            </ul>
+    <div class="tab-content">
+        <h5 class="font-weight-normal pt-2 pb-2 pl-2">Περίοδος Αιτήσεων</h5>
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header p-2">
+                    <ul class="nav nav-pills">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#meals" data-toggle="tab">
+                                Σίτιση</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#accommodation" data-toggle="tab"> Στέγαση </a>
+                        </li>
+                    </ul>
+                </div>
+                <br>
+                <div class="card-body">
+                    <div class="tab-content">
+                        <div class="tab-pane" id="activity">
+                        </div>
+                        <div class="tab-pane active" id="meals">
+                            <form ngNativeValidate #meals="ngForm" class="form-horizontal" (ngSubmit)="(meals.value)">
+                                <div class="form-group row">
+                                    <div class="col-sm-6">
+                                        <div class="container row">
+                                            <label for="date" class="col-sm-1 col-form-label">Από:</label>
+                                            <input type="date" name="date_from" ngModel id="date_from"
+                                                class="form-control col-sm-11" placeholder="Από" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="container row">
+                                            <label for="date" class="col-sm-1 col-form-label">Έως:</label>
+                                            <input type="date" name="date_to" ngModel id="date_to"
+                                                class="form-control col-sm-11" placeholder="Έως" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                </div>
+                                <br>
+                                <strong> &nbsp; Τρέχουσα Περίοδος: </strong> 11/09/2022 - 11/10/2022
+                                <br>
+                                <br>
+                                <div class="form-group container-fluid row" style="width: 320px; margin: auto">
+                                    <div class="col-sm-6 submitButton">
+                                        <button type="submit" class="btn btn-primary"
+                                            style="width: 120px; margin: auto">
+                                            Δημιουργία
+                                        </button>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <a (click)="meals.resetForm()" class="btn btn-secondary"
+                                            style="width: 120px; margin: auto">
+                                            {{'STUDENT.PROFILE-CANCEL' | translate}}
+                                        </a>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="tab-pane" id="accommodation">
+                            <form ngNativeValidate #accommodation="ngForm" class="form-horizontal">
+                                <div class="fieldset-wrapper">
+                                    <div class="form-group row">
+                                        <div class="col-sm-6">
+                                            <div class="container row">
+                                                <label for="date" class="col-sm-1 col-form-label">Από:</label>
+                                                <input type="date" name="date_from" ngModel id="date_from"
+                                                    class="form-control col-sm-11" placeholder="Από" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="container row">
+                                                <label for="date" class="col-sm-1 col-form-label">Έως:</label>
+                                                <input type="date" name="date_to" ngModel id="date_to"
+                                                    class="form-control col-sm-11" placeholder="Έως" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                    </div>
+                                    <br>
+                                    <strong> &nbsp; Τρέχουσα Περίοδος: </strong> 11/09/2022 - 11/10/2022
+                                    <br>
+                                    <br>
+                                </div>
+                                <div class="form-group container-fluid row" style="width: 320px; margin: auto">
+                                    <div class="col-sm-6 submitButton">
+                                        <button type="submit" class="btn btn-primary"
+                                            style="width: 120px; margin: auto">
+                                            Δημιουργία
+                                        </button>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <a (click)="accommodation.resetForm()" class="btn btn-secondary"
+                                            style="width: 120px; margin: auto">
+                                            {{'STUDENT.PROFILE-CANCEL' | translate}}
+                                        </a>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
-                <div class="p-3">
-                    <div class="form-group row">
-                        <div class="col-sm-6">
-                            <div class="container row">
-                                <label for="inputPassword" class="col-sm-1 col-form-label">Από:</label>
-                                <input type="date" name="date_to" ngModel id="date_to" class="form-control col-sm-11"
-                                    placeholder="Λήξη" required>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="container row">
-                                <label for="inputPassword" class="col-sm-1 col-form-label">Έως:</label>
-                                <input type="date" name="date_to" ngModel id="date_to" class="form-control col-sm-11"
-                                    placeholder="Λήξη" required>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                    </div>
-                    <strong> &nbsp; Τρέχουσα Περίοδος: </strong> 11/09/2022 - 11/10/2022
-                    <br>
-                    <br>
-                    <div class="m-auto" style="max-width:100px;">
-                        <button class="btn btn-primary">Δημιουργία</button>
-                    </div>
-                </div>
-            </form>
+            </div>
         </div>
-    </div>
-</div>

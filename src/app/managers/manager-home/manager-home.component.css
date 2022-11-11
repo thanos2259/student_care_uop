@@ -1,15 +1,11 @@
-.lang-div {
-    border-radius: 4px;
-    background-color: #224957;
+.fa-icon:hover {
+    opacity: 0.7;
+    cursor: pointer;
 }
 
-.lang-anchor {
-    color: white;
-    text-align: center;
-}
+@media screen and (max-width: 575px) {
+    .submitButton {
+        padding-bottom: 15px;
+    }
 
-.period {
-    border-radius: 4px;
-    border: #DEE2E6 solid 1px;
-    background-color: white;
 }

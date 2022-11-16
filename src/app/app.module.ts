@@ -46,6 +46,7 @@ import { ManagerComponent } from './managers/manager/manager.component';
 import { ManagerHomeComponent } from './managers/manager-home/manager-home.component';
 import { AccommodationComponent } from './managers/manager-accommodation/manager-accommodation.component';
 import { ManagerMealsComponent } from './managers/manager-meals/manager-meals.component';
+import { CommentsDialogComponent } from './managers/comments-dialog/comments-dialog.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -72,7 +73,8 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     ManagerComponent,
     ManagerHomeComponent,
     AccommodationComponent,
-    ManagerMealsComponent
+    ManagerMealsComponent,
+    CommentsDialogComponent
   ],
   imports: [
     BrowserModule,

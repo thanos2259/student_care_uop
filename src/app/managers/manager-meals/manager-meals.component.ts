@@ -1,7 +1,10 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { AuthService } from 'src/app/auth/auth.service';
+import { Utils } from 'src/app/MiscUtils';
 import { StudentsService } from 'src/app/students/student.service';
-import { Manager } from '../manager.model';
+import { Student } from '../../students/student.model';
+import {CommentsDialogComponent} from '../comments-dialog/comments-dialog.component';
 
 @Component({
   selector: 'app-manager-meals',
@@ -14,14 +17,17 @@ export class ManagerMealsComponent implements OnInit {
   @ViewChild('processing') table1: ElementRef | undefined;
   @ViewChild('completed') table2: ElementRef | undefined;
 
-  studentsSSOData: Manager[] = [];
+  studentsSSOData: Student[] = [];
 
-  constructor(public studentsService: StudentsService, public authService: AuthService) { }
+  constructor(public studentsService: StudentsService, public authService: AuthService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.studentsService.getStudents()
-      .subscribe((students: Manager[]) => {
+    this.studentsService.getAllStudents()
+      .subscribe((students: Student[]) => {
         this.studentsSSOData = students;
+        for (let i = 0; i < students.length; i++) {
+          this.studentsSSOData[i].schacpersonaluniquecode = Utils.getRegistrationNumber(this.studentsSSOData[i].schacpersonaluniquecode);
+        }
       });
 
     const table: any = $('#processing');
@@ -63,5 +69,17 @@ export class ManagerMealsComponent implements OnInit {
   printDataTable() {
 
   }
+
+  openCommentsDialog(idx: any) {
+    console.log(idx);
+    const dialogRef = this.dialog.open(CommentsDialogComponent, {
+      data: { studentsData: this.studentsSSOData, index: idx }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
+
 
 }

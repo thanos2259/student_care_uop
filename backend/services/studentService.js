@@ -5,6 +5,7 @@ const mssql = require("../secretariat_db_config.js");
 const msql = require('mssql');
 const fs = require('fs');
 const JSZip = require('jszip');
+const moment = require('moment');
 
 const getAllStudents = async () => {
   try {
@@ -176,6 +177,18 @@ const getApplicationById = async (id) => {
   }
 };
 
+const getCommentByStudentIdAndSubject = async (studentId, subject) => {
+  try {
+    const comment = await pool.query("SELECT * FROM comments WHERE student_id = $1 AND comment_subject = $2", [studentId, subject]);
+    // Change the date because comment_date was wrong even if timezones seemed correct both in nodejs and db.
+    comment.rows[0].comment_date = moment(comment.rows[0].comment_date).format("YYYY-MM-DD HH:mm:ss");
+    return comment.rows[0];
+  } catch (error) {
+    console.log('Error while getting comments ' + error.message);
+    throw Error('Error while getting comments');
+  }
+};
+
 const combineToZIP = (id, applicationType) => {
   try {
     const zip = new JSZip();
@@ -266,6 +279,7 @@ module.exports = {
   getAllStudents,
   getStudentById,
   getAccommodationFilesByAppID,
+  getCommentByStudentIdAndSubject,
   updateStudentDetails,
   updateStudentContact,
   updateStudentBasicInfo,

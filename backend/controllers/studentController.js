@@ -83,6 +83,20 @@ const getStudentById = async (request, response) => {
   }
 };
 
+const getCommentByStudentIdAndSubject = async (request, response) => {
+  try {
+    const id = request.query.studentId;
+    const subject = request.query.subject;
+
+    const comment = await depManagerService.getCommentByStudentIdAndSubject(id, subject);
+    response.status(200).json(comment);
+  } catch (error) {
+    response.send({
+      message: error.message
+    });
+  }
+};
+
 const updateStudentDetails = async (request, response, next) => {
   try {
     const id = request.params.id;
@@ -213,7 +227,6 @@ const uploadFile = async (request, response) => {
   } catch (error) { console.log(error); }
 };
 
-
 const sendFile = async (request, response) => {
   try {
     const id = request.params.id;
@@ -237,14 +250,60 @@ const sendFile = async (request, response) => {
   }
 };
 
+
+const insertCommentsByStudentId = async (request, response) => {
+  try {
+    const id = request.params.id;
+    const comments = request.body.comments;
+    const subject = "Σίτιση";
+
+    await studentService.insertCommentsByStudentId(id, comments, subject);
+
+    response
+      .status(200)
+      .json({
+        message: 'Student comments inserted successfully'
+      });
+  } catch (error) {
+    console.error(error.message);
+    response.status(400).send({
+      message: error.message
+    });
+  }
+};
+
+const updateCommentsByStudentId = async (request, response) => {
+  try {
+    const id = request.params.id;
+    const comments = request.body.comments;
+    const subject = "Σίτιση";
+
+    await studentService.updateCommentsByStudentId(id, comments, subject);
+
+    response
+      .status(200)
+      .json({
+        message: 'Student comments updated successfully'
+      });
+  } catch (error) {
+    console.error(error.message);
+    response.status(400).send({
+      message: error.message
+    });
+  }
+};
+
 module.exports = {
   getAllStudents,
   getStudentById,
   getAccommodationFiles,
+  getCommentByStudentIdAndSubject,
   updateStudentDetails,
   updateStudentContact,
   updateStudentSpecialData,
   updateStudentBasicInfo,
+  insertCommentsByStudentId,
+  updateCommentsByStudentId,
   getApplicationsById,
   login,
   uploadFile,

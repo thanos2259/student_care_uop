@@ -63,3 +63,22 @@
     </mat-card>
   </section>
 </div>
+<div class="row">
+  <section class="col-lg-9 mt-3">
+    <mat-accordion>
+      <mat-expansion-panel [expanded]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <h3><i class="fas fa-book"></i>
+              {{ "Σχόλια Διαχειριστή" | translate }}
+            </h3>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="instruction-size">
+          <p class="pl-4">Σχόλια για {{comment?.comment_subject}}:
+            {{comment == null ? 'Δεν υπάρχουν σχόλια' : comment?.comment_text}}</p>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </section>
+</div>

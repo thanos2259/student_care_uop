@@ -88,7 +88,7 @@ const getCommentByStudentIdAndSubject = async (request, response) => {
     const id = request.query.studentId;
     const subject = request.query.subject;
 
-    const comment = await depManagerService.getCommentByStudentIdAndSubject(id, subject);
+    const comment = await studentService.getCommentByStudentIdAndSubject(id, subject);
     response.status(200).json(comment);
   } catch (error) {
     response.send({

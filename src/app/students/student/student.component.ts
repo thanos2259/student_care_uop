@@ -4,6 +4,9 @@ import { Student } from '../student.model';
 import { StudentsService } from '../student.service';
 import { AuthService } from 'src/app/auth/auth.service';
 import { TranslateService } from '@ngx-translate/core';
+import * as moment from 'moment/moment';
+import {StudentCommentsDialogComponent} from '../student-comments-dialog/student-comments-dialog.component';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-student',
@@ -19,8 +22,11 @@ export class StudentComponent implements OnInit, OnDestroy {
   private language!: string;
   dateFrom!: string;
   dateTo!: string;
+  public comment: any;
 
-  constructor(public studentsService: StudentsService, private router: Router, public authService: AuthService, public translate: TranslateService) {
+  constructor(public studentsService: StudentsService, private router: Router, public authService: AuthService,
+    public translate: TranslateService, public dialog: MatDialog) {
+
     translate.addLangs(['en', 'gr']);
     translate.setDefaultLang('gr');
 
@@ -43,6 +49,12 @@ export class StudentComponent implements OnInit, OnDestroy {
         this.studentsService.getStudents()
           .subscribe((students: Student[]) => {
             this.studentsSSOData = students;
+            this.studentsService.getCommentByStudentIdAndSubject(this.studentsSSOData[0]?.sso_uid, 'Σίτιση')
+              .subscribe((comment: any) => {
+                this.comment = comment;
+                const dateDif = moment(comment.comment_date, "YYYY-MM-DD HH:mm:ss").locale("el").fromNow();
+                this.comment.comment_date = dateDif;
+              });
           });
       });
   }
@@ -72,6 +84,16 @@ export class StudentComponent implements OnInit, OnDestroy {
     localStorage.setItem('language', language);
     // window.location.reload();
     this.translate.use(language);
+  }
+
+  openCommentsDialog() {
+    const dialogRef = this.dialog.open(StudentCommentsDialogComponent, {
+      data: { studentsData: this.studentsSSOData, index: 0 }
+    });
+
+    dialogRef.afterClosed().subscribe((result: any) => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
 
   onDarkModeSwitched() { }

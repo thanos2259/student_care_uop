@@ -109,20 +109,20 @@
           </li>
           <li class="nav-item">
             <a [routerLink]="[
-                '/student/accommodation/' + this.authService.getSessionId()
-              ]" class="nav-link">
-              <i class="nav-icon fa fa-home"></i>
-              <p>{{ "STUDENT.SIDEBAR-ACCOMMODATION" | translate }}</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a [routerLink]="[
                 '/student/meals/' + this.authService.getSessionId()
               ]" class="nav-link">
               <i class="nav-icon fas fa-hamburger"></i>
               <p>
                 {{ "STUDENT.SIDEBAR-MEALS" | translate }}
               </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a [routerLink]="[
+                '/student/accommodation/' + this.authService.getSessionId()
+              ]" class="nav-link">
+              <i class="nav-icon fa fa-home"></i>
+              <p>{{ "STUDENT.SIDEBAR-ACCOMMODATION" | translate }}</p>
             </a>
           </li>
           <li class="nav-item">

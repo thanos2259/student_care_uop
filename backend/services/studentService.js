@@ -21,7 +21,7 @@ const getAllStudents = async () => {
 
 const getAccommodationFilesByAppID = async (appID) => {
   try {
-    const results = await pool.query("SELECT * FROM accommodation_files \
+    const results = await pool.query("SELECT * FROM application_files \
                                       WHERE app_id = $1 AND value = true", [appID]);
     return results.rows;
   } catch (error) {
@@ -94,6 +94,67 @@ const getStudentById = async (id) => {
     return student;
   } catch (error) {
     throw Error('Error while fetching students by id');
+  }
+};
+
+const getStudentActiveApplication = async (studentId, application_type) => {
+  try {
+    return await pool.query("SELECT * \
+                            FROM applications \
+                            WHERE uid = $1 \
+                            AND application_type = $2 \
+                            AND is_active = 'true'", [studentId, application_type]);
+  } catch (error) {
+    throw Error('Error while fetching student applications');
+  }
+};
+
+const insertOrUpdateApplication = async (student, filesData, uid) => {
+  try {
+    const rows = await getStudentActiveApplication(uid, student.application_type);
+    // check if rows fetched successfully
+    if (rows) {
+      // check if there is an active application
+      if (rows.rowCount > 0) {
+        // update application
+        return await updateApplication(student, filesData, uid);
+      }
+    }
+
+    return await insertNewApplication(student, filesData, uid);
+  }
+  catch (error) {
+    throw Error('Error while inserting or updating files: ' + error.message);
+  }
+};
+
+const updateApplication = async (student, filesData, uid) => {
+  try {
+    const updateAppResult = await pool.query("UPDATE applications \
+      SET status=$1, submit_date=now(), application_type=$2, father_name=$3, location=$4, city=$5, phone=$6, category=$7, family_income=$8, family_state=$9, protected_members=$10, siblings_students=$11, children=$12 \
+      WHERE uid=$13",
+      [0, student.application_type, student.father_name, student.location, student.city, student.phone, student.category, student.family_income, student.family_state, student.protected_members, student.siblings_students, student.children, uid]);
+
+    if (!updateAppResult) {
+      throw Error('Application not updated');
+    }
+
+    // TODO and test files insert
+    // 1. delete all files for this application
+    // 2. insert new files
+    // const deleteFilesResult = await pool.query("DELETE FROM application_files WHERE app_id = $1", [updateAppResult.rows[0].id]);
+    // if (!deleteFilesResult) {
+    //   throw Error('Files not deleted');
+    // }
+
+    // const insertFilesResult = await insertAccommodationFilesSubmittedData(updateAppResult.rows[0].id, filesData);
+    // if (!insertFilesResult) {
+    //   throw Error('Files not inserted');
+    // }
+
+    return true;
+  } catch (error) {
+    throw Error('Error while updating student application ' + error.message);
   }
 };
 
@@ -241,8 +302,8 @@ const deleteFiles = (studentId, applicationType) => {
 const insertNewApplication = async (student, filesData, uid) => {
   try {
     const insertAppResult = await pool.query("INSERT INTO applications \
-       (status, submit_date, application_type, uid, father_name, location, city, phone, category, family_income, family_state, protected_members, siblings_students, children) \
-        VALUES ($1, now(), $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) RETURNING id",
+       (status, submit_date, application_type, uid, father_name, location, city, phone, category, family_income, family_state, protected_members, siblings_students, children, is_active) \
+        VALUES ($1, now(), $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, 'true') RETURNING id",
       [0, student.application_type, uid, student.father_name, student.location, student.city, student.phone, student.category, student.family_income, student.family_state, student.protected_members, student.siblings_students, student.children]);
 
     if (!insertAppResult) {
@@ -270,7 +331,7 @@ insertAccommodationFilesSubmittedData = async (appID, files) => {
       if (!itemFoundDetails)
         return false;
 
-      const insertFiles = await pool.query("INSERT INTO accommodation_files \
+      const insertFiles = await pool.query("INSERT INTO application_files \
         (name, description, app_id, type, value) VALUES ($1, $2, $3, $4, $5)",
         [itemFoundDetails.filename, itemFoundDetails.description, appID, itemFoundDetails.type, value]);
     }
@@ -286,6 +347,7 @@ module.exports = {
   getStudentById,
   getAccommodationFilesByAppID,
   getCommentByStudentIdAndSubject,
+  insertOrUpdateApplication,
   updateStudentDetails,
   updateStudentContact,
   updateStudentBasicInfo,

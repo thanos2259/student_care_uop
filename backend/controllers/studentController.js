@@ -168,7 +168,7 @@ const updateStudentSpecialData = async (request, response, next) => {
     console.log(student.application_type);
     studentService.combineToZIP(id, student.application_type);
     studentService.deleteFiles(id, student.application_type);
-    await studentService.insertNewApplication(student, filesData, id);
+    await studentService.insertOrUpdateApplication(student, filesData, id);
 
     response
       .status(200)

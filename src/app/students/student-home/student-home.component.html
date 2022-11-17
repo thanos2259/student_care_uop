@@ -55,10 +55,10 @@
           {{ "STUDENT.COMMENTS" | translate }}
         </h1>
         <p> <strong>{{ "STUDENT.COMMENTS-FOR-MEALS" | translate }}</strong>
-          {{comment.comment_date === null || comment.comment_date === '' || comment.comment_date === undefined ?
+          {{comment === null || comment === '' || comment === undefined ?
           'Δεν υπάρχουν σχόλια': comment?.comment_text}}</p>
         <p> <strong>{{ "STUDENT.COMMENTS-FOR-ACCOMMODATION" | translate }}</strong>
-          {{comment.comment_date === null || comment.comment_date === '' || comment.comment_date === undefined ?
+          {{comment === null || comment === '' || comment === undefined ?
           'Δεν υπάρχουν σχόλια': comment?.comment_text}}</p>
       </mat-expansion-panel>
     </mat-accordion>

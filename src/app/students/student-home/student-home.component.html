@@ -4,53 +4,58 @@
       <mat-expansion-panel [expanded]="true">
         <mat-expansion-panel-header>
           <mat-panel-title>
-            <h3><i class="fas fa-book"></i>
+            <h1><i class="fas fa-book"></i>
               {{ "STUDENT.STUDENT-CARE-INSTRUCTIONS" | translate }}
-            </h3>
+            </h1>
           </mat-panel-title>
         </mat-expansion-panel-header>
-        <div class="instruction-size">
+        <div>
+          {{ "STUDENT.STUDENT-CARE-INTRO1" | translate }}
+          {{ "STUDENT.HOME" | translate }}
+          <br>
+          <br>
+        </div>
+        <span class="d-flex justify-content-center fw-bold pb-2">{{
+          "STUDENT.STUDENT-CARE-STEPS-INTRO" | translate
+          }}</span>
+        <div class="pt-2">
+          <span class="text-danger">
+            {{ "STUDENT.STUDENT-CARE-STEP1" | translate }}</span>
+        </div>
+        <div class="pt-2">
+          {{ "STUDENT.STUDENT-CARE-STEP2" | translate }}
+        </div>
+        <li class="pt-2">
+          <span class="fst-italic">
+            {{ "STUDENT.STUDENT-CARE-STEP3" | translate }}</span>
+        </li>
+        <li class="pt-2">
+          <span class="fst-italic">
+            {{ "STUDENT.STUDENT-CARE-STEP4" | translate }}</span>
+        </li>
+        <div class="pt-2">
+          <br>
+          {{ "STUDENT.STUDENT-CARE-STEP5" | translate }}
+          <span class="text-danger">
+            {{ "STUDENT.STUDENT-CARE-STEP6" | translate }}
+          </span>
+          {{ "STUDENT.STUDENT-CARE-STEP7" | translate }}
+          <div class="text-danger">
+            {{ "STUDENT.STUDENT-CARE-STEP8" | translate }}
+          </div>
           <div>
-            {{ "STUDENT.STUDENT-CARE-INTRO1" | translate }}
-            {{ "STUDENT.HOME" | translate }}
-            <br>
-            <br>
-            <br>
-          </div>
-          <span class="d-flex justify-content-center fw-bold pb-2">{{
-            "STUDENT.STUDENT-CARE-STEPS-INTRO" | translate
-            }}</span>
-          <div class="pt-2">
-            <span class="text-danger">
-              {{ "STUDENT.STUDENT-CARE-STEP1" | translate }}</span>
-          </div>
-          <div class="pt-2">
-            <br>
-            {{ "STUDENT.STUDENT-CARE-STEP2" | translate }}
-          </div>
-          <li class="pt-2">
-            <span class="fst-italic">
-              {{ "STUDENT.STUDENT-CARE-STEP3" | translate }}</span>
-          </li>
-          <li class="pt-2">
-            <span class="fst-italic">
-              {{ "STUDENT.STUDENT-CARE-STEP4" | translate }}</span>
-          </li>
-          <div class="pt-2">
-            <br>
-            {{ "STUDENT.STUDENT-CARE-STEP5" | translate }}
-            <span class="text-danger">
-              {{ "STUDENT.STUDENT-CARE-STEP6" | translate }}
-            </span>
-            {{ "STUDENT.STUDENT-CARE-STEP7" | translate }}
-            <div class="text-danger">
-              {{ "STUDENT.STUDENT-CARE-STEP8" | translate }}
-            </div>
-            <div>
-              {{ "STUDENT.STUDENT-CARE-STEP9" | translate }}
-            </div>
+            {{ "STUDENT.STUDENT-CARE-STEP9" | translate }}
           </div>
         </div>
+        <br>
+        <mat-divider>
+        </mat-divider>
+        <br>
+        <h1><i class="fas fa-comments pb-3"></i>
+          {{ "STUDENT.COMMENTS" | translate }}
+        </h1>
+        <p> {{ "STUDENT.COMMENTS-FOR" | translate }} {{comment?.comment_subject}}:
+          {{comment == 'null' || comment == undefined ? 'Δεν υπάρχουν σχόλια' : comment?.comment_text}}</p>
       </mat-expansion-panel>
     </mat-accordion>
   </section>
@@ -59,26 +64,6 @@
       <i class="far fa-calendar-alt"></i>
       {{ "STUDENT.CALENDAR-HOME" | translate }}
       <mat-calendar [(selected)]="selected"></mat-calendar>
-      <!-- <p>Selected date: {{ selected }}</p> -->
     </mat-card>
-  </section>
-</div>
-<div class="row">
-  <section class="col-lg-9 mt-3">
-    <mat-accordion>
-      <mat-expansion-panel [expanded]="true">
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            <h3><i class="fas fa-book"></i>
-              {{ "Σχόλια Διαχειριστή" | translate }}
-            </h3>
-          </mat-panel-title>
-        </mat-expansion-panel-header>
-        <div class="instruction-size">
-          <p class="pl-4">Σχόλια για {{comment?.comment_subject}}:
-            {{comment == null ? 'Δεν υπάρχουν σχόλια' : comment?.comment_text}}</p>
-        </div>
-      </mat-expansion-panel>
-    </mat-accordion>
   </section>
 </div>

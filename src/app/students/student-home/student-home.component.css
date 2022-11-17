@@ -39,10 +39,6 @@ abbr[data-original-title] {
   font-weight: lighter;
 }
 
-.instruction-size {
-  font-size: medium;
-}
-
 ::ng-deep .dark-mode .mat-expansion-panel {
   background-color: #343a40;
   color: #fff;
@@ -52,59 +48,16 @@ abbr[data-original-title] {
   color: #fff;
 }
 
+::ng-deep .dark-mode h1 {
+  color: #fff;
+}
+
+::ng-deep .dark-mode .mat-divider {
+  border-top-color: rgba(255, 255, 255, 1);
+}
+
 @media screen and (max-width: 991px) {
   .calendar {
     margin-top: 30px;
   }
 }
-
-
-/*  calendar js */
-
-/* @media screen and (max-width: 1680px) {
-  #calendar {
-    zoom: 0.8;
-  }
-}
-
-@media screen and (max-width: 1410px) {
-  #calendar {
-    zoom: 0.6;
-  }
-}
-
-@media screen and (max-width: 1200px) {
-  #calendar {
-    zoom: 0.5;
-  }
-}
-
-@media screen and (max-width: 1050px) {
-  #calendar {
-    zoom: 0.45;
-  }
-}
-
-@media screen and (max-width: 991px) {
-  #calendar {
-    zoom: 1;
-  }
-}
-
-@media screen and (max-width: 500px) {
-  #calendar {
-    zoom: 0.8;
-  }
-}
-
-@media screen and (max-width: 433px) {
-  #calendar {
-    zoom: 0.7;
-  }
-}
-
-@media screen and (max-width: 377px) {
-  #calendar {
-    zoom: 0.6;
-  }
-} */

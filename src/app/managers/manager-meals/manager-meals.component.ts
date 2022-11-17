@@ -73,13 +73,12 @@ export class ManagerMealsComponent implements OnInit {
   openCommentsDialog(idx: any) {
     console.log(idx);
     const dialogRef = this.dialog.open(CommentsDialogComponent, {
-      data: { studentsData: this.studentsSSOData, index: idx }
+      data: { studentsData: this.studentsSSOData, index: idx, subject: 'Σίτιση' }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
     });
   }
-
 
 }

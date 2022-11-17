@@ -11,6 +11,7 @@ export class CommentsDialogComponent implements OnInit {
   @ViewChild('commentsArea') commentsArea!: ElementRef;
   comment!: any;
   commentExistsInDatabase = false;
+  subject = this.data.subject;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any, public dialog: MatDialog,
@@ -29,18 +30,19 @@ export class CommentsDialogComponent implements OnInit {
 
     if (this.commentExistsInDatabase) {
       // update comment
-      this.managerService.updateCommentsByStudentId(this.data.studentsData[this.data.index].uuid, comments);
+      this.managerService.updateCommentsByStudentId(this.data.studentsData[this.data.index].uuid, comments, this.subject);
     } else {
       // insert comment
-      this.managerService.insertCommentsByStudentId(this.data.studentsData[this.data.index].uuid, comments);
+      this.managerService.insertCommentsByStudentId(this.data.studentsData[this.data.index].uuid, comments, this.subject);
     }
 
     this.dialogRef.close();
   }
 
   ngOnInit(): void {
-    const subject = "Σίτιση";
-    this.managerService.getCommentByStudentIdAndSubject(this.data.studentsData[this.data.index].uuid, subject)
+    this.subject = this.data.subject;
+    console.log('asd ' + this.subject);
+    this.managerService.getCommentByStudentIdAndSubject(this.data.studentsData[this.data.index].uuid, this.subject)
       .subscribe((comment: any) => {
         if (comment) {
           this.comment = comment;

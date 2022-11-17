@@ -55,11 +55,11 @@
           {{ "STUDENT.COMMENTS" | translate }}
         </h1>
         <p> <strong>{{ "STUDENT.COMMENTS-FOR-MEALS" | translate }}</strong>
-          {{comment === null || comment === '' || comment === undefined ?
-          'Δεν υπάρχουν σχόλια': comment?.comment_text}}</p>
+          {{commentSitisi === null || commentSitisi === '' || commentSitisi === undefined ?
+          'Δεν υπάρχουν σχόλια': commentSitisi?.comment_text}}</p>
         <p> <strong>{{ "STUDENT.COMMENTS-FOR-ACCOMMODATION" | translate }}</strong>
-          {{comment === null || comment === '' || comment === undefined ?
-          'Δεν υπάρχουν σχόλια': comment?.comment_text}}</p>
+          {{commentStegasi === null || commentStegasi === '' || commentStegasi === undefined ?
+          'Δεν υπάρχουν σχόλια': commentStegasi?.comment_text}}</p>
       </mat-expansion-panel>
     </mat-accordion>
   </section>

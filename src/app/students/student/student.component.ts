@@ -22,7 +22,8 @@ export class StudentComponent implements OnInit, OnDestroy {
   private language!: string;
   dateFrom!: string;
   dateTo!: string;
-  public comment: any;
+  public commentSitisi!: any;
+  public commentStegasi!: any;
 
   constructor(public studentsService: StudentsService, private router: Router, public authService: AuthService,
     public translate: TranslateService, public dialog: MatDialog) {
@@ -51,9 +52,15 @@ export class StudentComponent implements OnInit, OnDestroy {
             this.studentsSSOData = students;
             this.studentsService.getCommentByStudentIdAndSubject(this.studentsSSOData[0]?.sso_uid, 'Σίτιση')
               .subscribe((comment: any) => {
-                this.comment = comment;
+                this.commentSitisi = comment;
                 const dateDif = moment(comment.comment_date, "YYYY-MM-DD HH:mm:ss").locale("el").fromNow();
-                this.comment.comment_date = dateDif;
+                this.commentSitisi.comment_date = dateDif;
+              });
+            this.studentsService.getCommentByStudentIdAndSubject(this.studentsSSOData[0]?.sso_uid, 'Στέγαση')
+              .subscribe((comment: any) => {
+                this.commentStegasi = comment;
+                const dateDif = moment(comment.comment_date, "YYYY-MM-DD HH:mm:ss").locale("el").fromNow();
+                this.commentStegasi.comment_date = dateDif;
               });
           });
       });
@@ -86,9 +93,9 @@ export class StudentComponent implements OnInit, OnDestroy {
     this.translate.use(language);
   }
 
-  openCommentsDialog() {
+  openCommentsDialog(subject: string) {
     const dialogRef = this.dialog.open(StudentCommentsDialogComponent, {
-      data: { studentsData: this.studentsSSOData, index: 0 }
+      data: { studentsData: this.studentsSSOData, index: 0, subject: subject}
     });
 
     dialogRef.afterClosed().subscribe((result: any) => {

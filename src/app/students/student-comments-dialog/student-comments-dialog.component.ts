@@ -10,6 +10,7 @@ import { StudentsService } from '../student.service';
 export class StudentCommentsDialogComponent implements OnInit {
   @ViewChild('commentsArea') commentsArea!: ElementRef;
   comment!: any;
+  subject!: string;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any, public dialog: MatDialog,
@@ -21,8 +22,8 @@ export class StudentCommentsDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const subject = "Σίτιση";
-    this.studentsService.getCommentByStudentIdAndSubject(this.data.studentsData[this.data.index].uuid, subject)
+    this.subject = this.data.subject;
+    this.studentsService.getCommentByStudentIdAndSubject(this.data.studentsData[this.data.index].uuid, this.subject)
       .subscribe((comment: any) => {
         this.comment = comment;
         this.commentsArea.nativeElement.value = this.comment.comment_text;

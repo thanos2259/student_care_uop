@@ -11,7 +11,8 @@ import { StudentsService } from '../student.service';
 export class StudentHomeComponent implements OnInit {
 
   selected: Date | null | undefined;
-  comment: any;
+  commentSitisi: any;
+  commentStegasi: any;
   studentsSSOData: Student[];
 
   constructor(public studentsService: StudentsService, public authService: AuthService) { }
@@ -22,7 +23,11 @@ export class StudentHomeComponent implements OnInit {
         this.studentsSSOData = students;
         this.studentsService.getCommentByStudentIdAndSubject(this.studentsSSOData[0]?.sso_uid, 'Σίτιση')
           .subscribe((comment: any) => {
-            this.comment = comment;
+            this.commentSitisi = comment;
+          });
+        this.studentsService.getCommentByStudentIdAndSubject(this.studentsSSOData[0]?.sso_uid, 'Στέγαση')
+          .subscribe((comment: any) => {
+            this.commentStegasi = comment;
           });
       });
   }

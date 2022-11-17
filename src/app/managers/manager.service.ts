@@ -18,8 +18,8 @@ export class ManagerService {
     return fetchedManager;
   }
 
-  insertCommentsByStudentId(studentId: number, comments: string) {
-    const commentsJson: any = { 'comments': comments };
+  insertCommentsByStudentId(studentId: number, comments: string, subject: string) {
+    const commentsJson: any = { 'comments': comments, 'subject': subject };
     this.http
       .post<{ message: string }>(MANAGER_URL + "insertCommentsByStudentId/" + studentId, commentsJson)
       .subscribe(responseData => {
@@ -27,8 +27,8 @@ export class ManagerService {
       });
   }
 
-  updateCommentsByStudentId(studentId: number, comments: string) {
-    const commentsJson: any = { 'comments': comments};
+  updateCommentsByStudentId(studentId: number, comments: string, subject: string) {
+    const commentsJson: any = { 'comments': comments, 'subject': subject };
     this.http
       .put<{ message: string }>(MANAGER_URL + "updateCommentsByStudentId/" + studentId, commentsJson)
       .subscribe(responseData => {

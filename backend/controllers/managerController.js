@@ -56,7 +56,7 @@ const insertCommentsByStudentId = async (request, response) => {
   try {
     const id = request.params.id;
     const comments = request.body.comments;
-    const subject = "Σίτιση";
+    const subject = request.body.subject;
 
     await managerService.insertCommentsByStudentId(id, comments, subject);
 
@@ -77,7 +77,7 @@ const updateCommentsByStudentId = async (request, response) => {
   try {
     const id = request.params.id;
     const comments = request.body.comments;
-    const subject = "Σίτιση";
+    const subject = request.body.subject;
 
     await managerService.updateCommentsByStudentId(id, comments, subject);
 

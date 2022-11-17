@@ -103,7 +103,7 @@ const updateStudentDetails = async (request, response, next) => {
     const student = request.body;
 
     const updateResults = await studentService.updateStudentDetails(student, id);
-    // console.log(inserts.rowCount);
+
     response
       .status(200)
       .json({

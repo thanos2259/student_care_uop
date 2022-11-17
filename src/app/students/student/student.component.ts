@@ -5,8 +5,8 @@ import { StudentsService } from '../student.service';
 import { AuthService } from 'src/app/auth/auth.service';
 import { TranslateService } from '@ngx-translate/core';
 import * as moment from 'moment/moment';
-import {StudentCommentsDialogComponent} from '../student-comments-dialog/student-comments-dialog.component';
-import {MatDialog} from '@angular/material/dialog';
+import { StudentCommentsDialogComponent } from '../student-comments-dialog/student-comments-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-student',

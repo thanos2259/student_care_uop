@@ -54,7 +54,6 @@ const getCommentByStudentIdAndSubject = async (request, response) => {
 
 const insertCommentsByStudentId = async (request, response) => {
   try {
-    console.log("asdas");
     const id = request.params.id;
     const comments = request.body.comments;
     const subject = "Σίτιση";

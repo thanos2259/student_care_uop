@@ -14,29 +14,18 @@
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
           <i class="far fa-bell"></i>
-          <span *ngIf="comment != null" class="badge badge-danger navbar-badge">!</span>
+          <span *ngIf="comment.student_id != null" class="badge badge-danger navbar-badge">!</span>
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-          <span class="dropdown-item dropdown-header">Ειδοποιήσεις</span>
+          <span class="dropdown-item dropdown-header">{{ "STUDENT.NOTIFICATIONS" | translate }}</span>
           <div class="dropdown-divider"></div>
-          <a *ngIf="comment != null" style="cursor: pointer" (click)="openCommentsDialog()" class="dropdown-item">
-            <i class="fas fa-envelope mr-2"></i> Σχόλιο Υπεύθυνου
+          <a *ngIf="comment.student_id != null" style="cursor: pointer" (click)="openCommentsDialog()"
+            class="dropdown-item">
+            <i class="fas fa-envelope mr-2"></i> {{ "STUDENT.MANAGER-COMMENT" | translate }}
             <span class="float-right text-muted text-sm">{{comment.comment_date}}</span>
           </a>
-          <!-- <div class="dropdown-divider"></div> -->
-          <!-- <a href="#" class="dropdown-item">
-            <i class="fas fa-users mr-2"></i> 8 friend requests
-            <span class="float-right text-muted text-sm">12 hours</span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-file mr-2"></i> 3 new reports
-            <span class="float-right text-muted text-sm">2 days</span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a> -->
-          <a *ngIf="comment == null" style="cursor: pointer" class="dropdown-item">
-            <i class="fas fa-envelope mr-2"></i> Δεν υπάρχουν νέες ειδοποιήσεις</a>
+          <a *ngIf="comment.student_id == null" style="cursor: pointer" class="dropdown-item">
+            <i class="fas fa-envelope mr-2"></i> {{ "STUDENT.NO-NEW-NOTIFICATIONS" | translate }}</a>
         </div>
       </li>
       <ul class="nav navbar-nav ms-auto">

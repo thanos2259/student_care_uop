@@ -204,7 +204,12 @@
     "SUBMIT-APPLICATION": "Submit application",
     "SUBMIT-APPLICATION-DESCR": "If you want to finalise your application, select Finalise Application or click Previous to edit the data you uploaded",
     "COMMENTS": "Admin Comments",
-    "COMMENTS-FOR": "Comments for"
+    "COMMENTS-FOR-MEALS": "Comments for Meals : ",
+    "COMMENTS-FOR-ACCOMMODATION": "Comments for Accommodation : ",
+    "NOTIFICATIONS": "Notifications",
+    "MANAGER-COMMENT": "Admin Comments",
+    "NO-NEW-NOTIFICATIONS": "There are no new notifications",
+    "BTN-CLOSE": "Close"
   },
   "MANAGER": {
     "FACULTY": "Manager",

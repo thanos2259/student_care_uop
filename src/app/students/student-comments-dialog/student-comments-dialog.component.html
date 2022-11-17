@@ -1,7 +1,8 @@
- <mat-dialog-content class="mat-typography">
-   <p><label for="managerReview">Σχόλια Υπεύθυνου</label></p>
-   <textarea #commentsArea id="managerReview" name="managerReview" rows="4" cols="50" readonly disabled></textarea>
- </mat-dialog-content>
- <mat-dialog-actions style='text-align: right'>
-   <button mat-button class="btn btn-primary mat-button" (click)="onClose()">Κλείσιμο</button>
- </mat-dialog-actions>
+<mat-dialog-content class="mat-typography">
+  <p><label for="managerReview">{{ "STUDENT.MANAGER-COMMENT" | translate }}</label></p>
+  <textarea #commentsArea id="managerReview" name="managerReview" rows="4" cols="50" readonly disabled></textarea>
+</mat-dialog-content>
+<mat-dialog-actions style='text-align: right'>
+  <button mat-button class="btn btn-primary mat-button" (click)="onClose()">{{ "STUDENT.BTN-CLOSE" | translate
+    }}</button>
+</mat-dialog-actions>

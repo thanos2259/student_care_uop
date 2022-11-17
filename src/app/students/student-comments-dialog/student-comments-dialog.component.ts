@@ -21,7 +21,7 @@ export class StudentCommentsDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const subject = "Δικαιολογητικά";
+    const subject = "Σίτιση";
     this.studentsService.getCommentByStudentIdAndSubject(this.data.studentsData[this.data.index].uuid, subject)
       .subscribe((comment: any) => {
         this.comment = comment;

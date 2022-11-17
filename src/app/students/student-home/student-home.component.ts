@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/auth/auth.service';
-import {Student} from '../student.model';
-import {StudentsService} from '../student.service';
+import { Student } from '../student.model';
+import { StudentsService } from '../student.service';
 
 @Component({
   selector: 'app-student-home',

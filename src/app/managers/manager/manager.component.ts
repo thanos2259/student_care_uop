@@ -5,6 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { StudentsService } from 'src/app/students/student.service';
 import { Student as Manager } from 'src/app/students/student.model';
 import { ManagerService } from '../manager.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-manager',
@@ -31,20 +32,16 @@ export class ManagerComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.language = localStorage.getItem('language') || 'gr';
-
+    if (!environment.production) {
+      this.authService.setSessionId(2);
+    }
     this.fetchManager();
   }
 
   public fetchManager() {
-    this.authService.loginManager('pcst19009')
-      .subscribe((response) => {
-        this.authService.setToken(response.token);
-        this.authService.setSessionId(response.userId);
-        console.log(response);
-        this.managerService.getManager()
-          .subscribe((managers: Manager[]) => {
-            this.managerSSOData = managers;
-          });
+    this.managerService.getManager()
+      .subscribe((managers: Manager[]) => {
+        this.managerSSOData = managers;
       });
   }
 

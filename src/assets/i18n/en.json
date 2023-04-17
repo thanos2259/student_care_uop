@@ -239,7 +239,9 @@
   },
   "MANAGER": {
     "FACULTY": "Manager",
-    "APPLICATIONS": "Applications"
+    "APPLICATIONS": "Applications",
+    "PROFILE-CANCEL": "Clear",
+    "PROFILE-CREATE": "Create"
   },
   "GENERIC": {
     "CONTACT": "Contact"

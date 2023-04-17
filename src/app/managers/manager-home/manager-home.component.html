@@ -45,18 +45,16 @@
                   </div>
                 </div>
                 <br>
-                <strong>Τρέχουσα Περίοδος:</strong> 11/09/2022 - 11/10/2022
-                <br>
-                <br>
                 <div class="form-group container-fluid row" style="width: 320px; margin: auto">
                   <div class="col-sm-6 submitButton">
-                    <button type="submit" class="btn btn-primary" style="width: 120px; margin: auto">
-                      Δημιουργία
+                    <button type="submit" (click)="insertPeriodDatesMeals()" class="btn btn-primary"
+                      style="width: 120px; margin: auto">
+                      {{'MANAGER.PROFILE-CREATE' | translate}}
                     </button>
                   </div>
                   <div class="col-sm-6">
                     <a (click)="meals.resetForm()" class="btn btn-secondary" style="width: 120px; margin: auto">
-                      {{'STUDENT.PROFILE-CANCEL' | translate}}
+                      {{'MANAGER.PROFILE-CANCEL' | translate}}
                     </a>
                   </div>
                 </div>
@@ -93,19 +91,17 @@
                     </div>
                   </div>
                   <br>
-                  <strong>Τρέχουσα Περίοδος:</strong> 11/09/2022 - 11/10/2022
-                  <br>
-                  <br>
                 </div>
                 <div class="form-group container-fluid row" style="width: 320px; margin: auto">
                   <div class="col-sm-6 submitButton">
-                    <button type="submit" class="btn btn-primary" style="width: 120px; margin: auto">
-                      Δημιουργία
+                    <button type="submit" (click)="insertPeriodDatesAccommodation()" class="btn btn-primary"
+                      style="width: 120px; margin: auto">
+                      {{'MANAGER.PROFILE-CREATE' | translate}}
                     </button>
                   </div>
                   <div class="col-sm-6">
                     <a (click)="accommodation.resetForm()" class="btn btn-secondary" style="width: 120px; margin: auto">
-                      {{'STUDENT.PROFILE-CANCEL' | translate}}
+                      {{'MANAGER.PROFILE-CANCEL' | translate}}
                     </a>
                   </div>
                 </div>

@@ -130,11 +130,14 @@
         <br>
         <br>
         <li>
-          <span class="font-weight-bold">{{'STUDENT.HOUSING-INF18' | translate}} </span>
-          {{'STUDENT.HOUSING-INF19' | translate}}
-          <span class="font-weight-bold">
-            {{'STUDENT.HOUSING-INF20' | translate}} </span>
-          {{'STUDENT.HOUSING-INF17' | translate}}
+          <span class="font-weight-bold">Εκκαθαριστικό Σημείωμα και Ε1του προηγούμενου οικονομικού έτους, γονέων καθώς
+            και του υποψηφίου,</span>
+          <span>
+            από την
+            οποία προκύπτουν και ο τόπος μόνιμης κατοικίας, καθώς και τα προστατευόμενα μέλη της οικογένειας του
+            υποψηφίου
+            (κωδικός 003, 004 του Πίνακα 8 της Δήλωσης Φορολογίας 9 Εισοδήματος Φυσικών Προσώπων)
+          </span>
           <br>
           <span class="font-italic">
             {{'STUDENT.HOUSING-INFSTATIC' | translate}}
@@ -161,39 +164,14 @@
         <br>
         <br>
         <li>
-          {{'STUDENT.HOUSING-INF15' | translate}}
-          <span class="font-weight-bold">{{'STUDENT.HOUSING-INF21' | translate}}</span>
-          {{'STUDENT.HOUSING-INF22' | translate}}
-          <span class="font-weight-bold">{{'STUDENT.HOUSING-INF23' | translate}}</span>
-          {{'STUDENT.HOUSING-INF17' | translate}}
-          {{'STUDENT.HOUSING-INF24' | translate}}
-          <br>
-          <span class="font-italic">
-            {{'STUDENT.HOUSING-INFSTATIC' | translate}}
-          </span>
-          <i class="fa fa-info-circle fa-lg fa-icon" data-toggle="tooltip" data-placement="top"
-            title="{{'STUDENT.HOUSING-INFSTATIC2' | translate}}">
-          </i>
-          <mat-form-field class="w-100" appearance="fill">
-            <mat-label>{{'STUDENT.HOUSING-INFSTATIC1' | translate}}</mat-label>
-            <ngx-mat-file-input (change)="validateFiles('fileEka8aristiko')" formControlName="fileEka8aristiko">
-            </ngx-mat-file-input>
-          </mat-form-field>
-        </li>
-        <button class="btn btn-secondary btn-margin-bottom mr-3" style="width:185px;"><a class="view-link"
-            (click)="receiveFile('fileEka8aristiko')" target="_blank">
-            <i class="fa fa-eye mr-2"></i>{{'STUDENT.HOUSING-FILE-VIEW' | translate}}</a></button>
-        <button class="btn btn-secondary view-btn" (click)="onSubmitFile('fileEka8aristiko')" style="width:185px">
-          <i class="fa fa-upload mr-2" aria-hidden="true"></i>{{'STUDENT.HOUSING-FILE-UPLOAD' | translate}}</button>
-        <i *ngIf="filesSubmitted.fileEka8aristiko==true"> &nbsp; <i class="success fas fa-3x fa-check text-success">
-          </i> </i>
-        <br>
-        <br>
-        <li>
           <span class="font-weight-bold">{{'STUDENT.HOUSING-INF25' | translate}}</span>
           {{'STUDENT.HOUSING-INF26' | translate}}
           <br>
-          <a href="src=../../../assets/images/n1599.pdf" target="_blank">{{'STUDENT.HOUSING-INF27' | translate}}</a>
+          <a href="src=../../../assets/images/n1599 stegasi geniki.pdf" target="_blank">{{'STUDENT.HOUSING-INF27' |
+            translate}} (Γενική Υπεύθυνη Δήλωση)</a>
+          <br>
+          <a href="src=../../../assets/images/n1599 stegasi patra.pdf" target="_blank">{{'STUDENT.HOUSING-INF27' |
+            translate}} (Υπεύθυνη Δήλωση για τα τμήματα της Πάτρας)</a>
           <br>
           <span class="font-italic">
             {{'STUDENT.HOUSING-INFSTATIC' | translate}}
@@ -217,24 +195,62 @@
         <br>
         <br>
         <li>
-          {{'STUDENT.HOUSING-INF28' | translate}}
+          <span class="font-weight-bold">Βεβαίωση επίδοσης</span>
+          <span> για τον υποψήφιο που έχει εξετασθεί επιτυχώς στα μισά μαθήματα του προηγούμενου Ακαδημαϊκού
+            Έτους, που προβλέπονται από τον Οδηγό Σπουδών. Επισημαίνεται ότι, για τους φοιτητές που κατά την περίοδο των
+            αιτήσεων διανύουν το πρώτο έτος σπουδών, η στάθμιση του συγκεκριμένου συντελεστή θα υπολογίζεται
+            αυτεπάγγελτα
+            από
+            το Γραφείο Φοιτητικών Θεμάτων, κατόπιν αναζήτησης του σχετικού δικαιολογητικού από την αντίστοιχη Γραμματεία
+            του
+            αιτούντος.(Για τη Πάτρα αρκεί να έχει ολοκληρώσει με επιτυχία το 1/3 τουλάχιστον των μαθημάτων του έτους που
+            προηγείται της υποβολής της αίτησής του).</span>
+          <br>
+          <span class="font-italic">
+            {{'STUDENT.HOUSING-INFSTATIC' | translate}}
+          </span>
+          <i class="fa fa-info-circle fa-lg fa-icon" data-toggle="tooltip" data-placement="top"
+            title="{{'STUDENT.HOUSING-INFSTATIC2' | translate}}">
+          </i>
           <mat-form-field class="w-100" appearance="fill">
-            <mat-label>{{'STUDENT.HOUSING-INF28' | translate}}
-            </mat-label>
-            <mat-select formControlName="studentCategory">
-              <mat-option value="{{'STUDENT.HOUSING-INF29' | translate}}">{{'STUDENT.HOUSING-INF29' | translate}}
-              </mat-option>
-              <mat-option value="{{'STUDENT.HOUSING-INF30' | translate}}">{{'STUDENT.HOUSING-INF30' | translate}}
-              </mat-option>
-              <mat-option value="{{'STUDENT.HOUSING-INF31' | translate}}">{{'STUDENT.HOUSING-INF31' | translate}}
-              </mat-option>
-              <mat-option value="{{'STUDENT.HOUSING-INF32' | translate}}">{{'STUDENT.HOUSING-INF32' | translate}}
-              </mat-option>
-              <mat-option value="{{'STUDENT.HOUSING-INF33' | translate}}">{{'STUDENT.HOUSING-INF33' | translate}}
-              </mat-option>
-            </mat-select>
+            <mat-label>{{'STUDENT.HOUSING-INFSTATIC1' | translate}}</mat-label>
+            <ngx-mat-file-input (change)="validateFiles('fileYpeu8unhDilosi')" formControlName="fileYpeu8unhDilosi">
+            </ngx-mat-file-input>
           </mat-form-field>
         </li>
+        <button class="btn btn-secondary btn-margin-bottom mr-3" style="width:185px;"><a class="view-link"
+            (click)="receiveFile('fileYpeu8unhDilosi')" target="_blank">
+            <i class="fa fa-eye mr-2"></i>{{'STUDENT.HOUSING-FILE-VIEW' | translate}}</a></button>
+        <button class="btn btn-secondary view-btn" (click)="onSubmitFile('fileYpeu8unhDilosi')" style="width:185px">
+          <i class="fa fa-upload mr-2" aria-hidden="true"></i>{{'STUDENT.HOUSING-FILE-UPLOAD' | translate}}</button>
+        <i *ngIf="filesSubmitted.fileYpeu8unhDilosi==true"> &nbsp; <i class="success fas fa-3x fa-check text-success">
+          </i> </i>
+        <br>
+        <br>
+        <li>
+          <span class="font-weight-bold">Βεβαίωση σπουδών.
+          </span>
+          <span>Για την απόδειξη φοίτησης εντός της τυπικής διάρκειας + 2 χρόνια.</span>
+          <br>
+          <span class="font-italic">
+            {{'STUDENT.HOUSING-INFSTATIC' | translate}}
+          </span>
+          <i class="fa fa-info-circle fa-lg fa-icon" data-toggle="tooltip" data-placement="top"
+            title="{{'STUDENT.HOUSING-INFSTATIC2' | translate}}">
+          </i>
+          <mat-form-field class="w-100" appearance="fill">
+            <mat-label>{{'STUDENT.HOUSING-INFSTATIC1' | translate}}</mat-label>
+            <ngx-mat-file-input (change)="validateFiles('fileYpeu8unhDilosi')" formControlName="fileYpeu8unhDilosi">
+            </ngx-mat-file-input>
+          </mat-form-field>
+        </li>
+        <button class="btn btn-secondary btn-margin-bottom mr-3" style="width:185px;"><a class="view-link"
+            (click)="receiveFile('fileYpeu8unhDilosi')" target="_blank">
+            <i class="fa fa-eye mr-2"></i>{{'STUDENT.HOUSING-FILE-VIEW' | translate}}</a></button>
+        <button class="btn btn-secondary view-btn" (click)="onSubmitFile('fileYpeu8unhDilosi')" style="width:185px">
+          <i class="fa fa-upload mr-2" aria-hidden="true"></i>{{'STUDENT.HOUSING-FILE-UPLOAD' | translate}}</button>
+        <i *ngIf="filesSubmitted.fileYpeu8unhDilosi==true"> &nbsp; <i class="success fas fa-3x fa-check text-success">
+          </i> </i>
       </ul>
       <div>
         <button mat-button matStepperPrevious>{{'STUDENT.HOUSING-BACK' | translate}}</button>

@@ -37,6 +37,19 @@ const getManager = async (request, response) => {
   }
 };
 
+const getPeriodInfo = async (request, response) => {
+  const depId = request.params.id;
+  try {
+    const manager = await managerService.getPeriodInfo(depId);
+    response.status(200).json(manager);
+  } catch (error) {
+    console.error(error.message);
+    response.send({
+      message: error.message
+    });
+  }
+};
+
 const getCommentByStudentIdAndSubject = async (request, response) => {
   try {
     const id = request.query.studentId;
@@ -73,6 +86,27 @@ const insertCommentsByStudentId = async (request, response) => {
   }
 };
 
+const insertPeriodDates = async (request, response) => {
+  try {
+    const id = request.query.managerId;
+    const depId = request.query.depId;
+    const data = request.body;
+
+    await managerService.insertPeriodDates(id, depId, data);
+
+    response
+      .status(200)
+      .json({
+        message: 'Period dates inserted successfully'
+      });
+  } catch (error) {
+    console.error(error.message);
+    response.status(400).send({
+      message: error.message
+    });
+  }
+};
+
 const updateCommentsByStudentId = async (request, response) => {
   try {
     const id = request.params.id;
@@ -97,7 +131,9 @@ const updateCommentsByStudentId = async (request, response) => {
 module.exports = {
   login,
   getManager,
+  getPeriodInfo,
   getCommentByStudentIdAndSubject,
   insertCommentsByStudentId,
+  insertPeriodDates,
   updateCommentsByStudentId
 };

@@ -27,6 +27,15 @@ export class ManagerService {
       });
   }
 
+  insertPeriodDates(data: any, depId: number) {
+    let managerId = this.authService.getSessionId();
+    const params = new HttpParams()
+      .set('managerId', managerId)
+      .set('depId', depId);
+    return this.http
+      .post<{ message: string }>(MANAGER_URL + "insertPeriodDates/", data, { params })
+  }
+
   updateCommentsByStudentId(studentId: number, comments: string, subject: string) {
     const commentsJson: any = { 'comments': comments, 'subject': subject };
     this.http
@@ -37,11 +46,15 @@ export class ManagerService {
   }
 
   getCommentByStudentIdAndSubject(studentId: number, subject: string): Observable<any> {
-     const params = new HttpParams()
+    const params = new HttpParams()
       .set('studentId', studentId)
       .set('subject', subject);
     const fetchedComment = this.http.get<any>(MANAGER_URL + "getCommentByStudentIdAndSubject/", { params });
     return fetchedComment;
+  }
+
+  getPeriodInfo(deptId: number): Observable<any> {
+    return this.http.get<any>(MANAGER_URL + "getPeriodInfo/" + deptId);
   }
 
 }

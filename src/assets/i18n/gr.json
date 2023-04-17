@@ -238,7 +238,9 @@
   },
   "MANAGER": {
     "FACULTY": "Διαχειριστής",
-    "APPLICATIONS": "Αιτήσεις"
+    "APPLICATIONS": "Αιτήσεις",
+    "PROFILE-CANCEL": "Καθαρισμός",
+    "PROFILE-CREATE": "Δημιουργία"
   },
   "GENERIC": {
     "CONTACT": "Επικοινωνία"

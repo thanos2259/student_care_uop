@@ -7,6 +7,7 @@ import { TranslateService } from '@ngx-translate/core';
 import * as moment from 'moment/moment';
 import { StudentCommentsDialogComponent } from '../student-comments-dialog/student-comments-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-student',
@@ -37,31 +38,27 @@ export class StudentComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.language = localStorage.getItem('language') || 'gr';
-
+    if (!environment.production) {
+      this.authService.setSessionId(1);
+    }
     this.fetchStudent();
   }
 
   public fetchStudent() {
-    this.authService.login('pcst19003')
-      .subscribe((response) => {
-        this.authService.setToken(response.token);
-        this.authService.setSessionId(response.userId);
-        console.log(response);
-        this.studentsService.getStudents()
-          .subscribe((students: Student[]) => {
-            this.studentsSSOData = students;
-            this.studentsService.getCommentByStudentIdAndSubject(this.studentsSSOData[0]?.sso_uid, 'Σίτιση')
-              .subscribe((comment: any) => {
-                this.commentSitisi = comment;
-                const dateDif = moment(comment.comment_date, "YYYY-MM-DD HH:mm:ss").locale("el").fromNow();
-                this.commentSitisi.comment_date = dateDif;
-              });
-            this.studentsService.getCommentByStudentIdAndSubject(this.studentsSSOData[0]?.sso_uid, 'Στέγαση')
-              .subscribe((comment: any) => {
-                this.commentStegasi = comment;
-                const dateDif = moment(comment.comment_date, "YYYY-MM-DD HH:mm:ss").locale("el").fromNow();
-                this.commentStegasi.comment_date = dateDif;
-              });
+    this.studentsService.getStudents()
+      .subscribe((students: Student[]) => {
+        this.studentsSSOData = students;
+        this.studentsService.getCommentByStudentIdAndSubject(this.studentsSSOData[0]?.sso_uid, 'Σίτιση')
+          .subscribe((comment: any) => {
+            this.commentSitisi = comment;
+            const dateDif = moment(comment.comment_date, "YYYY-MM-DD HH:mm:ss").locale("el").fromNow();
+            this.commentSitisi.comment_date = dateDif;
+          });
+        this.studentsService.getCommentByStudentIdAndSubject(this.studentsSSOData[0]?.sso_uid, 'Στέγαση')
+          .subscribe((comment: any) => {
+            this.commentStegasi = comment;
+            const dateDif = moment(comment.comment_date, "YYYY-MM-DD HH:mm:ss").locale("el").fromNow();
+            this.commentStegasi.comment_date = dateDif;
           });
       });
   }
@@ -95,7 +92,7 @@ export class StudentComponent implements OnInit, OnDestroy {
 
   openCommentsDialog(subject: string) {
     const dialogRef = this.dialog.open(StudentCommentsDialogComponent, {
-      data: { studentsData: this.studentsSSOData, index: 0, subject: subject}
+      data: { studentsData: this.studentsSSOData, index: 0, subject: subject }
     });
 
     dialogRef.afterClosed().subscribe((result: any) => {

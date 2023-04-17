@@ -5,7 +5,7 @@ const checkAuth = require("../middleware/auth.js");
 
 /* Student Routes */
 router.get("/", studentController.getAllStudents);
-router.get("/getStudentById/:id", checkAuth, studentController.getStudentById);
+router.get("/getStudentById/:id", studentController.getStudentById);
 router.get("/getStudentApplicationById/:id", studentController.getApplicationsById);
 router.get("/getAccommodationFiles/:id", studentController.getAccommodationFiles);
 router.get("/getCommentByStudentIdAndSubject/", studentController.getCommentByStudentIdAndSubject);

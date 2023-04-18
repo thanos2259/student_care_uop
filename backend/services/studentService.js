@@ -158,6 +158,24 @@ const updateApplication = async (student, filesData, uid) => {
   }
 };
 
+const getStudentsApplyPhaseMeals = async () => {
+  try {
+    const query = `SELECT *
+                    FROM sso_users
+                    INNER JOIN student_users
+                    ON sso_users.uuid = student_users.sso_uid
+                    INNER JOIN applications apps ON apps.uid = sso_users.uuid
+                    INNER JOIN period ON period.id = apps.period_id AND period.is_active = true
+                    WHERE sso_users.edupersonprimaryaffiliation = 'student' `;
+
+    const studentsWithAppsMeals = await pool.query(query);
+    return studentsWithAppsMeals.rows;
+  } catch (error) {
+    console.error('Error while fetching students from active period' + error.message);
+    throw Error('Error while fetching students from active period');
+  }
+};
+
 // dummy login with username only for testing purposes
 const loginStudent = async (username) => {
   try {
@@ -347,6 +365,7 @@ module.exports = {
   getStudentById,
   getAccommodationFilesByAppID,
   getCommentByStudentIdAndSubject,
+  getStudentsApplyPhaseMeals,
   insertOrUpdateApplication,
   updateStudentDetails,
   updateStudentContact,

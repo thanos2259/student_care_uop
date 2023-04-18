@@ -166,7 +166,7 @@ const getStudentsApplyPhaseMeals = async () => {
                     ON sso_users.uuid = student_users.sso_uid
                     INNER JOIN applications apps ON apps.uid = sso_users.uuid
                     INNER JOIN period ON period.id = apps.period_id AND period.is_active = true
-                    WHERE sso_users.edupersonprimaryaffiliation = 'student' `;
+                    WHERE sso_users.edupersonprimaryaffiliation = 'student' AND apps.application_type = 'meals'`;
 
     const studentsWithAppsMeals = await pool.query(query);
     return studentsWithAppsMeals.rows;

@@ -18,7 +18,8 @@ export class accommodationComponent implements OnInit {
     "fileOikogeneiakhKatastasi": false,
     "fileTautotita": false,
     "fileToposMonimhsKatoikias": false,
-    "fileEka8aristiko": false,
+    "fileEpidosi": false,
+    "fileVevaiwshSpoudwn": false,
     "fileYpeu8unhDilosi": false,
     "filePolutekneia": false,
     "fileBebaioshSpoudonAderfwn": false,
@@ -30,9 +31,15 @@ export class accommodationComponent implements OnInit {
     "fileGoneisAMEAIatrikhGnomateush": false,
     "fileGoneisThumataTromokratias1": false,
     "fileGoneisThumataTromokratias2": false,
-    "fileBebaioshEpidothsdhsAnergeias": false,
+    // "fileBebaioshEpidothsdhsAnergeias": false,
     "fileDiazevgmenoiGoneis1": false,
-    "fileDiazevgmenoiGoneis2": false
+    "fileDiazevgmenoiGoneis2": false,
+    "fileStratos": false,
+    "fileYpotrofeia": false,
+    "fileAporia": false,
+    "fileDiavathrio": false,
+    "filePistopoihtikoAlodapou": false,
+    "fileEkkatharistikoAllodapou": false
   };
   isLinear = true;
   firstFormGroup!: FormGroup;
@@ -70,9 +77,9 @@ export class accommodationComponent implements OnInit {
       fileOikogeneiakhKatastasi: ['', Validators.required],
       fileTautotita: ['', Validators.required],
       fileToposMonimhsKatoikias: ['', Validators.required],
-      fileEka8aristiko: ['', Validators.required],
       fileYpeu8unhDilosi: ['', Validators.required],
-      studentCategory: ['', Validators.required]
+      fileEpidosi: ['', Validators.required],
+      fileVevaiwshSpoudwn: ['', Validators.required]
     });
 
     this.thirdFormGroup = this._formBuilder.group({
@@ -86,9 +93,15 @@ export class accommodationComponent implements OnInit {
       fileGoneisAMEAIatrikhGnomateush: [''],
       fileGoneisThumataTromokratias1: [''],
       fileGoneisThumataTromokratias2: [''],
-      fileBebaioshEpidothsdhsAnergeias: [''],
+      // fileBebaioshEpidothsdhsAnergeias: [''],
       fileDiazevgmenoiGoneis1: [''],
-      fileDiazevgmenoiGoneis2: ['']
+      fileDiazevgmenoiGoneis2: [''],
+      fileStratos: [''],
+      fileYpotrofeia: [''],
+      fileAporia: [''],
+      fileDiavathrio: [''],
+      filePistopoihtikoAlodapou: [''],
+      fileEkkatharistikoAllodapou: ['']
     });
 
     this.specialDataFormGroup = this._formBuilder.group({
@@ -118,11 +131,9 @@ export class accommodationComponent implements OnInit {
       location: this.firstFormGroup.get('municipality')?.value,
       city: this.firstFormGroup.get('city')?.value,
       phone: this.firstFormGroup.get('phone')?.value,
-      category: this.secondFormGroup.get('studentCategory')?.value
     };
 
     const applicationData: any = {
-      category: this.secondFormGroup.get('studentCategory')?.value,
       family_income: this.specialDataFormGroup.get('familyIncome')?.value,
       family_state: this.specialDataFormGroup.get('familyState')?.value,
       protected_members: this.specialDataFormGroup.get('protectedMembers')?.value,
@@ -154,7 +165,7 @@ export class accommodationComponent implements OnInit {
     let trueElements = Object.keys(this.filesSubmitted).filter(el => this.filesSubmitted[el] == true);
     let trueElementsCount = trueElements.length;
 
-    if (trueElementsCount == 5) {
+    if (trueElementsCount == 6) {
       this.stepper.selected.completed = true;
       this.stepper.next(); // Move to next step
       return;

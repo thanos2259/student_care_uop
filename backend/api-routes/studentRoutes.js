@@ -9,11 +9,12 @@ router.get("/getStudentById/:id", studentController.getStudentById);
 router.get("/getStudentApplicationById/:id", studentController.getApplicationsById);
 router.get("/getAccommodationFiles/:id", studentController.getAccommodationFiles);
 router.get("/getCommentByStudentIdAndSubject/", studentController.getCommentByStudentIdAndSubject);
+router.get("/getStudentsApplyPhaseMeals/:id", studentController.getStudentsApplyPhaseMeals);
+router.put("/updateStudentDetails/:id", studentController.updateStudentDetails);
+router.put("/updateStudentContact/:id", studentController.updateStudentContact);
+router.put("/updateStudentBasicInfo/:id", studentController.updateStudentBasicInfo);
+router.put("/updateStudentSpecialData/:id", studentController.updateStudentSpecialData);
 router.post("/login", studentController.login);
-router.put("/updateStudentDetails/:id", checkAuth, studentController.updateStudentDetails);
-router.put("/updateStudentContact/:id", checkAuth, studentController.updateStudentContact);
-router.put("/updateStudentBasicInfo/:id", checkAuth, studentController.updateStudentBasicInfo);
-router.put("/updateStudentSpecialData/:id", checkAuth, studentController.updateStudentSpecialData);
 // file upload routes
 router.post("/upload/:id/:fileIndex", studentController.uploadFile);
 router.post("/sendFile/:id", studentController.sendFile);

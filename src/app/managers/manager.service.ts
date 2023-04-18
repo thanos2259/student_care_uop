@@ -24,6 +24,7 @@ export class ManagerService {
       .post<{ message: string }>(MANAGER_URL + "insertCommentsByStudentId/" + studentId, commentsJson)
       .subscribe(responseData => {
         console.log(responseData.message);
+        location.reload();
       });
   }
 
@@ -55,6 +56,14 @@ export class ManagerService {
 
   getPeriodInfo(deptId: number): Observable<any> {
     return this.http.get<any>(MANAGER_URL + "getPeriodInfo/" + deptId);
+  }
+
+  updateApplicationStatus(status: any, appId: number) {
+    this.http
+      .put<any>(MANAGER_URL + "updateApplicationStatus/" + appId, { status })
+      .subscribe(responseData => {
+        console.log(responseData.message);
+      });
   }
 
 }

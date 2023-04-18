@@ -160,7 +160,7 @@ const updateApplication = async (student, filesData, uid) => {
 
 const getStudentsApplyPhaseMeals = async () => {
   try {
-    const query = `SELECT *
+    const query = `SELECT apps.id as app_id, *
                     FROM sso_users
                     INNER JOIN student_users
                     ON sso_users.uuid = student_users.sso_uid

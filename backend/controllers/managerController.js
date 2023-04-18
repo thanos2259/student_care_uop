@@ -128,6 +128,27 @@ const updateCommentsByStudentId = async (request, response) => {
   }
 };
 
+const updateApplicationStatus = async (request, response) => {
+  try {
+    const appId = request.params.id;
+    const status = request.body.status;
+
+    await managerService.updateApplicationStatus(appId, status);
+
+    response
+      .status(200)
+      .json({
+        message: 'Student application status updated successfully'
+      });
+  } catch (error) {
+    console.error(error.message);
+    response.status(400).send({
+      message: error.message
+    });
+  }
+};
+
+
 module.exports = {
   login,
   getManager,
@@ -135,5 +156,6 @@ module.exports = {
   getCommentByStudentIdAndSubject,
   insertCommentsByStudentId,
   insertPeriodDates,
-  updateCommentsByStudentId
+  updateCommentsByStudentId,
+  updateApplicationStatus
 };

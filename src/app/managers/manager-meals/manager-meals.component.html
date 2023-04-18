@@ -24,70 +24,94 @@
                 <button class="btn btn-secondary" (click)="printDataTable()"><i class='fas fa-print'></i>
                   Print</button>
                 <br><br>
-                <table id="processingTable" #processingTable class="table table-bordered table-striped">
+                <table id="processingTable" #processingTable
+                  class="table table-responsive table-bordered table-striped">
                   <thead>
                     <tr>
+                      <th scope="col">#</th>
                       <th scope="col">Επιλογή</th>
-                      <th scope="col">Α/A</th>
+                      <th scope="col">Τμήμα</th>
                       <th scope="col">Όνομ/νυμο</th>
-                      <th scope="col">ΑΜ</th>
-                      <th scope="col">Έγγραφα</th>
+                      <th scope="col">Α.Μ.</th>
+                      <th scope="col">Αρ. Αίτησης</th>
+                      <th scope="col">Ημ/νία Αίτησης</th>
+                      <th scope="col">Αίτηση</th>
+                      <th scope="col">Εισόδημα</th>
+                      <th scope="col">Όριο Εισ.</th>
+                      <th scope="col">Σημειώσεις</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr *ngFor="let student of studentsSSOData ; let idx=index" [attr.data-index]="idx">
+                      <td>{{idx+1}}</td>
                       <td>
-                        <mat-form-field id="{{student.sso_uid}}" name="phase" style="width:100%;" appearance="standard">
+                        <mat-form-field id="{{student.app_id}}" name="phase" style="width:100%;" appearance="standard">
                           <mat-label>Υπό επεξεργασία</mat-label>
-                          <mat-select value="'option1'" name="phase">
-                            <mat-option value="option3" (click)="onSubmitSelect('option3', student.sso_uid)">Υπό
+                          <mat-select value="'option1'" name="phase"
+                            value="{{student.status== 1 ? 'option1' : student.status== 0 ? '' : 'option2'}}">
+                            <mat-option value="option3" (click)="onSubmitSelect('option3', student.app_id)">Υπό
                               επεξεργασία
                             </mat-option>
-                            <mat-option value="option1" (click)="onSubmitSelect('option1', student.sso_uid)">Έγκριση
+                            <mat-option value="option1" (click)="onSubmitSelect('option1', student.app_id)">Έγκριση
                             </mat-option>
-                            <mat-option value="option2" (click)="onSubmitSelect('option2', student.sso_uid)">
+                            <mat-option value="option2" (click)="onSubmitSelect('option2', student.app_id)">
                               Απόρριψη
                             </mat-option>
                           </mat-select>
                         </mat-form-field>
                         <!-- Insert Comment Button -->
-                        <a class="text-secondary w-100" style="cursor: pointer;" (click)="openCommentsDialog(idx)"><i
+                        <a *ngIf="!checkStudentHasComment(student.sso_uid) == true" class="text-secondary w-100"
+                          style="cursor: pointer; font-weight: bold;" (click)="openCommentsDialog(idx)"><i
+                            class="fas fa-plus"></i>
+                          Προσθήκη Σχολίου<br></a>
+                        <a *ngIf="checkStudentHasComment(student.sso_uid)" class=" text-secondary w-100"
+                          style="cursor: pointer; font-style: italic;" (click)="openCommentsDialog(idx)"><i
                             class="fas fa-edit"></i>
-                          Σχόλιο<br></a>
+                          Προβολή / Επεξεργασία Σχολίου<br></a>
                       </td>
-                      <th scope="row">1</th>
+                      <td>{{departmentNameByid(student.department_id)}}</td>
                       <td>{{student.givenname}} {{student.sn}}</td>
                       <td>{{student.schacpersonaluniquecode}}</td>
-                      <td class="reponsive-text-center-td">
-                        <button (click)="receiveFile(student.sso_uid, 'zip')"
-                          class=" mt-0 mb-0 pt-0 pb-0 btn btn-primary mr-3 td-button-responsive">
-                          <i class="fa fa-download" aria-hidden="true"></i> zip
-                        </button>
-                        <button (click)="receiveFile(student.sso_uid, 'application')"
-                          class="mt-0 mb-0 pt-0 pb-0 btn btn-primary mr-3 td-button-responsive">
-                          <i class="fa fa-download" aria-hidden="true"></i> Αίτηση
-                        </button>
+                      <td>{{student.app_id}}</td>
+                      <td>{{student.submit_date}}</td>
+                      <td class="text-left" style="min-width: 150px;">
+                        <a href="#" style="color: #224957;"><i class="fa fa-lg fa-eye mb-3"></i> Προβολή </a>
+                        <br>
+                        <a href="#" style="color: #224957;"><i class="fa fa-lg fa-download mb-3"></i> ZIP Αρχείο </a>
+                        <br>
+                        <a href="#" style="color: #224957;"><i class="fa fa-lg fa-address-card"></i> Επεξεργασία </a>
                       </td>
+                      <td>{{student.family_income}}</td>
+                      <td> 545454</td>
+                      <td> {{student.notes}}</td>
+                      <!-- <td class="reponsive-text-center-td">
+                          <button (click)="receiveFile(student.sso_uid, 'zip')"
+                            class=" mt-0 mb-0 pt-0 pb-0 btn btn-primary mr-3 td-button-responsive">
+                            <i class="fa fa-download" aria-hidden="true"></i> zip
+                          </button>
+                          <button (click)="receiveFile(student.sso_uid, 'application')"
+                            class="mt-0 mb-0 pt-0 pb-0 btn btn-primary mr-3 td-button-responsive">
+                            <i class="fa fa-download" aria-hidden="true"></i> Αίτηση
+                          </button>
+                        </td> -->
                     </tr>
                   </tbody>
                   <tfoot>
                     <tr>
+                      <th scope="col">#</th>
                       <th scope="col">Επιλογή</th>
-                      <th scope="col">Α/A</th>
+                      <th scope="col">Τμήμα</th>
                       <th scope="col">Όνομ/νυμο</th>
-                      <th scope="col">ΑΜ</th>
-                      <th scope="col">Έγγραφα</th>
+                      <th scope="col">Α.Μ.</th>
+                      <th scope="col">Αρ. Αίτησης</th>
+                      <th scope="col">Ημ/νία Αίτησης</th>
+                      <th scope="col">Αίτηση</th>
+                      <th scope="col">Εισόδημα</th>
+                      <th scope="col">Όριο Εισ.</th>
+                      <th scope="col">Σημειώσεις</th>
                     </tr>
                   </tfoot>
                 </table>
-                <br>
-                <div class="container">
-                  <div class="col-md-12 text-center">
-                    <button type="submit" class="btn btn-primary">
-                      Οριστικοποίηση
-                    </button>
-                  </div>
-                </div>
               </form>
             </div>
             <div class="tab-pane" id="completed">
@@ -102,9 +126,13 @@
                   <thead>
                     <tr>
                       <th scope="col">Α/A</th>
+                      <th scope="col">Επιλογή</th>
+                      <th scope="col">Τμήμα</th>
+                      <th scope="col">Α.Μ.</th>
                       <th scope="col">Όνομ/νυμο</th>
-                      <th scope="col">ΑΜ</th>
-                      <th scope="col">Αποτελέσματα</th>
+                      <th scope="col">Εισόδημα</th>
+                      <th scope="col">Όριο Εισ.</th>
+                      <th scope="col">Έγγραφα</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -146,9 +174,13 @@
                   <tfoot>
                     <tr>
                       <th scope="col">Α/A</th>
+                      <th scope="col">Επιλογή</th>
+                      <th scope="col">Τμήμα</th>
+                      <th scope="col">Α.Μ.</th>
                       <th scope="col">Όνομ/νυμο</th>
-                      <th scope="col">ΑΜ</th>
-                      <th scope="col">Αποτελέσματα</th>
+                      <th scope="col">Εισόδημα</th>
+                      <th scope="col">Όριο Εισ.</th>
+                      <th scope="col">Έγγραφα</th>
                     </tr>
                   </tfoot>
                 </table>

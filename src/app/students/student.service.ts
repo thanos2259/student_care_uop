@@ -23,6 +23,12 @@ export class StudentsService {
     return fetchedStudents;
   }
 
+  getStudentsAppsMealsForPeriod(): Observable<Array<Student>> {
+    let id = this.authService.getSessionId();
+    const fetchedStudents = this.http.get<Array<Student>>('http://localhost:3000/api/students/getStudentsApplyPhaseMeals/' + id);
+    return fetchedStudents;
+  }
+
   getApplication(): Observable<Array<Application>> {
     let id = this.authService.getSessionId();
     const fetchedStudents = this.http.get<Array<Application>>('http://localhost:3000/api/students/getStudentApplicationById/' + id);
@@ -35,7 +41,7 @@ export class StudentsService {
   }
 
   getCommentByStudentIdAndSubject(studentId: number, subject: string): Observable<any> {
-     const params = new HttpParams()
+    const params = new HttpParams()
       .set('studentId', studentId)
       .set('subject', subject);
     const fetchedComment = this.http.get<any>("http://localhost:3000/api/students/" + "getCommentByStudentIdAndSubject/", { params });

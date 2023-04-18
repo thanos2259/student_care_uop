@@ -214,16 +214,16 @@
           </i>
           <mat-form-field class="w-100" appearance="fill">
             <mat-label>{{'STUDENT.HOUSING-INFSTATIC1' | translate}}</mat-label>
-            <ngx-mat-file-input (change)="validateFiles('fileYpeu8unhDilosi')" formControlName="fileYpeu8unhDilosi">
+            <ngx-mat-file-input (change)="validateFiles('fileEpidosi')" formControlName="fileEpidosi">
             </ngx-mat-file-input>
           </mat-form-field>
         </li>
         <button class="btn btn-secondary btn-margin-bottom mr-3" style="width:185px;"><a class="view-link"
-            (click)="receiveFile('fileYpeu8unhDilosi')" target="_blank">
+            (click)="receiveFile('fileEpidosi')" target="_blank">
             <i class="fa fa-eye mr-2"></i>{{'STUDENT.HOUSING-FILE-VIEW' | translate}}</a></button>
-        <button class="btn btn-secondary view-btn" (click)="onSubmitFile('fileYpeu8unhDilosi')" style="width:185px">
+        <button class="btn btn-secondary view-btn" (click)="onSubmitFile('fileEpidosi')" style="width:185px">
           <i class="fa fa-upload mr-2" aria-hidden="true"></i>{{'STUDENT.HOUSING-FILE-UPLOAD' | translate}}</button>
-        <i *ngIf="filesSubmitted.fileYpeu8unhDilosi==true"> &nbsp; <i class="success fas fa-3x fa-check text-success">
+        <i *ngIf="filesSubmitted.fileEpidosi==true"> &nbsp; <i class="success fas fa-3x fa-check text-success">
           </i> </i>
         <br>
         <br>
@@ -240,16 +240,16 @@
           </i>
           <mat-form-field class="w-100" appearance="fill">
             <mat-label>{{'STUDENT.HOUSING-INFSTATIC1' | translate}}</mat-label>
-            <ngx-mat-file-input (change)="validateFiles('fileYpeu8unhDilosi')" formControlName="fileYpeu8unhDilosi">
+            <ngx-mat-file-input (change)="validateFiles('fileVevaiwshSpoudwn')" formControlName="fileVevaiwshSpoudwn">
             </ngx-mat-file-input>
           </mat-form-field>
         </li>
         <button class="btn btn-secondary btn-margin-bottom mr-3" style="width:185px;"><a class="view-link"
-            (click)="receiveFile('fileYpeu8unhDilosi')" target="_blank">
+            (click)="receiveFile('fileVevaiwshSpoudwn')" target="_blank">
             <i class="fa fa-eye mr-2"></i>{{'STUDENT.HOUSING-FILE-VIEW' | translate}}</a></button>
-        <button class="btn btn-secondary view-btn" (click)="onSubmitFile('fileYpeu8unhDilosi')" style="width:185px">
+        <button class="btn btn-secondary view-btn" (click)="onSubmitFile('fileVevaiwshSpoudwn')" style="width:185px">
           <i class="fa fa-upload mr-2" aria-hidden="true"></i>{{'STUDENT.HOUSING-FILE-UPLOAD' | translate}}</button>
-        <i *ngIf="filesSubmitted.fileYpeu8unhDilosi==true"> &nbsp; <i class="success fas fa-3x fa-check text-success">
+        <i *ngIf="filesSubmitted.fileVevaiwshSpoudwn==true"> &nbsp; <i class="success fas fa-3x fa-check text-success">
           </i> </i>
       </ul>
       <div>
@@ -579,7 +579,7 @@
           </ol>
         </li>
         <br>
-        <li>
+        <!-- <li>
           {{'STUDENT.HOUSING-INF66' | translate}}
           <br>
           <span class="font-weight-bold"> {{'STUDENT.HOUSING-INF36' | translate}}</span>
@@ -608,9 +608,9 @@
           translate}}</button>
         <i *ngIf="filesSubmitted.fileBebaioshEpidothsdhsAnergeias==true"> &nbsp; <i
             class="success fas fa-3x fa-check text-success">
-          </i> </i>
-        <br>
-        <br>
+          </i> </i> -->
+        <!-- <br> -->
+        <!-- <br> -->
         <li>
           {{'STUDENT.HOUSING-INF69' | translate}}
           <br>
@@ -673,6 +673,185 @@
             </li>
           </ol>
         </li>
+        <br>
+        <li>
+          <span class="font-weight-bold"> Βεβαίωση Υπηρεσίας από τη Μονάδα του στρατευμένου</span>
+          <span> για κάθε προστατευόμενο μέλος της οικογένειας του υποψηφίου,
+            που υπηρετεί στρατιωτική θητεία και δεν αποζημιώνεται (όπως π.χ. οι δόκιμοι έφεδροι αξιωματικοί), με
+            εναπομείνασα διάρκεια θητείας τουλάχιστον 6 μηνών, από την έναρξη της περιόδου στέγασης του
+            υποψηφίου.</span>
+          <br>
+          <span class="font-italic">
+            {{'STUDENT.HOUSING-INFSTATIC' | translate}}
+          </span>
+          <i class="fa fa-info-circle fa-lg fa-icon" data-toggle="tooltip" data-placement="top"
+            title="{{'STUDENT.HOUSING-INFSTATIC2' | translate}}">
+          </i>
+          <mat-form-field class="w-100" appearance="fill">
+            <mat-label>{{'STUDENT.HOUSING-INFSTATIC1' | translate}}</mat-label>
+            <ngx-mat-file-input (change)="validateFiles('fileStratos')" formControlName="fileStratos">
+            </ngx-mat-file-input>
+          </mat-form-field>
+          <button class="btn btn-secondary btn-margin-bottom mr-3" style="width:185px;"><a class="view-link"
+              (click)="receiveFile('fileStratos')" target="_blank">
+              <i class="fa fa-eye mr-2"></i>{{'STUDENT.HOUSING-FILE-VIEW' | translate}}</a></button>
+          <button class="btn btn-secondary view-btn" (click)="onSubmitFile('fileStratos')" style="width:185px;">
+            <i class="fa fa-upload mr-2" aria-hidden="true"></i>{{'STUDENT.HOUSING-FILE-UPLOAD' |
+            translate}}</button>
+          <i *ngIf="filesSubmitted.fileStratos==true"> &nbsp; <i class="success fas fa-3x fa-check text-success">
+            </i> </i>
+        </li>
+        <br>
+        <li>
+          <span class="font-weight-bold"> Βεβαίωση υποτροφίας</span>
+          <br>
+          <span class="font-italic">
+            {{'STUDENT.HOUSING-INFSTATIC' | translate}}
+          </span>
+          <i class="fa fa-info-circle fa-lg fa-icon" data-toggle="tooltip" data-placement="top"
+            title="{{'STUDENT.HOUSING-INFSTATIC2' | translate}}">
+          </i>
+          <mat-form-field class="w-100" appearance="fill">
+            <mat-label>{{'STUDENT.HOUSING-INFSTATIC1' | translate}}</mat-label>
+            <ngx-mat-file-input (change)="validateFiles('fileYpotrofeia')" formControlName="fileYpotrofeia">
+            </ngx-mat-file-input>
+          </mat-form-field>
+          <button class="btn btn-secondary btn-margin-bottom mr-3" style="width:185px;"><a class="view-link"
+              (click)="receiveFile('fileYpotrofeia')" target="_blank">
+              <i class="fa fa-eye mr-2"></i>{{'STUDENT.HOUSING-FILE-VIEW' | translate}}</a></button>
+          <button class="btn btn-secondary view-btn" (click)="onSubmitFile('fileYpotrofeia')" style="width:185px;">
+            <i class="fa fa-upload mr-2" aria-hidden="true"></i>{{'STUDENT.HOUSING-FILE-UPLOAD' |
+            translate}}</button>
+          <i *ngIf="filesSubmitted.fileYpotrofeia==true"> &nbsp; <i class="success fas fa-3x fa-check text-success">
+            </i> </i>
+        </li>
+        <br>
+        <li>
+          <span class="font-weight-bold"> Bεβαίωση – πιστοποιητικό απορίας</span>
+          <span> Παιδιά απόρων οικογενειών θα πρέπει να προσκομίσουν βεβαίωση – πιστοποιητικό απορίας από αρμόδια
+            Υπηρεσία
+            Κοινωνικής Πρόνοιας</span>
+          <br>
+          <span class="font-italic">
+            {{'STUDENT.HOUSING-INFSTATIC' | translate}}
+          </span>
+          <i class="fa fa-info-circle fa-lg fa-icon" data-toggle="tooltip" data-placement="top"
+            title="{{'STUDENT.HOUSING-INFSTATIC2' | translate}}">
+          </i>
+          <mat-form-field class="w-100" appearance="fill">
+            <mat-label>{{'STUDENT.HOUSING-INFSTATIC1' | translate}}</mat-label>
+            <ngx-mat-file-input (change)="validateFiles('fileAporia')" formControlName="fileAporia">
+            </ngx-mat-file-input>
+          </mat-form-field>
+          <button class="btn btn-secondary btn-margin-bottom mr-3" style="width:185px;"><a class="view-link"
+              (click)="receiveFile('fileAporia')" target="_blank">
+              <i class="fa fa-eye mr-2"></i>{{'STUDENT.HOUSING-FILE-VIEW' | translate}}</a></button>
+          <button class="btn btn-secondary view-btn" (click)="onSubmitFile('fileAporia')" style="width:185px;">
+            <i class="fa fa-upload mr-2" aria-hidden="true"></i>{{'STUDENT.HOUSING-FILE-UPLOAD' |
+            translate}}</button>
+          <i *ngIf="filesSubmitted.fileAporia==true"> &nbsp; <i class="success fas fa-3x fa-check text-success">
+            </i> </i>
+        </li>
+        <br>
+        <li>
+          Ειδικότερα οι αλλοδαποί θα προσκομίζουν επιπλέον :
+          <br>
+          <span class="font-weight-bold"> {{'STUDENT.HOUSING-INF36' | translate}}</span>
+          <br>
+          <ol>
+            <li>
+              <span class="font-weight-bold"> Διαβατήριο και άδεια παραμονής (φωτοτυπία)</span>
+              <br>
+              <span class="font-italic">
+                {{'STUDENT.HOUSING-INFSTATIC' | translate}}
+              </span>
+              <i class="fa fa-info-circle fa-lg fa-icon" data-toggle="tooltip" data-placement="top"
+                title="{{'STUDENT.HOUSING-INFSTATIC2' | translate}}">
+              </i>
+              <mat-form-field class="w-100" appearance="fill">
+                <mat-label>{{'STUDENT.HOUSING-INFSTATIC1' | translate}}</mat-label>
+                <ngx-mat-file-input (change)="validateFiles('fileDiavathrio')" formControlName="fileDiavathrio">
+                </ngx-mat-file-input>
+              </mat-form-field>
+              <button class="btn btn-secondary btn-margin-bottom mr-3" style="width:185px;"><a class="view-link"
+                  (click)="receiveFile('fileDiavathrio')" target="_blank">
+                  <i class="fa fa-eye mr-2"></i>{{'STUDENT.HOUSING-FILE-VIEW' | translate}}</a></button>
+              <button class="btn btn-secondary view-btn" (click)="onSubmitFile('fileDiavathrio')" style="width:185px;">
+                <i class="fa fa-upload mr-2" aria-hidden="true"></i>{{'STUDENT.HOUSING-FILE-UPLOAD' |
+                translate}}</button>
+              <i *ngIf="filesSubmitted.fileDiavathrio==true"> &nbsp; <i class="success fas fa-3x fa-check text-success">
+                </i> </i>
+            </li>
+            <br>
+            <li>
+              <span class="font-weight-bold"> Πιστοποιητικό οικογενειακής κατάστασης, μεταφρασμένο και θεωρημένο από
+                αρμόδια αρχή</span>
+              <br>
+              <span class="font-italic">
+                {{'STUDENT.HOUSING-INFSTATIC' | translate}}
+              </span>
+              <i class="fa fa-info-circle fa-lg fa-icon" data-toggle="tooltip" data-placement="top"
+                title="{{'STUDENT.HOUSING-INFSTATIC2' | translate}}">
+              </i>
+              <mat-form-field class="w-100" appearance="fill">
+                <mat-label>{{'STUDENT.HOUSING-INFSTATIC1' | translate}}</mat-label>
+                <ngx-mat-file-input (change)="validateFiles('filePistopoihtikoAlodapou')"
+                  formControlName="filePistopoihtikoAlodapou">
+                </ngx-mat-file-input>
+              </mat-form-field>
+              <button class="btn btn-secondary btn-margin-bottom mr-3" style="width:185px;"><a class="view-link"
+                  (click)="receiveFile('filePistopoihtikoAlodapou')" target="_blank">
+                  <i class="fa fa-eye mr-2"></i>{{'STUDENT.HOUSING-FILE-VIEW' | translate}}</a></button>
+              <button class="btn btn-secondary view-btn" (click)="onSubmitFile('filePistopoihtikoAlodapou')"
+                style="width:185px;">
+                <i class="fa fa-upload mr-2" aria-hidden="true"></i>{{'STUDENT.HOUSING-FILE-UPLOAD' |
+                translate}}</button>
+              <i *ngIf="filesSubmitted.filePistopoihtikoAlodapou==true"> &nbsp; <i
+                  class="success fas fa-3x fa-check text-success">
+                </i> </i>
+            </li>
+            <br>
+            <li>
+              <span class="font-weight-bold"> Εκκαθαριστικό σημείωμα για το οικογενειακό εισόδημα ή Βεβαίωση Οικονομικής
+                αρχής από τον τόπο καταγωγής ή
+                διαμονής τους.</span>
+              <br>
+              <span class="font-italic">
+                {{'STUDENT.HOUSING-INFSTATIC' | translate}}
+              </span>
+              <i class="fa fa-info-circle fa-lg fa-icon" data-toggle="tooltip" data-placement="top"
+                title="{{'STUDENT.HOUSING-INFSTATIC2' | translate}}">
+              </i>
+              <mat-form-field class="w-100" appearance="fill">
+                <mat-label>{{'STUDENT.HOUSING-INFSTATIC1' | translate}}</mat-label>
+                <ngx-mat-file-input (change)="validateFiles('fileEkkatharistikoAllodapou')"
+                  formControlName="fileEkkatharistikoAllodapou">
+                </ngx-mat-file-input>
+              </mat-form-field>
+              <button class="btn btn-secondary btn-margin-bottom mr-3" style="width:185px;"><a class="view-link"
+                  (click)="receiveFile('fileEkkatharistikoAllodapou')" target="_blank">
+                  <i class="fa fa-eye mr-2"></i>{{'STUDENT.HOUSING-FILE-VIEW' | translate}}</a></button>
+              <button class="btn btn-secondary view-btn" (click)="onSubmitFile('fileEkkatharistikoAllodapou')"
+                style="width:185px;">
+                <i class="fa fa-upload mr-2" aria-hidden="true"></i>{{'STUDENT.HOUSING-FILE-UPLOAD' |
+                translate}}</button>
+              <i *ngIf="filesSubmitted.fileEkkatharistikoAllodapou==true"> &nbsp; <i
+                  class="success fas fa-3x fa-check text-success">
+                </i> </i>
+            </li>
+          </ol>
+        </li>
+
+
+
+
+
+
+
+
+
+
+
       </ul>
       <br>
       <div>

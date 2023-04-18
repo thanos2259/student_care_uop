@@ -56,6 +56,18 @@ const getApplicationsById = async (request, response) => {
   }
 };
 
+const getStudentsApplyPhaseMeals = async (request, response) => {
+  try {
+    const studentsApps = await studentService.getStudentsApplyPhaseMeals();
+    response.status(200).json(studentsApps);
+  } catch (error) {
+    console.error(error.message);
+    response.send({
+      message: error.message
+    });
+  }
+};
+
 // get accommodation files information by application id
 const getAccommodationFiles = async (request, response) => {
   try {
@@ -143,7 +155,6 @@ const updateStudentBasicInfo = async (request, response, next) => {
     const student = request.body;
 
     await studentService.updateStudentBasicInfo(student, id);
-
     response
       .status(200)
       .json({
@@ -305,6 +316,7 @@ module.exports = {
   insertCommentsByStudentId,
   updateCommentsByStudentId,
   getApplicationsById,
+  getStudentsApplyPhaseMeals,
   login,
   uploadFile,
   sendFile

@@ -80,6 +80,17 @@ const updateCommentsByStudentId = async (studentId, comments, subject) => {
   }
 };
 
+const updateApplicationStatus = async (appId, status) => {
+  try {
+    const updateResults = await pool.query(`UPDATE applications 
+     SET status = $1 WHERE id = $2`,
+      [status, appId]);
+
+    return updateResults;
+  } catch (error) {
+    throw Error('Error while updating student application status');
+  }
+};
 
 module.exports = {
   loginManager,
@@ -88,5 +99,6 @@ module.exports = {
   getCommentByStudentIdAndSubject,
   insertCommentsByStudentId,
   insertPeriodDates,
-  updateCommentsByStudentId
+  updateCommentsByStudentId,
+  updateApplicationStatus
 };

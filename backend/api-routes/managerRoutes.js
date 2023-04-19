@@ -12,5 +12,6 @@ router.post("/insertPeriodDates/", managerController.insertPeriodDates);
 router.post("/insertCommentsByStudentId/:id", managerController.insertCommentsByStudentId);
 router.put("/updateCommentsByStudentId/:id", managerController.updateCommentsByStudentId);
 router.put("/updateApplicationStatus/:id", managerController.updateApplicationStatus);
+router.put("/updateNotesByAppId/:id", managerController.updateNotesByAppId);
 
 module.exports = router;

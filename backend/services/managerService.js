@@ -82,13 +82,25 @@ const updateCommentsByStudentId = async (studentId, comments, subject) => {
 
 const updateApplicationStatus = async (appId, status) => {
   try {
-    const updateResults = await pool.query(`UPDATE applications 
+    const updateResults = await pool.query(`UPDATE applications
      SET status = $1 WHERE id = $2`,
       [status, appId]);
 
     return updateResults;
   } catch (error) {
     throw Error('Error while updating student application status');
+  }
+};
+
+const updateNotesByAppId = async (appId, notes) => {
+  try {
+    const updateResults = await pool.query(`UPDATE applications
+     SET notes = $1 WHERE id = $2`, [notes, appId]);
+
+    return updateResults;
+  } catch (error) {
+    console.error('Error while updating application notes status' + error.message);
+    throw Error('Error while updating application notes status');
   }
 };
 
@@ -100,5 +112,6 @@ module.exports = {
   insertCommentsByStudentId,
   insertPeriodDates,
   updateCommentsByStudentId,
-  updateApplicationStatus
+  updateApplicationStatus,
+  updateNotesByAppId
 };

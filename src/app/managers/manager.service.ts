@@ -67,4 +67,12 @@ export class ManagerService {
       });
   }
 
+  updateNotesByAppId(notes: string, appId: number) {
+    this.http
+      .put<any>(MANAGER_URL + "updateNotesByAppId/" + appId, { notes })
+      .subscribe(responseData => {
+        console.log(responseData.message);
+      });
+  }
+
 }

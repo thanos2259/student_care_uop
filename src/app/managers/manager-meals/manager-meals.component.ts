@@ -6,6 +6,7 @@ import { StudentsService } from 'src/app/students/student.service';
 import { CommentsDialogComponent } from '../comments-dialog/comments-dialog.component';
 import { ManagerService } from '../manager.service';
 import { StudentApplication } from 'src/app/students/student-application.model';
+import { EditNotesDialogComponent } from '../edit-notes-dialog/edit-notes-dialog.component';
 
 @Component({
   selector: 'app-manager-meals',
@@ -91,6 +92,26 @@ export class ManagerMealsComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
+    });
+  }
+
+  openUpdateNotesDialog(appId: number, notes: string) {
+    console.log(appId);
+    const dialogRef = this.dialog.open(EditNotesDialogComponent, {
+      data: { notes: notes, appId: appId }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+      // Re-fetch the student data to update notes etc.
+      this.studentsService.getStudentsAppsMealsForPeriod()
+        .subscribe((students: StudentApplication[]) => {
+          this.studentsSSOData = students;
+          for (let i = 0; i < students.length; i++) {
+            this.studentsSSOData[i].schacpersonaluniquecode = Utils.getRegistrationNumber(this.studentsSSOData[i].schacpersonaluniquecode);
+            this.formattedDate[i] = Utils.getPreferredTimestamp(this.studentsSSOData[i].submit_date);
+          }
+        });
     });
   }
 

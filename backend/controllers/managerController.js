@@ -148,6 +148,25 @@ const updateApplicationStatus = async (request, response) => {
   }
 };
 
+const updateNotesByAppId = async (request, response) => {
+  try {
+    const appId = request.params.id;
+    const notes = request.body.notes;
+
+    await managerService.updateNotesByAppId(appId, notes);
+
+    response
+      .status(200)
+      .json({
+        message: 'Student notes updated successfully'
+      });
+  } catch (error) {
+    console.error(error.message);
+    response.status(400).send({
+      message: error.message
+    });
+  }
+};
 
 module.exports = {
   login,
@@ -157,5 +176,6 @@ module.exports = {
   insertCommentsByStudentId,
   insertPeriodDates,
   updateCommentsByStudentId,
-  updateApplicationStatus
+  updateApplicationStatus,
+  updateNotesByAppId
 };

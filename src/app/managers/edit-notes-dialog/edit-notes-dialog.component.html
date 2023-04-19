@@ -1,0 +1,8 @@
+ <h3>Σχόλια</h3>
+ <mat-dialog-content class="mat-typography">
+   <p><label for="notesEdit">Σημείωση για αίτηση φοιτητή:</label></p>
+   <textarea #notesArea id="notesEdit" name="notesEdit" rows="4" cols="50"></textarea>
+ </mat-dialog-content>
+ <mat-dialog-actions style='text-align: right'>
+   <button mat-button class="btn btn-primary mat-button" (click)="onCommentSubmit()">Εισαγωγή Σημείωσης</button>
+ </mat-dialog-actions>

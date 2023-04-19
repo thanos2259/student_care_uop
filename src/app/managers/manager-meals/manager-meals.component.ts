@@ -7,6 +7,8 @@ import { CommentsDialogComponent } from '../comments-dialog/comments-dialog.comp
 import { ManagerService } from '../manager.service';
 import { StudentApplication } from 'src/app/students/student-application.model';
 import { EditNotesDialogComponent } from '../edit-notes-dialog/edit-notes-dialog.component';
+import { AppViewDialogComponent } from '../app-view-dialog/app-view-dialog.component';
+import { StudentViewDialogComponent } from '../student-view-dialog/student-view-dialog.component';
 
 @Component({
   selector: 'app-manager-meals',
@@ -87,6 +89,28 @@ export class ManagerMealsComponent implements OnInit {
   openCommentsDialog(idx: any) {
     console.log(idx);
     const dialogRef = this.dialog.open(CommentsDialogComponent, {
+      data: { studentsData: this.studentsSSOData, index: idx, subject: 'Σίτιση' }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
+
+  openAppViewDialog(idx: any) {
+    console.log(idx);
+    const dialogRef = this.dialog.open(AppViewDialogComponent, {
+      data: { studentsData: this.studentsSSOData, index: idx, subject: 'Σίτιση' }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
+
+  studentInfo(idx: any) {
+    console.log(idx);
+    const dialogRef = this.dialog.open(StudentViewDialogComponent, {
       data: { studentsData: this.studentsSSOData, index: idx, subject: 'Σίτιση' }
     });
 

@@ -1,0 +1,26 @@
+<h3>Στοιχεία Φοιτητή</h3>
+<mat-dialog-content class="mat-typography">
+  <mat-divider class="mb-2"></mat-divider>
+  <p><span>Ονοματεπώνυμο</span>: {{ this.data.studentsData[this.data.index].givenname}}
+    {{ this.data.studentsData[this.data.index].sn}}
+  </p>
+  <!-- <p><span>Εξάμηνο</span>: {{ this.data.studentsData[this.data.index].Semester}}</p>
+    <p><span>ECTS</span>: {{ this.data.studentsData[this.data.index].Ects}}</p>
+    <p><span>Βαθμολογία</span>: {{ this.data.studentsData[this.data.index].Grade}}</p>
+    <p><span>Σύνολο Περασμένων Μαθημάτων</span>: {{this.data.studentsData[this.data.index].CourseCount}}</p> -->
+  <p><span>Πατρώνυμο</span>: {{ this.data.studentsData[this.data.index].father_name}}</p>
+  <p><span>Μητρώνυμο</span>: {{ this.data.studentsData[this.data.index].mother_name}}</p>
+  <p><span>Επώνυμο πατέρα</span>: {{ this.data.studentsData[this.data.index].father_last_name}}</p>
+  <p><span>Επώνυμο μητέρας</span>: {{ this.data.studentsData[this.data.index].mother_last_name}}</p>
+  <p><span>ΑΜ</span>: {{ this.data.studentsData[this.data.index].schacpersonaluniquecode}}</p>
+  <p><span>Ημ/νία Γέννησης</span>: {{ this.data.studentsData[this.data.index].schacdateofbirth}}</p>
+  <p><span>Φύλο</span>: {{ this.data.studentsData[this.data.index].schacgender == 1 ? 'Άνδρας' : 'Γυναίκα'}}</p>
+  <p><span>email</span>: {{ this.data.studentsData[this.data.index].mail}}</p>
+  <p><span>Τηλέφωνο</span>: {{ this.data.studentsData[this.data.index].phone}}</p>
+  <p><span>Πόλη</span>: {{ this.data.studentsData[this.data.index].city}}</p>
+  <p><span>ΤΚ</span>: {{ this.data.studentsData[this.data.index].post_address}}</p>
+  <p><span>Διεύθυνση</span>: {{ this.data.studentsData[this.data.index].address}}</p>
+  <p><span>Τοποθεσία</span>: {{ this.data.studentsData[this.data.index].location}}</p>
+  <div mat-dialog-actions style='text-align: right'>
+    <button class="btn btn-primary mat-button" (click)="onCancel()">Κλείσιμο</button>
+  </div>

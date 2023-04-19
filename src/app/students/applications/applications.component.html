@@ -39,7 +39,7 @@
       <i *ngIf="element.status==0" class="fa fa-cog">
         {{'STUDENT.APPLICATION-STATUS1' | translate}}</i>
       <i *ngIf="element.status==1" class="fa fa-check"> {{'STUDENT.APPLICATION-STATUS2' | translate}} </i>
-      <i *ngIf="element.status==-1" class="fa fa-check"> {{'STUDENT.APPLICATION-STATUS3' | translate}} </i>
+      <i *ngIf="element.status==-1" class="fa fa-times"> {{'STUDENT.APPLICATION-STATUS3' | translate}} </i>
     </td>
   </ng-container>
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

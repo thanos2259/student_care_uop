@@ -70,12 +70,15 @@
                           Προβολή / Επεξεργασία Σχολίου<br></a>
                       </td>
                       <td>{{departmentNameByid(student.department_id)}}</td>
-                      <td>{{student.givenname}} {{student.sn}}</td>
+                      <td> <a class="custom-info-btn" (click)="studentInfo(student.sso_uid)">{{student.givenname}}
+                          {{student.sn}}</a></td>
                       <td>{{student.schacpersonaluniquecode}}</td>
                       <td>{{student.app_id}}</td>
                       <td>{{formattedDate[idx]}}</td>
                       <td class="text-left" style="min-width: 150px;">
-                        <a href="#" style="color: #224957;"><i class="fa fa-lg fa-eye mb-3"></i> Προβολή </a>
+                        <a (click)="openAppViewDialog(idx)" style="color: #224957; cursor: pointer;"><i
+                            class="fa fa-lg fa-eye mb-3"></i>
+                          Προβολή </a>
                         <br>
                         <a href="#" style="color: #224957;"><i class="fa fa-lg fa-download mb-3"></i> ZIP Αρχείο </a>
                         <br>
@@ -83,11 +86,17 @@
                       </td>
                       <td>{{student.family_income}}</td>
                       <td>{{calculateIncomeLimitForStudent(idx)}}</td>
-                      <td>{{student.notes}}
-                        <button (click)="openUpdateNotesDialog(student.app_id, student.notes)"
+                      <td>
+                        {{student.notes}}
+                        <mat-divider class="mb-2"></mat-divider>
+                        <div style="text-align:center;">
+                          <a (click)="openUpdateNotesDialog(student.app_id, student.notes)"
+                            style="color: #224957; cursor: pointer;"><i class="fa fa-lg fa-edit"></i></a>
+                        </div>
+                        <!-- <button (click)="openUpdateNotesDialog(student.app_id, student.notes)"
                           class="mt-0 mb-0 pt-0 pb-0 btn btn-primary mr-3 td-button-responsive">
                           <i class="fa fa-edit" aria-hidden="true"></i>
-                        </button>
+                        </button> -->
                       </td>
                       <!-- <td class="reponsive-text-center-td">
                           <button (click)="receiveFile(student.sso_uid, 'zip')"

@@ -1,0 +1,22 @@
+<h3>Στοιχεία Αίτησης Φοιτητή</h3>
+<mat-dialog-content class="mat-typography">
+  <mat-divider class="mb-2"></mat-divider>
+  <p><span>Ονοματεπώνυμο</span>: {{ this.data.studentsData[this.data.index].givenname}}
+    {{ this.data.studentsData[this.data.index].sn}}
+  </p>
+  <p><span>Κατηγορία</span>: {{ this.data.studentsData[this.data.index].category}}</p>
+  <p><span>Οικογενειακό Εισόδημα</span>: {{ this.data.studentsData[this.data.index].family_income}}</p>
+  <p><span>Οικογενειακή Κατάσταση</span>: {{ this.data.studentsData[this.data.index].family_state}}</p>
+  <p><span>Προστατευόμενα Μέλη</span>: {{ this.data.studentsData[this.data.index].protected_members}}</p>
+  <p><span>Αδέρφια 1ου κύκλου σπουδών</span>: {{ this.data.studentsData[this.data.index].siblings_students}}</p>
+  <p><span>Παιδιά φοιτητή</span>: {{ this.data.studentsData[this.data.index].children}}</p>
+  <p><span>Πολυτεκνία</span>: {{ this.data.studentsData[this.data.index].children}}</p>
+  <p><span>Τριτεκνία</span>: {{ this.data.studentsData[this.data.index].children}}</p>
+  <p><span>Αδελφός Φοιτητής</span>: {{ this.data.studentsData[this.data.index].children}}</p>
+  <p><span>Χωρίς Γονείς</span>: {{ this.data.studentsData[this.data.index].children}}</p>
+  <p><span>Ανύπαντρη Μητέρα</span>: {{ this.data.studentsData[this.data.index].children}}</p>
+  <p><span>Ειδική Ασθένεια</span>: {{ this.data.studentsData[this.data.index].children}}</p>
+</mat-dialog-content>
+<mat-dialog-actions style='text-align: right'>
+  <button mat-button class="btn btn-primary mat-button" (click)="onCancel()">Κλείσιμο</button>
+</mat-dialog-actions>

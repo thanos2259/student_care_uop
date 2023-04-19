@@ -10,12 +10,12 @@
   <p><span>Προστατευόμενα Μέλη</span>: {{ this.data.studentsData[this.data.index].protected_members}}</p>
   <p><span>Αδέρφια 1ου κύκλου σπουδών</span>: {{ this.data.studentsData[this.data.index].siblings_students}}</p>
   <p><span>Παιδιά φοιτητή</span>: {{ this.data.studentsData[this.data.index].children}}</p>
-  <p><span>Πολυτεκνία</span>: {{ this.data.studentsData[this.data.index].children}}</p>
-  <p><span>Τριτεκνία</span>: {{ this.data.studentsData[this.data.index].children}}</p>
-  <p><span>Αδελφός Φοιτητής</span>: {{ this.data.studentsData[this.data.index].children}}</p>
-  <p><span>Χωρίς Γονείς</span>: {{ this.data.studentsData[this.data.index].children}}</p>
-  <p><span>Ανύπαντρη Μητέρα</span>: {{ this.data.studentsData[this.data.index].children}}</p>
-  <p><span>Ειδική Ασθένεια</span>: {{ this.data.studentsData[this.data.index].children}}</p>
+  <p><span>Πολυτεκνία</span>: {{fiveChildrenModel ? 'ΝΑΙ' : 'ΟΧΙ'}}</p>
+  <p><span>Τριτεκνία</span>: {{threeChildrenModel ? 'ΝΑΙ' : 'ΟΧΙ'}}</p>
+  <p><span>Αδελφός Φοιτητής</span>: {{siblingStudentModel ? 'ΝΑΙ' : 'ΟΧΙ'}}</p>
+  <p><span>Χωρίς Γονείς</span>: {{noParentsModel ? 'ΝΑΙ' : 'ΟΧΙ'}}</p>
+  <p><span>Ανύπαντρη Μητέρα</span>: {{unmarriedMotherModel ? 'ΝΑΙ' : 'ΟΧΙ'}}</p>
+  <p><span>Ειδική Ασθένεια</span>: {{specialIllnessModel ? 'ΝΑΙ' : 'ΟΧΙ'}}</p>
 </mat-dialog-content>
 <mat-dialog-actions style='text-align: right'>
   <button mat-button class="btn btn-primary mat-button" (click)="onCancel()">Κλείσιμο</button>

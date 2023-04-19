@@ -261,7 +261,6 @@ const sendFile = async (request, response) => {
   }
 };
 
-
 const insertCommentsByStudentId = async (request, response) => {
   try {
     const id = request.params.id;

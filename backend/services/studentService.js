@@ -99,11 +99,11 @@ const getStudentById = async (id) => {
 
 const getStudentActiveApplication = async (studentId, application_type) => {
   try {
-    return await pool.query("SELECT * \
-                            FROM applications \
-                            WHERE uid = $1 \
-                            AND application_type = $2 \
-                            AND is_active = 'true'", [studentId, application_type]);
+    return await pool.query(`SELECT *
+                            FROM applications
+                            WHERE uid = $1
+                            AND application_type = $2
+                            AND is_active = 'true'`, [studentId, application_type]);
   } catch (error) {
     throw Error('Error while fetching student applications');
   }
@@ -112,13 +112,10 @@ const getStudentActiveApplication = async (studentId, application_type) => {
 const insertOrUpdateApplication = async (student, filesData, uid) => {
   try {
     const rows = await getStudentActiveApplication(uid, student.application_type);
-    // check if rows fetched successfully
-    if (rows) {
-      // check if there is an active application
-      if (rows.rowCount > 0) {
-        // update application
-        return await updateApplication(student, filesData, uid);
-      }
+    // check if rows fetched successfully and if there is an active application
+    if (rows && rows.rowCount > 0) {
+      // update application and handle files
+      return await updateApplicationAndHandleFiles(student, filesData, uid, rows.rows[0].id);
     }
 
     return await insertNewApplication(student, filesData, uid);
@@ -139,22 +136,29 @@ const updateApplication = async (student, filesData, uid) => {
       throw Error('Application not updated');
     }
 
-    // TODO and test files insert
-    // 1. delete all files for this application
-    // 2. insert new files
-    // const deleteFilesResult = await pool.query("DELETE FROM application_files WHERE app_id = $1", [updateAppResult.rows[0].id]);
-    // if (!deleteFilesResult) {
-    //   throw Error('Files not deleted');
-    // }
-
-    // const insertFilesResult = await insertAccommodationFilesSubmittedData(updateAppResult.rows[0].id, filesData);
-    // if (!insertFilesResult) {
-    //   throw Error('Files not inserted');
-    // }
-
     return true;
   } catch (error) {
     throw Error('Error while updating student application ' + error.message);
+  }
+};
+
+// Updates an existing application and handles file management
+const updateApplicationAndHandleFiles = async (student, filesData, uid, appId) => {
+  try {
+    const updateResult = await updateApplication(student, filesData, uid);
+
+    if (updateResult) {
+      const deleteFilesResult = await deleteOldApplicationFiles(appId);
+      const insertFilesResult = await insertAccommodationFilesSubmittedData(appId, filesData);
+
+      if (!deleteFilesResult || !insertFilesResult) {
+        throw Error('Files not inserted');
+      }
+    }
+
+    return updateResult;
+  } catch (error) {
+    throw Error('Error while handling files: ' + error.message);
   }
 };
 
@@ -336,6 +340,17 @@ const insertNewApplication = async (student, filesData, uid) => {
     return true;
   } catch (error) {
     throw Error('Error while inserting student application ' + error.message);
+  }
+};
+
+const deleteOldApplicationFiles = async (appID) => {
+  try {
+    const deleteFilesRes = await pool.query(`DELETE FROM application_files
+        WHERE app_id = $1`, [appID]);
+
+    return true;
+  } catch (error) {
+    throw Error('Error while deleting student files: ' + error.message);
   }
 };
 

@@ -97,10 +97,10 @@ export class ManagerMealsComponent implements OnInit {
     });
   }
 
-  openAppViewDialog(idx: any) {
+  openAppViewDialog(idx: number, appId: number) {
     console.log(idx);
     const dialogRef = this.dialog.open(AppViewDialogComponent, {
-      data: { studentsData: this.studentsSSOData, index: idx, subject: 'Σίτιση' }
+      data: { studentsData: this.studentsSSOData, index: idx, appId: appId}
     });
 
     dialogRef.afterClosed().subscribe(result => {

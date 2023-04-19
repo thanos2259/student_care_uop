@@ -3,8 +3,9 @@ import { Observable } from "rxjs";
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { AuthService } from 'src/app/auth/auth.service';
 import { Manager } from "./manager.model";
+import { environment } from "src/environments/environment";
 
-const MANAGER_URL = "http://localhost:3000/api/managers/";
+const MANAGER_URL = environment.apiUrl + "/managers/";
 
 @Injectable({ providedIn: 'root' })
 export class ManagerService {

@@ -87,6 +87,16 @@ export abstract class Utils {
     return displayDate;
   }
 
+  public static getPreferredTimestamp(dateParam: string|number|Date): string {
+    let dateVal = new Date(dateParam);
+    let preferredTimestamp = dateVal.toLocaleDateString("el-GR", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric"
+    });
+    return preferredTimestamp;
+  }
+
   public static getCurrentYear() {
     return new Date().getFullYear();
   }

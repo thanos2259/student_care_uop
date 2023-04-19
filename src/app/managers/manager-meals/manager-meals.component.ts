@@ -3,33 +3,34 @@ import { MatDialog } from '@angular/material/dialog';
 import { AuthService } from 'src/app/auth/auth.service';
 import { Utils } from 'src/app/MiscUtils';
 import { StudentsService } from 'src/app/students/student.service';
-import { Student } from '../../students/student.model';
 import { CommentsDialogComponent } from '../comments-dialog/comments-dialog.component';
-import { Manager } from '../manager.model';
 import { ManagerService } from '../manager.service';
+import { StudentApplication } from 'src/app/students/student-application.model';
 
 @Component({
   selector: 'app-manager-meals',
   templateUrl: './manager-meals.component.html',
   styleUrls: ['./manager-meals.component.css']
 })
-
 export class ManagerMealsComponent implements OnInit {
 
   @ViewChild('processingTable') table1: ElementRef | undefined;
   @ViewChild('completed') table2: ElementRef | undefined;
 
-  studentsSSOData: Student[] = [];
+  studentsSSOData: StudentApplication[] = [];
+  formattedDate: string[] = [];
   hasMadeComment = [];
 
   constructor(public studentsService: StudentsService, public authService: AuthService, public dialog: MatDialog, private chRef: ChangeDetectorRef, public managerService: ManagerService) { }
 
   ngOnInit(): void {
     this.studentsService.getStudentsAppsMealsForPeriod()
-      .subscribe((students: Student[]) => {
+      .subscribe((students: StudentApplication[]) => {
         this.studentsSSOData = students;
         for (let i = 0; i < students.length; i++) {
           this.studentsSSOData[i].schacpersonaluniquecode = Utils.getRegistrationNumber(this.studentsSSOData[i].schacpersonaluniquecode);
+          this.formattedDate[i] = Utils.getPreferredTimestamp(this.studentsSSOData[i].submit_date);
+
           this.managerService.getCommentByStudentIdAndSubject(this.studentsSSOData[i].sso_uid, 'Σίτιση')
             .subscribe((comment: any) => {
               if (comment) {

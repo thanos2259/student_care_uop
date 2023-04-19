@@ -42,7 +42,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr *ngFor="let student of studentsSSOData ; let idx=index" [attr.data-index]="idx">
+                    <tr *ngFor="let student of studentsSSOData; let idx=index" [attr.data-index]="idx">
                       <td>{{idx+1}}</td>
                       <td>
                         <mat-form-field id="{{student.app_id}}" name="phase" style="width:100%;" appearance="standard">
@@ -73,7 +73,7 @@
                       <td>{{student.givenname}} {{student.sn}}</td>
                       <td>{{student.schacpersonaluniquecode}}</td>
                       <td>{{student.app_id}}</td>
-                      <td>{{student.submit_date}}</td>
+                      <td>{{formattedDate[idx]}}</td>
                       <td class="text-left" style="min-width: 150px;">
                         <a href="#" style="color: #224957;"><i class="fa fa-lg fa-eye mb-3"></i> Προβολή </a>
                         <br>

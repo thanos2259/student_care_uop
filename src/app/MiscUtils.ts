@@ -112,6 +112,11 @@ export abstract class Utils {
     }
   }
 
+  public static FamilyState = {
+    UnmarriedStudentUnder25: 'Άγαμος φοιτητής/φοιτήτρια κάτω των 25 ετών',
+    MarriedStudent: 'Έγγαμος φοιτητής/φοιτήτρια',
+    UnmarriedStudentOver25: 'Άγαμος φοιτητής/φοιτήτρια άνω των 25 ετών'
+  }
 
   public static calculateIncomeLimitForMealEligibility(appInfo): number {
     let incomeLimit = 25000;
@@ -120,7 +125,7 @@ export abstract class Utils {
       // const appInfo = getApplicationInfoByAppId(appId);
       const familyState = appInfo.family_state;
 
-      if (familyState === 'a') {
+      if (familyState === this.FamilyState.UnmarriedStudentUnder25) {
         incomeLimit = 45000;
         const siblings = Number(appInfo.protected_members);
         const siblingStudents = Number(appInfo.siblings_students);
@@ -132,14 +137,14 @@ export abstract class Utils {
         for (let i = 0; i < siblingStudents; i++) {
           incomeLimit += 3000;
         }
-      } else if (familyState === 'b') {
+      } else if (familyState === this.FamilyState.MarriedStudent) {
         incomeLimit = 45000;
         const kids = Number(appInfo.children);
 
         for (let i = 0; i < kids - 1; i++) {
           incomeLimit += 5000;
         }
-      } else if (familyState === 'c') {
+      } else if (familyState === this.FamilyState.UnmarriedStudentOver25) {
         incomeLimit = 25000;
       }
 

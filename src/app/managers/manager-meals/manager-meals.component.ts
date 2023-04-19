@@ -115,6 +115,10 @@ export class ManagerMealsComponent implements OnInit {
     });
   }
 
+  calculateIncomeLimitForStudent(index: number) {
+    return Utils.calculateIncomeLimitForMealEligibility(this.studentsSSOData[index]);
+  }
+
   departmentNameByid(depId: number) {
     return Utils.departmentsMap[depId];
   }

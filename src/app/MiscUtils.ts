@@ -112,6 +112,44 @@ export abstract class Utils {
     }
   }
 
+
+  public static calculateIncomeLimitForMealEligibility(appInfo): number {
+    let incomeLimit = 25000;
+    try {
+      // console.log(appInfo);
+      // const appInfo = getApplicationInfoByAppId(appId);
+      const familyState = appInfo.family_state;
+
+      if (familyState === 'a') {
+        incomeLimit = 45000;
+        const siblings = Number(appInfo.protected_members);
+        const siblingStudents = Number(appInfo.siblings_students);
+
+        for (let i = 1; i < siblings; i++) {
+          incomeLimit += 5000;
+        }
+
+        for (let i = 0; i < siblingStudents; i++) {
+          incomeLimit += 3000;
+        }
+      } else if (familyState === 'b') {
+        incomeLimit = 45000;
+        const kids = Number(appInfo.children);
+
+        for (let i = 0; i < kids - 1; i++) {
+          incomeLimit += 5000;
+        }
+      } else if (familyState === 'c') {
+        incomeLimit = 25000;
+      }
+
+      return incomeLimit;
+    } catch (error) {
+      console.error('Error while updating application notes status' + error.message);
+      throw Error('Error while updating application notes status');
+    }
+  };
+
   public static location = [
     { name: 'Αβδήρων' },
     { name: 'Αγαθονησίου' },

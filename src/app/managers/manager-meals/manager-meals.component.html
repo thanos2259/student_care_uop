@@ -82,8 +82,8 @@
                         <a href="#" style="color: #224957;"><i class="fa fa-lg fa-address-card"></i> Επεξεργασία </a>
                       </td>
                       <td>{{student.family_income}}</td>
-                      <td> 545454</td>
-                      <td> {{student.notes}}
+                      <td>{{calculateIncomeLimitForStudent(idx)}}</td>
+                      <td>{{student.notes}}
                         <button (click)="openUpdateNotesDialog(student.app_id, student.notes)"
                           class="mt-0 mb-0 pt-0 pb-0 btn btn-primary mr-3 td-button-responsive">
                           <i class="fa fa-edit" aria-hidden="true"></i>

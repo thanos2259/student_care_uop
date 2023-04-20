@@ -61,9 +61,6 @@ export class AppViewDialogComponent implements OnInit {
       .subscribe((files: any[]) => {
         console.log(files);
         this.appFiles = files;
-        // for (let item of this.filesMeals) {
-        //   item = false;
-        // }
         for (let item of this.appFiles) {
           // console.log(item.description);
           if (!item.value) continue;

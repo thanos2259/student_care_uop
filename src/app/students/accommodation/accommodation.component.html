@@ -518,6 +518,74 @@
         </li>
         <br>
         <li>
+          Οι πάσχοντες από τις σοβαρές ασθένειες που προβλέπονται στις διατάξεις του άρθρου 35 του ν.3794/2009 (Α΄
+          156).
+          <br>
+          <span class="font-weight-bold">{{'STUDENT.HOUSING-INF36' | translate}}</span>
+          <br>
+          <ol>
+            <li>
+              <span class="font-weight-bold"> {{'STUDENT.HOUSING-INF53' | translate}}</span>
+              {{'STUDENT.HOUSING-INF54' | translate}}
+              <br>
+              <span class="font-italic">
+                {{'STUDENT.HOUSING-INFSTATIC' | translate}}
+              </span>
+              <i class="fa fa-info-circle fa-lg fa-icon" data-toggle="tooltip" data-placement="top"
+                title="{{'STUDENT.HOUSING-INFSTATIC2' | translate}}">
+              </i>
+              <mat-form-field class="w-100" appearance="fill">
+                <mat-label>{{'STUDENT.HOUSING-INFSTATIC1' | translate}}</mat-label>
+                <ngx-mat-file-input (change)="validateFiles('fileAMEA')" formControlName="fileAMEA">
+                </ngx-mat-file-input>
+              </mat-form-field>
+              <button class="btn btn-secondary btn-margin-bottom mr-3" style="width:185px;"><a class="view-link"
+                  (click)="receiveFile('fileAMEA')" target="_blank">
+                  <i class="fa fa-eye mr-2"></i>{{'STUDENT.HOUSING-FILE-VIEW' | translate}}</a></button>
+              <button class="btn btn-secondary view-btn" (click)="onSubmitFile('fileAMEA')" style="width:185px;">
+                <i class="fa fa-upload mr-2" aria-hidden="true"></i>{{'STUDENT.HOUSING-FILE-UPLOAD' |
+                translate}}</button>
+              <i *ngIf="filesSubmitted.fileAMEA==true"> &nbsp; <i class="success fas fa-3x fa-check text-success">
+                </i> </i>
+            </li>
+            <br>
+            <li>
+              <span class="font-weight-bold">{{'STUDENT.HOUSING-INF55' | translate}}</span>
+              {{'STUDENT.HOUSING-INF56' | translate}}
+              <span class="font-weight-bold">{{'STUDENT.HOUSING-INF57' | translate}}</span>
+              {{'STUDENT.HOUSING-INF58' | translate}}
+              <span class="font-weight-bold">{{'STUDENT.HOUSING-INF59' | translate}}</span>
+              {{'STUDENT.HOUSING-INF60' | translate}}
+              <span class="font-weight-bold">{{'STUDENT.HOUSING-INF61' | translate}}</span>
+              {{'STUDENT.HOUSING-INF62' | translate}}
+              <br>
+              <span class="font-italic">
+                {{'STUDENT.HOUSING-INFSTATIC' | translate}}
+              </span>
+              <i class="fa fa-info-circle fa-lg fa-icon" data-toggle="tooltip" data-placement="top"
+                title="{{'STUDENT.HOUSING-INFSTATIC2' | translate}}">
+              </i>
+              <mat-form-field class="w-100" appearance="fill">
+                <mat-label>{{'STUDENT.HOUSING-INFSTATIC1' | translate}}</mat-label>
+                <ngx-mat-file-input (change)="validateFiles('fileAMEAIatrikhGnomateush')"
+                  formControlName="fileAMEAIatrikhGnomateush">
+                </ngx-mat-file-input>
+              </mat-form-field>
+              <button class="btn btn-secondary btn-margin-bottom mr-3" style="width:185px;"><a class="view-link"
+                  (click)="receiveFile('fileAMEAIatrikhGnomateush')" target="_blank">
+                  <i class="fa fa-eye mr-2"></i>{{'STUDENT.HOUSING-FILE-VIEW' | translate}}</a></button>
+              <button class="btn btn-secondary view-btn" (click)="onSubmitFile('fileAMEAIatrikhGnomateush')"
+                style="width:185px;">
+                <i class="fa fa-upload mr-2" aria-hidden="true"></i>{{'STUDENT.HOUSING-FILE-UPLOAD' |
+                translate}}</button>
+              <i *ngIf="filesSubmitted.fileAMEAIatrikhGnomateush==true"> &nbsp; <i
+                  class="success fas fa-3x fa-check text-success">
+                </i> </i>
+            </li>
+          </ol>
+        </li>
+        <br>
+        <li>
           {{'STUDENT.HOUSING-INF63' | translate}}
           <br>
           <span class="font-weight-bold"> {{'STUDENT.HOUSING-INF36' | translate}}</span>

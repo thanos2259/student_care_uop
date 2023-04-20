@@ -731,4 +731,27 @@ export abstract class Utils {
     '411': 'ΠΟΛΙΤΙΚΗΣ ΕΠΙΣΤΗΜΗΣ ΚΑΙ ΔΙΕΘΝΩΝ ΣΧΕΣΕΩΝ'
   }
 
+  public static mapFilesMealsModelToFilenames = {
+    'eka8aristiko': 'fileEka8aristiko',
+    'oikogeneiakhKatastasi': 'fileOikogeneiakhKatastasi',
+    'pistopoihtikoGoneaFoithth': 'filePistopoihtikoGoneaFoithth',
+    'tautotita': 'fileTautotita',
+    'toposMonimhsKatoikias': 'fileToposMonimhsKatoikias',
+    'ypeu8unhDilosi': 'fileYpeu8unhDilosi',
+    'polutekneia': 'filePolutekneia',
+    'bebaioshSpoudonAderfwn': 'fileBebaioshSpoudonAderfwn',
+    'agamhMhtera': 'fileAgamhMhtera',
+    'AMEA': 'fileAMEA',
+    'AMEAIatrikhGnomateush': 'fileAMEAIatrikhGnomateush',
+    'lhksiarxikhPrakshThanatouGoneaA': 'fileLhksiarxikhPrakshThanatouGoneaA',
+    'lhksiarxikhPrakshThanatouGoneaB': 'fileLhksiarxikhPrakshThanatouGoneaB',
+    'goneisAMEA': 'fileGoneisAMEA',
+    'goneisAMEAIatrikhGnomateush': 'fileGoneisAMEAIatrikhGnomateush',
+    'goneisThumataTromokratias1': 'fileGoneisThumataTromokratias1',
+    'goneisThumataTromokratias2': 'fileGoneisThumataTromokratias2',
+    'bebaioshEpidothsdhsAnergeias': 'fileBebaioshEpidothsdhsAnergeias',
+    'diazevgmenoiGoneis1': 'fileDiazevgmenoiGoneis1',
+    'diazevgmenoiGoneis2': 'fileDiazevgmenoiGoneis2'
+  };
+
 }

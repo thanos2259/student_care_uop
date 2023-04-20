@@ -175,12 +175,15 @@ const updateStudentSpecialData = async (request, response, next) => {
     const id = request.params.id;
     const student = request.body.studentData;
     const filesData = request.body.submittedFilesData;
+    const deleteFilesEnabled = false; // File deletion is currently disabled
 
     await studentService.updateStudentSpecialData(student, id);
 
     console.log(student.application_type);
     studentService.combineToZIP(id, student.application_type);
-    studentService.deleteFiles(id, student.application_type);
+    if (deleteFilesEnabled) {
+      studentService.deleteFiles(id, student.application_type);
+    }
     await studentService.insertOrUpdateApplication(student, filesData, id);
 
     response
@@ -263,10 +266,36 @@ const sendFile = async (request, response) => {
   }
 };
 
+
+const sendFileByType = async (request, response) => {
+  try {
+    const id = request.params.id;
+    // let initialPath = 'C:/Users/thanos/Documents/Github/student_care_uop/';
+    let initialPath = 'C:/Users/losNasos/Documents/workspace/student_care_uop/';
+    // let initialPath = 'C:/xampp/htdocs/student_care_uop/uploads/';
+    const fileName = request.body.fileName + '.pdf';
+    const appType = request.body.appType;
+
+    const filePath = './uploads/' + id + '/' + appType + '/';
+
+    let metadata = { file_path: filePath, file_name: fileName };
+
+    response
+      .status(200)
+      .sendFile(initialPath + metadata.file_path + metadata.file_name);
+
+  } catch (error) {
+    console.error(error.message);
+    response.send({
+      message: error.message
+    });
+  }
+};
+
 const getMealsAppZipFile = async (request, response) => {
   try {
     const id = request.params.id;
-    const initialPath = '/Users/Thanos/Documents/Github/student_care_uop/';
+    const initialPath = 'C:/Users/losNasos/Documents/workspace/student_care_uop/';
     const fileName = `dikaiologitika_student_${id}.zip`;
     const filePath = `./uploads/${id}/mea/`;
 
@@ -361,6 +390,7 @@ module.exports = {
   login,
   uploadFile,
   sendFile,
+  sendFileByType,
   getMealsAppZipFile,
   getAccommodationAppZipFile
 };

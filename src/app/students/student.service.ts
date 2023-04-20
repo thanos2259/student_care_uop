@@ -33,6 +33,11 @@ export class StudentsService {
     return fetchedStudents;
   }
 
+  sendFileByType(studentId: number, fileName: string, appType: 'mea' | 'acc'): Observable<Blob> {
+    const url = STUDENTS_URL + "sendFileByType/" + studentId;
+    return this.http.post(url, { 'fileName': fileName, "appType": appType }, { responseType: 'blob' });
+  }
+
   receiveZipFileMeals(studentId: number, docType: string): Observable<Blob> {
     const url = STUDENTS_URL + "getMealsAppZipFile/" + studentId;
     return this.http.post(url, { 'doctype': docType }, { responseType: 'blob' });

@@ -3,6 +3,7 @@ const jwt = require("jsonwebtoken");
 const formidable = require('formidable');
 const fs = require('fs');
 require('dotenv').config();
+const path = require('path');
 
 // app.post("/api/students/login/:id", (request, response, next) => {
 const login = async (request, response, next) => {
@@ -269,7 +270,7 @@ const getMealsAppZipFile = async (request, response) => {
     const fileName = `dikaiologitika_student_${id}.zip`;
     const filePath = `./uploads/${id}/mea/`;
 
-    const fullPath = initialPath + filePath + fileName;
+    const fullPath = path.join(initialPath, filePath, fileName);
 
     response
       .status(200)
@@ -289,7 +290,7 @@ const getAccommodationAppZipFile = async (request, response) => {
     const fileName = `dikaiologitika_student_${id}.zip`;
     const filePath = `./uploads/${id}/acc/`;
 
-    const fullPath = initialPath + filePath + fileName;
+    const fullPath = path.join(initialPath, filePath, fileName);
 
     response
       .status(200)

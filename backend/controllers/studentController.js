@@ -2,6 +2,7 @@ const studentService = require("../services/studentService.js");
 const jwt = require("jsonwebtoken");
 const formidable = require('formidable');
 const fs = require('fs');
+require('dotenv').config();
 
 // app.post("/api/students/login/:id", (request, response, next) => {
 const login = async (request, response, next) => {

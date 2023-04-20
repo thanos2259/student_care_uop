@@ -24,6 +24,10 @@ export class AppViewDialogComponent implements OnInit {
     this.dialogRef.close();
   }
 
+  viewFile(studentId) {
+
+  }
+
   ngOnInit(): void {
     this.studentService.getAccommodationFiles(this.data.appId)
       .subscribe((files: any[]) => {

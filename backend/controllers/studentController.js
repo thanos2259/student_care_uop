@@ -266,7 +266,7 @@ const sendFile = async (request, response) => {
 const getMealsAppZipFile = async (request, response) => {
   try {
     const id = request.params.id;
-    const initialPath = process.env.MANAGER_PREVIEW_FILE_PATH;
+    const initialPath = '/Users/Thanos/Documents/Github/student_care_uop/';
     const fileName = `dikaiologitika_student_${id}.zip`;
     const filePath = `./uploads/${id}/mea/`;
 

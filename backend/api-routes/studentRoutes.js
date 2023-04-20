@@ -18,5 +18,7 @@ router.post("/login", studentController.login);
 // file upload routes
 router.post("/upload/:id/:fileIndex", studentController.uploadFile);
 router.post("/sendFile/:id", studentController.sendFile);
+router.post("/getMealsAppZipFile/:id", studentController.getMealsAppZipFile);
+router.post("/getAccommodationAppZipFile/:id", studentController.getMealsAppZipFile);
 
 module.exports = router;

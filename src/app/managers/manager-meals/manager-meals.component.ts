@@ -86,6 +86,12 @@ export class ManagerMealsComponent implements OnInit {
 
   }
 
+  receiveZipFileMeals(studentId: number, docType: string) {
+    this.studentsService.receiveZipFileMeals(studentId, docType).subscribe(res => {
+      window.open(window.URL.createObjectURL(res));
+    });
+  }
+
   openCommentsDialog(idx: any) {
     console.log(idx);
     const dialogRef = this.dialog.open(CommentsDialogComponent, {

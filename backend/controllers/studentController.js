@@ -261,6 +261,46 @@ const sendFile = async (request, response) => {
   }
 };
 
+const getMealsAppZipFile = async (request, response) => {
+  try {
+    const id = request.params.id;
+    const initialPath = process.env.MANAGER_PREVIEW_FILE_PATH;
+    const fileName = `dikaiologitika_student_${id}.zip`;
+    const filePath = `./uploads/${id}/mea/`;
+
+    const fullPath = initialPath + filePath + fileName;
+
+    response
+      .status(200)
+      .sendFile(fullPath);
+  } catch (error) {
+    console.error(error.message);
+    response.status(500).send({
+      message: error.message
+    });
+  }
+};
+
+const getAccommodationAppZipFile = async (request, response) => {
+  try {
+    const id = request.params.id;
+    const initialPath = process.env.MANAGER_PREVIEW_FILE_PATH;
+    const fileName = `dikaiologitika_student_${id}.zip`;
+    const filePath = `./uploads/${id}/acc/`;
+
+    const fullPath = initialPath + filePath + fileName;
+
+    response
+      .status(200)
+      .sendFile(fullPath);
+  } catch (error) {
+    console.error(error.message);
+    response.status(500).send({
+      message: error.message
+    });
+  }
+};
+
 const insertCommentsByStudentId = async (request, response) => {
   try {
     const id = request.params.id;
@@ -318,5 +358,7 @@ module.exports = {
   getStudentsApplyPhaseMeals,
   login,
   uploadFile,
-  sendFile
+  sendFile,
+  getMealsAppZipFile,
+  getAccommodationAppZipFile
 };

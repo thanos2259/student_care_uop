@@ -33,6 +33,16 @@ export class StudentsService {
     return fetchedStudents;
   }
 
+  receiveZipFileMeals(studentId: number, docType: string): Observable<Blob> {
+    const url = STUDENTS_URL + "getMealsAppZipFile/" + studentId;
+    return this.http.post(url, { 'doctype': docType }, { responseType: 'blob' });
+  }
+
+  receiveZipFileAccommodation(studentId: number, docType: string): Observable<Blob> {
+    const url = STUDENTS_URL + "getAccommodationAppZipFile/" + studentId;
+    return this.http.post(url, { 'doctype': docType }, { responseType: 'blob' });
+  }
+
   getApplication(): Observable<Array<Application>> {
     let id = this.authService.getSessionId();
     const fetchedStudents = this.http.get<Array<Application>>(STUDENTS_URL + 'getStudentApplicationById/' + id);

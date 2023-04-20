@@ -12,29 +12,29 @@ import { StudentsService } from 'src/app/students/student.service';
 export class AppViewDialogComponent implements OnInit {
   appFiles!: any[];
   public filesMeals: FilesMeals = {
-  eka8aristiko: false,
-  oikogeneiakhKatastasi: false,
-  pistopoihtikoGoneaFoithth: false,
-  tautotita: false,
-  toposMonimhsKatoikias: false,
-  ypeu8unhDilosi: false,
-  polutekneia: false,
-  threeChildren: false,
-  bebaioshSpoudonAderfwn: false,
-  noParents: false,
-  agamhMhtera: false,
-  lhksiarxikhPrakshThanatouGoneaA: false,
-  lhksiarxikhPrakshThanatouGoneaB: false,
-  goneisAMEA: false,
-  goneisAMEAIatrikhGnomateush: false,
-  goneisThumataTromokratias1: false,
-  goneisThumataTromokratias2: false,
-  bebaioshEpidothsdhsAnergeias: false,
-  diazevgmenoiGoneis1: false,
-  diazevgmenoiGoneis2: false,
-  AMEA: false,
-  AMEAIatrikhGnomateush: false,
-};
+    eka8aristiko: false,
+    oikogeneiakhKatastasi: false,
+    pistopoihtikoGoneaFoithth: false,
+    tautotita: false,
+    toposMonimhsKatoikias: false,
+    ypeu8unhDilosi: false,
+    polutekneia: false,
+    threeChildren: false,
+    bebaioshSpoudonAderfwn: false,
+    noParents: false,
+    agamhMhtera: false,
+    lhksiarxikhPrakshThanatouGoneaA: false,
+    lhksiarxikhPrakshThanatouGoneaB: false,
+    goneisAMEA: false,
+    goneisAMEAIatrikhGnomateush: false,
+    goneisThumataTromokratias1: false,
+    goneisThumataTromokratias2: false,
+    bebaioshEpidothsdhsAnergeias: false,
+    diazevgmenoiGoneis1: false,
+    diazevgmenoiGoneis2: false,
+    AMEA: false,
+    AMEAIatrikhGnomateush: false,
+  };
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialog: MatDialog,
     public dialogRef: MatDialogRef<AppViewDialogComponent>, public studentService: StudentsService
@@ -46,7 +46,6 @@ export class AppViewDialogComponent implements OnInit {
 
   viewFile(filesMealsModelParam: string) {
     const MEALS_ABBR: 'mea' | 'acc' = 'mea';
-    console.log('asdasdasda');
     const studentId: number = this.data.studentsData[this.data.index].sso_uid;
     const appId: number = this.data.studentsData[this.data.index].app_id;
     const fileName: string = MEALS_ABBR + Utils.mapFilesMealsModelToFilenames[filesMealsModelParam];

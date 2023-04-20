@@ -106,7 +106,8 @@ export class ManagerMealsComponent implements OnInit {
   openAppViewDialog(idx: number, appId: number) {
     console.log(idx);
     const dialogRef = this.dialog.open(AppViewDialogComponent, {
-      data: { studentsData: this.studentsSSOData, index: idx, appId: appId}
+      data: { studentsData: this.studentsSSOData, index: idx, appId: appId },
+      width: '850px',
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -117,7 +118,7 @@ export class ManagerMealsComponent implements OnInit {
   studentInfo(idx: any) {
     console.log(idx);
     const dialogRef = this.dialog.open(StudentViewDialogComponent, {
-      data: { studentsData: this.studentsSSOData, index: idx, subject: 'Σίτιση' }
+      data: { studentsData: this.studentsSSOData, index: idx }
     });
 
     dialogRef.afterClosed().subscribe(result => {

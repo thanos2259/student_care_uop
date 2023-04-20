@@ -13,7 +13,7 @@
   <p><span>Επώνυμο πατέρα</span>: {{ this.data.studentsData[this.data.index].father_last_name}}</p>
   <p><span>Επώνυμο μητέρας</span>: {{ this.data.studentsData[this.data.index].mother_last_name}}</p>
   <p><span>ΑΜ</span>: {{ this.data.studentsData[this.data.index].schacpersonaluniquecode}}</p>
-  <p><span>Ημ/νία Γέννησης</span>: {{ this.data.studentsData[this.data.index].schacdateofbirth}}</p>
+  <p><span>Ημ/νία Γέννησης</span>: {{formattedDateOfBirth}}</p>
   <p><span>Φύλο</span>: {{ this.data.studentsData[this.data.index].schacgender == 1 ? 'Άνδρας' : 'Γυναίκα'}}</p>
   <p><span>email</span>: {{ this.data.studentsData[this.data.index].mail}}</p>
   <p><span>Τηλέφωνο</span>: {{ this.data.studentsData[this.data.index].phone}}</p>

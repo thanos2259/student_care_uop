@@ -183,20 +183,21 @@ const getStudentsApplyPhaseMeals = async () => {
 
 const getOldStudentsApps = async () => {
   try {
-    const query = `SELECT apps.id as app_id, *
-                  FROM sso_users
-                  INNER JOIN student_users
-                  ON sso_users.uuid = student_users.sso_uid
-                  INNER JOIN applications apps ON apps.uid = sso_users.uuid
-                  INNER JOIN period ON apps.submit_date NOT between period.date_from and period.date_to
-                  AND period.is_active <> true
-                  WHERE sso_users.edupersonprimaryaffiliation = 'student' AND apps.application_type = 'meals'`;
+    const query = `SELECT DISTINCT apps.id as app_id, *
+                    FROM sso_users
+                    INNER JOIN student_users
+                    ON sso_users.uuid = student_users.sso_uid
+                    INNER JOIN applications apps ON apps.uid = sso_users.uuid
+                    LEFT JOIN period ON apps.submit_date BETWEEN period.date_from AND period.date_to
+                    WHERE sso_users.edupersonprimaryaffiliation = 'student'
+                    AND apps.application_type = 'meals'
+                    AND (period.is_active = false OR period.is_active IS NULL)`;
 
     const results = await pool.query(query);
     return results.rows;
   } catch (error) {
-    console.error('Error while fetching students from active period' + error.message);
-    throw Error('Error while fetching students from active period');
+    console.error('Error while fetching students old meal applications' + error.message);
+    throw Error('Error while fetching students old meal applications');
   }
 };
 

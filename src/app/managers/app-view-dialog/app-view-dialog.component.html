@@ -3,8 +3,8 @@
     <h3>Στοιχεία Αίτησης Φοιτητή</h3>
   </div>
   <div class="col-sm-2">
-    <a (click)="viewFile(this.data.studentsData[this.data.index].sso_uid)" style="color: #224957; cursor: pointer;"><i
-        class="fa fa-lg fa-print"></i> Εκτύπωση
+    <a (click)="printToPdf(this.data.index)" style="color: #224957; cursor: pointer;"><i class="fa fa-lg fa-print"></i>
+      Εκτύπωση
     </a>
   </div>
 </div>
@@ -111,8 +111,8 @@
   <div class="form-group row">
     <div class="col-sm-10">
       <span>Απορφανισθέντες από τον ένα ή από τους δύο γονείς, μικρότεροι των 25 ετών</span>:
-      {{filesMeals.noParents ? 'ΝΑΙ' : 'ΟΧΙ'}}
-      <ul *ngIf="filesMeals.noParents">
+      {{filesMeals.lhksiarxikhPrakshThanatouGoneaA || filesMeals.lhksiarxikhPrakshThanatouGoneaB ? 'ΝΑΙ' : 'ΟΧΙ'}}
+      <ul *ngIf="filesMeals.lhksiarxikhPrakshThanatouGoneaA || filesMeals.lhksiarxikhPrakshThanatouGoneaB">
         <li>
           <span>Ληξιαρχική Πράξη θανάτου Γονέα</span>: {{filesMeals.lhksiarxikhPrakshThanatouGoneaA ? 'ΝΑΙ' : 'ΟΧΙ'}}
         </li>
@@ -121,14 +121,15 @@
         </li>
       </ul>
     </div>
-    <div class="col-sm-2">
+    <div class="col-sm-2"
+      *ngIf="filesMeals.lhksiarxikhPrakshThanatouGoneaA || filesMeals.lhksiarxikhPrakshThanatouGoneaB">
       <br>
       <a *ngIf="filesMeals.lhksiarxikhPrakshThanatouGoneaA" (click)="viewFile('lhksiarxikhPrakshThanatouGoneaA')"
         style="color: #224957; cursor: pointer;"><i class="fa fa-lg fa-eye"></i> Προβολή
-        <br>
-        <a *ngIf="filesMeals.lhksiarxikhPrakshThanatouGoneaB" (click)="viewFile('lhksiarxikhPrakshThanatouGoneaB')"
-          style="color: #224957; cursor: pointer;"><i class="fa fa-lg fa-eye"></i> Προβολή
-        </a>
+      </a>
+      <br>
+      <a *ngIf="filesMeals.lhksiarxikhPrakshThanatouGoneaB" (click)="viewFile('lhksiarxikhPrakshThanatouGoneaB')"
+        style="color: #224957; cursor: pointer;"><i class="fa fa-lg fa-eye"></i> Προβολή
       </a>
     </div>
   </div>
@@ -159,15 +160,13 @@
         </li>
       </ul>
     </div>
-    <div class="col-sm-2">
+    <div class="col-sm-2" *ngIf="filesMeals.goneisAMEA || filesMeals.goneisAMEAIatrikhGnomateush">
       <br>
       <a *ngIf="filesMeals.goneisAMEA" (click)="viewFile('goneisAMEA')" style="color: #224957; cursor: pointer;"><i
-          class="fa fa-lg fa-eye"></i>
-        Προβολή
-        <br>
-        <a *ngIf="filesMeals.goneisAMEAIatrikhGnomateush" (click)="viewFile('goneisAMEAIatrikhGnomateush')"
-          style="color: #224957; cursor: pointer;"><i class="fa fa-lg fa-eye"></i> Προβολή
-        </a>
+          class="fa fa-lg fa-eye"></i> Προβολή</a>
+      <br>
+      <a *ngIf="filesMeals.goneisAMEAIatrikhGnomateush" (click)="viewFile('goneisAMEAIatrikhGnomateush')"
+        style="color: #224957; cursor: pointer;"><i class="fa fa-lg fa-eye"></i> Προβολή
       </a>
     </div>
   </div>
@@ -185,12 +184,10 @@
         </li>
       </ul>
     </div>
-    <div class="col-sm-2">
+    <div class="col-sm-2" *ngIf="filesMeals.AMEA || filesMeals.AMEAIatrikhGnomateush">
       <br>
       <a *ngIf="filesMeals.AMEA" (click)="viewFile('AMEA')" style="color: #224957; cursor: pointer;"><i
-          class="fa fa-lg fa-eye"></i>
-        Προβολή
-      </a>
+          class="fa fa-lg fa-eye"></i> Προβολή</a>
       <br>
       <a *ngIf="filesMeals.AMEAIatrikhGnomateush" (click)="viewFile('AMEAIatrikhGnomateush')"
         style="color: #224957; cursor: pointer;"><i class="fa fa-lg fa-eye"></i> Προβολή
@@ -213,7 +210,7 @@
         </li>
       </ul>
     </div>
-    <div class="col-sm-2">
+    <div class="col-sm-2" *ngIf="filesMeals.goneisThumataTromokratias1 || filesMeals.goneisThumataTromokratias2">
       <br>
       <a *ngIf="filesMeals.goneisThumataTromokratias1" (click)="viewFile('goneisThumataTromokratias1')"
         style="color: #224957; cursor: pointer;"><i class="fa fa-lg fa-eye"></i> Προβολή
@@ -264,12 +261,75 @@
 
   <mat-divider class="mb-2"></mat-divider>
   <h2 style="font-weight: bold;">Ειδικά Στοιχεία</h2>
-
-  <p><span>Οικογενειακό Εισόδημα</span>: {{ this.data.studentsData[this.data.index].family_income}}</p>
   <p><span>Οικογενειακή Κατάσταση</span>: {{ this.data.studentsData[this.data.index].family_state}}</p>
+
+  <div class="form-group row">
+    <div class="col-sm-10">
+      <mat-form-field class="mr-1 w-75 disabled" appearance="fill">
+        <mat-label>Οικογενειακό Εισόδημα</mat-label>
+        <input matInput #inputFamilyIncome placeholder="Οικογενειακό Εισόδημα"
+          [value]="this.data.studentsData[this.data.index].family_income" formControlName="family_income">
+      </mat-form-field>
+    </div>
+    <div class="col-sm-2">
+      <a style="color: #224957; cursor: pointer;"
+        (click)="updateSpecialFields(inputFamilyIncome.value, 'family_income')"><i class="fa fa-lg fa-arrow-right"></i>
+        Υποβολή</a>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <div class="col-sm-10">
+      <mat-form-field class="mr-1 w-75 disabled" appearance="fill">
+        <mat-label>Προστατευόμενα Μέλη</mat-label>
+        <input matInput #inputProtectedMembers placeholder="Προστατευόμενα Μέλη"
+          [value]="this.data.studentsData[this.data.index].protected_members" formControlName="protected_members">
+      </mat-form-field>
+    </div>
+    <div class="col-sm-2">
+      <a style="color: #224957; cursor: pointer;"
+        (click)="updateSpecialFields(inputProtectedMembers.value, 'protected_members')"><i
+          class="fa fa-lg fa-arrow-right"></i> Υποβολή</a>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <div class="col-sm-10">
+      <mat-form-field class="mr-1 w-75 disabled" appearance="fill">
+        <mat-label>Αδέρφια 1ου κύκλου σπουδών</mat-label>
+        <input matInput #inputSiblingsStudents placeholder="Αδέρφια 1ου κύκλου σπουδών"
+          [value]="this.data.studentsData[this.data.index].siblings_students" formControlName="siblings_students">
+      </mat-form-field>
+    </div>
+    <div class="col-sm-2">
+      <a style="color: #224957; cursor: pointer;"
+        (click)="updateSpecialFields(inputSiblingsStudents.value, 'siblings_students')"><i
+          class="fa fa-lg fa-arrow-right"></i> Υποβολή</a>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <div class="col-sm-10">
+      <mat-form-field class="mr-1 w-75 disabled" appearance="fill">
+        <mat-label>Παιδιά φοιτητή</mat-label>
+        <input matInput #inputChildren placeholder="Παιδιά φοιτητή"
+          [value]="this.data.studentsData[this.data.index].children" formControlName="children">
+      </mat-form-field>
+    </div>
+    <div class="col-sm-2">
+      <a style="color: #224957; cursor: pointer;" (click)="updateSpecialFields(inputChildren.value, 'children')"><i
+          class="fa fa-lg fa-arrow-right"></i> Υποβολή</a>
+    </div>
+  </div>
+
+  <!-- <span>Οικογενειακό Εισόδημα</span>: -->
+
+
+  <!-- {{ this.data.studentsData[this.data.index].family_income}} -->
+  <!--
   <p><span>Προστατευόμενα Μέλη</span>: {{ this.data.studentsData[this.data.index].protected_members}}</p>
   <p><span>Αδέρφια 1ου κύκλου σπουδών</span>: {{ this.data.studentsData[this.data.index].siblings_students}}</p>
-  <p><span>Παιδιά φοιτητή</span>: {{ this.data.studentsData[this.data.index].children}}</p>
+  <p><span>Παιδιά φοιτητή</span>: {{ this.data.studentsData[this.data.index].children}}</p> -->
 </mat-dialog-content>
 <mat-dialog-actions style='text-align: right'>
   <button mat-button class="btn btn-primary mat-button" (click)="onCancel()">Κλείσιμο</button>

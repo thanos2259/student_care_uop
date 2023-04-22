@@ -149,7 +149,7 @@ const updateApplicationAndHandleFiles = async (student, filesData, uid, appId) =
 
     if (updateResult) {
       const deleteFilesResult = await deleteOldApplicationFiles(appId);
-      const insertFilesResult = await insertAccommodationFilesSubmittedData(appId, filesData);
+      const insertFilesResult = await insertApplicationFilesSubmittedData(appId, filesData);
 
       if (!deleteFilesResult || !insertFilesResult) {
         throw Error('Files not inserted');
@@ -169,11 +169,31 @@ const getStudentsApplyPhaseMeals = async () => {
                     INNER JOIN student_users
                     ON sso_users.uuid = student_users.sso_uid
                     INNER JOIN applications apps ON apps.uid = sso_users.uuid
-                    INNER JOIN period ON period.id = apps.period_id AND period.is_active = true
+                    INNER JOIN period ON apps.submit_date between period.date_from and period.date_to
+                    AND period.is_active = true
                     WHERE sso_users.edupersonprimaryaffiliation = 'student' AND apps.application_type = 'meals'`;
 
     const studentsWithAppsMeals = await pool.query(query);
     return studentsWithAppsMeals.rows;
+  } catch (error) {
+    console.error('Error while fetching students from active period' + error.message);
+    throw Error('Error while fetching students from active period');
+  }
+};
+
+const getOldStudentsApps = async () => {
+  try {
+    const query = `SELECT apps.id as app_id, *
+                  FROM sso_users
+                  INNER JOIN student_users
+                  ON sso_users.uuid = student_users.sso_uid
+                  INNER JOIN applications apps ON apps.uid = sso_users.uuid
+                  INNER JOIN period ON apps.submit_date NOT between period.date_from and period.date_to
+                  AND period.is_active <> true
+                  WHERE sso_users.edupersonprimaryaffiliation = 'student' AND apps.application_type = 'meals'`;
+
+    const results = await pool.query(query);
+    return results.rows;
   } catch (error) {
     console.error('Error while fetching students from active period' + error.message);
     throw Error('Error while fetching students from active period');
@@ -332,7 +352,7 @@ const insertNewApplication = async (student, filesData, uid) => {
       throw Error('No application inserted');
     }
 
-    const insertFilesDetailsResult = await insertAccommodationFilesSubmittedData(insertAppResult.rows[0].id, filesData);
+    const insertFilesDetailsResult = await insertApplicationFilesSubmittedData(insertAppResult.rows[0].id, filesData);
     // if (!insertFilesDetailsResult) {
     //   throw Error('No submitted files data inserted');
     // }
@@ -350,11 +370,12 @@ const deleteOldApplicationFiles = async (appID) => {
 
     return true;
   } catch (error) {
+    console.error(error.message);
     throw Error('Error while deleting student files: ' + error.message);
   }
 };
 
-insertAccommodationFilesSubmittedData = async (appID, files) => {
+const insertApplicationFilesSubmittedData = async (appID, files) => {
   try {
     // traverse files as key value pairs
     for (const [key, value] of Object.entries(files)) {
@@ -371,6 +392,18 @@ insertAccommodationFilesSubmittedData = async (appID, files) => {
 
     return true;
   } catch (error) {
+    console.error(error.message);
+    throw Error('Error while inserting student files: ' + error.message);
+  }
+};
+
+const updateSpecialField = async (fieldValue, fieldName, appId) => {
+  try {
+    const query = `UPDATE applications SET ${fieldName} = ${fieldValue} WHERE id = ${appId}`;
+    console.log(query);
+    await pool.query(query);
+  } catch (error) {
+    console.error(error.message);
     throw Error('Error while inserting student files: ' + error.message);
   }
 };
@@ -381,13 +414,15 @@ module.exports = {
   getAccommodationFilesByAppID,
   getCommentByStudentIdAndSubject,
   getStudentsApplyPhaseMeals,
+  getApplicationById,
+  getOldStudentsApps,
   insertOrUpdateApplication,
+  insertNewApplication,
   updateStudentDetails,
   updateStudentContact,
   updateStudentBasicInfo,
   updateStudentSpecialData,
-  insertNewApplication,
-  getApplicationById,
+  updateSpecialField,
   loginStudent,
   combineToZIP,
   deleteFiles

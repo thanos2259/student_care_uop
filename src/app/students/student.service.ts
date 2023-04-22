@@ -33,6 +33,12 @@ export class StudentsService {
     return fetchedStudents;
   }
 
+  getOldStudentsApps(): Observable<Array<StudentApplication>> {
+    let id = this.authService.getSessionId();
+    const fetchedStudents = this.http.get<Array<StudentApplication>>(STUDENTS_URL + 'getOldStudentsApps/' + id);
+    return fetchedStudents;
+  }
+
   sendFileByType(studentId: number, fileName: string, appType: 'mea' | 'acc'): Observable<Blob> {
     const url = STUDENTS_URL + "sendFileByType/" + studentId;
     return this.http.post(url, { 'fileName': fileName, "appType": appType }, { responseType: 'blob' });
@@ -118,5 +124,11 @@ export class StudentsService {
     const id = this.authService.getSessionId();
     return this.http
       .post<{ message: string }>(STUDENTS_URL + "upload/" + id + "/" + fileUniqueIndex, file);
+  }
+
+  updateSpecialField(appId: number, value: string | number, field: string): any {
+    return this.http
+      .patch<{ message: string }>(STUDENTS_URL + "applications/updateSpecialField/" + appId,
+         { "fieldValue": value, "fieldName": field });
   }
 }

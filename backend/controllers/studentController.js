@@ -111,6 +111,19 @@ const getCommentByStudentIdAndSubject = async (request, response) => {
   }
 };
 
+const getOldStudentsApps = async (request, response) => {
+  try {
+    const id = request.params.id;
+
+    const comment = await studentService.getOldStudentsApps();
+    response.status(200).json(comment);
+  } catch (error) {
+    response.send({
+      message: error.message
+    });
+  }
+};
+
 const updateStudentDetails = async (request, response, next) => {
   try {
     const id = request.params.id;
@@ -374,15 +387,37 @@ const updateCommentsByStudentId = async (request, response) => {
   }
 };
 
+const updateSpecialField = async (request, response) => {
+  try {
+    const appId = request.params.id;
+    const { fieldValue, fieldName } = request.body;
+
+    await studentService.updateSpecialField(fieldValue, fieldName, appId);
+
+    response
+      .status(200)
+      .json({
+        message: `Student application ${fieldName} field was updated successfully`
+      });
+  } catch (error) {
+    console.error(error.message);
+    response.status(500).send({
+      message: `Student application ${fieldName} field was not updated, error: ${error.message}`
+    });
+  }
+};
+
 module.exports = {
   getAllStudents,
   getStudentById,
   getAccommodationFiles,
   getCommentByStudentIdAndSubject,
+  getOldStudentsApps,
   updateStudentDetails,
   updateStudentContact,
   updateStudentSpecialData,
   updateStudentBasicInfo,
+  updateSpecialField,
   insertCommentsByStudentId,
   updateCommentsByStudentId,
   getApplicationsById,

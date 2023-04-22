@@ -9,6 +9,7 @@ import { StudentApplication } from 'src/app/students/student-application.model';
 import { EditNotesDialogComponent } from '../edit-notes-dialog/edit-notes-dialog.component';
 import { AppViewDialogComponent } from '../app-view-dialog/app-view-dialog.component';
 import { StudentViewDialogComponent } from '../student-view-dialog/student-view-dialog.component';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-manager-meals',
@@ -16,10 +17,9 @@ import { StudentViewDialogComponent } from '../student-view-dialog/student-view-
   styleUrls: ['./manager-meals.component.css']
 })
 export class ManagerMealsComponent implements OnInit {
-
   @ViewChild('processingTable') table1: ElementRef | undefined;
   @ViewChild('completed') table2: ElementRef | undefined;
-
+  public state: number = 0;
   studentsSSOData: StudentApplication[] = [];
   formattedDate: string[] = [];
   hasMadeComment = [];
@@ -79,7 +79,46 @@ export class ManagerMealsComponent implements OnInit {
   }
 
   exportToExcel() {
+    let studentsDataJson: any = [];
+    for (const item of this.studentsSSOData) {
+      const itemIndex = this.studentsSSOData.indexOf(item);
+      studentsDataJson.push({
+        "TMHMA": this.departmentNameByid(Number(item.department_id)),
+        "ΑΜ": item.schacpersonaluniquecode,
+        "Επώνυμο": item.sn,
+        "Όνομα": item.givenname,
+        "Πατρώνυμο": item.father_name,
+        "Μητρώνυμο": item.mother_name,
+        "Επώνυμο πατέρα": item.father_last_name,
+        "Επώνυμο μητέρας": item.mother_last_name,
+        "email": item.mail,
+        "Ημ/νια Γέννησης": Utils.reformatDateOfBirth(item.schacdateofbirth),
+        // "Φύλο": item.schacgender == 1 ? 'Άνδρας' : 'Γυναίκα',
+        "Τηλέφωνο": item.phone,
+        "Πόλη": item.city,
+        "ΤΚ": item.post_address,
+        "Διεύθυνση": item.address,
+        "Τοποθεσία": item.location,
+        "Χώρα": item.country == "gr" ? 'Ελλάδα' : item.country,
+        "Αρ. Αίτησης": item.id,
+        "Ημ/νία Αίτησης":  Utils.getPreferredTimestamp(item.submit_date),
+        "Κατηγορία": item.category,
+        "Οικογενειακό εισόδημα":  item.family_income,
+        "Όριο Εισοδηματος": this.calculateIncomeLimitForStudent(itemIndex),
+        "Οικογενειακή κατάσταση": item.family_state,
+        "Προστατευόμενα Μέλη": item.protected_members,
+        "Αδέλφια που φοιτούν": item.siblings_students,
+        "Παιδιά Φοιτητή": item.children
+      });
+    }
 
+    const excelFileName: string = "StudentsPhase1Meals.xlsx";
+    const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(studentsDataJson) //table_to_sheet((document.getElementById("example2") as HTMLElement));
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+    /* Save to file */
+    XLSX.writeFile(wb, excelFileName);
   }
 
   printDataTable() {
@@ -163,6 +202,53 @@ export class ManagerMealsComponent implements OnInit {
   checkStudentHasComment(studentSSOUid: number): boolean {
     const studentComment = this.hasMadeComment.find((comment: { studentId: number; hasComment: boolean }) => comment.studentId === studentSSOUid);
     return (studentComment && studentComment.hasComment);
+  }
+
+  fetchOldAppData(state: number) {
+    this.state = state;
+    this.studentsSSOData = [];
+
+    this.studentsService.getOldStudentsApps()
+      .subscribe((students: StudentApplication[]) => {
+        this.studentsSSOData = students;
+        for (let i = 0; i < students.length; i++) {
+          this.studentsSSOData[i].schacpersonaluniquecode = Utils.getRegistrationNumber(this.studentsSSOData[i].schacpersonaluniquecode);
+          this.formattedDate[i] = Utils.getPreferredTimestamp(this.studentsSSOData[i].submit_date);
+
+          this.managerService.getCommentByStudentIdAndSubject(this.studentsSSOData[i].sso_uid, 'Σίτιση')
+            .subscribe((comment: any) => {
+              if (comment) {
+                this.hasMadeComment.push({ studentId: this.studentsSSOData[i].sso_uid, hasComment: true });
+              } else {
+                this.hasMadeComment.push({ studentId: this.studentsSSOData[i].sso_uid, hasComment: false });
+              }
+            });
+        }
+
+      });
+  }
+
+  fetchCurrectAppData(state: number) {
+    this.state = state;
+    this.studentsSSOData = [];
+     this.studentsService.getStudentsAppsMealsForPeriod()
+      .subscribe((students: StudentApplication[]) => {
+        this.studentsSSOData = students;
+        for (let i = 0; i < students.length; i++) {
+          this.studentsSSOData[i].schacpersonaluniquecode = Utils.getRegistrationNumber(this.studentsSSOData[i].schacpersonaluniquecode);
+          this.formattedDate[i] = Utils.getPreferredTimestamp(this.studentsSSOData[i].submit_date);
+
+          this.managerService.getCommentByStudentIdAndSubject(this.studentsSSOData[i].sso_uid, 'Σίτιση')
+            .subscribe((comment: any) => {
+              if (comment) {
+                this.hasMadeComment.push({ studentId: this.studentsSSOData[i].sso_uid, hasComment: true });
+              } else {
+                this.hasMadeComment.push({ studentId: this.studentsSSOData[i].sso_uid, hasComment: false });
+              }
+            });
+        }
+
+      });
   }
 
 }

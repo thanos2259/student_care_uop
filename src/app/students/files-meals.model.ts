@@ -6,9 +6,7 @@ export interface FilesMeals {
   toposMonimhsKatoikias: boolean;
   ypeu8unhDilosi: boolean;
   polutekneia: boolean;
-  threeChildren: boolean;
   bebaioshSpoudonAderfwn: boolean;
-  noParents: boolean;
   agamhMhtera: boolean;
   lhksiarxikhPrakshThanatouGoneaA: boolean;
   lhksiarxikhPrakshThanatouGoneaB: boolean;

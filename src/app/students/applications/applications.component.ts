@@ -102,14 +102,14 @@ export class ApplicationsComponent implements OnInit {
                                       <td style="width: 50.0000%;">Αρ. Μητρ.</td>
                                       <td style="width: 50.0000%;">${this.studentsSSOData[0].schacpersonaluniquecode}</td>
                                   </tr>
-                                  <tr>
+                                  <!--<tr>
                                       <td style="width: 50.0000%;">Εγγραφή</td>
                                       <td style="width: 50.0000%;"></td>
                                   </tr>
                                   <tr>
                                       <td style="width: 50.0000%;">Εισαγωγή</td>
                                       <td style="width: 50.0000%;"></td>
-                                  </tr>
+                                  </tr>-->
                                   <tr>
                                       <td style="width: 50.0000%;">Δικαιούχος</td>
                                       <td style="width: 50.0000%;">${this.studentsSSOData[0].displayname}</td>

@@ -6,11 +6,12 @@
         <div class="card-header p-2">
           <ul class="nav nav-pills">
             <li class="nav-item">
-              <a class="nav-link active" href="#processing" data-toggle="tab">
+              <a class="nav-link active" href="#processing" (click)="fetchCurrectAppData(0)" data-toggle="tab">
                 Υπο επεξεργασία</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#completed" data-toggle="tab"> Ολοκληρωμένες </a>
+              <a class="nav-link" style="cursor: pointer;" (click)="fetchOldAppData(1)" data-toggle="tab"> Παλιές
+                Αιτήσεις </a>
             </li>
           </ul>
         </div>
@@ -20,9 +21,6 @@
               <form ngNativeValidate #processing="ngForm" class="form-horizontal" (ngSubmit)="(processing.value)">
                 <button class="btn btn-secondary" (click)="exportToExcel()"><i class='fas fa-file-export'></i>
                   Excel</button>
-                &nbsp;
-                <button class="btn btn-secondary" (click)="printDataTable()"><i class='fas fa-print'></i>
-                  Print</button>
                 <br><br>
                 <table id="processingTable" #processingTable
                   class="table table-responsive table-bordered table-striped">
@@ -44,7 +42,7 @@
                   <tbody>
                     <tr *ngFor="let student of studentsSSOData; let idx=index" [attr.data-index]="idx">
                       <td>{{idx+1}}</td>
-                      <td>
+                      <td *ngIf="state == 0">
                         <mat-form-field id="{{student.app_id}}" name="phase" style="width:100%;" appearance="standard">
                           <mat-label>Υπό επεξεργασία</mat-label>
                           <mat-select value="'option1'" name="phase"
@@ -69,6 +67,12 @@
                             class="fas fa-edit"></i>
                           Προβολή / Επεξεργασία Σχολίου<br></a>
                       </td>
+                      <td *ngIf="state == 1">
+                        <p [ngClass]="{'green-text': student.status == 1 && student.is_approved, 'yellow-text': student.status == 0
+                          && !student.is_approved , 'red-text': student.status == -1 }">
+                          {{student.status == 1 ? 'Έγκριση - Επιλαχών' : student.status == 0 ? 'Υπό επεξεργασία' : 'Απόρριψη'}}
+                        </p>
+                      </td>
                       <td>{{departmentNameByid(student.department_id)}}</td>
                       <td> <a class="custom-info-btn" (click)="studentInfo(idx)">{{student.givenname}}
                           {{student.sn}}</a></td>
@@ -76,15 +80,19 @@
                       <td>{{student.app_id}}</td>
                       <td>{{formattedDate[idx]}}</td>
                       <td class="text-left" style="min-width: 150px;">
-                        <a (click)="openAppViewDialog(idx, student.app_id)" style="color: #224957; cursor: pointer;"><i
+                        <!-- <a (click)="openAppViewDialog(idx, student.app_id)" style="color: #224957; cursor: pointer;"><i
                             class="fa fa-lg fa-eye mb-3"></i>
-                          Προβολή </a>
+                          Προβολή </a> -->
+
+                        <a (click)="openAppViewDialog(idx, student.app_id)" style="color: #224957; cursor: pointer;"><i
+                            class="fa fa-lg fa-address-card mb-3"></i>
+                          Αίτηση </a>
                         <br>
                         <a (click)="receiveZipFileMeals(student.sso_uid, 'zip')"
                           style="color: #224957; cursor: pointer;"><i class="fa fa-lg fa-download mb-3"></i> ZIP Αρχείο
                         </a>
                         <br>
-                        <a href="#" style="color: #224957;"><i class="fa fa-lg fa-address-card"></i> Επεξεργασία </a>
+                        <!-- <a href="#" style="color: #224957;"><i class="fa fa-lg fa-address-card"></i> Επεξεργασία </a> -->
                       </td>
                       <td>{{student.family_income}}</td>
                       <td>{{calculateIncomeLimitForStudent(idx)}}</td>
@@ -125,78 +133,6 @@
                       <th scope="col">Εισόδημα</th>
                       <th scope="col">Όριο Εισ.</th>
                       <th scope="col">Σημειώσεις</th>
-                    </tr>
-                  </tfoot>
-                </table>
-              </form>
-            </div>
-            <div class="tab-pane" id="completed">
-              <form #completed="ngForm" class="form-horizontal">
-                <button class="btn btn-secondary" (click)="exportToExcel()"><i class='fas fa-file-export'></i>
-                  Excel</button>
-                &nbsp;
-                <button class="btn btn-secondary" (click)="printDataTable()"><i class='fas fa-print'></i>
-                  Print</button>
-                <br><br>
-                <table id="processingTable" #processingTable class="table table-bordered table-striped">
-                  <thead>
-                    <tr>
-                      <th scope="col">Α/A</th>
-                      <th scope="col">Επιλογή</th>
-                      <th scope="col">Τμήμα</th>
-                      <th scope="col">Α.Μ.</th>
-                      <th scope="col">Όνομ/νυμο</th>
-                      <th scope="col">Εισόδημα</th>
-                      <th scope="col">Όριο Εισ.</th>
-                      <th scope="col">Έγγραφα</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr *ngFor="let student of studentsSSOData ; let idx=index" [attr.data-index]="idx">
-                      <th scope="row">1</th>
-                      <td>
-                        <mat-form-field id="{{student.sso_uid}}" name="phase" style="width:100%;" appearance="standard">
-                          <mat-label>Υπό επεξεργασία</mat-label>
-                          <mat-select value="'option1'" name="phase">
-                            <mat-option value="option3" (click)="onSubmitSelect('option3', student.sso_uid)">Υπό
-                              επεξεργασία
-                            </mat-option>
-                            <mat-option value="option1" (click)="onSubmitSelect('option1', student.sso_uid)">Έγκριση
-                            </mat-option>
-                            <mat-option value="option2" (click)="onSubmitSelect('option2', student.sso_uid)">
-                              Απόρριψη
-                            </mat-option>
-                          </mat-select>
-                        </mat-form-field>
-                        <!-- Insert Comment Button -->
-                        <a class="text-secondary w-100" style="cursor: pointer;" (click)="openCommentsDialog(idx)"><i
-                            class="fas fa-edit"></i>
-                          Σχόλιο<br></a>
-                      </td>
-                      <td>{{student.givenname}} {{student.sn}}</td>
-                      <td>{{student.schacpersonaluniquecode}}</td>
-                      <td class="reponsive-text-center-td">
-                        <button (click)="receiveFile(student.sso_uid, 'zip')"
-                          class=" mt-0 mb-0 pt-0 pb-0 btn btn-primary mr-3 td-button-responsive">
-                          <i class="fa fa-download" aria-hidden="true"></i> zip
-                        </button>
-                        <button (click)="receiveFile(student.sso_uid, 'application')"
-                          class="mt-0 mb-0 pt-0 pb-0 btn btn-primary mr-3 td-button-responsive">
-                          <i class="fa fa-download" aria-hidden="true"></i> Αίτηση
-                        </button>
-                      </td>
-                    </tr>
-                  </tbody>
-                  <tfoot>
-                    <tr>
-                      <th scope="col">Α/A</th>
-                      <th scope="col">Επιλογή</th>
-                      <th scope="col">Τμήμα</th>
-                      <th scope="col">Α.Μ.</th>
-                      <th scope="col">Όνομ/νυμο</th>
-                      <th scope="col">Εισόδημα</th>
-                      <th scope="col">Όριο Εισ.</th>
-                      <th scope="col">Έγγραφα</th>
                     </tr>
                   </tfoot>
                 </table>

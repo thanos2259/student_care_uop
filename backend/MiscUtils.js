@@ -74,6 +74,10 @@ const filesSubmitted = [
     filename: "fileDiazevgmenoiGoneis1", description: "Διαζευκτήριο", type: 'optional'
   }, {
     filename: "fileDiazevgmenoiGoneis2", description: "Eπιμέλεια φοιτητή", type: 'optional'
+  }, {
+    filename: "fileAMEA", description: "Πιστοποιητικό υγειονομικής επιτροπής(αναπηρία)(άρθρο 1, παρ.9, περ.στ)", type: 'optional'
+  }, {
+    filename: "fileAMEAIatrikhGnomateush", description: "Ιατρική γνωμάτευση από Δημόσιο Νοσοκομείο(άρθρο 1, παρ.9, περ.στ)", type: 'optional'
   }
 ];
 

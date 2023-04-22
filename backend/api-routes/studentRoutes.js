@@ -10,6 +10,7 @@ router.get("/getStudentApplicationById/:id", studentController.getApplicationsBy
 router.get("/getAccommodationFiles/:id", studentController.getAccommodationFiles);
 router.get("/getCommentByStudentIdAndSubject/", studentController.getCommentByStudentIdAndSubject);
 router.get("/getStudentsApplyPhaseMeals/:id", studentController.getStudentsApplyPhaseMeals);
+router.get("/getOldStudentsApps/:id", studentController.getOldStudentsApps);
 router.put("/updateStudentDetails/:id", studentController.updateStudentDetails);
 router.put("/updateStudentContact/:id", studentController.updateStudentContact);
 router.put("/updateStudentBasicInfo/:id", studentController.updateStudentBasicInfo);
@@ -21,5 +22,6 @@ router.post("/sendFile/:id", studentController.sendFile);
 router.post("/sendFileByType/:id", studentController.sendFileByType);
 router.post("/getMealsAppZipFile/:id", studentController.getMealsAppZipFile);
 router.post("/getAccommodationAppZipFile/:id", studentController.getMealsAppZipFile);
+router.patch("/applications/updateSpecialField/:id", studentController.updateSpecialField);
 
 module.exports = router;

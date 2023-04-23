@@ -181,7 +181,26 @@ const getStudentsApplyPhaseMeals = async () => {
   }
 };
 
-const getOldStudentsApps = async () => {
+const getStudentsApplyPhaseAccommodation = async () => {
+  try {
+    const query = `SELECT apps.id as app_id, *
+                    FROM sso_users
+                    INNER JOIN student_users
+                    ON sso_users.uuid = student_users.sso_uid
+                    INNER JOIN applications apps ON apps.uid = sso_users.uuid
+                    INNER JOIN period ON apps.submit_date between period.date_from and period.date_to
+                    AND period.is_active = true
+                    WHERE sso_users.edupersonprimaryaffiliation = 'student' AND apps.application_type = 'accommodation'`;
+
+    const studentsWithAppsMeals = await pool.query(query);
+    return studentsWithAppsMeals.rows;
+  } catch (error) {
+    console.error('Error while fetching students from active period' + error.message);
+    throw Error('Error while fetching students from active period');
+  }
+};
+
+const getOldStudentsAppsForMeals = async () => {
   try {
     const query = `SELECT DISTINCT apps.id as app_id, *
                     FROM sso_users
@@ -191,6 +210,26 @@ const getOldStudentsApps = async () => {
                     LEFT JOIN period ON apps.submit_date BETWEEN period.date_from AND period.date_to
                     WHERE sso_users.edupersonprimaryaffiliation = 'student'
                     AND apps.application_type = 'meals'
+                    AND (period.is_active = false OR period.is_active IS NULL)`;
+
+    const results = await pool.query(query);
+    return results.rows;
+  } catch (error) {
+    console.error('Error while fetching students old meal applications' + error.message);
+    throw Error('Error while fetching students old meal applications');
+  }
+};
+
+const getOldStudentsAppsForAccommodation = async () => {
+  try {
+    const query = `SELECT DISTINCT apps.id as app_id, *
+                    FROM sso_users
+                    INNER JOIN student_users
+                    ON sso_users.uuid = student_users.sso_uid
+                    INNER JOIN applications apps ON apps.uid = sso_users.uuid
+                    LEFT JOIN period ON apps.submit_date BETWEEN period.date_from AND period.date_to
+                    WHERE sso_users.edupersonprimaryaffiliation = 'student'
+                    AND apps.application_type = 'accommodation'
                     AND (period.is_active = false OR period.is_active IS NULL)`;
 
     const results = await pool.query(query);
@@ -415,8 +454,10 @@ module.exports = {
   getAccommodationFilesByAppID,
   getCommentByStudentIdAndSubject,
   getStudentsApplyPhaseMeals,
+  getStudentsApplyPhaseAccommodation,
   getApplicationById,
-  getOldStudentsApps,
+  getOldStudentsAppsForMeals,
+  getOldStudentsAppsForAccommodation,
   insertOrUpdateApplication,
   insertNewApplication,
   updateStudentDetails,

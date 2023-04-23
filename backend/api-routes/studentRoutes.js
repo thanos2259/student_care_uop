@@ -10,7 +10,9 @@ router.get("/getStudentApplicationById/:id", studentController.getApplicationsBy
 router.get("/getAccommodationFiles/:id", studentController.getAccommodationFiles);
 router.get("/getCommentByStudentIdAndSubject/", studentController.getCommentByStudentIdAndSubject);
 router.get("/getStudentsApplyPhaseMeals/:id", studentController.getStudentsApplyPhaseMeals);
-router.get("/getOldStudentsApps/:id", studentController.getOldStudentsApps);
+router.get("/getStudentsApplyPhaseAccommodation/:id", studentController.getStudentsApplyPhaseAccommodation);
+router.get("/getOldStudentsAppsForMeals/:id", studentController.getOldStudentsAppsForMeals);
+router.get("/getOldStudentsAppsForAccommodation/:id", studentController.getOldStudentsAppsForAccommodation);
 router.put("/updateStudentDetails/:id", studentController.updateStudentDetails);
 router.put("/updateStudentContact/:id", studentController.updateStudentContact);
 router.put("/updateStudentBasicInfo/:id", studentController.updateStudentBasicInfo);

@@ -17,12 +17,11 @@ import * as XLSX from 'xlsx';
   styleUrls: ['./manager-meals.component.css']
 })
 export class ManagerMealsComponent implements OnInit {
-  @ViewChild('processingTable') table1: ElementRef | undefined;
-  @ViewChild('completed') table2: ElementRef | undefined;
+  @ViewChild('processingTable') private table1: ElementRef | undefined;
   public state: number = 0;
-  studentsSSOData: StudentApplication[] = [];
-  formattedDate: string[] = [];
-  hasMadeComment = [];
+  public studentsSSOData: StudentApplication[] = [];
+  public formattedDate: string[] = [];
+  private hasMadeComment = [];
 
   constructor(public studentsService: StudentsService, public authService: AuthService, public dialog: MatDialog, private chRef: ChangeDetectorRef, public managerService: ManagerService) { }
 
@@ -61,18 +60,7 @@ export class ManagerMealsComponent implements OnInit {
           select: true,
           pagingType: 'full_numbers',
           processing: true,
-          columnDefs: [{ orderable: false, targets: [0, 7, 10] }],
-          language: {
-            // lengthMenu: 'Show _MENU_ entries'
-            // lengthMenu: this.translate.instant('DEPT-MANAGER.SHOW-RESULTS') + ' _MENU_ ' + this.translate.instant('DEPT-MANAGER.ENTRIES')
-            // : "Επίδειξη","ENTRIES": "εγγραφών ανά σελίδα"
-            // // lengthMenu: 'Display _MENU_ records per page',
-            // zeroRecords: 'Nothing found - sorry',
-            // info: 'Showing page _PAGE_ of _PAGES_',
-            // infoEmpty: 'No records available',
-            // infoFiltered: '(filtered from _MAX_ total records)',
-          },
-          // pageLength: 8
+          columnDefs: [{ orderable: false, targets: [0, 7, 10] }]
         });
 
       });
@@ -93,7 +81,7 @@ export class ManagerMealsComponent implements OnInit {
         "Επώνυμο μητέρας": item.mother_last_name,
         "email": item.mail,
         "Ημ/νια Γέννησης": Utils.reformatDateOfBirth(item.schacdateofbirth),
-        // "Φύλο": item.schacgender == 1 ? 'Άνδρας' : 'Γυναίκα',
+        "Φύλο": item.schacgender == 1 ? 'Άνδρας' : 'Γυναίκα',
         "Τηλέφωνο": item.phone,
         "Πόλη": item.city,
         "ΤΚ": item.post_address,
@@ -119,10 +107,6 @@ export class ManagerMealsComponent implements OnInit {
 
     /* Save to file */
     XLSX.writeFile(wb, excelFileName);
-  }
-
-  printDataTable() {
-
   }
 
   receiveZipFileMeals(studentId: number, docType: string) {
@@ -195,7 +179,6 @@ export class ManagerMealsComponent implements OnInit {
 
   onSubmitSelect(option: string, appId: number) {
     let status = (option == "option1") ? 1 : (option == "option2") ? -1 : 0;
-    // console.log("status: " + status + " stId: " + (appId));
     this.managerService.updateApplicationStatus(status, appId);
   }
 
@@ -208,7 +191,7 @@ export class ManagerMealsComponent implements OnInit {
     this.state = state;
     this.studentsSSOData = [];
 
-    this.studentsService.getOldStudentsApps()
+    this.studentsService.getOldStudentsAppsForMeals()
       .subscribe((students: StudentApplication[]) => {
         this.studentsSSOData = students;
         for (let i = 0; i < students.length; i++) {
@@ -247,7 +230,6 @@ export class ManagerMealsComponent implements OnInit {
               }
             });
         }
-
       });
   }
 

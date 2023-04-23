@@ -33,9 +33,21 @@ export class StudentsService {
     return fetchedStudents;
   }
 
-  getOldStudentsApps(): Observable<Array<StudentApplication>> {
+  getStudentsAppsAccommodationForPeriod(): Observable<Array<StudentApplication>> {
     let id = this.authService.getSessionId();
-    const fetchedStudents = this.http.get<Array<StudentApplication>>(STUDENTS_URL + 'getOldStudentsApps/' + id);
+    const fetchedStudents = this.http.get<Array<StudentApplication>>(STUDENTS_URL + 'getStudentsApplyPhaseAccommodation/' + id);
+    return fetchedStudents;
+  }
+
+  getOldStudentsAppsForMeals(): Observable<Array<StudentApplication>> {
+    let id = this.authService.getSessionId();
+    const fetchedStudents = this.http.get<Array<StudentApplication>>(STUDENTS_URL + 'getOldStudentsAppsForMeals/' + id);
+    return fetchedStudents;
+  }
+
+  getOldStudentsAppsForAccommodation(): Observable<Array<StudentApplication>> {
+    let id = this.authService.getSessionId();
+    const fetchedStudents = this.http.get<Array<StudentApplication>>(STUDENTS_URL + 'getOldStudentsAppsForAccommodation/' + id);
     return fetchedStudents;
   }
 

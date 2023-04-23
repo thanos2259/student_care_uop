@@ -26,6 +26,7 @@ export interface StudentApplication {
   schacyearofbirth: number;
   schacdateofbirth: string;
   schacpersonaluniqueid: string;
+  schacgender?: number;
   department_id: string;
   post_address: string;
   mother_name: string;

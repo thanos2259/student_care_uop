@@ -70,6 +70,18 @@ const getStudentsApplyPhaseMeals = async (request, response) => {
   }
 };
 
+const getStudentsApplyPhaseAccommodation = async (request, response) => {
+  try {
+    const studentsApps = await studentService.getStudentsApplyPhaseAccommodation();
+    response.status(200).json(studentsApps);
+  } catch (error) {
+    console.error(error.message);
+    response.send({
+      message: error.message
+    });
+  }
+};
+
 // get accommodation files information by application id
 const getAccommodationFiles = async (request, response) => {
   try {
@@ -111,11 +123,24 @@ const getCommentByStudentIdAndSubject = async (request, response) => {
   }
 };
 
-const getOldStudentsApps = async (request, response) => {
+const getOldStudentsAppsForMeals = async (request, response) => {
   try {
     const id = request.params.id;
 
-    const comment = await studentService.getOldStudentsApps();
+    const comment = await studentService.getOldStudentsAppsForMeals();
+    response.status(200).json(comment);
+  } catch (error) {
+    response.send({
+      message: error.message
+    });
+  }
+};
+
+const getOldStudentsAppsForAccommodation = async (request, response) => {
+  try {
+    const id = request.params.id;
+
+    const comment = await studentService.getOldStudentsAppsForAccommodation();
     response.status(200).json(comment);
   } catch (error) {
     response.send({
@@ -412,7 +437,8 @@ module.exports = {
   getStudentById,
   getAccommodationFiles,
   getCommentByStudentIdAndSubject,
-  getOldStudentsApps,
+  getOldStudentsAppsForMeals,
+  getOldStudentsAppsForAccommodation,
   updateStudentDetails,
   updateStudentContact,
   updateStudentSpecialData,
@@ -422,6 +448,7 @@ module.exports = {
   updateCommentsByStudentId,
   getApplicationsById,
   getStudentsApplyPhaseMeals,
+  getStudentsApplyPhaseAccommodation,
   login,
   uploadFile,
   sendFile,

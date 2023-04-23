@@ -171,6 +171,7 @@ const getStudentsApplyPhaseMeals = async () => {
                     INNER JOIN applications apps ON apps.uid = sso_users.uuid
                     INNER JOIN period ON apps.submit_date between period.date_from and period.date_to
                     AND period.is_active = true
+                    AND period.app_type = 'meals'
                     WHERE sso_users.edupersonprimaryaffiliation = 'student' AND apps.application_type = 'meals'`;
 
     const studentsWithAppsMeals = await pool.query(query);
@@ -190,6 +191,7 @@ const getStudentsApplyPhaseAccommodation = async () => {
                     INNER JOIN applications apps ON apps.uid = sso_users.uuid
                     INNER JOIN period ON apps.submit_date between period.date_from and period.date_to
                     AND period.is_active = true
+                    AND period.app_type = 'accommodation'
                     WHERE sso_users.edupersonprimaryaffiliation = 'student' AND apps.application_type = 'accommodation'`;
 
     const studentsWithAppsMeals = await pool.query(query);
@@ -210,7 +212,8 @@ const getOldStudentsAppsForMeals = async () => {
                     LEFT JOIN period ON apps.submit_date BETWEEN period.date_from AND period.date_to
                     WHERE sso_users.edupersonprimaryaffiliation = 'student'
                     AND apps.application_type = 'meals'
-                    AND (period.is_active = false OR period.is_active IS NULL)`;
+                    AND (period.is_active = false OR period.is_active IS NULL)
+                    AND period.app_type = 'meals'`;
 
     const results = await pool.query(query);
     return results.rows;
@@ -230,7 +233,8 @@ const getOldStudentsAppsForAccommodation = async () => {
                     LEFT JOIN period ON apps.submit_date BETWEEN period.date_from AND period.date_to
                     WHERE sso_users.edupersonprimaryaffiliation = 'student'
                     AND apps.application_type = 'accommodation'
-                    AND (period.is_active = false OR period.is_active IS NULL)`;
+                    AND (period.is_active = false OR period.is_active IS NULL)
+                    AND period.app_type = 'accommodation'`;
 
     const results = await pool.query(query);
     return results.rows;

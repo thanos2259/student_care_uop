@@ -7,7 +7,7 @@ import { CommentsDialogComponent } from '../comments-dialog/comments-dialog.comp
 import { ManagerService } from '../manager.service';
 import { StudentApplication } from 'src/app/students/student-application.model';
 import { EditNotesDialogComponent } from '../edit-notes-dialog/edit-notes-dialog.component';
-import { AppViewDialogComponent } from '../app-view-dialog/app-view-dialog.component';
+import { AppViewDialogAccommodationComponent } from '../app-view-dialog-accommodation/app-view-dialog-accommodation.component';
 import { StudentViewDialogComponent } from '../student-view-dialog/student-view-dialog.component';
 import * as XLSX from 'xlsx';
 
@@ -122,7 +122,7 @@ export class AccommodationComponent implements OnInit {
 
   openAppViewDialog(idx: number, appId: number) {
     console.log(idx);
-    const dialogRef = this.dialog.open(AppViewDialogComponent, {
+    const dialogRef = this.dialog.open(AppViewDialogAccommodationComponent, {
       data: { studentsData: this.studentsSSOData, index: idx, appId: appId },
       width: '850px',
     });

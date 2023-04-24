@@ -1,0 +1,395 @@
+<div class="form-group row">
+  <div class="col-sm-10">
+    <h3>Στοιχεία Αίτησης Φοιτητή</h3>
+  </div>
+  <div class="col-sm-2">
+    <a (click)="printToPdf(this.data.index)" style="color: #224957; cursor: pointer;"><i class="fa fa-lg fa-print"></i>
+      Εκτύπωση
+    </a>
+  </div>
+</div>
+<mat-dialog-content class="mat-typography">
+  <mat-divider class="mb-2"></mat-divider>
+  <p><span>Ονοματεπώνυμο</span>: {{ this.data.studentsData[this.data.index].givenname}}
+    {{ this.data.studentsData[this.data.index].sn}}
+  </p>
+  <h2 style="font-weight: bold;">Βασικά Δικαιολογητικά</h2>
+
+  <div class="form-group row">
+    <div class="col-sm-10">
+      <span>Πιστοποιητικό οικογενειακής κατάστασης</span>
+    </div>
+    <div class="col-sm-2">
+      <a (click)="viewFile('oikogeneiakhKatastasi')" style="color: #224957; cursor: pointer;"><i
+          class="fa fa-lg fa-eye"></i> Προβολή
+      </a>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <div class="col-sm-10">
+      <span>Δελτίο Αστυνομικής Ταυτότητας/Διαβατήριο</span>
+    </div>
+    <div class="col-sm-2">
+      <a (click)="viewFile('tautotita')" style="color: #224957; cursor: pointer;"><i class="fa fa-lg fa-eye"></i>
+        Προβολή
+      </a>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <div class="col-sm-10">
+      <span>Εκκαθαριστικό Σημείωμα και Ε1του προηγούμενου οικονομικού έτους, γονέων καθώς και του υποψηφίου, από την
+        οποία προκύπτουν και ο τόπος μόνιμης κατοικίας, καθώς και τα προστατευόμενα μέλη της οικογένειας του υποψηφίου
+        (κωδικός 003, 004 του Πίνακα 8 της Δήλωσης Φορολογίας 9 Εισοδήματος Φυσικών Προσώπων)</span>
+    </div>
+    <div class="col-sm-2">
+      <a (click)="viewFile('toposMonimhsKatoikias')" style="color: #224957; cursor: pointer;"><i
+          class="fa fa-lg fa-eye"></i> Προβολή
+      </a>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <div class="col-sm-10">
+      <span>Υπεύθυνη δήλωση</span>
+    </div>
+    <div class="col-sm-2">
+      <a (click)="viewFile('ypeu8unhDilosi')" style="color: #224957; cursor: pointer;"><i class="fa fa-lg fa-eye"></i>
+        Προβολή
+      </a>
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-sm-10">
+      <span>Βεβαίωση επίδοσης για τον υποψήφιο που έχει εξετασθεί επιτυχώς στα μισά μαθήματα του προηγούμενου
+        Ακαδημαϊκού Έτους, που προβλέπονται από τον Οδηγό Σπουδών</span>
+    </div>
+    <div class="col-sm-2">
+      <a (click)="viewFile('eka8aristiko')" style="color: #224957; cursor: pointer;"><i class="fa fa-lg fa-eye"></i>
+        Προβολή
+      </a>
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-sm-10">
+      <span>Βεβαίωση σπουδών. Για την απόδειξη φοίτησης εντός της τυπικής διάρκειας +2 χρόνια</span>
+    </div>
+    <div class="col-sm-2">
+      <a (click)="viewFile('vevaiwshSpoudwn')" style="color: #224957; cursor: pointer;"><i class="fa fa-lg fa-eye"></i>
+        Προβολή
+      </a>
+    </div>
+  </div>
+
+  <!-- <p><span>Κατηγορία</span>: {{ this.data.studentsData[this.data.index].category}}</p> -->
+  <mat-divider class="mb-2"></mat-divider>
+  <h2 style="font-weight: bold;">Προαιρετικά Δικαιολογητικά</h2>
+
+  <div class="form-group row">
+    <div class="col-sm-10">
+      <span>Πολυτεκνία</span>: {{filesAccommodation.polutekneia ? 'ΝΑΙ' : 'ΟΧΙ'}}
+    </div>
+    <div class="col-sm-2">
+      <a (click)="viewFile('polutekneia')" *ngIf="filesAccommodation.polutekneia"
+        style="color: #224957; cursor: pointer;"><i class="fa fa-lg fa-eye"></i> Προβολή
+      </a>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <div class="col-sm-10">
+      <span>Βεβαίωση Σπουδών για αδερφό φοιτητή/τρια</span>:
+      {{filesAccommodation.bebaioshSpoudonAderfwn ? 'ΝΑΙ' : 'ΟΧΙ'}}
+    </div>
+    <div class="col-sm-2">
+      <a (click)="viewFile('bebaioshSpoudonAderfwn')" *ngIf="filesAccommodation.bebaioshSpoudonAderfwn"
+        style="color: #224957; cursor: pointer;"><i class="fa fa-lg fa-eye"></i> Προβολή
+      </a>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <div class="col-sm-10">
+      <span>Φοιτητής/τρια γονεάς ή Τριτεκνία</span>: {{filesAccommodation.pistopoihtikoGoneaFoithth ? 'ΝΑΙ' : 'ΟΧΙ'}}
+    </div>
+    <div class="col-sm-2">
+      <a (click)="viewFile('pistopoihtikoGoneaFoithth')" *ngIf="filesAccommodation.pistopoihtikoGoneaFoithth"
+        style="color: #224957; cursor: pointer;"><i class="fa fa-lg fa-eye"></i> Προβολή
+      </a>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <div class="col-sm-10">
+      <span>Απορφανισθέντες από τον ένα ή από τους δύο γονείς, μικρότεροι των 25 ετών</span>:
+      {{filesAccommodation.lhksiarxikhPrakshThanatouGoneaA || filesAccommodation.lhksiarxikhPrakshThanatouGoneaB ? 'ΝΑΙ' : 'ΟΧΙ'}}
+      <ul
+        *ngIf="filesAccommodation.lhksiarxikhPrakshThanatouGoneaA || filesAccommodation.lhksiarxikhPrakshThanatouGoneaB">
+        <li>
+          <span>Ληξιαρχική Πράξη θανάτου Γονέα</span>:
+          {{filesAccommodation.lhksiarxikhPrakshThanatouGoneaA ? 'ΝΑΙ' : 'ΟΧΙ'}}
+        </li>
+        <li>
+          <span>Ληξιαρχική Πράξη Γέννησης Φοιτητή</span>:
+          {{filesAccommodation.lhksiarxikhPrakshThanatouGoneaB ? 'ΝΑΙ' : 'ΟΧΙ'}}
+        </li>
+      </ul>
+    </div>
+    <div class="col-sm-2"
+      *ngIf="filesAccommodation.lhksiarxikhPrakshThanatouGoneaA || filesAccommodation.lhksiarxikhPrakshThanatouGoneaB">
+      <br>
+      <a *ngIf="filesAccommodation.lhksiarxikhPrakshThanatouGoneaA"
+        (click)="viewFile('lhksiarxikhPrakshThanatouGoneaA')" style="color: #224957; cursor: pointer;"><i
+          class="fa fa-lg fa-eye"></i> Προβολή
+      </a>
+      <br>
+      <a *ngIf="filesAccommodation.lhksiarxikhPrakshThanatouGoneaB"
+        (click)="viewFile('lhksiarxikhPrakshThanatouGoneaB')" style="color: #224957; cursor: pointer;"><i
+          class="fa fa-lg fa-eye"></i> Προβολή
+      </a>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <div class="col-sm-10">
+      <span>Ανύπαντρη Μητέρα</span>: {{filesAccommodation.agamhMhtera ? 'ΝΑΙ' : 'ΟΧΙ'}}
+    </div>
+    <div class="col-sm-2">
+      <a (click)="viewFile('agamhMhtera')" *ngIf="filesAccommodation.agamhMhtera"
+        style="color: #224957; cursor: pointer;"><i class="fa fa-lg fa-eye"></i>
+        Προβολή
+      </a>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <div class="col-sm-10">
+      <span>Συγγενείς με αναπηρία άνω του 67%</span>:
+      {{filesAccommodation.goneisAMEA || filesAccommodation.goneisAMEAIatrikhGnomateush ? 'ΝΑΙ' : 'ΟΧΙ'}}
+      <ul *ngIf="filesAccommodation.goneisAMEA || filesAccommodation.goneisAMEAIatrikhGnomateush">
+        <li>
+          <span>Πιστοποιητικό Υγειονομικής Επιτροπής</span>: {{filesAccommodation.goneisAMEA ? 'ΝΑΙ' : 'ΟΧΙ'}}
+        </li>
+        <li>
+          <span>Ιατρική γνωμάτευση από Δημόσιο Νοσοκομείο</span>:
+          {{filesAccommodation.goneisAMEAIatrikhGnomateush ? 'ΝΑΙ' : 'ΟΧΙ'}}
+        </li>
+      </ul>
+    </div>
+    <div class="col-sm-2" *ngIf="filesAccommodation.goneisAMEA || filesAccommodation.goneisAMEAIatrikhGnomateush">
+      <br>
+      <a *ngIf="filesAccommodation.goneisAMEA" (click)="viewFile('goneisAMEA')"
+        style="color: #224957; cursor: pointer;"><i class="fa fa-lg fa-eye"></i> Προβολή</a>
+      <br>
+      <a *ngIf="filesAccommodation.goneisAMEAIatrikhGnomateush" (click)="viewFile('goneisAMEAIatrikhGnomateush')"
+        style="color: #224957; cursor: pointer;"><i class="fa fa-lg fa-eye"></i> Προβολή
+      </a>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <div class="col-sm-10">
+      <span>Φοιτητής με σοβαρή ασθένεια</span>:
+      {{filesAccommodation.AMEA || filesAccommodation.AMEAIatrikhGnomateush ? 'ΝΑΙ' : 'ΟΧΙ'}}
+      <ul *ngIf="filesAccommodation.AMEA || filesAccommodation.AMEAIatrikhGnomateush">
+        <li>
+          <span>Πιστοποιητικό Υγειονομικής Επιτροπής</span>: {{filesAccommodation.AMEA ? 'ΝΑΙ' : 'ΟΧΙ'}}
+        </li>
+        <li>
+          <span>Ιατρική γνωμάτευση από Δημόσιο Νοσοκομείο</span>:
+          {{filesAccommodation.AMEAIatrikhGnomateush ? 'ΝΑΙ' : 'ΟΧΙ'}}
+        </li>
+      </ul>
+    </div>
+    <div class="col-sm-2" *ngIf="filesAccommodation.AMEA || filesAccommodation.AMEAIatrikhGnomateush">
+      <br>
+      <a *ngIf="filesAccommodation.AMEA" (click)="viewFile('AMEA')" style="color: #224957; cursor: pointer;"><i
+          class="fa fa-lg fa-eye"></i> Προβολή</a>
+      <br>
+      <a *ngIf="filesAccommodation.AMEAIatrikhGnomateush" (click)="viewFile('AMEAIatrikhGnomateush')"
+        style="color: #224957; cursor: pointer;"><i class="fa fa-lg fa-eye"></i> Προβολή
+      </a>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <div class="col-sm-10">
+      <span>Τρομοκρατία</span>:
+      {{filesAccommodation.goneisThumataTromokratias1 || filesAccommodation.goneisThumataTromokratias2 ? 'ΝΑΙ' : 'ΟΧΙ'}}
+      <ul *ngIf="filesAccommodation.goneisThumataTromokratias1 || filesAccommodation.goneisThumataTromokratias2">
+        <li>
+          <span>Ληξιαρχική πράξη γέννησης του/της φοιτητή/φοιτήτριας</span>:
+          {{filesAccommodation.goneisThumataTromokratias1 ? 'ΝΑΙ' : 'ΟΧΙ'}}
+        </li>
+        <li>
+          <span>Αντίγραφο της πράξης συνταξιοδότησης</span>:
+          {{filesAccommodation.goneisThumataTromokratias2 ? 'ΝΑΙ' : 'ΟΧΙ'}}
+        </li>
+      </ul>
+    </div>
+    <div class="col-sm-2"
+      *ngIf="filesAccommodation.goneisThumataTromokratias1 || filesAccommodation.goneisThumataTromokratias2">
+      <br>
+      <a *ngIf="filesAccommodation.goneisThumataTromokratias1" (click)="viewFile('goneisThumataTromokratias1')"
+        style="color: #224957; cursor: pointer;"><i class="fa fa-lg fa-eye"></i> Προβολή
+      </a>
+      <br>
+      <a *ngIf="filesAccommodation.goneisThumataTromokratias2" (click)="viewFile('goneisThumataTromokratias2')"
+        style="color: #224957; cursor: pointer;"><i class="fa fa-lg fa-eye"></i> Προβολή
+      </a>
+    </div>
+  </div>
+
+
+
+  <div class="form-group row">
+    <div class="col-sm-10">
+      <span>Βεβαίωση επιδότησης ανεργίας</span>: {{filesAccommodation.bebaioshEpidothsdhsAnergeias ? 'ΝΑΙ' :
+      'ΟΧΙ'}}
+    </div>
+    <div class="col-sm-2">
+      <a (click)="viewFile('bebaioshEpidothsdhsAnergeias')" *ngIf="filesAccommodation.bebaioshEpidothsdhsAnergeias"
+        style="color: #224957; cursor: pointer;"><i class="fa fa-lg fa-eye"></i> Προβολή
+      </a>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <div class="col-sm-10">
+      <span>Στρατός-Βεβαίωση Υπηρεσίας για κάθε προστατευόμενο μέλος της οικογένειας του
+        υποψηφίου</span>: {{filesAccommodation.stratos ? 'ΝΑΙ' :
+      'ΟΧΙ'}}
+    </div>
+    <div class="col-sm-2">
+      <a (click)="viewFile('stratos')" *ngIf="filesAccommodation.stratos" style="color: #224957; cursor: pointer;"><i
+          class="fa fa-lg fa-eye"></i> Προβολή
+      </a>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <div class="col-sm-10">
+      <span>Βεβαίωση Υποτροφίας</span>: {{filesAccommodation.ypotrofeia ? 'ΝΑΙ' :
+      'ΟΧΙ'}}
+    </div>
+    <div class="col-sm-2">
+      <a (click)="viewFile('ypotrofeia')" *ngIf="filesAccommodation.ypotrofeia"
+        style="color: #224957; cursor: pointer;"><i class="fa fa-lg fa-eye"></i> Προβολή
+      </a>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <div class="col-sm-10">
+      <span>Bεβαίωση – πιστοποιητικό απορίας Βεβαίωση από αρμόδια Υπηρεσία Κοινωνικής Πρόνοιας</span>:
+      {{filesAccommodation.aporia ? 'ΝΑΙ' :
+      'ΟΧΙ'}}
+    </div>
+    <div class="col-sm-2">
+      <a (click)="viewFile('aporia')" *ngIf="filesAccommodation.aporia" style="color: #224957; cursor: pointer;"><i
+          class="fa fa-lg fa-eye"></i> Προβολή
+      </a>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <div class="col-sm-10">
+      <span>Διαζευγμένοι γονείς</span>:
+      {{filesAccommodation.diazevgmenoiGoneis1 || filesAccommodation.diazevgmenoiGoneis2 ? 'ΝΑΙ' : 'ΟΧΙ'}}
+      <ul *ngIf="filesAccommodation.diazevgmenoiGoneis1 || filesAccommodation.diazevgmenoiGoneis2">
+        <li>
+          <span>Διαζευκτήριο</span>: {{filesAccommodation.diazevgmenoiGoneis1 ? 'ΝΑΙ' : 'ΟΧΙ'}}
+        </li>
+        <li>
+          <span>Επιμέλεια του/της φοιτητή/φοιτήτριας</span>:
+          {{filesAccommodation.diazevgmenoiGoneis2 ? 'ΝΑΙ' : 'ΟΧΙ'}}
+        </li>
+      </ul>
+    </div>
+    <div class="col-sm-2">
+      <br>
+      <a *ngIf="filesAccommodation.diazevgmenoiGoneis1" (click)="viewFile('diazevgmenoiGoneis1')"
+        style="color: #224957; cursor: pointer;"><i class="fa fa-lg fa-eye"></i> Προβολή
+      </a>
+      <br>
+      <a *ngIf="filesAccommodation.diazevgmenoiGoneis2" (click)="viewFile('diazevgmenoiGoneis2')"
+        style="color: #224957; cursor: pointer;"><i class="fa fa-lg fa-eye"></i> Προβολή
+      </a>
+    </div>
+  </div>
+
+  <mat-divider class="mb-2"></mat-divider>
+  <h2 style="font-weight: bold;">Ειδικά Στοιχεία</h2>
+  <p><span>Οικογενειακή Κατάσταση</span>: {{ this.data.studentsData[this.data.index].family_state}}</p>
+
+  <div class="form-group row">
+    <div class="col-sm-10">
+      <mat-form-field class="mr-1 w-75 disabled" appearance="fill">
+        <mat-label>Οικογενειακό Εισόδημα</mat-label>
+        <input matInput #inputFamilyIncome placeholder="Οικογενειακό Εισόδημα"
+          [value]="this.data.studentsData[this.data.index].family_income" formControlName="family_income">
+      </mat-form-field>
+    </div>
+    <div class="col-sm-2">
+      <a style="color: #224957; cursor: pointer;"
+        (click)="updateSpecialFields(inputFamilyIncome.value, 'family_income')"><i class="fa fa-lg fa-arrow-right"></i>
+        Υποβολή</a>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <div class="col-sm-10">
+      <mat-form-field class="mr-1 w-75 disabled" appearance="fill">
+        <mat-label>Προστατευόμενα Μέλη</mat-label>
+        <input matInput #inputProtectedMembers placeholder="Προστατευόμενα Μέλη"
+          [value]="this.data.studentsData[this.data.index].protected_members" formControlName="protected_members">
+      </mat-form-field>
+    </div>
+    <div class="col-sm-2">
+      <a style="color: #224957; cursor: pointer;"
+        (click)="updateSpecialFields(inputProtectedMembers.value, 'protected_members')"><i
+          class="fa fa-lg fa-arrow-right"></i> Υποβολή</a>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <div class="col-sm-10">
+      <mat-form-field class="mr-1 w-75 disabled" appearance="fill">
+        <mat-label>Αδέρφια 1ου κύκλου σπουδών</mat-label>
+        <input matInput #inputSiblingsStudents placeholder="Αδέρφια 1ου κύκλου σπουδών"
+          [value]="this.data.studentsData[this.data.index].siblings_students" formControlName="siblings_students">
+      </mat-form-field>
+    </div>
+    <div class="col-sm-2">
+      <a style="color: #224957; cursor: pointer;"
+        (click)="updateSpecialFields(inputSiblingsStudents.value, 'siblings_students')"><i
+          class="fa fa-lg fa-arrow-right"></i> Υποβολή</a>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <div class="col-sm-10">
+      <mat-form-field class="mr-1 w-75 disabled" appearance="fill">
+        <mat-label>Παιδιά φοιτητή</mat-label>
+        <input matInput #inputChildren placeholder="Παιδιά φοιτητή"
+          [value]="this.data.studentsData[this.data.index].children" formControlName="children">
+      </mat-form-field>
+    </div>
+    <div class="col-sm-2">
+      <a style="color: #224957; cursor: pointer;" (click)="updateSpecialFields(inputChildren.value, 'children')"><i
+          class="fa fa-lg fa-arrow-right"></i> Υποβολή</a>
+    </div>
+  </div>
+
+
+  <!-- <span>Οικογενειακό Εισόδημα</span>: -->
+  <!-- {{ this.data.studentsData[this.data.index].family_income}} -->
+  <!--
+  <p><span>Προστατευόμενα Μέλη</span>: {{ this.data.studentsData[this.data.index].protected_members}}</p>
+  <p><span>Αδέρφια 1ου κύκλου σπουδών</span>: {{ this.data.studentsData[this.data.index].siblings_students}}</p>
+  <p><span>Παιδιά φοιτητή</span>: {{ this.data.studentsData[this.data.index].children}}</p> -->
+</mat-dialog-content>
+<mat-dialog-actions style='text-align: right'>
+  <button mat-button class="btn btn-primary mat-button" (click)="onCancel()">Κλείσιμο</button>
+</mat-dialog-actions>

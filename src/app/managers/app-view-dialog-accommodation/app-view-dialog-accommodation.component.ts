@@ -1,19 +1,17 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Utils } from 'src/app/MiscUtils';
-import { FilesMeals } from 'src/app/students/files-meals.model';
+import { FilesAccommodation } from 'src/app/students/files-accommodation.model';
 import { StudentsService } from 'src/app/students/student.service';
-import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-app-view-dialog',
-  templateUrl: './app-view-dialog.component.html',
-  styleUrls: ['./app-view-dialog.component.css']
+  selector: 'app-app-view-dialog-accommodation',
+  templateUrl: './app-view-dialog-accommodation.component.html',
+  styleUrls: ['./app-view-dialog-accommodation.component.css']
 })
-export class AppViewDialogComponent implements OnInit {
+export class AppViewDialogAccommodationComponent implements OnInit {
   appFiles!: any[];
-  public filesMeals: FilesMeals = {
-    eka8aristiko: false,
+  public filesAccommodation: FilesAccommodation = {
     oikogeneiakhKatastasi: false,
     pistopoihtikoGoneaFoithth: false,
     tautotita: false,
@@ -33,11 +31,19 @@ export class AppViewDialogComponent implements OnInit {
     diazevgmenoiGoneis2: false,
     AMEA: false,
     AMEAIatrikhGnomateush: false,
+    epidosi: false,
+    vevaiwshSpoudwn: false,
+    stratos: false,
+    ypotrofeia: false,
+    aporia: false,
+    diavathrio: false,
+    pistopoihtikoAlodapou: false,
+    ekkatharistikoAllodapou: false
   };
   fileFieldsText: string = '';
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialog: MatDialog,
-    public dialogRef: MatDialogRef<AppViewDialogComponent>, public studentService: StudentsService
+    public dialogRef: MatDialogRef<AppViewDialogAccommodationComponent>, public studentService: StudentsService
   ) { }
 
   onCancel(): void {
@@ -45,10 +51,10 @@ export class AppViewDialogComponent implements OnInit {
   }
 
   viewFile(filesMealsModelParam: string) {
-    const MEALS_ABBR: 'mea' | 'acc' = 'mea';
+    const MEALS_ABBR: 'mea' | 'acc' = 'acc';
     const studentId: number = this.data.studentsData[this.data.index].sso_uid;
     const appId: number = this.data.studentsData[this.data.index].app_id;
-    const fileName: string = MEALS_ABBR + Utils.mapFilesMealsModelToFilenames[filesMealsModelParam];
+    const fileName: string = MEALS_ABBR + Utils.mapFilesAccommodationModelToFilenames[filesMealsModelParam];
 
     this.studentService.sendFileByType(studentId, fileName, MEALS_ABBR).subscribe(res => {
       window.open(window.URL.createObjectURL(res));
@@ -76,35 +82,41 @@ export class AppViewDialogComponent implements OnInit {
           if (!item.value) continue;
 
           if (item.name == 'filePolutekneia') {
-            this.filesMeals.polutekneia = true;
+            this.filesAccommodation.polutekneia = true;
           } else if (item.name == 'filePistopoihtikoGoneaFoithth') {
-            this.filesMeals.pistopoihtikoGoneaFoithth = true;
+            this.filesAccommodation.pistopoihtikoGoneaFoithth = true;
           } else if (item.name == 'fileBebaioshSpoudonAderfwn') {
-            this.filesMeals.bebaioshSpoudonAderfwn = true;
+            this.filesAccommodation.bebaioshSpoudonAderfwn = true;
           } else if (item.name == 'fileAgamhMhtera') {
-            this.filesMeals.agamhMhtera = true;
+            this.filesAccommodation.agamhMhtera = true;
           } else if (item.name == 'fileLhksiarxikhPrakshThanatouGoneaA') {
-            this.filesMeals.lhksiarxikhPrakshThanatouGoneaA = true;
+            this.filesAccommodation.lhksiarxikhPrakshThanatouGoneaA = true;
           } else if (item.name == 'fileLhksiarxikhPrakshThanatouGoneaB') {
-            this.filesMeals.lhksiarxikhPrakshThanatouGoneaB = true;
+            this.filesAccommodation.lhksiarxikhPrakshThanatouGoneaB = true;
           } else if (item.name == 'fileGoneisAMEA') {
-            this.filesMeals.goneisAMEA = true;
+            this.filesAccommodation.goneisAMEA = true;
           } else if (item.name == 'fileGoneisAMEAIatrikhGnomateush') {
-            this.filesMeals.goneisAMEAIatrikhGnomateush = true;
+            this.filesAccommodation.goneisAMEAIatrikhGnomateush = true;
           } else if (item.name == 'fileGoneisThumataTromokratias1') {
-            this.filesMeals.goneisThumataTromokratias1 = true;
+            this.filesAccommodation.goneisThumataTromokratias1 = true;
           } else if (item.name == 'fileGoneisThumataTromokratias2') {
-            this.filesMeals.goneisThumataTromokratias2 = true;
+            this.filesAccommodation.goneisThumataTromokratias2 = true;
           } else if (item.name == 'fileBebaioshEpidothsdhsAnergeias') {
-            this.filesMeals.bebaioshEpidothsdhsAnergeias = true;
+            this.filesAccommodation.bebaioshEpidothsdhsAnergeias = true;
           } else if (item.name == 'fileDiazevgmenoiGoneis1') {
-            this.filesMeals.diazevgmenoiGoneis1 = true;
+            this.filesAccommodation.diazevgmenoiGoneis1 = true;
           } else if (item.name == 'fileDiazevgmenoiGoneis2') {
-            this.filesMeals.diazevgmenoiGoneis2 = true;
+            this.filesAccommodation.diazevgmenoiGoneis2 = true;
           } else if (item.name == 'fileAMEA') {
-            this.filesMeals.AMEA = true;
+            this.filesAccommodation.AMEA = true;
           } else if (item.name == 'fileAMEAIatrikhGnomateush') {
-            this.filesMeals.AMEAIatrikhGnomateush = true;
+            this.filesAccommodation.AMEAIatrikhGnomateush = true;
+          } else if (item.name == 'fileStratos') {
+            this.filesAccommodation.stratos = true;
+          } else if (item.name == 'fileYpotrofeia') {
+            this.filesAccommodation.ypotrofeia = true;
+          } else if (item.name == 'fileAporia') {
+            this.filesAccommodation.aporia = true;
           }
 
           this.fileFieldsText += `<input type="checkbox" id="file${item.description}" name="file${item.description}" checked="true">

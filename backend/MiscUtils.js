@@ -37,7 +37,7 @@ const departmentsMap = {
 };
 
 // TODO check if filenames do indeed match the description
-const filesSubmitted = [
+const filesSubmittedMeals = [
   {
     filename: "fileOikogeneiakhKatastasi", description: "Πιστοποιητικό οικογενειακής κατάστασης(άρθρο 5, παρ.1, κατ.β)", type: 'required'
   }, {
@@ -81,10 +81,69 @@ const filesSubmitted = [
   }
 ];
 
+const filesSubmittedAccommodation = [
+  {
+    filename: "fileOikogeneiakhKatastasi", description: "Πιστοποιητικό οικογενειακής κατάστασης(άρθρο 5, παρ.1, κατ.β)", type: 'required'
+  }, {
+    filename: "fileTautotita", description: "Αντίγραφο Αστυνομικής Ταυτότητας ή Διαβατηρίου(άρθρο 5, παρ.1, κατ.γ)", type: 'required'
+  }, {
+    filename: "fileToposMonimhsKatoikias", description: "Έγγραφο πιστοποίησης τόπου μόνιμης κατοικίας(άρθρο 5, παρ.1, κατ.δ)", type: 'required'
+  }, {
+    filename: "fileEpidosi", description: "Βεβαίωση επίδοσης για επιτυχής εξέταση στα μισά μαθήματα του προηγούμενου Ακ. Έτους, που προβλέπονται από τον Οδηγό Σπουδών.", type: 'required'
+  }, {
+    filename: "fileVevaiwshSpoudwn", description: "Βεβαίωση σπουδών. Για την απόδειξη φοίτησης εντός της τυπικής διάρκειας +2 χρόνια.", type: 'required'
+  }, {
+    filename: "fileYpeu8unhDilosi", description: "Υπεύθυνη δήλωση Ν.1599(βάσει υποδείγματος) (άρθρο 5, παρ 1, κατ.ε)", type: 'required'
+  }, {
+    filename: "filePolutekneia", description: "Πιστοποιητικό πολυτεκνίας(άρθρο1, παρ.9, κατ.α)", type: 'optional'
+  }, {
+    filename: "fileBebaioshSpoudonAderfwn", description: "Βεβαίωση σπουδών αδελφού/ης(άρθρο 1, παρ.9, κατ.γ)", type: 'optional'
+  }, {
+    filename: "filePistopoihtikoGoneaFoithth", description: "Πιστοποιητικό οικογενειακής κατάστασης(τρίτεκνος)(άρθρο 1, παρ. 9, κατ.β)", type: 'optional'
+  }, {
+    filename: "fileLhksiarxikhPrakshThanatouGoneaA", description: "Ληξιαρχική πράξη θανάτου γονέα(άρθρο 1, παρ9, κατ.δ)", type: 'optional'
+  }, {
+    filename: "fileLhksiarxikhPrakshThanatouGoneaB", description: "Ληξιαρχική πράξη γέννησης φοιτητή(άρθρο 1, παρ.9, κατ.δ)", type: 'optional'
+  }, {
+    filename: "fileAgamhMhtera", description: "Ληξιαρχική πράξη γέννησης φοιτητή(άρθρο 1, παρ.9, κατ.ε)", type: 'optional'
+  }, {
+    filename: "fileGoneisAMEA", description: "Πιστοποιητικό υγειονομικής επιτροπής(αναπηρία)(άρθρο 1, παρ.9, περ.στ)", type: 'optional'
+  }, {
+    filename: "fileGoneisAMEAIatrikhGnomateush", description: "Ιατρική γνωμάτευση από Δημόσιο Νοσοκομείο(άρθρο 1, παρ.9, περ.στ)", type: 'optional'
+  }, {
+    filename: "fileGoneisThumataTromokratias1", description: "Ληξιαρχική πράξη γέννησης φοιτητή(άρθρο 1, παρ.9, κατ.η)", type: 'optional'
+  }, {
+    filename: "fileGoneisThumataTromokratias2", description: "Αντίγραφο πράξης συνταξιοδότησης Ν1897(άρθρο 1, παρ.9, κατ.η)", type: 'optional'
+  }, {
+    filename: "fileBebaioshEpidothsdhsAnergeias", description: "Βεβαίωση επιδότησης ανεργίας(άρθρο 1, παρ5)", type: 'optional'
+  }, {
+    filename: "fileDiazevgmenoiGoneis1", description: "Διαζευκτήριο", type: 'optional'
+  }, {
+    filename: "fileDiazevgmenoiGoneis2", description: "Eπιμέλεια φοιτητή", type: 'optional'
+  }, {
+    filename: "fileAMEA", description: "Πιστοποιητικό υγειονομικής επιτροπής(αναπηρία)(άρθρο 1, παρ.9, περ.στ)", type: 'optional'
+  }, {
+    filename: "fileAMEAIatrikhGnomateush", description: "Ιατρική γνωμάτευση από Δημόσιο Νοσοκομείο(άρθρο 1, παρ.9, περ.στ)", type: 'optional'
+  }, {
+    filename: "fileStratos", description: "Βεβαίωση Υπηρεσίας από τη Μονάδα του στρατευμένου για κάθε προστατευόμενο μέλος της οικογένειας του υποψηφίου", type: 'optional'
+  }, {
+    filename: "fileYpotrofeia", description: "Βεβαίωση υποτροφίας", type: 'optional'
+  }, {
+    filename: "fileAporia", description: "Bεβαίωση – πιστοποιητικό απορίας Βεβαίωση από αρμόδια Υπηρεσία Κοινωνικής Πρόνοιας", type: 'optional'
+  }, {
+    filename: "fileDiavathrio", description: "Διαβατήριο και άδεια παραμονής (φωτοτυπία)", type: 'optional'
+  }, {
+    filename: "filePistopoihtikoAlodapou", description: "Πιστοποιητικό οικογενειακής κατάστασης, μεταφρασμένο και θεωρημένο από αρμόδια αρχή", type: 'optional'
+  }, {
+    filename: "fileEkkatharistikoAllodapou", description: "Εκκαθαριστικό σημείωμα για το οικογενειακό εισόδημα ή Βεβαίωση Οικονομικής αρχής από τον τόπο καταγωγής/διαμονής τους", type: 'optional'
+  }
+];
+
 // Export list
 module.exports = {
   FILE_TYPES,
   FILE_TYPES_WITH_DOT,
   departmentsMap,
-  filesSubmitted
+  filesSubmittedMeals,
+  filesSubmittedAccommodation
 };

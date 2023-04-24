@@ -754,4 +754,34 @@ export abstract class Utils {
     'diazevgmenoiGoneis2': 'fileDiazevgmenoiGoneis2'
   };
 
+  public static mapFilesAccommodationModelToFilenames = {
+    'oikogeneiakhKatastasi': 'fileOikogeneiakhKatastasi',
+    'pistopoihtikoGoneaFoithth': 'filePistopoihtikoGoneaFoithth',
+    'tautotita': 'fileTautotita',
+    'toposMonimhsKatoikias': 'fileToposMonimhsKatoikias',
+    'ypeu8unhDilosi': 'fileYpeu8unhDilosi',
+    'polutekneia': 'filePolutekneia',
+    'bebaioshSpoudonAderfwn': 'fileBebaioshSpoudonAderfwn',
+    'agamhMhtera': 'fileAgamhMhtera',
+    'AMEA': 'fileAMEA',
+    'AMEAIatrikhGnomateush': 'fileAMEAIatrikhGnomateush',
+    'lhksiarxikhPrakshThanatouGoneaA': 'fileLhksiarxikhPrakshThanatouGoneaA',
+    'lhksiarxikhPrakshThanatouGoneaB': 'fileLhksiarxikhPrakshThanatouGoneaB',
+    'goneisAMEA': 'fileGoneisAMEA',
+    'goneisAMEAIatrikhGnomateush': 'fileGoneisAMEAIatrikhGnomateush',
+    'goneisThumataTromokratias1': 'fileGoneisThumataTromokratias1',
+    'goneisThumataTromokratias2': 'fileGoneisThumataTromokratias2',
+    'bebaioshEpidothsdhsAnergeias': 'fileBebaioshEpidothsdhsAnergeias',
+    'diazevgmenoiGoneis1': 'fileDiazevgmenoiGoneis1',
+    'diazevgmenoiGoneis2': 'fileDiazevgmenoiGoneis2',
+    "epidosi": "fileEpidosi",
+    "vevaiwshSpoudwn": "fileVevaiwshSpoudwn",
+    "stratos": "fileStratos",
+    "ypotrofeia": "fileYpotrofeia",
+    "aporia": "fileAporia",
+    "diavathrio": "fileDiavathrio",
+    "pistopoihtikoAlodapou": "filePistopoihtikoAlodapou",
+    "ekkatharistikoAllodapou": "fileEkkatharistikoAllodapou"
+  }
+
 }

@@ -51,6 +51,7 @@ import { StudentCommentsDialogComponent } from './students/student-comments-dial
 import { EditNotesDialogComponent } from './managers/edit-notes-dialog/edit-notes-dialog.component';
 import { AppViewDialogComponent } from './managers/app-view-dialog/app-view-dialog.component';
 import { StudentViewDialogComponent } from './managers/student-view-dialog/student-view-dialog.component';
+import { AppViewDialogAccommodationComponent } from './managers/app-view-dialog-accommodation/app-view-dialog-accommodation.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -82,7 +83,8 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     StudentCommentsDialogComponent,
     EditNotesDialogComponent,
     AppViewDialogComponent,
-    StudentViewDialogComponent
+    StudentViewDialogComponent,
+    AppViewDialogAccommodationComponent
   ],
   imports: [
     BrowserModule,

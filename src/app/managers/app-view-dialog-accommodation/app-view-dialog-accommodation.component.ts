@@ -26,7 +26,6 @@ export class AppViewDialogAccommodationComponent implements OnInit {
     goneisAMEAIatrikhGnomateush: false,
     goneisThumataTromokratias1: false,
     goneisThumataTromokratias2: false,
-    bebaioshEpidothsdhsAnergeias: false,
     diazevgmenoiGoneis1: false,
     diazevgmenoiGoneis2: false,
     AMEA: false,
@@ -101,8 +100,6 @@ export class AppViewDialogAccommodationComponent implements OnInit {
             this.filesAccommodation.goneisThumataTromokratias1 = true;
           } else if (item.name == 'fileGoneisThumataTromokratias2') {
             this.filesAccommodation.goneisThumataTromokratias2 = true;
-          } else if (item.name == 'fileBebaioshEpidothsdhsAnergeias') {
-            this.filesAccommodation.bebaioshEpidothsdhsAnergeias = true;
           } else if (item.name == 'fileDiazevgmenoiGoneis1') {
             this.filesAccommodation.diazevgmenoiGoneis1 = true;
           } else if (item.name == 'fileDiazevgmenoiGoneis2') {
@@ -117,6 +114,12 @@ export class AppViewDialogAccommodationComponent implements OnInit {
             this.filesAccommodation.ypotrofeia = true;
           } else if (item.name == 'fileAporia') {
             this.filesAccommodation.aporia = true;
+          } else if (item.name == 'fileDiavathrio') {
+            this.filesAccommodation.diavathrio = true;
+          } else if (item.name == 'filePistopoihtikoAlodapou') {
+            this.filesAccommodation.pistopoihtikoAlodapou = true;
+          } else if (item.name == 'fileEkkatharistikoAllodapou') {
+            this.filesAccommodation.ekkatharistikoAllodapou = true;
           }
 
           this.fileFieldsText += `<input type="checkbox" id="file${item.description}" name="file${item.description}" checked="true">

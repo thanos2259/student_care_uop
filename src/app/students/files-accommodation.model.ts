@@ -13,7 +13,6 @@ export interface FilesAccommodation {
   goneisAMEAIatrikhGnomateush: boolean;
   goneisThumataTromokratias1: boolean;
   goneisThumataTromokratias2: boolean;
-  bebaioshEpidothsdhsAnergeias: boolean;
   diazevgmenoiGoneis1: boolean;
   diazevgmenoiGoneis2: boolean;
   AMEA: boolean;

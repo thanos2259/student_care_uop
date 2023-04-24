@@ -47,9 +47,31 @@
             {{ "STUDENT.STUDENT-CARE-STEP9" | translate }}
           </div>
         </div>
-        <br>
-        <mat-divider>
-        </mat-divider>
+        <div>
+          <br>
+          <mat-divider></mat-divider>
+          <br>
+          <h1><i class="fas fa-calendar-alt pb-3"></i>
+            Περίοδος Αιτήσεων
+          </h1>
+          <div>
+            <p *ngIf="periodMeals"> <strong>Περίοδος για Σίτιση:</strong>
+              {{this.periodMeals?.date_from}} - {{this.periodMeals?.date_to}}
+            </p>
+            <p *ngIf="!periodMeals">
+              <strong>Περίοδος για Σίτιση:</strong> Δεν υπάρχει περίοδος
+            </p>
+
+            <p *ngIf="periodAccommodation"> <strong>Περίοδος για Στέγαση:</strong>
+              {{!periodAccommodation ? 'Δεν υπάρχει περίοδος' : this.periodAccommodation?.date_from}} -
+              {{!periodAccommodation ? 'Δεν υπάρχει περίοδος' : this.periodAccommodation?.date_to}}
+            </p>
+            <p *ngIf="!periodAccommodation">
+              <strong>Περίοδος για Στέγαση:</strong> Δεν υπάρχει περίοδος
+            </p>
+          </div>
+        </div>
+        <mat-divider></mat-divider>
         <br>
         <h1><i class="fas fa-comments pb-3"></i>
           {{ "STUDENT.COMMENTS" | translate }}

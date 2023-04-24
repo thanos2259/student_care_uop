@@ -17,7 +17,7 @@ import * as XLSX from 'xlsx';
   styleUrls: ['./manager-meals.component.css']
 })
 export class ManagerMealsComponent implements OnInit {
-  @ViewChild('processingTable') private table1: ElementRef | undefined;
+  @ViewChild('processingTable') private table1: DataTables.Api | undefined;
   public state: number = 0;
   public studentsSSOData: StudentApplication[] = [];
   public formattedDate: string[] = [];
@@ -29,6 +29,7 @@ export class ManagerMealsComponent implements OnInit {
     this.studentsService.getStudentsAppsMealsForPeriod()
       .subscribe((students: StudentApplication[]) => {
         this.studentsSSOData = students;
+
         for (let i = 0; i < students.length; i++) {
           this.studentsSSOData[i].schacpersonaluniquecode = Utils.getRegistrationNumber(this.studentsSSOData[i].schacpersonaluniquecode);
           this.formattedDate[i] = Utils.getPreferredTimestamp(this.studentsSSOData[i].submit_date);
@@ -43,26 +44,8 @@ export class ManagerMealsComponent implements OnInit {
             });
         }
 
-        this.chRef.detectChanges();
-        const table: any = $('#processingTable');
-        this.table1 = table.DataTable({
-          lengthMenu: [
-            [10, 25, 50, -1],
-            [10, 25, 50, 'All']
-          ],
-          lengthChange: true,
-          paging: true,
-          searching: true,
-          ordering: true,
-          info: true,
-          autoWidth: false,
-          responsive: true,
-          select: true,
-          pagingType: 'full_numbers',
-          processing: true,
-          columnDefs: [{ orderable: false, targets: [0, 7, 10] }]
-        });
-
+        // Reinitialize the DataTable with the new data
+        this.initDataTable();
       });
   }
 
@@ -158,14 +141,11 @@ export class ManagerMealsComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
       // Re-fetch the student data to update notes etc.
-      this.studentsService.getStudentsAppsMealsForPeriod()
-        .subscribe((students: StudentApplication[]) => {
-          this.studentsSSOData = students;
-          for (let i = 0; i < students.length; i++) {
-            this.studentsSSOData[i].schacpersonaluniquecode = Utils.getRegistrationNumber(this.studentsSSOData[i].schacpersonaluniquecode);
-            this.formattedDate[i] = Utils.getPreferredTimestamp(this.studentsSSOData[i].submit_date);
-          }
-        });
+      if (this.state == 0) {
+        this.fetchCurrectAppData(0);
+      } else if (this.state == 1) {
+        this.fetchOldAppData(1);
+      }
     });
   }
 
@@ -190,6 +170,7 @@ export class ManagerMealsComponent implements OnInit {
   fetchOldAppData(state: number) {
     this.state = state;
     this.studentsSSOData = [];
+    $('#processingTable').DataTable().destroy();
 
     this.studentsService.getOldStudentsAppsForMeals()
       .subscribe((students: StudentApplication[]) => {
@@ -208,13 +189,42 @@ export class ManagerMealsComponent implements OnInit {
             });
         }
 
+        // Reinitialize the DataTable with the new data
+        this.initDataTable();
       });
+  }
+
+  initDataTable(): void {
+    this.chRef.detectChanges();
+    const table: any = $('#processingTable');
+    this.table1 = table.DataTable({
+      lengthMenu: [
+        [10, 25, 50, -1],
+        [10, 25, 50, 'All']
+      ],
+      lengthChange: true,
+      paging: true,
+      searching: true,
+      ordering: true,
+      info: true,
+      autoWidth: false,
+      responsive: true,
+      select: true,
+      pagingType: 'full_numbers',
+      processing: true,
+      columnDefs: [{ orderable: false, targets: [0, 7, 10] }],
+      language: {
+        emptyTable: "Δεν υπάρχουν αιτήσεις φοιτητών"
+      }
+    });
   }
 
   fetchCurrectAppData(state: number) {
     this.state = state;
     this.studentsSSOData = [];
-     this.studentsService.getStudentsAppsMealsForPeriod()
+    $('#processingTable').DataTable().destroy();
+
+    this.studentsService.getStudentsAppsMealsForPeriod()
       .subscribe((students: StudentApplication[]) => {
         this.studentsSSOData = students;
         for (let i = 0; i < students.length; i++) {
@@ -230,6 +240,9 @@ export class ManagerMealsComponent implements OnInit {
               }
             });
         }
+
+        // Reinitialize the DataTable with the new data
+        this.initDataTable();
       });
   }
 

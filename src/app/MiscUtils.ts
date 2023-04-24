@@ -2,6 +2,11 @@ import Swal from 'sweetalert2';
 
 export abstract class Utils {
 
+  public static reformatDateToEULocaleStr(date: Date): string {
+    let newDate = new Date(date);
+    return (newDate.getDate()) + "/" + (newDate.getMonth() + 1) + "/" + newDate.getFullYear();
+  }
+
   public static onSaveApplication() {
     Swal.fire({
       title: 'Αίτηση',

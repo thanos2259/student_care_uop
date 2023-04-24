@@ -8,6 +8,7 @@ import * as moment from 'moment/moment';
 import { StudentCommentsDialogComponent } from '../student-comments-dialog/student-comments-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { environment } from 'src/environments/environment';
+import {Utils} from 'src/app/MiscUtils';
 
 @Component({
   selector: 'app-student',
@@ -18,6 +19,8 @@ export class StudentComponent implements OnInit, OnDestroy {
   @Output()
   readonly darkModeSwitched = new EventEmitter<boolean>();
 
+  public isAccommodationEnabled: boolean = false;
+  public isMealsEnabled: boolean = false;
   public studentsSSOData: Student[] = [];
   fontSize: number = 100;
   private language!: string;
@@ -48,6 +51,25 @@ export class StudentComponent implements OnInit, OnDestroy {
     this.studentsService.getStudents()
       .subscribe((students: Student[]) => {
         this.studentsSSOData = students;
+        this.studentsService.getAllPeriodDates(Number(this.studentsSSOData[0]?.department_id))
+          .subscribe((period: any) => {
+            for (let item of period) {
+              console.log(item);
+              if (item.app_type == 'meals') {
+                this.dateFrom = Utils.reformatDateToEULocaleStr(item.date_from);
+                this.dateTo = Utils.reformatDateToEULocaleStr(item.date_to);
+
+                const isPeriodDateActive = moment(new Date()).isSameOrBefore(item.date_to, 'day') && moment(new Date()).isSameOrAfter(period.date_from, 'day');
+                this.isMealsEnabled = isPeriodDateActive;
+              } else {
+                this.dateFrom = Utils.reformatDateToEULocaleStr(item.date_from);
+                this.dateTo = Utils.reformatDateToEULocaleStr(item.date_to);
+
+                const isPeriodDateActive = moment(new Date()).isSameOrBefore(item.date_to, 'day') && moment(new Date()).isSameOrAfter(item.date_from, 'day');
+                this.isAccommodationEnabled = isPeriodDateActive;
+              }
+            }
+          });
         this.studentsService.getCommentByStudentIdAndSubject(this.studentsSSOData[0]?.sso_uid, 'Σίτιση')
           .subscribe((comment: any) => {
             this.commentSitisi = comment;

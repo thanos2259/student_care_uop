@@ -43,26 +43,8 @@ export class AccommodationComponent implements OnInit {
             });
         }
 
-        this.chRef.detectChanges();
-        const table: any = $('#processingTable');
-        this.table1 = table.DataTable({
-          lengthMenu: [
-            [10, 25, 50, -1],
-            [10, 25, 50, 'All']
-          ],
-          lengthChange: true,
-          paging: true,
-          searching: true,
-          ordering: true,
-          info: true,
-          autoWidth: false,
-          responsive: true,
-          select: true,
-          pagingType: 'full_numbers',
-          processing: true,
-          columnDefs: [{ orderable: false, targets: [0, 7, 10] }]
-        });
-
+        // Reinitialize the DataTable with the new data
+        this.initDataTable();
       });
   }
 
@@ -152,14 +134,12 @@ export class AccommodationComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
       // Re-fetch the student data to update notes etc.
-      this.studentsService.getStudentsAppsAccommodationForPeriod()
-        .subscribe((students: StudentApplication[]) => {
-          this.studentsSSOData = students;
-          for (let i = 0; i < students.length; i++) {
-            this.studentsSSOData[i].schacpersonaluniquecode = Utils.getRegistrationNumber(this.studentsSSOData[i].schacpersonaluniquecode);
-            this.formattedDate[i] = Utils.getPreferredTimestamp(this.studentsSSOData[i].submit_date);
-          }
-        });
+      // Re-fetch the student data to update notes etc.
+      if (this.state == 0) {
+        this.fetchCurrectAppData(0);
+      } else if (this.state == 1) {
+        this.fetchOldAppData(1);
+      }
     });
   }
 
@@ -184,6 +164,7 @@ export class AccommodationComponent implements OnInit {
   fetchOldAppData(state: number) {
     this.state = state;
     this.studentsSSOData = [];
+    $('#processingTable').DataTable().destroy();
 
     this.studentsService.getOldStudentsAppsForAccommodation()
       .subscribe((students: StudentApplication[]) => {
@@ -202,13 +183,42 @@ export class AccommodationComponent implements OnInit {
             });
         }
 
+        // Reinitialize the DataTable with the new data
+        this.initDataTable();
       });
+  }
+
+  initDataTable(): void {
+    this.chRef.detectChanges();
+    const table: any = $('#processingTable');
+    this.table1 = table.DataTable({
+      lengthMenu: [
+        [10, 25, 50, -1],
+        [10, 25, 50, 'All']
+      ],
+      lengthChange: true,
+      paging: true,
+      searching: true,
+      ordering: true,
+      info: true,
+      autoWidth: false,
+      responsive: true,
+      select: true,
+      pagingType: 'full_numbers',
+      processing: true,
+      columnDefs: [{ orderable: false, targets: [0, 7, 10] }],
+      language: {
+        emptyTable: "Δεν υπάρχουν αιτήσεις φοιτητών" // Replace this with your custom message
+      }
+    });
   }
 
   fetchCurrectAppData(state: number) {
     this.state = state;
     this.studentsSSOData = [];
-     this.studentsService.getStudentsAppsAccommodationForPeriod()
+    $('#processingTable').DataTable().destroy();
+
+    this.studentsService.getStudentsAppsAccommodationForPeriod()
       .subscribe((students: StudentApplication[]) => {
         this.studentsSSOData = students;
         for (let i = 0; i < students.length; i++) {
@@ -224,6 +234,9 @@ export class AccommodationComponent implements OnInit {
               }
             });
         }
+
+        // Reinitialize the DataTable with the new data
+        this.initDataTable();
       });
   }
 

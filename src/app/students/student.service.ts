@@ -8,6 +8,7 @@ import { StudentApplication } from "./student-application.model";
 import { environment } from "src/environments/environment";
 
 const STUDENTS_URL = environment.apiUrl + "/students/";
+const MANAGER_URL = environment.apiUrl + "/managers/";
 
 @Injectable({ providedIn: 'root' })
 export class StudentsService {
@@ -83,6 +84,10 @@ export class StudentsService {
       .set('subject', subject);
     const fetchedComment = this.http.get<any>(STUDENTS_URL + "getCommentByStudentIdAndSubject/", { params });
     return fetchedComment;
+  }
+
+  getAllPeriodDates(departmentId: number): Observable<any> {
+    return this.http.get<any>(MANAGER_URL + 'getPeriodInfo/' + departmentId);
   }
 
   updateStudentDetails(data: any) {

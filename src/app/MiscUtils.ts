@@ -92,7 +92,7 @@ export abstract class Utils {
     return displayDate;
   }
 
-  public static getPreferredTimestamp(dateParam: string|number|Date): string {
+  public static getPreferredTimestamp(dateParam: string | number | Date): string {
     let dateVal = new Date(dateParam);
     let preferredTimestamp = dateVal.toLocaleDateString("el-GR", {
       day: "2-digit",
@@ -735,6 +735,32 @@ export abstract class Utils {
     '400': 'ΟΡΓΑΝΩΣΗΣ ΚΑΙ ΔΙΑΧΕΙΡΙΣΗΣ ΑΘΛΗΤΙΣΜΟΥ',
     '411': 'ΠΟΛΙΤΙΚΗΣ ΕΠΙΣΤΗΜΗΣ ΚΑΙ ΔΙΕΘΝΩΝ ΣΧΕΣΕΩΝ'
   }
+
+  public static citiesDepartmentsMap =
+    [
+      { depid: "98", name: "ΠΛΗΡΟΦΟΡΙΚΗΣ ΚΑΙ ΤΗΛΕΠΙΚΟΙΝΩΝΙΩΝ", city: 'ΝΑΥΠΛΙΟ' },
+      { depid: "104", name: "ΙΣΤΟΡΙΑΣ, ΑΡΧΑΙΟΛΟΓΙΑΣ ΚΑΙ ΔΙΑΧΕΙΡΙΣΗΣ ΠΟΛΙΤΙΣΜΙΚΩΝ ΑΓΑΘΩΝ", city: 'ΚΑΛΑΜΑΤΑ' },
+      { depid: "1511", name: "ΓΕΩΠΟΝΙΑΣ", city: 'ΚΑΛΑΜΑΤΑ' },
+      { depid: "1512", name: "ΕΠΙΣΤΗΜΗΣ ΚΑΙ ΤΕΧΝΟΛΟΓΙΑΣ ΤΡΟΦΙΜΩΝ", city: 'ΚΑΛΑΜΑΤΑ' },
+      { depid: "1513", name: "ΛΟΓΙΣΤΙΚΗΣ ΚΑΙ ΧΡΗΜΑΤΟΟΙΚΟΝΟΜΙΚΗΣ", city: 'ΚΑΛΑΜΑΤΑ' },
+      { depid: "1514", name: "ΔΙΟΙΚΗΣΗΣ ΕΠΙΧΕΙΡΗΣΕΩΝ ΚΑΙ ΟΡΓΑΝΙΣΜΩΝ", city: 'ΚΑΛΑΜΑΤΑ' },
+      { depid: "1515", name: "ΛΟΓΟΘΕΡΑΠΕΙΑΣ", city: 'ΚΑΛΑΜΑΤΑ' },
+      { depid: "1516", name: "ΕΠΙΣΤΗΜΗΣ ΔΙΑΤΡΟΦΗΣ ΚΑΙ ΔΙΑΙΤΟΛΟΓΙΑΣ", city: 'ΚΑΛΑΜΑΤΑ' },
+      { depid: "1517", name: "ΠΑΡΑΣΤΑΤΙΚΩΝ ΚΑΙ ΨΗΦΙΑΚΩΝ ΤΕΧΝΩΝ", city: 'ΝΑΥΠΛΙΟ' },
+      { depid: "1518", name: "ΔΙΟΙΚΗΤΙΚΗΣ ΕΠΙΣΤΗΜΗΣ ΚΑΙ ΤΕΧΝΟΛΟΓΙΑΣ", city: 'ΝΑΥΠΛΙΟ' },
+      { depid: "1519", name: "ΨΗΦΙΑΚΩΝ ΣΥΣΤΗΜΑΤΩΝ", city: 'ΝΑΥΠΛΙΟ' },
+      { depid: "1520", name: "ΦΥΣΙΚΟΘΕΡΑΠΕΙΑΣ", city: 'ΚΑΛΑΜΑΤΑ' },
+      { depid: "1522", name: "ΗΛΕΚΤΡΟΛΟΓΩΝ ΜΗΧΑΝΙΚΩΝ ΚΑΙ ΜΗΧΑΝΙΚΩΝ ΥΠΟΛΟΓΙΣΤΩΝ - ΣΧΟΛΗ ΜΗΧΑΝΙΚΩΝ", city: 'ΠΑΤΡΑ' },
+      { depid: "1523", name: "ΜΗΧΑΝΟΛΟΓΩΝ ΜΗΧΑΝΙΚΩΝ - ΣΧΟΛΗ ΜΗΧΑΝΙΚΩΝ", city: 'ΠΑΤΡΑ' },
+      { depid: "1524", name: "ΠΟΛΙΤΙΚΩΝ ΜΗΧΑΝΙΚΩΝ - ΣΧΟΛΗ ΜΗΧΑΝΙΚΩΝ", city: 'ΠΑΤΡΑ' },
+      { depid: "187", name: "ΚΟΙΝΩΝΙΚΗΣ ΚΑΙ ΕΚΠΑΙΔΕΥΤΙΚΗΣ ΠΟΛΙΤΙΚΗΣ", city: 'ΝΑΥΠΛΙΟ' },
+      { depid: "189", name: "ΦΙΛΟΛΟΓΙΑΣ", city: 'ΚΑΛΑΜΑΤΑ' },
+      { depid: "190", name: "ΝΟΣΗΛΕΥΤΙΚΗΣ", city: 'ΝΑΥΠΛΙΟ' },
+      { depid: "361", name: "ΟΙΚΟΝΟΜΙΚΩΝ ΕΠΙΣΤΗΜΩΝ", city: 'ΝΑΥΠΛΙΟ' },
+      { depid: "362", name: "ΘΕΑΤΡΙΚΩΝ ΣΠΟΥΔΩΝ", city: 'ΝΑΥΠΛΙΟ' },
+      { depid: "400", name: "ΟΡΓΑΝΩΣΗΣ ΚΑΙ ΔΙΑΧΕΙΡΙΣΗΣ ΑΘΛΗΤΙΣΜΟΥ", city: 'ΝΑΥΠΛΙΟ' },
+      { depid: "411", name: "ΠΟΛΙΤΙΚΗΣ ΕΠΙΣΤΗΜΗΣ ΚΑΙ ΔΙΕΘΝΩΝ ΣΧΕΣΕΩΝ", city: 'ΝΑΥΠΛΙΟ' },
+    ];
 
   public static mapFilesMealsModelToFilenames = {
     'eka8aristiko': 'fileEka8aristiko',

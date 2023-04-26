@@ -70,7 +70,7 @@ const getDepartmentsOfUserByUserID = async (request, response) => {
     console.error(error.message);
     response.status(401)
       .json({
-        message: error.message
+        message: 'error ' + error.message
       });
   }
 };

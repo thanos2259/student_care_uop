@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from "src/environments/environment";
 import { RoleModel } from './role.model';
+import {AuthService} from '../auth/auth.service';
 
 const API_URL = environment.apiUrl + "/admin/";
 
@@ -10,7 +11,7 @@ const API_URL = environment.apiUrl + "/admin/";
 })
 export class AdminService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, public authService: AuthService) { }
 
   insertRoles(roles: any) {
     const form: RoleModel = roles;
@@ -30,7 +31,8 @@ export class AdminService {
     return this.http.get(API_URL + 'getUsers/');
   }
 
-  getDepartmentsOfUserByUserID(userID: number) {
+  getDepartmentsOfUserByUserID() {
+    const userID: number = this.authService.getSessionId();
     return this.http.get(API_URL + 'getDepartmentsOfUserByUserID/' + userID);
   }
 

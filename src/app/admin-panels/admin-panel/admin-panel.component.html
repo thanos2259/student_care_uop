@@ -231,24 +231,21 @@
                   <tr>
                     <th>Όνομα</th>
                     <th>Πόλη</th>
+                    <!-- <th>Τμήματα</th> -->
                     <th>Admin</th>
-                    <!-- <th>Ρόλος</th> -->
                     <th>Διαγραφή</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr *ngFor="let user of fetchedUsers; let idx=index" [attr.data-index]="idx">
                     <td>{{user.sso_username}}</td>
-                    <td>
-                      {{user.user_role == 'department-manager' ? 'Τμηματικός Υπεύθυνος' : 'Γραφείο
-                      Πρακτικής Άσκησης'}}
-                    </td>
-                    <td><i *ngIf="user.is_admin" class="fa fa-check" aria-hidden="true"></i>
-                      <i *ngIf="!user.is_admin" class="fa fa-times" aria-hidden="true"></i>
-                    </td>
-                    <td>
+                    <td>{{user.managed_cities}} </td>
+                    <!-- <td>
                       <a style="cursor: pointer;" (click)="openDialog(user.user_role_id)"><i class="fa fa-eye"></i>
                         Προβολή<br></a>
+                    </td> -->
+                    <td><i *ngIf="user.is_admin" class="fa fa-check" aria-hidden="true"></i>
+                      <i *ngIf="!user.is_admin" class="fa fa-times" aria-hidden="true"></i>
                     </td>
                     <td><button class="btn btn-danger" (click)="deleteRole(user.user_role_id)">Διαγραφή</button></td>
                   </tr>

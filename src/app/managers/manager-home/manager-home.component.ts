@@ -3,6 +3,7 @@ import { NgbCalendar, NgbDateAdapter, NgbDateParserFormatter, NgbDateStruct } fr
 import { ManagerService } from '../manager.service';
 import { Utils } from 'src/app/MiscUtils';
 import Swal from 'sweetalert2';
+import { AdminService } from 'src/app/admin-panels/admin.service';
 
 /**
  * This Service handles how the date is represented in scripts i.e. ngModel.
@@ -69,55 +70,79 @@ export class ManagerHomeComponent implements OnInit {
 	modelAccommodationDateFrom: string;
 	modelAccommodationDateTo: string;
 
-	constructor(private ngbCalendar: NgbCalendar, private dateAdapter: NgbDateAdapter<string>, public managerService: ManagerService) { }
+	constructor(private ngbCalendar: NgbCalendar,
+    private dateAdapter: NgbDateAdapter<string>,
+    public managerService: ManagerService,
+    public adminService: AdminService) { }
 
 	insertPeriodDatesMeals() {
-		const depId = 98;
-		const data = { date_from: this.modelMealsDateFrom, date_to: this.modelMealsDateTo, app_type: 'meals' };
-		this.managerService.insertPeriodDates(data, depId).subscribe(responseData => {
-			// console.log(responseData.message);
-			Swal.fire({
-				title: 'Δημιουργία περιόδου αιτήσεων',
-				text: 'Οι ημερομηνίες έναρξης και λήξης αιτήσεων δημιουργήθηκαν επιτυχώς',
-				icon: 'success',
-				showCancelButton: false,
-				confirmButtonColor: '#3085d6',
-				cancelButtonColor: '#d33',
-				confirmButtonText: 'ΟΚ'
-			});
-		});
+    this.insertPeriodDatesByType('meals');
 	}
 
 	insertPeriodDatesAccommodation() {
-		const depId = 98;
-		const data = { date_from: this.modelAccommodationDateFrom, date_to: this.modelAccommodationDateTo, app_type: 'accommodation' };
-		this.managerService.insertPeriodDates(data, depId).subscribe(responseData => {
-			// console.log(responseData.message);
-			Swal.fire({
-				title: 'Δημιουργία περιόδου αιτήσεων',
-				text: 'Οι ημερομηνίες έναρξης και λήξης αιτήσεων δημιουργήθηκαν επιτυχώς',
-				icon: 'success',
-				showCancelButton: false,
-				confirmButtonColor: '#3085d6',
-				cancelButtonColor: '#d33',
-				confirmButtonText: 'ΟΚ'
-			});
-		});
+    this.insertPeriodDatesByType('accommodation');
 	}
 
+  insertPeriodDatesByType(appType: string) {
+    this.adminService.getDepartmentsOfUserByUserID().subscribe((departments: any) => {
+      let failure = false;
+
+      for (let department of departments) {
+        let departmentId = department.academic_id;
+
+        const data = appType == 'meals' ? { date_from: this.modelMealsDateFrom, date_to: this.modelMealsDateTo, app_type: appType }
+                                        : { date_from: this.modelAccommodationDateFrom, date_to: this.modelAccommodationDateTo, app_type: appType };
+        this.managerService.insertPeriodDates(data, departmentId).subscribe(responseData => {
+          console.log(responseData.message);
+          if (responseData.message.includes('error')) {
+            failure = true;
+          }
+        });
+      }
+
+      if (failure) {
+         Swal.fire({
+          title: 'Δημιουργία περιόδου αιτήσεων',
+          text: 'Κάτι πήγε στραβά. Δοκιμάστε να κάνετε υποβολή ημερομηνιών ξανά',
+          icon: 'error',
+          showCancelButton: false,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'ΟΚ'
+        });
+        return;
+      }
+
+      Swal.fire({
+        title: 'Δημιουργία περιόδου αιτήσεων',
+        text: 'Οι ημερομηνίες έναρξης και λήξης αιτήσεων δημιουργήθηκαν επιτυχώς',
+        icon: 'success',
+        showCancelButton: false,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'ΟΚ'
+      });
+    });
+  }
+
 	ngOnInit(): void {
-		this.managerService.getPeriodInfo(98).subscribe(results => {
-			// console.log(results);
-			for (let item of results) {
-				if (item.app_type == 'meals') {
-					this.modelMealsDateFrom = item.date_from;
-					this.modelMealsDateTo = item.date_to;
-				} else {
-					this.modelAccommodationDateFrom = item.date_from;
-					this.modelAccommodationDateTo = item.date_to;
-				}
-			}
-		})
+    this.adminService.getDepartmentsOfUserByUserID()
+      .subscribe((departments: any) => {
+
+        let departmentId = departments[0].academic_id;
+        this.managerService.getPeriodInfo(departmentId)
+          .subscribe(results => {
+            for (let item of results) {
+              if (item.app_type == 'meals') {
+                this.modelMealsDateFrom = item.date_from;
+                this.modelMealsDateTo = item.date_to;
+              } else {
+                this.modelAccommodationDateFrom = item.date_from;
+                this.modelAccommodationDateTo = item.date_to;
+              }
+            }
+          });
+      });
 	}
 
 }

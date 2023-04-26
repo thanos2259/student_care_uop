@@ -1,5 +1,6 @@
 // database connection configuration
 const pool = require("../db_config.js");
+const MiscUtils = require("../MiscUtils.js");
 
 const loginAdmin = async (username) => {
   try {
@@ -14,17 +15,34 @@ const loginAdmin = async (username) => {
   }
 };
 
-const insertRoles = async (username, isAdmin, academics) => {
+const insertRoles = async (username, isAdmin, cities) => {
   try {
-    const userRole = await pool.query("INSERT INTO users_roles(sso_username, is_admin)" +
-      " VALUES ($1, $2) RETURNING user_role_id", [username, isAdmin]);
+    let citiesStr = '';
+    let academicsForCities = [];
+
+    const isNafplioIncluded = cities.includes("ΝΑΥΠΛΙΟ");
+    if (isNafplioIncluded) {
+      const allDepartments = MiscUtils.getAllDepartments();
+      academicsForCities = allDepartments.map(department => department.depId);
+      citiesStr = 'ΝΑΥΠΛΙΟ,ΠΑΤΡΑ,ΚΑΛΑΜΑΤΑ';
+    } else {
+      for (let city of cities) {
+        citiesStr += (cities.indexOf(city) == cities.length - 1) ? city : city + ',';
+        const departmentsOfCity = MiscUtils.getDepartmentsByCity(city);
+        academicsForCities.push(...departmentsOfCity.map(department => department.depId));
+      }
+    }
+
+    const userRole = await pool.query("INSERT INTO users_roles(sso_username, is_admin, managed_cities)" +
+      " VALUES ($1, $2, $3) RETURNING user_role_id", [username, isAdmin, citiesStr]);
     const userRoleId = userRole.rows[0].user_role_id;
 
-    for (let academic of academics) {
+    for (let academic of academicsForCities) {
       await pool.query("INSERT INTO role_manages_academics(user_role_id, academic_id)" +
         " VALUES ($1, $2)", [userRoleId, academic]);
     }
   } catch (error) {
+    console.error('Error while inserting position group relations' + error.message);
     throw Error('Error while inserting position group relations' + error);
   }
 };
@@ -39,12 +57,13 @@ const getUsersWithRoles = async () => {
   }
 };
 
-const getDepartmentsOfUserByUserID = async (userRoleId) => {
+const getDepartmentsOfUserByUserID = async (ssoUserId) => {
   try {
-    const users = await pool.query("SELECT academic_id FROM users_roles \
-                                    INNER JOIN role_manages_academics ON \
-                                    role_manages_academics.user_role_id = users_roles.user_role_id \
-                                    WHERE users_roles.user_role_id = $1", [userRoleId]);
+    const users = await pool.query(`SELECT academic_id FROM sso_users
+                                    INNER JOIN users_roles ON users_roles.sso_username = sso_users.id
+                                    INNER JOIN role_manages_academics ON
+                                    role_manages_academics.user_role_id = users_roles.user_role_id
+                                    WHERE uuid = $1`, [ssoUserId]);
     return users.rows;
   } catch (error) {
     throw Error('Error while getting departments of user by username' + error);

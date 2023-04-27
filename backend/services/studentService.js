@@ -165,17 +165,25 @@ const updateApplicationAndHandleFiles = async (student, filesData, appId, appTyp
 
 const getStudentsApplyPhaseMeals = async () => {
   try {
-    const query = `SELECT apps.id as app_id, *
-                    FROM sso_users
-                    INNER JOIN student_users
-                    ON sso_users.uuid = student_users.sso_uid
-                    INNER JOIN applications apps ON apps.uid = sso_users.uuid
-                    INNER JOIN period ON apps.submit_date between period.date_from and period.date_to
-                    AND period.is_active = true
-                    AND period.app_type = 'meals'
-                    WHERE sso_users.edupersonprimaryaffiliation = 'student' AND apps.application_type = 'meals'`;
+    let userId = 2; // TODO: change it to receive it as parameter
+    const query = `SELECT DISTINCT
+                      apps.id as app_id,
+                      student_sso_users.*,
+                      apps.*
+                    FROM sso_users student_sso_users
+                        INNER JOIN student_users ON student_sso_users.uuid = student_users.sso_uid
+                        INNER JOIN applications apps ON apps.uid = student_sso_users.uuid
+                        LEFT JOIN period ON apps.submit_date BETWEEN period.date_from AND period.date_to
+                        INNER JOIN sso_users manager_sso_users ON manager_sso_users.uuid = $1
+                        INNER JOIN users_roles ON manager_sso_users.id = users_roles.sso_username
+                        INNER JOIN role_manages_academics ON users_roles.user_role_id = role_manages_academics.user_role_id
+                    WHERE student_sso_users.edupersonprimaryaffiliation = 'student'
+                        AND apps.application_type = 'meals'
+                        AND (period.is_active = false OR period.is_active IS NULL)
+                        AND period.app_type = 'meals'
+                        AND student_sso_users.department_id = role_manages_academics.academic_id`;
 
-    const studentsWithAppsMeals = await pool.query(query);
+    const studentsWithAppsMeals = await pool.query(query, [userId]);
     return studentsWithAppsMeals.rows;
   } catch (error) {
     console.error('Error while fetching students from active period' + error.message);

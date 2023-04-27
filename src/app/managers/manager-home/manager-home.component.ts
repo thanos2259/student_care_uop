@@ -1,9 +1,10 @@
-import { Component, Injectable, OnInit } from '@angular/core';
+import { Component, ElementRef, Injectable, OnInit, ViewChild } from '@angular/core';
 import { NgbCalendar, NgbDateAdapter, NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { ManagerService } from '../manager.service';
 import { Utils } from 'src/app/MiscUtils';
 import Swal from 'sweetalert2';
 import { AdminService } from 'src/app/admin-panels/admin.service';
+import { AvailableCities } from '../available-cities';
 
 /**
  * This Service handles how the date is represented in scripts i.e. ngModel.
@@ -63,6 +64,8 @@ export class CustomDateParserFormatter extends NgbDateParserFormatter {
 	],
 })
 export class ManagerHomeComponent implements OnInit {
+  @ViewChild('citySelect') citySelect: ElementRef | undefined;
+  public isUserNafplio: boolean = true;
 	ngSelect = "";
 	ngSelectPhase = "";
 	modelMealsDateFrom: string;
@@ -84,6 +87,53 @@ export class ManagerHomeComponent implements OnInit {
 	}
 
   insertPeriodDatesByType(appType: string) {
+    const selectedCity: AvailableCities = this.citySelect?.nativeElement?.value;
+    if (selectedCity) {
+      // console.log('Nafplio');
+      let departments = Utils.getDepartmentsIdsByCity(this.citySelect.nativeElement.value);
+      console.log(departments);
+      let failure = false;
+
+      for (let department of departments) {
+        let departmentId = Number(department);
+
+        const data = appType == 'meals' ? { date_from: this.modelMealsDateFrom, date_to: this.modelMealsDateTo, app_type: appType }
+                                        : { date_from: this.modelAccommodationDateFrom, date_to: this.modelAccommodationDateTo, app_type: appType };
+        this.managerService.insertPeriodDates(data, departmentId).subscribe(responseData => {
+          console.log(responseData.message);
+          if (responseData.message.includes('error')) {
+            failure = true;
+          }
+        });
+      }
+
+      if (failure) {
+        Swal.fire({
+          title: 'Δημιουργία περιόδου αιτήσεων',
+          text: 'Κάτι πήγε στραβά. Δοκιμάστε να κάνετε υποβολή ημερομηνιών ξανά',
+          icon: 'error',
+          showCancelButton: false,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'ΟΚ'
+        });
+        return;
+      }
+
+      Swal.fire({
+        title: 'Δημιουργία περιόδου αιτήσεων',
+        text: 'Οι ημερομηνίες έναρξης και λήξης αιτήσεων δημιουργήθηκαν επιτυχώς',
+        icon: 'success',
+        showCancelButton: false,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'ΟΚ'
+      });
+
+      return;
+    }
+
+    // For other departments
     this.adminService.getDepartmentsOfUserByUserID().subscribe((departments: any) => {
       let failure = false;
 
@@ -101,7 +151,7 @@ export class ManagerHomeComponent implements OnInit {
       }
 
       if (failure) {
-         Swal.fire({
+        Swal.fire({
           title: 'Δημιουργία περιόδου αιτήσεων',
           text: 'Κάτι πήγε στραβά. Δοκιμάστε να κάνετε υποβολή ημερομηνιών ξανά',
           icon: 'error',
@@ -126,10 +176,21 @@ export class ManagerHomeComponent implements OnInit {
   }
 
 	ngOnInit(): void {
-    this.adminService.getDepartmentsOfUserByUserID()
-      .subscribe((departments: any) => {
+    this.managerService.getManagerCities()
+      .subscribe((cities: any) => {
+        let chosenCity = '';
 
-        let departmentId = departments[0].academic_id;
+        if (cities.includes(',')) {
+          chosenCity = cities.split(',')[0];
+          this.isUserNafplio = chosenCity == AvailableCities.NAFPLIO;
+        } else {
+           chosenCity = cities[0];
+        }
+
+        let departments = Utils.getDepartmentsIdsByCity(chosenCity);
+        let departmentId = Number(departments[0]);
+        console.log(departmentId);
+
         this.managerService.getPeriodInfo(departmentId)
           .subscribe(results => {
             for (let item of results) {

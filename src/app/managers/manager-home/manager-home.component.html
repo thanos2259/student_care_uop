@@ -19,6 +19,17 @@
             <div class="tab-pane active" id="meals">
               <form ngNativeValidate #meals="ngForm" class="form-horizontal" (ngSubmit)="(meals.value)">
                 <div class="form-group row">
+                  <!-- <label for="date" class="col-form-label">Πόλη</label> -->
+                  <div *ngIf="isUserNafplio" class="container-responsive row">
+                    <select #citySelect class="form-select col-sm-12" aria-label="Default select example">
+                      <!-- <option selected>Επιλέξτε Πόλη</option> -->
+                      <option value="ΝΑΥΠΛΙΟ" selected>ΝΑΥΠΛΙΟ</option>
+                      <option value="ΠΑΤΡΑ">ΠΑΤΡΑ</option>
+                      <option value="ΚΑΛΑΜΑΤΑ">ΚΑΛΑΜΑΤΑ</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group row">
                   <div class="col-sm-6">
                     <label for="date" class="col-form-label">Από:</label>
                     <div class="container row">

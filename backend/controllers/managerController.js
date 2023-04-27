@@ -37,6 +37,19 @@ const getManager = async (request, response) => {
   }
 };
 
+const getManagerCities = async (request, response) => {
+  const ssoUserId = request.params.id;
+  try {
+    const cities = await managerService.getManagerCities(ssoUserId);
+    response.status(200).json(cities);
+  } catch (error) {
+    console.error(error.message);
+    response.status(500).send({
+      message: error.message
+    });
+  }
+};
+
 const getPeriodInfo = async (request, response) => {
   const depId = request.params.id;
   try {
@@ -173,6 +186,7 @@ module.exports = {
   getManager,
   getPeriodInfo,
   getCommentByStudentIdAndSubject,
+  getManagerCities,
   insertCommentsByStudentId,
   insertPeriodDates,
   updateCommentsByStudentId,

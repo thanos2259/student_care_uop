@@ -16,6 +16,20 @@ const loginManager = async (username) => {
   }
 };
 
+const getManagerCities = async (ssoUserId) => {
+  try {
+    const users = await pool.query(`SELECT distinct users_roles.managed_cities as cities FROM sso_users
+                                    INNER JOIN users_roles ON users_roles.sso_username = sso_users.id
+                                    INNER JOIN role_manages_academics ON
+                                    role_manages_academics.user_role_id = users_roles.user_role_id
+                                    WHERE uuid = $1`, [ssoUserId]);
+    return users.rows[0].cities;
+  } catch (error) {
+    console.error(error.message);
+    throw Error('Error while getting cities of user by sso user Id' + error);
+  }
+};
+
 const getManager = async (id) => {
   try {
     const resultsSSOUsers = await pool.query("SELECT * FROM sso_users \
@@ -109,6 +123,7 @@ module.exports = {
   getManager,
   getPeriodInfo,
   getCommentByStudentIdAndSubject,
+  getManagerCities,
   insertCommentsByStudentId,
   insertPeriodDates,
   updateCommentsByStudentId,

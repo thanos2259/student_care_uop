@@ -19,6 +19,12 @@ export class ManagerService {
     return fetchedManager;
   }
 
+  getManagerCities(): Observable<any> {
+    let id = this.authService.getSessionId();
+    const citiesManagedByUser = this.http.get<any>(MANAGER_URL + 'getManagerCities/' + id);
+    return citiesManagedByUser;
+  }
+
   insertCommentsByStudentId(studentId: number, comments: string, subject: string) {
     const commentsJson: any = { 'comments': comments, 'subject': subject };
     this.http

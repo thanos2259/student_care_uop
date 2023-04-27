@@ -60,7 +60,8 @@ const getApplicationsById = async (request, response) => {
 
 const getStudentsApplyPhaseMeals = async (request, response) => {
   try {
-    const studentsApps = await studentService.getStudentsApplyPhaseMeals();
+    const userId = request.params.id;
+    const studentsApps = await studentService.getStudentsApplyPhaseMeals(userId);
     response.status(200).json(studentsApps);
   } catch (error) {
     console.error(error.message);
@@ -72,7 +73,8 @@ const getStudentsApplyPhaseMeals = async (request, response) => {
 
 const getStudentsApplyPhaseAccommodation = async (request, response) => {
   try {
-    const studentsApps = await studentService.getStudentsApplyPhaseAccommodation();
+    const userId = request.params.id;
+    const studentsApps = await studentService.getStudentsApplyPhaseAccommodation(userId);
     response.status(200).json(studentsApps);
   } catch (error) {
     console.error(error.message);
@@ -125,9 +127,9 @@ const getCommentByStudentIdAndSubject = async (request, response) => {
 
 const getOldStudentsAppsForMeals = async (request, response) => {
   try {
-    const id = request.params.id;
+    const userId = request.params.id;
 
-    const comment = await studentService.getOldStudentsAppsForMeals();
+    const comment = await studentService.getOldStudentsAppsForMeals(userId);
     response.status(200).json(comment);
   } catch (error) {
     response.send({
@@ -138,9 +140,9 @@ const getOldStudentsAppsForMeals = async (request, response) => {
 
 const getOldStudentsAppsForAccommodation = async (request, response) => {
   try {
-    const id = request.params.id;
+    const userId = request.params.id;
 
-    const comment = await studentService.getOldStudentsAppsForAccommodation();
+    const comment = await studentService.getOldStudentsAppsForAccommodation(userId);
     response.status(200).json(comment);
   } catch (error) {
     response.send({

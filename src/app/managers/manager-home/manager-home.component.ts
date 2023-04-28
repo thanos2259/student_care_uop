@@ -65,7 +65,8 @@ export class CustomDateParserFormatter extends NgbDateParserFormatter {
 })
 export class ManagerHomeComponent implements OnInit {
   @ViewChild('citySelect') citySelect: ElementRef | undefined;
-  public isUserNafplio: boolean = true;
+  @ViewChild('citySelectAcc') citySelectAcc: ElementRef | undefined;
+  public isUserNafplio: boolean = false;
 	ngSelect = "";
 	ngSelectPhase = "";
 	modelMealsDateFrom: string;
@@ -87,11 +88,11 @@ export class ManagerHomeComponent implements OnInit {
 	}
 
   insertPeriodDatesByType(appType: string) {
-    const selectedCity: AvailableCities = this.citySelect?.nativeElement?.value;
+    const selectedCity: AvailableCities = appType == 'meals' ? this.citySelect?.nativeElement?.value
+                                                             : this.citySelectAcc?.nativeElement?.value;
+
     if (selectedCity) {
-      // console.log('Nafplio');
-      let departments = Utils.getDepartmentsIdsByCity(this.citySelect.nativeElement.value);
-      console.log(departments);
+      let departments = Utils.getDepartmentsIdsByCity(selectedCity);
       let failure = false;
 
       for (let department of departments) {
@@ -206,4 +207,52 @@ export class ManagerHomeComponent implements OnInit {
       });
 	}
 
+  changeDatesByCityMeals() {
+    const selectedCity: AvailableCities =  this.citySelect?.nativeElement?.value;
+
+    if (!selectedCity) {
+      return;
+    }
+
+    let departments = Utils.getDepartmentsIdsByCity(selectedCity);
+    let departmentId = Number(departments[0]);
+
+    // Reset mocel values before receiving new values from DB
+    this.modelMealsDateFrom = '';
+    this.modelMealsDateTo = '';
+
+    this.managerService.getPeriodInfo(departmentId)
+      .subscribe(results => {
+        for (let item of results) {
+          if (item.app_type == 'meals') {
+            this.modelMealsDateFrom = item.date_from;
+            this.modelMealsDateTo = item.date_to;
+          }
+        }
+      });
+  }
+
+  changeDatesByCityAccommodation() {
+    const selectedCity: AvailableCities = this.citySelectAcc?.nativeElement?.value;
+    if (!selectedCity) {
+      return;
+    }
+
+    let departments = Utils.getDepartmentsIdsByCity(selectedCity);
+    let departmentId = Number(departments[0]);
+
+    // Reset mocel values before receiving new values from DB
+    this.modelAccommodationDateFrom = '';
+    this.modelAccommodationDateTo = '';
+
+    this.managerService.getPeriodInfo(departmentId)
+      .subscribe(results => {
+        for (let item of results) {
+          if (item.app_type !== 'meals') {
+            this.modelAccommodationDateFrom = item.date_from;
+            this.modelAccommodationDateTo = item.date_to;
+          }
+        }
+      });
+  }
 }

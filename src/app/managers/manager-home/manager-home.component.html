@@ -21,7 +21,8 @@
                 <div class="form-group row">
                   <!-- <label for="date" class="col-form-label">Πόλη</label> -->
                   <div *ngIf="isUserNafplio" class="container-responsive row">
-                    <select #citySelect class="form-select col-sm-12" aria-label="Default select example">
+                    <select #citySelect class="form-select col-sm-12" (change)="changeDatesByCityMeals()"
+                      aria-label="City select">
                       <!-- <option selected>Επιλέξτε Πόλη</option> -->
                       <option value="ΝΑΥΠΛΙΟ" selected>ΝΑΥΠΛΙΟ</option>
                       <option value="ΠΑΤΡΑ">ΠΑΤΡΑ</option>
@@ -72,37 +73,47 @@
               </form>
             </div>
             <div class="tab-pane" id="accommodation">
-              <form ngNativeValidate #accommodation="ngForm" class="form-horizontal">
-                <div class="fieldset-wrapper">
-                  <div class="form-group row">
-                    <div class="col-sm-6">
-                      <label for="date" class="col-form-label">Από:</label>
-                      <div class="container row">
-                        <div class="pl-0 ml-0 input-group col-12">
-                          <input class="form-control" placeholder="dd/mm/yyyy" id="date_from" name="date_from"
-                            #c3="ngModel" [(ngModel)]="modelAccommodationDateFrom" ngbDatepicker
-                            #datepicker3="ngbDatepicker" />
-                          <button class="btn btn-outline-secondary" (click)="datepicker3.toggle()" type="button">
-                            <i class="fas fa-calendar-alt"></i>
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-sm-6">
-                      <label for="date" class="col-form-label">Έως:</label>
-                      <div class="container row">
-                        <div class="pl-0 ml-0 input-group col-12">
-                          <input class="form-control" placeholder="dd/mm/yyyy" id="date_to" name="date_to" #c4="ngModel"
-                            [(ngModel)]="modelAccommodationDateTo" ngbDatepicker #datepicker4="ngbDatepicker" />
-                          <button class="btn btn-outline-secondary" (click)="datepicker4.toggle()" type="button">
-                            <i class="fas fa-calendar-alt"></i>
-                          </button>
-                        </div>
+              <form ngNativeValidate #accommodation="ngForm" class="form-horizontal" (ngSubmit)="(accommodation.value)">
+                <div class="form-group row">
+                  <div *ngIf="isUserNafplio" class="container-responsive row">
+                    <select #citySelectAcc class="form-select col-sm-12" (change)="changeDatesByCityAccommodation()"
+                      aria-label="City select">
+                      <!-- <option selected>Επιλέξτε Πόλη</option> -->
+                      <option value="ΝΑΥΠΛΙΟ" selected>ΝΑΥΠΛΙΟ</option>
+                      <option value="ΠΑΤΡΑ">ΠΑΤΡΑ</option>
+                      <option value="ΚΑΛΑΜΑΤΑ">ΚΑΛΑΜΑΤΑ</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-sm-6">
+                    <label for="date" class="col-form-label">Από:</label>
+                    <div class="container row">
+                      <div class="pl-0 ml-0 input-group col-12">
+                        <input class="form-control" placeholder="dd/mm/yyyy" id="date_from" name="date_from"
+                          #c3="ngModel" [(ngModel)]="modelAccommodationDateFrom" ngbDatepicker
+                          #datepicker3="ngbDatepicker" />
+                        <button class="btn btn-outline-secondary" (click)="datepicker3.toggle()" type="button">
+                          <i class="fas fa-calendar-alt"></i>
+                        </button>
                       </div>
                     </div>
                   </div>
-                  <br>
+                  <div class="col-sm-6">
+                    <label for="date" class="col-form-label">Έως:</label>
+                    <div class="container row">
+                      <div class="pl-0 ml-0 input-group col-12">
+                        <input class="form-control" placeholder="dd/mm/yyyy" id="date_to" name="date_to" #c4="ngModel"
+                          [(ngModel)]="modelAccommodationDateTo" ngbDatepicker #datepicker4="ngbDatepicker" />
+                        <button class="btn btn-outline-secondary" (click)="datepicker4.toggle()" type="button">
+                          <i class="fas fa-calendar-alt"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
                 </div>
+                <br>
+
                 <div class="form-group container-fluid row" style="width: 320px; margin: auto">
                   <div class="col-sm-6 submitButton">
                     <button type="submit" (click)="insertPeriodDatesAccommodation()" class="btn btn-primary"

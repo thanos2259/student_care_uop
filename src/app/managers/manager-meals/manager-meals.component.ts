@@ -28,7 +28,8 @@ export class ManagerMealsComponent implements OnInit {
   ngOnInit(): void {
     this.studentsService.getStudentsAppsMealsForPeriod()
       .subscribe((students: StudentApplication[]) => {
-        this.studentsSSOData = students;
+        // this.studentsSSOData = students;
+        this.studentsSSOData = Utils.sortArrayOfDepartments(students);
 
         for (let i = 0; i < students.length; i++) {
           this.studentsSSOData[i].schacpersonaluniquecode = Utils.getRegistrationNumber(this.studentsSSOData[i].schacpersonaluniquecode);
@@ -47,6 +48,10 @@ export class ManagerMealsComponent implements OnInit {
         // Reinitialize the DataTable with the new data
         this.initDataTable();
       });
+  }
+
+  getDepartmentCityByDepId(depId: any) {
+    return Utils.getCityByDepartmentId(depId);
   }
 
   exportToExcel() {

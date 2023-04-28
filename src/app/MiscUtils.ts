@@ -820,4 +820,16 @@ export abstract class Utils {
                                      .map(department => department.depId);
   }
 
+  public static getCityByDepartmentId(departmentId: string) {
+    return Utils.citiesDepartmentsMap.filter(department => department.depId == departmentId)
+                                     .map(department => department.city)
+  }
+
+  public static sortArrayOfDepartments(array: any) {
+    return array.sort((itemA, itemB) => {
+      const cityA = Utils.getCityByDepartmentId(itemA.department_id).toString();
+      const cityB = Utils.getCityByDepartmentId(itemB.department_id).toString();
+      return cityA.localeCompare(cityB, 'el');
+    });
+  }
 }

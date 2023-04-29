@@ -1,0 +1,33 @@
+   <h4>Νέο Ερώτημα</h4>
+   <!-- <mat-form-field class="example-full-width w-100" appearance="">
+     <mat-label>Γράψε το ερώτημά σου...</mat-label>
+     <textarea matInput placeholder="Ex. It makes me feel..."></textarea>
+   </mat-form-field> -->
+   <div class="form-group">
+     <!-- <label for="exampleFormControlTextarea1">Example textarea</label> -->
+     <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+   </div>
+   <button class="btn btn-primary mat-button" (click)="insertNewQuestion()">Υποβολή</button>
+   <br> <br> <br>
+   <h4>Προηγούμενα Ερωτήματα</h4>
+   <mat-accordion>
+
+     <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+       <mat-expansion-panel-header>
+         <mat-panel-title>
+           Eρώτηση
+         </mat-panel-title>
+         <mat-panel-description>
+           Ανέβηκε η αιτησή μου;
+           <!-- {{panelOpenState ? 'open' : 'closed'}} -->
+         </mat-panel-description>
+       </mat-expansion-panel-header>
+       <h6>Ερώτηση</h6>
+       <p>Ανέβηκε η αιτησή μου;</p>
+
+       <h6>Απάντηση
+
+       </h6>
+       <p>Ναι</p>
+     </mat-expansion-panel>
+   </mat-accordion>

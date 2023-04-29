@@ -160,6 +160,24 @@
             </a>
           </li>
           <li class="nav-header">
+            Ερωτήματα &#38; QNA
+          </li>
+          <li class="nav-item">
+            <a [routerLink]="['/student/qna']" class="nav-link">
+              <i class="nav-icon fa fa-question"></i>
+              <p>Συχνές ερωτήσεις</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a [routerLink]="['/student/questions']" class="nav-link">
+              <i class="nav-icon fa fa-plus"></i>
+              <p>
+                Ερώτηση προς Υπεύθυνο
+                <!-- προς το Τμήμα Φοιτητικής Μέριμνας -->
+              </p>
+            </a>
+          </li>
+          <li class="nav-header">
             {{ "STUDENT.SIDEBAR-SECONDARY-OPTIONS" | translate }}
           </li>
           <li class="nav-item">
@@ -256,6 +274,8 @@
           <app-accommodation *ngIf="isAccommodationRoute()"></app-accommodation>
           <app-meals *ngIf="isMealsRoute()"></app-meals>
           <app-applications *ngIf="isApplicationssRoute()"></app-applications>
+          <app-student-questions *ngIf="isStudentQuestions()"></app-student-questions>
+          <app-qna *ngIf="isQNARoute()"></app-qna>
         </div>
       </div>
     </div>

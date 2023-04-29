@@ -54,6 +54,8 @@ import { StudentViewDialogComponent } from './managers/student-view-dialog/stude
 import { AppViewDialogAccommodationComponent } from './managers/app-view-dialog-accommodation/app-view-dialog-accommodation.component';
 import { AdminPanelComponent } from './admin-panels/admin-panel/admin-panel.component';
 import { AdminPanelLoginComponent } from './admin-panels/admin-panel-login/admin-panel-login.component';
+import { QnaComponent } from './generic-components/qna/qna.component';
+import { StudentQuestionsComponent } from './students/student-questions/student-questions.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -88,7 +90,9 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     StudentViewDialogComponent,
     AppViewDialogAccommodationComponent,
     AdminPanelComponent,
-    AdminPanelLoginComponent
+    AdminPanelLoginComponent,
+    QnaComponent,
+    StudentQuestionsComponent
   ],
   imports: [
     BrowserModule,

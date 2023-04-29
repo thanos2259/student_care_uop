@@ -50,16 +50,12 @@ export class ManagerMealsComponent implements OnInit {
       });
   }
 
-  getDepartmentCityByDepId(depId: any) {
-    return Utils.getCityByDepartmentId(depId);
-  }
-
   exportToExcel() {
     let studentsDataJson: any = [];
     for (const item of this.studentsSSOData) {
       const itemIndex = this.studentsSSOData.indexOf(item);
       studentsDataJson.push({
-        "TMHMA": this.departmentNameByid(Number(item.department_id)),
+        "TMHMA": this.getDepartmentNameById(Number(item.department_id)),
         "ΑΜ": item.schacpersonaluniquecode,
         "Επώνυμο": item.sn,
         "Όνομα": item.givenname,
@@ -158,8 +154,12 @@ export class ManagerMealsComponent implements OnInit {
     return Utils.calculateIncomeLimitForMealEligibility(this.studentsSSOData[index]);
   }
 
-  departmentNameByid(depId: number) {
+  getDepartmentNameById(depId: number) {
     return Utils.departmentsMap[depId];
+  }
+
+  getDepartmentCityByDepId(depId: any) {
+    return Utils.getCityByDepartmentId(depId);
   }
 
   onSubmitSelect(option: string, appId: number) {

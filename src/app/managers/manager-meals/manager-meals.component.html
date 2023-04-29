@@ -74,7 +74,7 @@
                           {{student.status == 1 ? 'Έγκριση - Επιλαχών' : student.status == 0 ? 'Υπό επεξεργασία' : 'Απόρριψη'}}
                         </p>
                       </td>
-                      <td>{{departmentNameByid(student.department_id)}}</td>
+                      <td>{{getDepartmentNameById(student.department_id)}}</td>
                       <td>{{getDepartmentCityByDepId(student.department_id)}}</td>
                       <td> <a class="custom-info-btn" (click)="studentInfo(idx)">{{student.givenname}}
                           {{student.sn}}</a></td>

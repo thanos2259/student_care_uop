@@ -17,7 +17,7 @@ import * as XLSX from 'xlsx';
   styleUrls: ['./manager-accommodation.component.css']
 })
 export class AccommodationComponent implements OnInit {
- @ViewChild('processingTable') private table1: ElementRef | undefined;
+  @ViewChild('processingTable') private table1: ElementRef | undefined;
   public state: number = 0;
   public studentsSSOData: StudentApplication[] = [];
   public formattedDate: string[] = [];
@@ -28,7 +28,8 @@ export class AccommodationComponent implements OnInit {
   ngOnInit(): void {
     this.studentsService.getStudentsAppsAccommodationForPeriod()
       .subscribe((students: StudentApplication[]) => {
-        this.studentsSSOData = students;
+        // this.studentsSSOData = students;
+        this.studentsSSOData = Utils.sortArrayOfDepartments(students);
         for (let i = 0; i < students.length; i++) {
           this.studentsSSOData[i].schacpersonaluniquecode = Utils.getRegistrationNumber(this.studentsSSOData[i].schacpersonaluniquecode);
           this.formattedDate[i] = Utils.getPreferredTimestamp(this.studentsSSOData[i].submit_date);
@@ -53,7 +54,7 @@ export class AccommodationComponent implements OnInit {
     for (const item of this.studentsSSOData) {
       const itemIndex = this.studentsSSOData.indexOf(item);
       studentsDataJson.push({
-        "TMHMA": this.departmentNameByid(Number(item.department_id)),
+        "TMHMA": this.getDepartmentNameById(Number(item.department_id)),
         "ΑΜ": item.schacpersonaluniquecode,
         "Επώνυμο": item.sn,
         "Όνομα": item.givenname,
@@ -147,8 +148,12 @@ export class AccommodationComponent implements OnInit {
     return Utils.calculateIncomeLimitForMealEligibility(this.studentsSSOData[index]);
   }
 
-  departmentNameByid(depId: number) {
+  getDepartmentNameById(depId: number) {
     return Utils.departmentsMap[depId];
+  }
+
+  getDepartmentCityByDepId(depId: any) {
+    return Utils.getCityByDepartmentId(depId);
   }
 
   onSubmitSelect(option: string, appId: number) {

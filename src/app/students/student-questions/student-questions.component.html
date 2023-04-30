@@ -6,24 +6,25 @@
    <button class="btn btn-primary mat-button" (click)="insertNewQuestion()">Υποβολή</button>
    <br><br><br>
    <h4 class="mb-3">Προηγούμενα Ερωτήματα</h4>
-   <mat-accordion>
-     <mat-expansion-panel *ngFor="let question of previousQuestions" (opened)="panelOpenState = true"
-       (closed)="panelOpenState = false">
-       <mat-expansion-panel-header>
-         <mat-panel-title>
-           Κωδικός Ερώτησης:&nbsp;{{question.question_id}}
-         </mat-panel-title>
-         <mat-panel-description>
-           {{ question.question_text }}
-         </mat-panel-description>
-       </mat-expansion-panel-header>
-       <h6>Ερώτηση</h6>
-       <p>{{ question.question_text }}</p>
+   <table class="table table-striped" style="background-color:white; border:1px solid #dee2e6">
+     <thead>
+       <tr>
+         <th scope="col"> Κωδικός Ερώτησης</th>
+         <th scope="col"> Ερώτηση</th>
+         <th scope="col"> Απάντηση</th>
+       </tr>
+     </thead>
+     <tbody>
+       <tr *ngFor="let question of previousQuestions">
+         <td>{{question.question_id}}</td>
+         <td>{{question.question_text}}</td>
+         <td>
+           <p *ngIf="question.answer_text; else noAnswer">{{ question.answer_text }}</p>
+           <ng-template #noAnswer>
+             <p>Δεν έχει δοθεί απάντηση ακόμη.</p>
+           </ng-template>
+         </td>
+       </tr>
 
-       <h6>Απάντηση</h6>
-       <p *ngIf="question.answer_text; else noAnswer">{{ question.answer_text }}</p>
-       <ng-template #noAnswer>
-         <p>Δεν έχει δοθεί απάντηση ακόμη.</p>
-       </ng-template>
-     </mat-expansion-panel>
-   </mat-accordion>
+     </tbody>
+   </table>

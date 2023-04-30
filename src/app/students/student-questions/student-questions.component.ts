@@ -3,6 +3,7 @@ import { StudentsService } from '../student.service';
 import { Question } from '../question.model';
 import { Student } from '../student.model';
 import { catchError, throwError } from 'rxjs';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-student-questions',
@@ -44,7 +45,15 @@ export class StudentQuestionsComponent implements OnInit {
     .subscribe(
       (response) => {
         console.log('Question submitted successfully:', response);
-        alert('Question submitted successfully');
+        Swal.fire({
+          title: 'Υποβολή Ερώτησης', text: 'Η ερώτηση υποβλήθηκε με επιτυχία', icon: 'success'
+        }).then((result) => {
+          if (!result.isConfirmed) {
+            console.log("User pressed Cancel or closed the popup");
+          } else {
+            location.reload();
+          }
+        });
       }
     );
   }

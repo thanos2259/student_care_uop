@@ -169,7 +169,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a [routerLink]="['/student/questions']" class="nav-link">
+            <a [routerLink]="['/student/questions/' + this.authService.getSessionId()]" class="nav-link">
               <i class="nav-icon fa fa-plus"></i>
               <p>
                 Ερώτηση προς Υπεύθυνο

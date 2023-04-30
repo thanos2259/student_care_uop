@@ -490,6 +490,30 @@ const updateSpecialField = async (fieldValue, fieldName, appId) => {
   }
 };
 
+const getQuestionsByStudentId = async (studentId) => {
+  try {
+    const query = 'SELECT * FROM ticket_questions WHERE student_id = $1';
+    const { rows } = await pool.query(query, [studentId]);
+    return rows;
+  } catch (error) {
+    console.error(error.message);
+    throw Error('Error fetching questions: ' + error.message);
+  }
+};
+
+const insertQuestion = async (questionData) => {
+  try {
+    const { department_id, receiver_role, student_id, question_text } = questionData;
+    const query = `INSERT INTO ticket_questions (department_id, receiver_role, student_id, question_text)
+    VALUES ($1, $2, $3, $4)`;
+
+    await pool.query(query, [department_id, receiver_role, student_id, question_text]);
+  } catch (error) {
+    console.error(error.message);
+    throw Error('Error while inserting question: ' + error.message);
+  }
+};
+
 module.exports = {
   getAllStudents,
   getStudentById,
@@ -500,8 +524,10 @@ module.exports = {
   getApplicationById,
   getOldStudentsAppsForMeals,
   getOldStudentsAppsForAccommodation,
+  getQuestionsByStudentId,
   insertOrUpdateApplication,
   insertNewApplication,
+  insertQuestion,
   updateStudentDetails,
   updateStudentContact,
   updateStudentBasicInfo,

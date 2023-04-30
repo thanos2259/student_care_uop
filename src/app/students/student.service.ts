@@ -6,6 +6,7 @@ import { AuthService } from 'src/app/auth/auth.service';
 import { Application } from "./application.model";
 import { StudentApplication } from "./student-application.model";
 import { environment } from "src/environments/environment";
+import { Question } from "./question.model";
 
 const STUDENTS_URL = environment.apiUrl + "/students/";
 const MANAGER_URL = environment.apiUrl + "/managers/";
@@ -147,5 +148,15 @@ export class StudentsService {
     return this.http
       .patch<{ message: string }>(STUDENTS_URL + "applications/updateSpecialField/" + appId,
          { "fieldValue": value, "fieldName": field });
+  }
+
+  submitQuestion(question: any): Observable<any> {
+    question.student_id = this.authService.getSessionId();
+    return this.http.post<any>(STUDENTS_URL + "/questions/", question);
+  }
+
+  getQuestionsByStudentId(): Observable<Question[]> {
+    const studentId: number = this.authService.getSessionId();
+    return this.http.get<Question[]>(STUDENTS_URL + "/questions/" + studentId);
   }
 }

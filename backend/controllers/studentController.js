@@ -434,6 +434,28 @@ const updateSpecialField = async (request, response) => {
   }
 };
 
+const getQuestionsByStudentId = async (request, response) => {
+  try {
+    const studentId = request.params.studentId;
+    const questions = await studentService.getQuestionsByStudentId(studentId);
+    response.status(200).json(questions);
+  } catch (error) {
+    console.error(error.message);
+    response.status(500).json({ error: 'Error fetching questions' });
+  }
+};
+
+const insertQuestion = async (request, response) => {
+  try {
+    const questionData = request.body;
+    await studentService.insertQuestion(questionData);
+    response.status(201).json({ message: 'Question submitted successfully' });
+  } catch (error) {
+    console.error(error.message);
+    response.status(500).json({ error: 'An error occurred while submitting the question' });
+  }
+};
+
 module.exports = {
   getAllStudents,
   getStudentById,
@@ -441,12 +463,14 @@ module.exports = {
   getCommentByStudentIdAndSubject,
   getOldStudentsAppsForMeals,
   getOldStudentsAppsForAccommodation,
+  getQuestionsByStudentId,
   updateStudentDetails,
   updateStudentContact,
   updateStudentSpecialData,
   updateStudentBasicInfo,
   updateSpecialField,
   insertCommentsByStudentId,
+  insertQuestion,
   updateCommentsByStudentId,
   getApplicationsById,
   getStudentsApplyPhaseMeals,

@@ -25,5 +25,7 @@ router.post("/sendFileByType/:id", studentController.sendFileByType);
 router.post("/getMealsAppZipFile/:id", studentController.getMealsAppZipFile);
 router.post("/getAccommodationAppZipFile/:id", studentController.getMealsAppZipFile);
 router.patch("/applications/updateSpecialField/:id", studentController.updateSpecialField);
+router.get('/questions/:studentId', studentController.getQuestionsByStudentId);
+router.post('/questions', studentController.insertQuestion);
 
 module.exports = router;

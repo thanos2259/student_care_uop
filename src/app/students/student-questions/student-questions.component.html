@@ -1,33 +1,29 @@
-   <h4>Νέο Ερώτημα</h4>
-   <!-- <mat-form-field class="example-full-width w-100" appearance="">
-     <mat-label>Γράψε το ερώτημά σου...</mat-label>
-     <textarea matInput placeholder="Ex. It makes me feel..."></textarea>
-   </mat-form-field> -->
+   <h4 class="mb-3">Νέο Ερώτημα</h4>
    <div class="form-group">
-     <!-- <label for="exampleFormControlTextarea1">Example textarea</label> -->
-     <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+     <textarea [(ngModel)]="question.question_text" class="form-control" id="exampleFormControlTextarea1"
+       rows="3"></textarea>
    </div>
    <button class="btn btn-primary mat-button" (click)="insertNewQuestion()">Υποβολή</button>
-   <br> <br> <br>
-   <h4>Προηγούμενα Ερωτήματα</h4>
+   <br><br><br>
+   <h4 class="mb-3">Προηγούμενα Ερωτήματα</h4>
    <mat-accordion>
-
-     <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+     <mat-expansion-panel *ngFor="let question of previousQuestions" (opened)="panelOpenState = true"
+       (closed)="panelOpenState = false">
        <mat-expansion-panel-header>
          <mat-panel-title>
-           Eρώτηση
+           Κωδικός Ερώτησης:&nbsp;{{question.question_id}}
          </mat-panel-title>
          <mat-panel-description>
-           Ανέβηκε η αιτησή μου;
-           <!-- {{panelOpenState ? 'open' : 'closed'}} -->
+           {{ question.question_text }}
          </mat-panel-description>
        </mat-expansion-panel-header>
        <h6>Ερώτηση</h6>
-       <p>Ανέβηκε η αιτησή μου;</p>
+       <p>{{ question.question_text }}</p>
 
-       <h6>Απάντηση
-
-       </h6>
-       <p>Ναι</p>
+       <h6>Απάντηση</h6>
+       <p *ngIf="question.answer_text; else noAnswer">{{ question.answer_text }}</p>
+       <ng-template #noAnswer>
+         <p>Δεν έχει δοθεί απάντηση ακόμη.</p>
+       </ng-template>
      </mat-expansion-panel>
    </mat-accordion>

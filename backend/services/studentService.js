@@ -492,7 +492,7 @@ const updateSpecialField = async (fieldValue, fieldName, appId) => {
 
 const getQuestionsByStudentId = async (studentId) => {
   try {
-    const query = 'SELECT * FROM ticket_questions WHERE student_id = $1';
+    const query = 'SELECT * FROM ticket_questions WHERE student_id = $1 ORDER BY question_id DESC';
     const { rows } = await pool.query(query, [studentId]);
     return rows;
   } catch (error) {

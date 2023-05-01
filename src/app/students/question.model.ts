@@ -5,4 +5,5 @@ export interface Question {
   student_id: number;
   question_text: string;
   answer_text?: string;
+  date_submitted?: Date;
 }

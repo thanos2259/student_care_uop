@@ -10,6 +10,7 @@
      <thead>
        <tr>
          <th scope="col"> Κωδικός Ερώτησης</th>
+         <th scope="col"> Ημ/νία Υποβολής</th>
          <th scope="col"> Ερώτηση</th>
          <th scope="col"> Απάντηση</th>
        </tr>
@@ -17,6 +18,7 @@
      <tbody>
        <tr *ngFor="let question of previousQuestions">
          <td>{{question.question_id}}</td>
+         <td>{{question.date_submitted}}</td>
          <td>{{question.question_text}}</td>
          <td>
            <p *ngIf="question.answer_text; else noAnswer">{{ question.answer_text }}</p>

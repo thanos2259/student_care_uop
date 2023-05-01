@@ -91,6 +91,14 @@ const routes: Routes = [{
   {
     path: 'contact',
     component: StudentComponent
+  },
+  {
+    path: 'questions/:id',
+    component: StudentComponent
+  },
+  {
+    path: 'qna',
+    component: StudentComponent
   }
   ]
 },

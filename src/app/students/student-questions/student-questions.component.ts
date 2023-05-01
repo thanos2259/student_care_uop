@@ -4,6 +4,7 @@ import { Question } from '../question.model';
 import { Student } from '../student.model';
 import { catchError, throwError } from 'rxjs';
 import Swal from 'sweetalert2';
+import {Utils} from 'src/app/MiscUtils';
 
 @Component({
   selector: 'app-student-questions',
@@ -20,6 +21,7 @@ export class StudentQuestionsComponent implements OnInit {
     student_id: 0,
     question_text: '',
   };
+  public dateOfTicket: string[] = [];
 
   constructor(private studentsService: StudentsService) { }
 
@@ -62,11 +64,16 @@ export class StudentQuestionsComponent implements OnInit {
     this.studentsService.getQuestionsByStudentId()
       .subscribe(
         (questions: any) => {
-          this.previousQuestions = questions;
+          this.previousQuestions = questions.map(question => {
+            question.date_submitted = Utils.getPreferredTimestamp(question.date_submitted);
+            return question;
+          });
         },
         (error) => {
           console.error('Error fetching questions:', error);
-          alert('Error fetching questions');
+          Swal.fire(
+            {title: 'Σφάλμα στη φόρτωση ερωτήσεων', text: 'Υπήρξε σφάλμα κατά τη φόρτωση των προηγούμενων ερωτήσεων', icon: 'error'}
+          );
         }
       );
   }

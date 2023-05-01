@@ -504,8 +504,8 @@ const getQuestionsByStudentId = async (studentId) => {
 const insertQuestion = async (questionData) => {
   try {
     const { department_id, receiver_role, student_id, question_text } = questionData;
-    const query = `INSERT INTO ticket_questions (department_id, receiver_role, student_id, question_text)
-    VALUES ($1, $2, $3, $4)`;
+    const query = `INSERT INTO ticket_questions (department_id, receiver_role, student_id, question_text, date_submitted)
+    VALUES ($1, $2, $3, $4, NOW())`;
 
     await pool.query(query, [department_id, receiver_role, student_id, question_text]);
   } catch (error) {

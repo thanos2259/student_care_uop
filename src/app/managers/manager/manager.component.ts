@@ -98,4 +98,11 @@ export class ManagerComponent implements OnInit, OnDestroy {
     return this.router.url === '/manager/contact'
   }
 
+  isManagerQNARoute() {
+    return this.router.url === '/manager/qna'
+  }
+
+  isManagerQuestionsRoute() {
+    return this.router.url === '/manager/questions/' + this.authService.getSessionId();
+  }
 }

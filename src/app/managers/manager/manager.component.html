@@ -127,6 +127,24 @@
             </a>
           </li>
           <li class="nav-header">
+            Ερωτήματα &#38; QNA
+          </li>
+          <li class="nav-item">
+            <a [routerLink]="['/manager/qna']" class="nav-link">
+              <i class="nav-icon fa fa-question"></i>
+              <p>Συχνές ερωτήσεις</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a [routerLink]="['/manager/questions/' + this.authService.getSessionId()]" class="nav-link">
+              <i class="nav-icon fa fa-plus"></i>
+              <p>
+                Ερωτήσεις Φοιτητών
+                <!-- προς το Τμήμα Φοιτητικής Μέριμνας -->
+              </p>
+            </a>
+          </li>
+          <li class="nav-header">
             {{ "STUDENT.SIDEBAR-SECONDARY-OPTIONS" | translate }}
           </li>
           <li class="nav-item">
@@ -221,6 +239,8 @@
           <app-about *ngIf="isAboutRoute()"></app-about>
           <app-manuals *ngIf="isManualsRoute()"></app-manuals>
           <app-contact *ngIf="isContactRoute()"></app-contact>
+          <app-questions-answers *ngIf="isManagerQuestionsRoute()"></app-questions-answers>
+          <app-qna *ngIf="isManagerQNARoute()"></app-qna>
         </div>
       </div>
     </div>

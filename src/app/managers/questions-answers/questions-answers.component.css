@@ -1,0 +1,22 @@
+.custom-info-btn {
+  color: #333;
+  cursor: pointer;
+  width: 100%;
+}
+
+.custom-info-btn:hover {
+  color: #224957;
+  text-decoration: underline;
+}
+
+.green-text {
+  color: green !important;
+}
+
+.red-text {
+  color: rgba(168, 14, 14, 0.8) !important;
+}
+
+.yellow-text {
+  color: rgb(122, 122, 2) !important;
+}

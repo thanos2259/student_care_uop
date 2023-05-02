@@ -94,11 +94,11 @@ const routes: Routes = [{
   },
   {
     path: 'questions/:id',
-    component: StudentComponent
+    component: ManagerComponent
   },
   {
     path: 'qna',
-    component: StudentComponent
+    component: ManagerComponent
   }
   ]
 },

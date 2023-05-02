@@ -1,4 +1,4 @@
-import { Component, ElementRef, Inject, OnInit, ViewChild,AfterViewInit } from '@angular/core';
+import { Component, ElementRef, Inject, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ManagerService } from '../manager.service';
 

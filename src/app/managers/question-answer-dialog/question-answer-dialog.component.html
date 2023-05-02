@@ -1,0 +1,8 @@
+<h3>Απάντηση σε Φοιτητή</h3>
+<mat-dialog-content class="mat-typography">
+  <p><label for="answerTextEdit">Κείμενο Απάντησης:</label></p>
+  <textarea #answerTextArea id="answerTextEdit" name="answerTextEdit" rows="4" cols="50"></textarea>
+</mat-dialog-content>
+<mat-dialog-actions style='text-align: right'>
+  <button mat-button class="btn btn-primary mat-button" (click)="onCommentSubmit()">Υποβολή Απάντησης</button>
+</mat-dialog-actions>

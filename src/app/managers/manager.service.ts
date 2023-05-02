@@ -53,6 +53,14 @@ export class ManagerService {
       });
   }
 
+  updateAnswerByQuestionId(answerText: string, questionId: number) {
+    this.http
+      .put<any>(MANAGER_URL + "questions/" + questionId, { answerText })
+      .subscribe(responseData => {
+        console.log(responseData.message);
+      });
+  }
+
   getCommentByStudentIdAndSubject(studentId: number, subject: string): Observable<any> {
     const params = new HttpParams()
       .set('studentId', studentId)
@@ -79,6 +87,15 @@ export class ManagerService {
       .subscribe(responseData => {
         console.log(responseData.message);
       });
+  }
+
+  submitAnswer(question: any): Observable<any> {
+    question.student_id = this.authService.getSessionId();
+    return this.http.post<any>(MANAGER_URL + "/questions/", question);
+  }
+
+  getQuestions(): Observable<any> {
+    return this.http.get<any>(MANAGER_URL + "/questions/");
   }
 
 }

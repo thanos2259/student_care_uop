@@ -62,6 +62,19 @@ const getCommentByStudentIdAndSubject = async (studentId, subject) => {
   }
 };
 
+const getQuestions = async () => {
+  try {
+    const results = await pool.query(`SELECT * FROM ticket_questions
+                                      INNER JOIN sso_users ON sso_users.uuid = ticket_questions.student_id
+                                      ORDER BY question_id DESC`);
+
+    return results.rows;
+  } catch (error) {
+    console.error('Error while getting questions of students ' + error.message);
+    throw Error('Error while getting questions of students');
+  }
+};
+
 const insertCommentsByStudentId = async (studentId, comments, subject) => {
   try {
     await pool.query("INSERT INTO comments(comment_text, comment_date, student_id, comment_subject) \
@@ -118,15 +131,29 @@ const updateNotesByAppId = async (appId, notes) => {
   }
 };
 
+const updateAnswerByQuestionId = async (questionId, answerText) => {
+  try {
+    const updateResults = await pool.query(`UPDATE ticket_questions
+     SET answer_text = $1 WHERE question_id = $2`, [answerText, questionId]);
+
+    return updateResults;
+  } catch (error) {
+    console.error('Error while updating questions answerText ' + error.message);
+    throw Error('Error while questions application answerText ');
+  }
+};
+
 module.exports = {
   loginManager,
   getManager,
   getPeriodInfo,
   getCommentByStudentIdAndSubject,
   getManagerCities,
+  getQuestions,
   insertCommentsByStudentId,
   insertPeriodDates,
   updateCommentsByStudentId,
   updateApplicationStatus,
-  updateNotesByAppId
+  updateNotesByAppId,
+  updateAnswerByQuestionId
 };

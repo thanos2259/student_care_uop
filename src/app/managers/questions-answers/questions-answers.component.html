@@ -1,1 +1,36 @@
-<p>questions-answers works!</p>
+<h4 class="mb-3">Ερωτήματα Φοιτητών</h4>
+<table class="table table-striped" style="background-color:white; border:1px solid #dee2e6">
+  <thead>
+    <tr>
+      <th scope="col"> Κωδικός Ερώτησης</th>
+      <th scope="col"> Ημ/νία Υποβολής</th>
+      <th scope="col"> Φοιτητής</th>
+      <th scope="col"> Τμήμα</th>
+      <th scope="col"> Ερώτηση</th>
+      <th scope="col"> Απάντηση</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let question of previousQuestions">
+      <td>{{question.question_id}}</td>
+      <td>{{question.date_submitted}}</td>
+      <td>
+        <a class="custom-info-btn"
+          (click)="studentInfo(previousQuestions.indexOf(question))">{{question.displayname}}</a>
+      </td>
+      <td>{{getDepartmentNameById(question.department_id)}}</td>
+      <td>{{question.question_text}}</td>
+      <td>
+        <p *ngIf="question.answer_text; else noAnswer">{{ question.answer_text }}</p>
+        <ng-template #noAnswer>
+          <p>Δεν έχει δοθεί απάντηση ακόμη.</p>
+        </ng-template>
+        <mat-divider class="mb-2"></mat-divider>
+        <div style="text-align:center;">
+          <a (click)="openUpdateAnswerDialog(question.question_id, question.answer_text)"
+            style="color: #224957; cursor: pointer;"><i class="fa fa-lg fa-edit"></i></a>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>

@@ -181,15 +181,50 @@ const updateNotesByAppId = async (request, response) => {
   }
 };
 
+const updateAnswerByQuestionId = async (request, response) => {
+  try {
+    const questionId = request.params.id;
+    const answerText = request.body.answerText;
+
+    await managerService.updateAnswerByQuestionId(questionId, answerText);
+
+    response
+      .status(200)
+      .json({
+        message: 'Student answer for question updated successfully'
+      });
+  } catch (error) {
+    console.error(error.message);
+    response.status(400).send({
+      message: error.message
+    });
+  }
+};
+
+const getQuestions = async (request, response) => {
+  try {
+    const studentQuestions = await managerService.getQuestions();
+
+    response.status(200).json(studentQuestions);
+  } catch (error) {
+    console.error(error.message);
+    response.status(400).send({
+      message: error.message
+    });
+  }
+};
+
 module.exports = {
   login,
   getManager,
   getPeriodInfo,
   getCommentByStudentIdAndSubject,
   getManagerCities,
+  getQuestions,
   insertCommentsByStudentId,
   insertPeriodDates,
   updateCommentsByStudentId,
   updateApplicationStatus,
-  updateNotesByAppId
+  updateNotesByAppId,
+  updateAnswerByQuestionId
 };

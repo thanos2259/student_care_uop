@@ -25,4 +25,8 @@ export interface Student {
   country: string;
   address: string;
   mail: string;
+  Grade?: number;
+  Semester?: number;
+  Ects?: number;
+  CourseCount?: number;
 }

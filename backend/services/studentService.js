@@ -6,6 +6,7 @@ const msql = require('mssql');
 const fs = require('fs');
 const JSZip = require('jszip');
 const moment = require('moment');
+require('dotenv').config();
 
 const getAllStudents = async () => {
   try {
@@ -61,23 +62,30 @@ const getAccommodationFilesByAppID = async (appID) => {
 //   }
 // };
 
-// const getStudentFactorProcedure = async (depId, studentAM) => {
-//   try {
-//     // make sure that any items are correctly URL encoded in the connection string
-//     let mspool = await msql.connect(mssql);
+const getStudentFactorProcedure = async (depId, studentAM) => {
+  try {
+    // make sure that any items are correctly URL encoded in the connection string
+    if (true) {
+      return {
+        Grade: 0,
+        Ects: 0,
+        Semester: 0,
+        Praktiki: true,
+        CourseCount: 0
+      };
+    }
+    let mspool = await msql.connect(mssql);
 
-//     const result = await mspool.request()
-//       .input('DepId', msql.Int, depId)
-//       .input('am', msql.VarChar(100), studentAM)
-//       .execute('usp_GetStudentFactorPraktiki');
-
-//     return result.recordset[0];
-//   } catch (error) {
-//     // error checks
-//     throw Error('error' + error);
-//     //console.log("error: " + error);
-//   }
-// };
+    const result = await mspool.request()
+      .input('DepId', msql.Int, depId)
+      .input('am', msql.VarChar(100), studentAM)
+      .execute('usp_GetStudentFactorPraktiki');
+    //console.log(result.recordset[0]);
+    return result.recordset[0];
+  } catch (error) {
+    console.log("error: " + error);
+  }
+};
 
 const getStudentById = async (id) => {
   try {
@@ -172,10 +180,10 @@ const getStudentsApplyPhaseMeals = async (userId) => {
                     FROM sso_users student_sso_users
                         INNER JOIN student_users ON student_sso_users.uuid = student_users.sso_uid
                         INNER JOIN applications apps ON apps.uid = student_sso_users.uuid
-                        INNER JOIN period ON apps.submit_date BETWEEN period.date_from AND period.date_to
                         INNER JOIN sso_users manager_sso_users ON manager_sso_users.uuid = $1
                         INNER JOIN users_roles ON manager_sso_users.id = users_roles.sso_username
                         INNER JOIN role_manages_academics ON users_roles.user_role_id = role_manages_academics.user_role_id
+                        INNER JOIN period ON apps.submit_date BETWEEN period.date_from AND period.date_to AND period.department_id = role_manages_academics.academic_id
                     WHERE student_sso_users.edupersonprimaryaffiliation = 'student'
                         AND apps.application_type = 'meals'
                         AND period.is_active = true
@@ -183,11 +191,33 @@ const getStudentsApplyPhaseMeals = async (userId) => {
                         AND student_sso_users.department_id = role_manages_academics.academic_id`;
 
     const studentsWithAppsMeals = await pool.query(query, [userId]);
-    return studentsWithAppsMeals.rows;
+
+    let studentsWithFactorProcedureResult = [];
+    studentsWithFactorProcedureResult = await getProcedureResultsForStudent(studentsWithAppsMeals);
+
+    return studentsWithFactorProcedureResult;
   } catch (error) {
     console.error('Error while fetching students from active period' + error.message);
     throw Error('Error while fetching students from active period');
   }
+};
+
+const getProcedureResultsForStudent = async (studentsWithAppsMeals) => {
+  let studentsWithFactorProcedureResult = [];
+  for (const student of studentsWithAppsMeals.rows) {
+    let departmentFieldForProcedure = student.department_id;
+
+    // If length equals 6 then it is a merged TEI department and should keep only 4 digits for the procedure
+    if (departmentFieldForProcedure.toString().length == 6) {
+      departmentFieldForProcedure = MiscUtils.getAEICodeFromDepartmentId(departmentFieldForProcedure);
+    }
+    const factorProcedureResult = await getStudentFactorProcedure(MiscUtils.departmentsMap[departmentFieldForProcedure], MiscUtils.splitStudentsAM(student.schacpersonaluniquecode));
+    studentsWithFactorProcedureResult.push({
+      ...student,
+      ...factorProcedureResult
+    });
+  }
+  return studentsWithFactorProcedureResult;
 };
 
 const getStudentsApplyPhaseAccommodation = async (userId) => {
@@ -199,10 +229,10 @@ const getStudentsApplyPhaseAccommodation = async (userId) => {
                     FROM sso_users student_sso_users
                         INNER JOIN student_users ON student_sso_users.uuid = student_users.sso_uid
                         INNER JOIN applications apps ON apps.uid = student_sso_users.uuid
-                        INNER JOIN period ON apps.submit_date BETWEEN period.date_from AND period.date_to
                         INNER JOIN sso_users manager_sso_users ON manager_sso_users.uuid = $1
                         INNER JOIN users_roles ON manager_sso_users.id = users_roles.sso_username
                         INNER JOIN role_manages_academics ON users_roles.user_role_id = role_manages_academics.user_role_id
+                        INNER JOIN period ON apps.submit_date BETWEEN period.date_from AND period.date_to AND period.department_id = role_manages_academics.academic_id
                     WHERE student_sso_users.edupersonprimaryaffiliation = 'student'
                         AND apps.application_type = 'accommodation'
                         AND period.is_active = true
@@ -210,7 +240,11 @@ const getStudentsApplyPhaseAccommodation = async (userId) => {
                         AND student_sso_users.department_id = role_manages_academics.academic_id`;
 
     const studentsWithAppsAccommodation = await pool.query(query, [userId]);
-    return studentsWithAppsAccommodation.rows;
+
+    let studentsWithFactorProcedureResult = [];
+    studentsWithFactorProcedureResult = await getProcedureResultsForStudent(studentsWithAppsAccommodation);
+
+    return studentsWithFactorProcedureResult;
   } catch (error) {
     console.error('Error while fetching students from active period' + error.message);
     throw Error('Error while fetching students from active period');
@@ -220,27 +254,31 @@ const getStudentsApplyPhaseAccommodation = async (userId) => {
 const getOldStudentsAppsForMeals = async (userId) => {
   try {
     const query = `SELECT DISTINCT
-                      apps.id as app_id,
-                      student_sso_users.*,
-                      apps.*
+                        apps.id as app_id,
+                        student_sso_users.*,
+                        apps.*
                     FROM sso_users student_sso_users
-                      INNER JOIN student_users ON student_sso_users.uuid = student_users.sso_uid
-                      INNER JOIN applications apps ON apps.uid = student_sso_users.uuid
-                      INNER JOIN period p1
-                      ON apps.submit_date BETWEEN p1.date_from AND p1.date_to
-                      AND (p1.is_active = false OR p1.is_active IS NULL)
-                      inner JOIN period p2 ON apps.submit_date NOT BETWEEN p2.date_from AND p2.date_to
-                      AND p2.is_active = true
-                      INNER JOIN sso_users manager_sso_users ON manager_sso_users.uuid = $1
-                      INNER JOIN users_roles ON manager_sso_users.id = users_roles.sso_username
-                      INNER JOIN role_manages_academics ON users_roles.user_role_id = role_manages_academics.user_role_id
+                        INNER JOIN student_users ON student_sso_users.uuid = student_users.sso_uid
+                        INNER JOIN applications apps ON apps.uid = student_sso_users.uuid
+                        INNER JOIN sso_users manager_sso_users ON manager_sso_users.uuid = $1
+                        INNER JOIN users_roles ON manager_sso_users.id = users_roles.sso_username
+                        INNER JOIN role_manages_academics ON users_roles.user_role_id = role_manages_academics.user_role_id
+					              INNER JOIN period p1
+                          ON apps.submit_date BETWEEN p1.date_from AND p1.date_to
+                          AND (p1.is_active = false OR p1.is_active IS NULL) AND p1.department_id = role_manages_academics.academic_id
+                          INNER JOIN period p2 ON apps.submit_date NOT BETWEEN p2.date_from AND p2.date_to
+                          AND p2.is_active = true AND p2.department_id = role_manages_academics.academic_id
                     WHERE student_sso_users.edupersonprimaryaffiliation = 'student'
-                      AND apps.application_type = 'meals'
-                      AND p1.app_type = 'meals' AND p2.app_type = 'meals'
-                      AND student_sso_users.department_id = role_manages_academics.academic_id`;
+                        AND apps.application_type = 'meals'
+                        AND p1.app_type = 'meals' AND p2.app_type = 'meals'
+                        AND student_sso_users.department_id = role_manages_academics.academic_id`;
 
     const results = await pool.query(query, [userId]);
-    return results.rows;
+
+    let studentsWithFactorProcedureResult = [];
+    studentsWithFactorProcedureResult = await getProcedureResultsForStudent(results);
+
+    return studentsWithFactorProcedureResult;
   } catch (error) {
     console.error('Error while fetching students old meal applications' + error.message);
     throw Error('Error while fetching students old meal applications');
@@ -256,21 +294,25 @@ const getOldStudentsAppsForAccommodation = async (userId) => {
                     FROM sso_users student_sso_users
                       INNER JOIN student_users ON student_sso_users.uuid = student_users.sso_uid
                       INNER JOIN applications apps ON apps.uid = student_sso_users.uuid
-                      INNER JOIN period p1
-                      ON apps.submit_date BETWEEN p1.date_from AND p1.date_to
-                      AND (p1.is_active = false OR p1.is_active IS NULL)
-                      inner JOIN period p2 ON apps.submit_date NOT BETWEEN p2.date_from AND p2.date_to
-                      AND p2.is_active = true
                       INNER JOIN sso_users manager_sso_users ON manager_sso_users.uuid = $1
                       INNER JOIN users_roles ON manager_sso_users.id = users_roles.sso_username
                       INNER JOIN role_manages_academics ON users_roles.user_role_id = role_manages_academics.user_role_id
+                      INNER JOIN period p1
+                        ON apps.submit_date BETWEEN p1.date_from AND p1.date_to
+                        AND (p1.is_active = false OR p1.is_active IS NULL) AND p1.department_id = role_manages_academics.academic_id
+                        INNER JOIN period p2 ON apps.submit_date NOT BETWEEN p2.date_from AND p2.date_to
+                        AND p2.is_active = true AND p2.department_id = role_manages_academics.academic_id
                     WHERE student_sso_users.edupersonprimaryaffiliation = 'student'
                       AND apps.application_type = 'accommodation'
                       AND p1.app_type = 'accommodation' AND p2.app_type = 'accommodation'
                       AND student_sso_users.department_id = role_manages_academics.academic_id`;
 
     const results = await pool.query(query, [userId]);
-    return results.rows;
+
+    let studentsWithFactorProcedureResult = [];
+    studentsWithFactorProcedureResult = await getProcedureResultsForStudent(results);
+
+    return studentsWithFactorProcedureResult;
   } catch (error) {
     console.error('Error while fetching students old meal applications' + error.message);
     throw Error('Error while fetching students old meal applications');

@@ -172,6 +172,28 @@ function getAllDepartments() {
   return citiesDepartmentsMap;
 }
 
+/**
+ * Extract the student Registry ID after the last colon (:) and after the optional slash (/) in the given string.
+ * Mostly for students of technological departments. e.g for AM: 1513/1234567 the function will return 1234567.
+ *
+ * @param {string} splitString - The input string to be split and processed.
+ * @returns {string} The extracted student ID.
+ */
+const splitStudentsAM = (splitString) => {
+  const splitArray = splitString.split(':');
+  const lastArrayPart = splitArray[splitArray.length - 1];
+
+  if (lastArrayPart.includes("/")) {
+    return lastArrayPart.split("/")[1];
+  }
+
+  return lastArrayPart;
+};
+
+const getAEICodeFromDepartmentId = (departmentId) => {
+  return parseInt(departmentId.toString().substring(0, 4));
+};
+
 // Export list
 module.exports = {
   FILE_TYPES,
@@ -181,5 +203,7 @@ module.exports = {
   filesSubmittedAccommodation,
   citiesDepartmentsMap,
   getDepartmentsByCity,
-  getAllDepartments
+  getAllDepartments,
+  splitStudentsAM,
+  getAEICodeFromDepartmentId
 };

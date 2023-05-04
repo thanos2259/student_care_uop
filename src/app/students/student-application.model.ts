@@ -35,4 +35,8 @@ export interface StudentApplication {
   country: string;
   address: string;
   mail: string;
+  Grade?: number;
+  Semester?: number;
+  Ects?: number;
+  CourseCount?: number;
 }

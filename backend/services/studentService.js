@@ -137,7 +137,7 @@ const updateApplicationByAppId = async (student, filesData, appId) => {
   try {
     const updateAppResult = await pool.query("UPDATE applications \
       SET status=$1, submit_date=now(), application_type=$2, father_name=$3, location=$4, city=$5, phone=$6, category=$7, family_income=$8, family_state=$9, protected_members=$10, siblings_students=$11, children=$12 \
-      WHERE app_id=$13",
+      WHERE id=$13",
       [0, student.application_type, student.father_name, student.location, student.city, student.phone, student.category, student.family_income, student.family_state, student.protected_members, student.siblings_students, student.children, appId]);
 
     if (!updateAppResult) {

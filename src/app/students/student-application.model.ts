@@ -1,5 +1,6 @@
 export interface StudentApplication {
   id: number;
+  app_id?: number;
   uid: number;
   submit_date: Date;
   status: number;

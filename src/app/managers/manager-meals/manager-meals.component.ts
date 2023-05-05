@@ -10,6 +10,7 @@ import { EditNotesDialogComponent } from '../edit-notes-dialog/edit-notes-dialog
 import { AppViewDialogComponent } from '../app-view-dialog/app-view-dialog.component';
 import { StudentViewDialogComponent } from '../student-view-dialog/student-view-dialog.component';
 import * as XLSX from 'xlsx';
+import {FilesMeals} from 'src/app/students/files-meals.model';
 
 @Component({
   selector: 'app-manager-meals',
@@ -22,6 +23,28 @@ export class ManagerMealsComponent implements OnInit {
   public studentsSSOData: StudentApplication[] = [];
   public formattedDate: string[] = [];
   private hasMadeComment = [];
+  public filesMeals: FilesMeals = {
+    eka8aristiko: false,
+    oikogeneiakhKatastasi: false,
+    pistopoihtikoGoneaFoithth: false,
+    tautotita: false,
+    toposMonimhsKatoikias: false,
+    ypeu8unhDilosi: false,
+    polutekneia: false,
+    bebaioshSpoudonAderfwn: false,
+    agamhMhtera: false,
+    lhksiarxikhPrakshThanatouGoneaA: false,
+    lhksiarxikhPrakshThanatouGoneaB: false,
+    goneisAMEA: false,
+    goneisAMEAIatrikhGnomateush: false,
+    goneisThumataTromokratias1: false,
+    goneisThumataTromokratias2: false,
+    bebaioshEpidothsdhsAnergeias: false,
+    diazevgmenoiGoneis1: false,
+    diazevgmenoiGoneis2: false,
+    AMEA: false,
+    AMEAIatrikhGnomateush: false,
+  };
 
   constructor(public studentsService: StudentsService, public authService: AuthService, public dialog: MatDialog, private chRef: ChangeDetectorRef, public managerService: ManagerService) { }
 
@@ -50,11 +73,12 @@ export class ManagerMealsComponent implements OnInit {
       });
   }
 
-  exportToExcel() {
+  async exportToExcel() {
     let studentsDataJson: any = [];
     for (const item of this.studentsSSOData) {
       const itemIndex = this.studentsSSOData.indexOf(item);
-      studentsDataJson.push({
+      await this.getApplicationFiilesData(item);
+      let obj1 = {
         "TMHMA": this.getDepartmentNameById(Number(item.department_id)),
         "ΑΜ": item.schacpersonaluniquecode,
         "Επώνυμο": item.sn,
@@ -80,10 +104,21 @@ export class ManagerMealsComponent implements OnInit {
         "Οικογενειακή κατάσταση": item.family_state,
         "Προστατευόμενα Μέλη": item.protected_members,
         "Αδέλφια που φοιτούν": item.siblings_students,
-        "Παιδιά Φοιτητή": item.children
-      });
+        "Παιδιά Φοιτητή": item.children,
+        "Πολυτεκνεία": this.filesMeals.polutekneia ? 'ΝΑΙ': 'OXI',
+        "Τρίτεκνος ή Φοιτητής γονέας": this.filesMeals.pistopoihtikoGoneaFoithth ? 'ΝΑΙ': 'OXI',
+        "Αδέρφιια φοιτητές": this.filesMeals.bebaioshSpoudonAderfwn ? 'ΝΑΙ': 'OXI',
+        "Άγαμη Μητέρα": this.filesMeals.agamhMhtera ? 'ΝΑΙ': 'OXI',
+        "Αποθνήσκων γονέας": this.filesMeals.lhksiarxikhPrakshThanatouGoneaA || this.filesMeals.lhksiarxikhPrakshThanatouGoneaB ? 'ΝΑΙ': 'OXI',
+        "Γονείς ΑΜΕΑ": this.filesMeals.goneisAMEA || this.filesMeals.goneisAMEAIatrikhGnomateush ? 'ΝΑΙ': 'OXI',
+        "Γονείς Θύματα Τρομοκρατίας": this.filesMeals.goneisThumataTromokratias1 || this.filesMeals.goneisThumataTromokratias2 ? 'ΝΑΙ': 'OXI',
+        "Άνεργος/η": this.filesMeals.bebaioshEpidothsdhsAnergeias ? 'ΝΑΙ': 'OXI',
+        "Διαζευγμένοι Γονείς": this.filesMeals.diazevgmenoiGoneis1 || this.filesMeals.diazevgmenoiGoneis2 ? 'ΝΑΙ': 'OXI',
+        "Φοιτητής / ρια ΑΜΕΑ": this.filesMeals.AMEA || this.filesMeals.AMEAIatrikhGnomateush ? 'ΝΑΙ': 'OXI'
+      };
+      studentsDataJson.push(obj1);
+      console.log(studentsDataJson);
     }
-
     const excelFileName: string = "StudentsPhase1Meals.xlsx";
     const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(studentsDataJson) //table_to_sheet((document.getElementById("example2") as HTMLElement));
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
@@ -91,6 +126,46 @@ export class ManagerMealsComponent implements OnInit {
 
     /* Save to file */
     XLSX.writeFile(wb, excelFileName);
+
+  }
+
+  async getApplicationFiilesData(item: StudentApplication) {
+    this.studentsService.getAccommodationFiles(item.app_id)
+      .subscribe((appFiles: any[]) => {
+        for (let item of appFiles) {
+          if (item.name == 'filePolutekneia') {
+            this.filesMeals.polutekneia = true;
+          } else if (item.name == 'filePistopoihtikoGoneaFoithth') {
+            this.filesMeals.pistopoihtikoGoneaFoithth = true;
+          } else if (item.name == 'fileBebaioshSpoudonAderfwn') {
+            this.filesMeals.bebaioshSpoudonAderfwn = true;
+          } else if (item.name == 'fileAgamhMhtera') {
+            this.filesMeals.agamhMhtera = true;
+          } else if (item.name == 'fileLhksiarxikhPrakshThanatouGoneaA') {
+            this.filesMeals.lhksiarxikhPrakshThanatouGoneaA = true;
+          } else if (item.name == 'fileLhksiarxikhPrakshThanatouGoneaB') {
+            this.filesMeals.lhksiarxikhPrakshThanatouGoneaB = true;
+          } else if (item.name == 'fileGoneisAMEA') {
+            this.filesMeals.goneisAMEA = true;
+          } else if (item.name == 'fileGoneisAMEAIatrikhGnomateush') {
+            this.filesMeals.goneisAMEAIatrikhGnomateush = true;
+          } else if (item.name == 'fileGoneisThumataTromokratias1') {
+            this.filesMeals.goneisThumataTromokratias1 = true;
+          } else if (item.name == 'fileGoneisThumataTromokratias2') {
+            this.filesMeals.goneisThumataTromokratias2 = true;
+          } else if (item.name == 'fileBebaioshEpidothsdhsAnergeias') {
+            this.filesMeals.bebaioshEpidothsdhsAnergeias = true;
+          } else if (item.name == 'fileDiazevgmenoiGoneis1') {
+            this.filesMeals.diazevgmenoiGoneis1 = true;
+          } else if (item.name == 'fileDiazevgmenoiGoneis2') {
+            this.filesMeals.diazevgmenoiGoneis2 = true;
+          } else if (item.name == 'fileAMEA') {
+            this.filesMeals.AMEA = true;
+          } else if (item.name == 'fileAMEAIatrikhGnomateush') {
+            this.filesMeals.AMEAIatrikhGnomateush = true;
+          }
+        }
+      });
   }
 
   receiveZipFileMeals(studentId: number, docType: string) {

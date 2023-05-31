@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, EventEmitter, Output } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Student } from '../student.model';
 import { StudentsService } from '../student.service';
 import { AuthService } from 'src/app/auth/auth.service';
@@ -29,7 +29,7 @@ export class StudentComponent implements OnInit, OnDestroy {
   public commentSitisi!: any;
   public commentStegasi!: any;
 
-  constructor(public studentsService: StudentsService, private router: Router, public authService: AuthService,
+  constructor(public studentsService: StudentsService, private router: Router, private route: ActivatedRoute, public authService: AuthService,
     public translate: TranslateService, public dialog: MatDialog) {
 
     translate.addLangs(['en', 'gr']);
@@ -43,6 +43,15 @@ export class StudentComponent implements OnInit, OnDestroy {
     this.language = localStorage.getItem('language') || 'gr';
     if (!environment.production) {
       this.authService.setSessionId(1);
+    }
+    if (this.router.url.includes('/student/login')) {
+      this.route.queryParams
+        .subscribe(params => {
+          this.authService.setToken(params['token']);
+          this.authService.setSessionId(params['uuid']);
+        }
+      );
+      this.router.navigateByUrl('/student/' + this.authService.getSessionId());
     }
     this.fetchStudent();
   }

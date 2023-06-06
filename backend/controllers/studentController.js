@@ -9,6 +9,7 @@ const path = require('path');
 const login = async (request, response, next) => {
   const uname = request.body.username;
   let userId;
+  console.log(uname);
 
   if (uname)
     userId = await studentService.loginStudent(uname);

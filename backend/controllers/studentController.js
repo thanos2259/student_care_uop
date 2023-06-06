@@ -12,13 +12,14 @@ const login = async (request, response, next) => {
 
   if (uname)
     userId = await studentService.loginStudent(uname);
-  // console.log(userId);
 
-  if (userId == null) {
+  console.log("uid " + userId);
+
+  if (userId == null)
     response.status(401).json({
       message: 'Unauthorized'
     });
-  } else {
+  else {
     const token = jwt.sign({
       userId: userId
     },

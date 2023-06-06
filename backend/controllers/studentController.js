@@ -7,7 +7,7 @@ const path = require('path');
 
 // app.post("/api/students/login/:id", (request, response, next) => {
 const login = async (request, response, next) => {
-  console.log(request.body);
+  console.log("request.body");
   const uname = request.body.username;
   let userId;
 

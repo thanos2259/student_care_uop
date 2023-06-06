@@ -8,7 +8,10 @@ const path = require('path');
 // app.post("/api/students/login/:id", (request, response, next) => {
 const login = async (request, response, next) => {
   const uname = request.body.username;
-  const userId = await studentService.loginStudent(uname);
+  let userId;
+
+  if (uname)
+    userId = await studentService.loginStudent(uname);
   // console.log(userId);
 
   if (userId == null) {

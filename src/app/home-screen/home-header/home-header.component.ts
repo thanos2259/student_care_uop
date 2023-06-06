@@ -29,7 +29,7 @@ export class HomeHeaderComponent implements OnInit {
     //   console.log(obj);
     // });
     //window.location.href = 'https://foititiki-merimna.uop.gr:443/CASlogin/CAS/CASlogin.php/'
-    window.location.href = 'CASlogin/CAS/CASapi.php/'
+    window.location.href = 'CAS/CASapi.php/'
     // $('#ssoLoginForm').attr("action", "https://sso.uop.gr/login?service=https%3A%2F%2Fpraktiki.uop.gr%2Fcas%3Fdestination%3Diamstudent");
     //$('#ssoLoginForm').attr("action", "http://praktiki-new.uop.gr:3000/CAS/CASapi.php/");
     // $('#ssoLoginForm').submit();

@@ -6,7 +6,7 @@ const login = async (request, response, next) => {
   let userId;
 
   if (uname)
-    userId = await depManagerService.loginManager(uname);
+    userId = await managerService.loginManager(uname);
 
   console.log("uid " + userId);
 

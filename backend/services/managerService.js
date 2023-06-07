@@ -1,12 +1,12 @@
 const pool = require("../db_config.js");
 const msql = require('mssql');
 
-// dummy login with username only for testing purposes
+// login with username only for testing purposes
 const loginManager = async (username) => {
   try {
     const resultsSSOUsers = await pool.query("SELECT * FROM sso_users \
-                                                  WHERE edupersonprimaryaffiliation = 'affiliate' \
-                                                  AND id=$1", [username]);
+                                              WHERE edupersonprimaryaffiliation <> 'student' \
+                                              AND id = $1", [username]);
     if (resultsSSOUsers.rowCount >= 1) {
       return resultsSSOUsers.rows[0].uuid;
     }

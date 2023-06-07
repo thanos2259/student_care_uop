@@ -10,7 +10,7 @@ export class AdminPanelLoginComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    window.location.href = 'http://localhost:3000/CAS/CASapiAdmin.php';
+    window.location.href = 'CAS/CASapiAdmin.php';
   }
 
 }

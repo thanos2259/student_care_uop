@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, EventEmitter, Output } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
 import { TranslateService } from '@ngx-translate/core';
 import { StudentsService } from 'src/app/students/student.service';
@@ -22,7 +22,7 @@ export class ManagerComponent implements OnInit, OnDestroy {
   dateFrom!: string;
   dateTo!: string;
 
-  constructor(public studentsService: StudentsService, private router: Router, public authService: AuthService, public translate: TranslateService, public managerService: ManagerService) {
+  constructor(public studentsService: StudentsService, private router: Router, private route: ActivatedRoute, public authService: AuthService, public translate: TranslateService, public managerService: ManagerService) {
     translate.addLangs(['en', 'gr']);
     translate.setDefaultLang('gr');
 
@@ -34,6 +34,16 @@ export class ManagerComponent implements OnInit, OnDestroy {
     this.language = localStorage.getItem('language') || 'gr';
     if (!environment.production) {
       this.authService.setSessionId(2);
+    }
+
+    if (this.router.url.includes('/manager/login')) {
+      this.route.queryParams
+        .subscribe(params => {
+          this.authService.setToken(params['token']);
+          this.authService.setSessionId(params['uuid']);
+          this.router.navigateByUrl('/manager/' + this.authService.getSessionId());
+        }
+      );
     }
     this.fetchManager();
   }

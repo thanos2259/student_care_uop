@@ -3,13 +3,18 @@ const jwt = require("jsonwebtoken");
 
 const login = async (request, response, next) => {
   const uname = request.body.username;
-  const userId = await managerService.loginManager(uname);
+  let userId;
 
-  if (userId == null) {
+  if (uname)
+    userId = await depManagerService.loginManager(uname);
+
+  console.log("uid " + userId);
+
+  if (userId == null)
     response.status(401).json({
       message: 'Unauthorized'
     });
-  } else {
+  else {
     const token = jwt.sign({
       userId: userId
     },

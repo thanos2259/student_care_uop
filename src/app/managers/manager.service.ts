@@ -15,7 +15,7 @@ export class ManagerService {
 
   getManager(): Observable<Array<Manager>> {
     let id = this.authService.getSessionId();
-    const fetchedManager = this.http.get<Array<Manager>>(MANAGER_URL + 'getmanager/' + id);
+    const fetchedManager = this.http.get<Array<Manager>>(MANAGER_URL + 'getManager/' + id);
     return fetchedManager;
   }
 

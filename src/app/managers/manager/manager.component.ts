@@ -42,6 +42,7 @@ export class ManagerComponent implements OnInit, OnDestroy {
           this.authService.setToken(params['token']);
           this.authService.setSessionId(params['uuid']);
           this.router.navigateByUrl('/manager/' + this.authService.getSessionId());
+          this.fetchManager();
         }
       );
     }

@@ -149,7 +149,10 @@ export class MealsComponent implements OnInit {
       cancelButtonColor: '#d33',
       confirmButtonText: 'ΟΚ'
     }).then((result) => {
-      window.location.href = "//localhost:4200/student/applications/" + this.authService.getSessionId();
+      const currentURL = window.location.href;
+      const baseURL = currentURL.substring(0, currentURL.lastIndexOf('student'));
+
+      window.location.href = baseURL + "student/applications/" + this.authService.getSessionId();
     });
   }
 

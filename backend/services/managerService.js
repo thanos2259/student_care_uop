@@ -33,7 +33,7 @@ const getManagerCities = async (ssoUserId) => {
 const getManager = async (id) => {
   try {
     const resultsSSOUsers = await pool.query("SELECT * FROM sso_users \
-                                                  WHERE edupersonprimaryaffiliation = 'affiliate' \
+                                                  WHERE edupersonprimaryaffiliation <> 'student' \
                                                   AND uuid=$1", [id]);
 
     return resultsSSOUsers.rows[0];

@@ -36,7 +36,7 @@ const getManager = async (id) => {
                                                   WHERE edupersonprimaryaffiliation <> 'student' \
                                                   AND uuid=$1", [id]);
 
-    return resultsSSOUsers.rows[0];
+    return resultsSSOUsers.rows;
   } catch (error) {
     throw Error('Error while fetching manager');
   }

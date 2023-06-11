@@ -316,7 +316,7 @@ const sendFileByType = async (request, response) => {
   try {
     const id = request.params.id;
     // let initialPath = 'C:/Users/thanos/Documents/Github/student_care_uop/';
-    let initialPath = 'C:/Users/losNasos/Documents/workspace/student_care_uop/';
+    let initialPath = process.env.MANAGER_PREVIEW_FILE_PATH;
     // let initialPath = 'C:/xampp/htdocs/student_care_uop/uploads/';
     const fileName = request.body.fileName + '.pdf';
     const appType = request.body.appType;
@@ -340,7 +340,7 @@ const sendFileByType = async (request, response) => {
 const getMealsAppZipFile = async (request, response) => {
   try {
     const id = request.params.id;
-    const initialPath = 'C:/Users/losNasos/Documents/workspace/student_care_uop/';
+    const initialPath = process.env.MANAGER_PREVIEW_FILE_PATH;
     const fileName = `dikaiologitika_student_${id}.zip`;
     const filePath = `./uploads/${id}/mea/`;
 

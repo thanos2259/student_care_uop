@@ -11,6 +11,7 @@ import { StudentsService } from 'src/app/students/student.service';
 })
 export class AppViewDialogAccommodationComponent implements OnInit {
   appFiles!: any[];
+  departmentsMap = Utils.departmentsMap;
   public filesAccommodation: FilesAccommodation = {
     oikogeneiakhKatastasi: false,
     pistopoihtikoGoneaFoithth: false,
@@ -172,7 +173,9 @@ export class AppViewDialogAccommodationComponent implements OnInit {
                               <tbody>
                                   <tr>
                                       <td style="width: 50.0000%;">Τμήμα</td>
-                                      <td style="width: 50.0000%;">${this.data.studentsData[0].department_id}</td>
+                                      <td style="width: 50.0000%;">
+                                          ${this.data.studentsData[0].department_id = this.departmentsMap[this.data.studentsData[0].department_id]}
+                                      </td>
                                   </tr>
                                   <tr>
                                       <td style="width: 50.0000%;">Αρ. Μητρ.</td>

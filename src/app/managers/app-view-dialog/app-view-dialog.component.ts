@@ -12,6 +12,7 @@ import Swal from 'sweetalert2';
 })
 export class AppViewDialogComponent implements OnInit {
   appFiles!: any[];
+  departmentsMap = Utils.departmentsMap;
   public filesMeals: FilesMeals = {
     eka8aristiko: false,
     oikogeneiakhKatastasi: false,
@@ -46,7 +47,7 @@ export class AppViewDialogComponent implements OnInit {
 
   viewFile(filesMealsModelParam: string) {
     const MEALS_ABBR: 'mea' | 'acc' = 'mea';
-    const studentId: number = this.data.studentsData[this.data.index].sso_uid;
+    const studentId: number = this.data.studentsData[this.data.index].uuid;
     const appId: number = this.data.studentsData[this.data.index].app_id;
     const fileName: string = MEALS_ABBR + Utils.mapFilesMealsModelToFilenames[filesMealsModelParam];
 
@@ -157,7 +158,9 @@ export class AppViewDialogComponent implements OnInit {
                               <tbody>
                                   <tr>
                                       <td style="width: 50.0000%;">Τμήμα</td>
-                                      <td style="width: 50.0000%;">${this.data.studentsData[0].department_id}</td>
+                                      <td style="width: 50.0000%;">
+                                          ${this.data.studentsData[0].department_id = this.departmentsMap[this.data.studentsData[0].department_id]}
+                                      </td>
                                   </tr>
                                   <tr>
                                       <td style="width: 50.0000%;">Αρ. Μητρ.</td>

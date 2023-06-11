@@ -321,7 +321,7 @@ const sendFileByType = async (request, response) => {
     const fileName = request.body.fileName + '.pdf';
     const appType = request.body.appType;
 
-    const filePath = './uploads/' + id + '/' + appType + '/';
+    const filePath = './backend/uploads/' + id + '/' + appType + '/';
 
     let metadata = { file_path: filePath, file_name: fileName };
 
@@ -342,7 +342,7 @@ const getMealsAppZipFile = async (request, response) => {
     const id = request.params.id;
     const initialPath = process.env.MANAGER_PREVIEW_FILE_PATH;
     const fileName = `dikaiologitika_student_${id}.zip`;
-    const filePath = `./uploads/${id}/mea/`;
+    const filePath = `./backend/uploads/${id}/mea/`;
 
     const fullPath = path.join(initialPath, filePath, fileName);
 
@@ -362,7 +362,7 @@ const getAccommodationAppZipFile = async (request, response) => {
     const id = request.params.id;
     const initialPath = process.env.MANAGER_PREVIEW_FILE_PATH;
     const fileName = `dikaiologitika_student_${id}.zip`;
-    const filePath = `./uploads/${id}/acc/`;
+    const filePath = `./backend/uploads/${id}/acc/`;
 
     const fullPath = path.join(initialPath, filePath, fileName);
 

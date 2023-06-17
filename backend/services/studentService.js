@@ -75,7 +75,7 @@ const getStudentFactorProcedure = async (depId, studentAM) => {
       };
     }
     let mspool = await msql.connect(mssql);
-    mssql.printValues();
+    console.log(mspool);
 
     const result = await mspool.request()
       .input('DepId', msql.Int, depId)

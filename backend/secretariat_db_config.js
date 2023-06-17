@@ -17,18 +17,4 @@ const sqlConfig = {
   }
 };
 
-function printValues() {
-  console.log(process.env.SECRETARIAT_DB_USER);
-  console.log(process.env.SECRETARIAT_DB_PWD);
-  console.log(process.env.SECRETARIAT_DB_NAME);
-  console.log(process.env.SECRETARIAT_DB_SERVER);
-  console.log(parseInt(process.env.SECRETARIAT_DB_PORT));
-}
-
-module.exports = {
-  sqlConfig,
-  printValues
-};
-
-
-// module.exports = sqlConfig;
+module.exports = sqlConfig;

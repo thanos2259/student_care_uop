@@ -75,12 +75,13 @@ const getStudentFactorProcedure = async (depId, studentAM) => {
       };
     }
     let mspool = await msql.connect(mssql);
+    mssql.printValues();
 
     const result = await mspool.request()
       .input('DepId', msql.Int, depId)
       .input('am', msql.VarChar(100), studentAM)
       .execute('usp_GetStudentFactorPraktiki');
-    //console.log(result.recordset[0]);
+    console.log(result.recordset[0]);
     return result.recordset[0];
   } catch (error) {
     console.log("error: " + error);

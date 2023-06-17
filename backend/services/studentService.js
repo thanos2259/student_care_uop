@@ -65,7 +65,7 @@ const getAccommodationFilesByAppID = async (appID) => {
 const getStudentFactorProcedure = async (depId, studentAM) => {
   try {
     // make sure that any items are correctly URL encoded in the connection string
-    if (true) {
+    if (process.env.ENV == 'DEV') {
       return {
         Grade: 0,
         Ects: 0,

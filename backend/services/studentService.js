@@ -74,6 +74,9 @@ const getStudentFactorProcedure = async (depId, studentAM) => {
         CourseCount: 0
       };
     }
+
+    console.log(mssql);
+    console.log(process.env.SECRETARIAT_DB_USER);
     let mspool = await msql.connect(mssql);
     console.log(mspool);
 

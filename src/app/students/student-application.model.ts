@@ -17,11 +17,6 @@ export interface StudentApplication {
   children: number;
   sso_uid: number;
   student_uid: number;
-  app_family_income?: string;
-  app_family_state?: string;
-  app_protected_members?: string;
-  app_siblings_students?: string;
-  app_children?: string;
   sn: string;
   givenname: string;
   edupersonaffiliation: string;

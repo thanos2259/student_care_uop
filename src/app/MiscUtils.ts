@@ -128,12 +128,12 @@ export abstract class Utils {
     try {
       // console.log(appInfo);
       // const appInfo = getApplicationInfoByAppId(appId);
-      const familyState = appInfo.app_family_state;
+      const familyState = appInfo.family_state;
 
       if (familyState === this.FamilyState.UnmarriedStudentUnder25) {
         incomeLimit = 45000;
-        const siblings = Number(appInfo.app_protected_members);
-        const siblingStudents = Number(appInfo.app_siblings_students);
+        const siblings = Number(appInfo.protected_members);
+        const siblingStudents = Number(appInfo.siblings_students);
 
         for (let i = 1; i < siblings; i++) {
           incomeLimit += 5000;
@@ -144,7 +144,7 @@ export abstract class Utils {
         }
       } else if (familyState === this.FamilyState.MarriedStudent) {
         incomeLimit = 45000;
-        const kids = Number(appInfo.app_children);
+        const kids = Number(appInfo.children);
 
         for (let i = 0; i < kids; i++) {
           incomeLimit += 5000;

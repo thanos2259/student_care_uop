@@ -179,8 +179,23 @@ const getStudentsApplyPhaseMeals = async (userId) => {
   try {
     const query = `SELECT DISTINCT
                         apps.id as app_id,
-                        student_sso_users.*,
-                        apps.*
+                        apps.status,
+                        apps.submit_date,
+                        apps.application_type,
+                        apps.uid,
+                        apps.father_name,
+                        apps.location,
+                        apps.city,
+                        apps.phone,
+                        apps.category,
+                        apps.family_income AS app_family_income,
+                        apps.family_state AS app_family_state,
+                        apps.protected_members AS app_protected_members,
+                        apps.siblings_students AS app_siblings_students,
+                        apps.children AS app_children,
+                        apps.is_active,
+                        apps.notes,
+                        student_sso_users.*
                     FROM sso_users student_sso_users
                         INNER JOIN student_users ON student_sso_users.uuid = student_users.sso_uid
                         INNER JOIN applications apps ON apps.uid = student_sso_users.uuid

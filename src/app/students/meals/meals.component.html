@@ -13,9 +13,9 @@
     <li>{{'STUDENT.HOUSING-DANGER2' | translate}}</li>
   </ul>
 </div>
-<button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
+<!-- <button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
   {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
-</button>
+</button> -->
 <mat-stepper orientation="horizontal" [linear]="isLinear" #stepper class="dark">
   <mat-step [stepControl]="firstFormGroup">
     <form class="mt-4 center" [formGroup]="firstFormGroup">

@@ -145,7 +145,7 @@ export class AccommodationComponent implements OnInit {
   }
 
   calculateIncomeLimitForStudent(index: number) {
-    return Utils.calculateIncomeLimitForMealEligibility(this.studentsSSOData[index]);
+    return Utils.calculateIncomeLimitForAccommodationEligibility(this.studentsSSOData[index]);
   }
 
   getDepartmentNameById(depId: number) {

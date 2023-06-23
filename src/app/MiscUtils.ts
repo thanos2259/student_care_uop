@@ -128,12 +128,12 @@ export abstract class Utils {
     try {
       // console.log(appInfo);
       // const appInfo = getApplicationInfoByAppId(appId);
-      const familyState = appInfo.family_state;
+      const familyState = appInfo.app_family_state;
 
       if (familyState === this.FamilyState.UnmarriedStudentUnder25) {
         incomeLimit = 45000;
-        const siblings = Number(appInfo.protected_members);
-        const siblingStudents = Number(appInfo.siblings_students);
+        const siblings = Number(appInfo.app_protected_members);
+        const siblingStudents = Number(appInfo.app_siblings_students);
 
         for (let i = 1; i < siblings; i++) {
           incomeLimit += 5000;
@@ -144,13 +144,42 @@ export abstract class Utils {
         }
       } else if (familyState === this.FamilyState.MarriedStudent) {
         incomeLimit = 45000;
-        const kids = Number(appInfo.children);
+        const kids = Number(appInfo.app_children);
 
-        for (let i = 0; i < kids - 1; i++) {
+        for (let i = 0; i < kids; i++) {
           incomeLimit += 5000;
         }
       } else if (familyState === this.FamilyState.UnmarriedStudentOver25) {
         incomeLimit = 25000;
+      }
+
+      return incomeLimit;
+    } catch (error) {
+      console.error('Error while updating application notes status' + error.message);
+      throw Error('Error while updating application notes status');
+    }
+  };
+
+  public static calculateIncomeLimitForAccommodationEligibility(appInfo): number {
+    let incomeLimit = 30000;
+    try {
+      const familyState = appInfo.family_state;
+
+      if (familyState === this.FamilyState.UnmarriedStudentUnder25) {
+        const siblings = Number(appInfo.protected_members);
+
+        for (let i = 1; i < siblings; i++) {
+          incomeLimit += 3000;
+        }
+
+      } else if (familyState === this.FamilyState.MarriedStudent) {
+        const kids = Number(appInfo.children);
+
+        for (let i = 0; i < kids; i++) {
+          incomeLimit += 3000;
+        }
+      } else if (familyState === this.FamilyState.UnmarriedStudentOver25) {
+        incomeLimit = 30000;
       }
 
       return incomeLimit;

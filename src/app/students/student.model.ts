@@ -29,4 +29,5 @@ export interface Student {
   Semester?: number;
   Ects?: number;
   CourseCount?: number;
+  Studieslevel?: string;
 }

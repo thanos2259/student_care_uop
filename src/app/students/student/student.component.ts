@@ -8,7 +8,7 @@ import * as moment from 'moment/moment';
 import { StudentCommentsDialogComponent } from '../student-comments-dialog/student-comments-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { environment } from 'src/environments/environment';
-import {Utils} from 'src/app/MiscUtils';
+import { Utils } from 'src/app/MiscUtils';
 
 @Component({
   selector: 'app-student',

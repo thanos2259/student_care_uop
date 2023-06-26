@@ -20,4 +20,11 @@ export class StudentViewDialogComponent implements OnInit {
     this.formattedDateOfBirth = Utils.reformatDateOfBirth(this.data.studentsData[this.data.index].schacdateofbirth);
   }
 
+  getStudiesLevel(type: number): string {
+    switch (type) {
+      case 1: return 'ΠΡΟΠΤΥΧΙΑΚΟ';
+      case 2: return 'ΜΕΤΑΠΤΥΧΙΑΚΟ';
+      case 3: return 'ΥΠΟΨΗΦΙΟΣ ΔΙΔΑΚΤΩΡ';
+    }
+  }
 }

@@ -8,6 +8,7 @@
   <p><span>ECTS</span>: {{ this.data.studentsData[this.data.index].Ects}}</p>
   <p><span>Βαθμολογία</span>: {{ this.data.studentsData[this.data.index].Grade}}</p>
   <p><span>Σύνολο Περασμένων Μαθημάτων</span>: {{this.data.studentsData[this.data.index].CourseCount}}</p>
+  <p><span>Επίπεδο Σπουδών</span>: {{getStudiesLevel(this.data.studentsData[this.data.index].Studieslevel)}}</p>
   <p><span>Πατρώνυμο</span>: {{ this.data.studentsData[this.data.index].father_name}}</p>
   <p><span>Μητρώνυμο</span>: {{ this.data.studentsData[this.data.index].mother_name}}</p>
   <p><span>Επώνυμο πατέρα</span>: {{ this.data.studentsData[this.data.index].father_last_name}}</p>

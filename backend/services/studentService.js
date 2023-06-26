@@ -71,7 +71,8 @@ const getStudentFactorProcedure = async (depId, studentAM) => {
         Ects: 0,
         Semester: 0,
         Praktiki: true,
-        CourseCount: 0
+        CourseCount: 0,
+        Studieslevel: ''
       };
     }
 

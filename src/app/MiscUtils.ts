@@ -861,4 +861,17 @@ export abstract class Utils {
       return cityA.localeCompare(cityB, 'el');
     });
   }
+
+  public static getYearsOfStudy(departmentId: number): number {
+    switch (Number(departmentId)) {
+      case 1522:
+      case 1523:
+      case 1524:
+      case 1511:
+      case 1512:
+        return 5;
+      default:
+        return 4;
+    }
+  }
 }

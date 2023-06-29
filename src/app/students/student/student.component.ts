@@ -9,6 +9,7 @@ import { StudentCommentsDialogComponent } from '../student-comments-dialog/stude
 import { MatDialog } from '@angular/material/dialog';
 import { environment } from 'src/environments/environment';
 import { Utils } from 'src/app/MiscUtils';
+import { StudyLevels } from '../study-levels';
 
 @Component({
   selector: 'app-student',
@@ -60,7 +61,8 @@ export class StudentComponent implements OnInit, OnDestroy {
     this.studentsService.getStudents()
       .subscribe((students: Student[]) => {
         this.studentsSSOData = students;
-        this.studentsService.getAllPeriodDates(Number(this.studentsSSOData[0]?.department_id))
+        const deptId = Number(this.studentsSSOData[0]?.department_id);
+        this.studentsService.getAllPeriodDates(deptId)
           .subscribe((period: any) => {
             for (let item of period) {
               console.log(item);
@@ -69,7 +71,16 @@ export class StudentComponent implements OnInit, OnDestroy {
                 this.dateTo = Utils.reformatDateToEULocaleStr(item.date_to);
 
                 const isPeriodDateActive = moment(new Date()).isSameOrBefore(item.date_to, 'day') && moment(new Date()).isSameOrAfter(period.date_from, 'day');
-                this.isMealsEnabled = isPeriodDateActive;
+
+                let isStudentActive: boolean = true;
+                const studyLevel = Number(this.studentsSSOData[0].Studieslevel);
+
+                if (studyLevel == StudyLevels.PROPTUXIAKO) {
+                  const deptMonthsOfStudy = Utils.getYearsOfStudy(deptId) * 2;
+                  isStudentActive = this.studentsSSOData[0].Semester < (deptMonthsOfStudy + 4);
+                }
+
+                this.isMealsEnabled = isPeriodDateActive && isStudentActive;
               } else {
                 this.dateFrom = Utils.reformatDateToEULocaleStr(item.date_from);
                 this.dateTo = Utils.reformatDateToEULocaleStr(item.date_to);

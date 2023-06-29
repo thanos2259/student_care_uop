@@ -30,37 +30,46 @@ const getAccommodationFilesByAppID = async (appID) => {
   }
 };
 
-// const getStudentsSecretaryDetails = async (departmentId, AM) => {
-//   try {
-//     let procedureResults;
-//     try {
-//       procedureResults = await getStudentFactorProcedure(MiscUtils.departmentsMap[departmentId], MiscUtils.splitStudentsAM(AM));
-//     } catch (exc) {
-//       console.log("SQLException or timeout occurred: " + exc.message);
-//       return {
-//         'Grade': 0,
-//         'Ects': 0,
-//         'Semester': 0,
-//         'Praktiki': 0
-//       };
-//     }
+const getStudentsSecretaryDetails = async (departmentId, AM) => {
+  try {
+    let procedureResults;
 
-//     if (!procedureResults.Grade || !procedureResults.Ects || !procedureResults.Semester || !procedureResults.Praktiki) {
-//       console.error("some student details fetched from procedure were null");
-//       return {
-//         'Grade': 0,
-//         'Ects': 0,
-//         'Semester': 0,
-//         'Praktiki': 0
-//       };
-//     }
+    if (process.env.ENV == 'DEV') {
+      return {
+        'Grade': 6.7, 'Ects': 160, 'Semester': 7, 'Praktiki': 0, 'CourseCount': 32, 'Studieslevel': 1
+      };
+    }
 
-//     return procedureResults;
-//   } catch (error) {
-//     console.log('Error while inserting Approved students rank ' + error.message);
-//     throw Error('Error while inserting Approved students rank');
-//   }
-// };
+    try {
+      procedureResults = await getStudentFactorProcedure(MiscUtils.departmentsMap[departmentId], MiscUtils.splitStudentsAM(AM));
+    } catch (exc) {
+      console.log("SQLException or timeout occurred: " + exc.message);
+      return {
+        'Grade': 0,
+        'Ects': 0,
+        'Semester': 0,
+        'Praktiki': 0,
+        'Studieslevel': ''
+      };
+    }
+
+    if (procedureResults.Grade == null || procedureResults.Ects == null || procedureResults.Semester == null || procedureResults.Praktiki == null) {
+      console.error("some student details fetched from procedure were null");
+      return {
+        'Grade': 0,
+        'Ects': 0,
+        'Semester': 0,
+        'Praktiki': 0,
+        'Studieslevel': ''
+      };
+    }
+
+    return procedureResults;
+  } catch (error) {
+    console.log('Error while inserting Approved students rank ' + error.message);
+    throw Error('Error while inserting Approved students rank');
+  }
+};
 
 const getStudentFactorProcedure = async (depId, studentAM) => {
   try {
@@ -99,12 +108,20 @@ const getStudentById = async (id) => {
                                               ON sso_users.uuid = student_users.sso_uid \
                                               WHERE sso_users.uuid = $1", [id]);
 
-    // const student = resultsSSOUsers.rows[0];
-    //const studentDetailsProcedure = await getStudentsSecretaryDetails(student.department_id, student.schacpersonaluniquecode);
-    //let studentDetails = Object.assign(student, studentDetailsProcedure);
-    //return [studentDetails];
-    const student = resultsSSOUsers.rows;
-    return student;
+    // const student = resultsSSOUsers.rows;
+    // return student;
+
+    const student = resultsSSOUsers.rows[0];
+
+    let departmentFieldForProcedure = student.department_id;
+    // If length equals 6 then it is a merged TEI department and should keep only 4 digits for the procedure
+    // if (student.department_id.toString().length == 6) {
+    //   departmentFieldForProcedure = MiscUtils.getAEICodeFromDepartmentId(student.department_id);
+    // }
+
+    const studentDetailsProcedure = await getStudentsSecretaryDetails(departmentFieldForProcedure, student.schacpersonaluniquecode);
+    let studentDetails = Object.assign(student, studentDetailsProcedure);
+    return [studentDetails];
   } catch (error) {
     throw Error('Error while fetching students by id');
   }

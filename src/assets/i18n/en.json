@@ -64,7 +64,11 @@
     "TERMS39": "It is reminded that the competent authority for the country is the Personal Data Protection Authority",
     "TERMS-DATE": "Last Updated: 07/10/2022",
     "TERMS-READ": "Read",
-    "CONTACT": "Contact the Student Welfare Department"
+    "CONTACT": "Contact the Student Welfare Department",
+    "LOGIN-TERMS-H4": "Terms",
+    "BACK-BTN": "Back ",
+    "CONTINUE-BTN": "Continue",
+    "SEE_TERMS": "See"
   },
   "STUDENT": {
     "PROFILE": "Profile",

@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home-screen/home/home.component';
 import { ManagerComponent } from './managers/manager/manager.component';
 import { StudentComponent } from './students/student/student.component';
+import { StudentLoginTermsComponent } from './home-screen/student-login-terms/student-login-terms.component';
 import { AdminPanelComponent } from './admin-panels/admin-panel/admin-panel.component';
 import { AdminPanelLoginComponent } from './admin-panels/admin-panel-login/admin-panel-login.component';
 
@@ -27,6 +28,14 @@ const routes: Routes = [{
   children: [{
     path: ':id',
     component: StudentComponent
+  },
+  {
+    path: 'login/:token/:uuid',
+    component: StudentComponent
+  },
+  {
+    path: 'terms/:id',
+    component: StudentLoginTermsComponent
   },
   {
     path: 'profile/:id',

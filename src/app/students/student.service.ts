@@ -29,6 +29,12 @@ export class StudentsService {
     return fetchedStudents;
   }
 
+  checkUserAcceptance(): Observable<{message: string, accepted: boolean}> {
+    const studentId = this.authService.getSessionId();
+    return this.http
+      .get<{ message: string; accepted: boolean }>(STUDENTS_URL + "checkUserAcceptance/" + studentId);
+  }
+
   getStudentsAppsMealsForPeriod(): Observable<Array<StudentApplication>> {
     let id = this.authService.getSessionId();
     const fetchedStudents = this.http.get<Array<StudentApplication>>(STUDENTS_URL + 'getStudentsApplyPhaseMeals/' + id);

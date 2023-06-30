@@ -50,10 +50,21 @@ export class StudentComponent implements OnInit, OnDestroy {
         .subscribe(params => {
           this.authService.setToken(params['token']);
           this.authService.setSessionId(params['uuid']);
-          this.router.navigateByUrl('/student/' + this.authService.getSessionId());
+          // this.router.navigateByUrl('/student/' + this.authService.getSessionId());
         }
       );
+
+      this.studentsService.checkUserAcceptance()
+        .subscribe((response: any) => {
+          if (response.accepted == false) {
+            this.router.navigateByUrl('/student/terms/' + this.authService.getSessionId());
+          } else {
+            this.router.navigateByUrl('/student/' + this.authService.getSessionId());
+            this.fetchStudent();
+          }
+        });
     }
+
     this.fetchStudent();
   }
 

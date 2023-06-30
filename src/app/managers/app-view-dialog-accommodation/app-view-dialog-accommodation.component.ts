@@ -241,7 +241,7 @@ export class AppViewDialogAccommodationComponent implements OnInit {
                                   </tr>
                               </tbody>
                           </table><br>
-                          <div style="text-align: center;">Πάτρα, &nbsp; &nbsp; &nbsp; / &nbsp; &nbsp; &nbsp; /<br><br></div>
+                          <div style="text-align: center;"> Ημερομηνία: &nbsp; &nbsp; &nbsp; / &nbsp; &nbsp; &nbsp; /<br><br></div>
                           <div style="text-align: center;">Ο/Η Αιτών/ούσα</div>
                           <p><br></p>
                           <p><br></p>

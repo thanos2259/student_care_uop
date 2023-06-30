@@ -156,6 +156,25 @@ const getOldStudentsAppsForAccommodation = async (request, response) => {
   }
 };
 
+const checkUserAcceptance = async (request, response) => {
+  const studentId = request.params.id;
+  try {
+    const resultsFound = await studentService.checkUserAcceptance(studentId);
+
+    response.status(200)
+      .json({
+        message: 'User acceptance checked successfully',
+        accepted: resultsFound
+      });
+
+  } catch (error) {
+    response.status(401)
+      .json({
+        message: error.message
+      });
+  }
+};
+
 const updateStudentDetails = async (request, response, next) => {
   try {
     const id = request.params.id;
@@ -469,6 +488,7 @@ module.exports = {
   getOldStudentsAppsForMeals,
   getOldStudentsAppsForAccommodation,
   getQuestionsByStudentId,
+  checkUserAcceptance,
   updateStudentDetails,
   updateStudentContact,
   updateStudentSpecialData,

@@ -356,6 +356,23 @@ const getOldStudentsAppsForAccommodation = async (userId) => {
   }
 };
 
+const checkUserAcceptance = async (userId) => {
+  try {
+    const result = await pool.query("SELECT accepted FROM terms_accepted WHERE sso_user_id = $1", [userId]);
+
+    if (result.rowCount === 0) {
+      return false;
+    } else if (!result.rows[0].accepted) {
+      return false;
+    }
+
+    return true;
+  } catch (error) {
+    console.error(error);
+    throw Error(`An error occured while checking user acceptance: ${error}`);
+  }
+};
+
 // dummy login with username only for testing purposes
 const loginStudent = async (username) => {
   try {
@@ -604,6 +621,7 @@ module.exports = {
   getOldStudentsAppsForMeals,
   getOldStudentsAppsForAccommodation,
   getQuestionsByStudentId,
+  checkUserAcceptance,
   insertOrUpdateApplication,
   insertNewApplication,
   insertQuestion,

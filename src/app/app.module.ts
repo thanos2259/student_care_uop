@@ -59,6 +59,7 @@ import { StudentQuestionsComponent } from './students/student-questions/student-
 import { QuestionsAnswersComponent } from './managers/questions-answers/questions-answers.component';
 import { QuestionAnswerDialogComponent } from './managers/question-answer-dialog/question-answer-dialog.component';
 import { StudentViewMinimalInfoDialogComponent } from './managers/student-view-minimal-info-dialog/student-view-minimal-info-dialog.component';
+import { StudentLoginTermsComponent } from './home-screen/student-login-terms/student-login-terms.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -98,7 +99,8 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     StudentQuestionsComponent,
     QuestionsAnswersComponent,
     QuestionAnswerDialogComponent,
-    StudentViewMinimalInfoDialogComponent
+    StudentViewMinimalInfoDialogComponent,
+    StudentLoginTermsComponent
   ],
   imports: [
     BrowserModule,

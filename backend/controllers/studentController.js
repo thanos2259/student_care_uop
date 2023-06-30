@@ -480,6 +480,23 @@ const insertQuestion = async (request, response) => {
   }
 };
 
+const insertUserAcceptance = async (request, response) => {
+  const studentId = request.params.id;
+  const areTermsAccepted = request.body.areTermsAccepted;
+
+  try {
+    await studentService.insertUserAcceptance(studentId, areTermsAccepted);
+
+    response.status(200).json({
+      message: 'User acceptance updated/inserted successfully'
+    });
+  } catch (error) {
+    response.status(401).json({
+      message: error.message
+    });
+  }
+};
+
 module.exports = {
   getAllStudents,
   getStudentById,
@@ -496,6 +513,7 @@ module.exports = {
   updateSpecialField,
   insertCommentsByStudentId,
   insertQuestion,
+  insertUserAcceptance,
   updateCommentsByStudentId,
   getApplicationsById,
   getStudentsApplyPhaseMeals,

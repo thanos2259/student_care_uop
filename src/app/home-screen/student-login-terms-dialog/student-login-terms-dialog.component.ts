@@ -19,5 +19,4 @@ export class StudentLoginTermsDialogComponent implements OnInit {
     this.dialogRef.close();
   }
 
-
 }

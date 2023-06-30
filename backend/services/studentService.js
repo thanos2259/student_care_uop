@@ -610,6 +610,16 @@ const insertQuestion = async (questionData) => {
   }
 };
 
+const insertUserAcceptance = async (userId, areTermsAccepted) => {
+  try {
+    await pool.query("INSERT INTO terms_accepted (sso_user_id, accepted, acceptance_datetime) \
+      VALUES($1, $2, NOW())", [userId, areTermsAccepted]);
+  } catch (error) {
+    console.error(error);
+    throw Error(`An error occured while inserting user acceptance: ${error}`);
+  }
+};
+
 module.exports = {
   getAllStudents,
   getStudentById,
@@ -625,6 +635,7 @@ module.exports = {
   insertOrUpdateApplication,
   insertNewApplication,
   insertQuestion,
+  insertUserAcceptance,
   updateStudentDetails,
   updateStudentContact,
   updateStudentBasicInfo,

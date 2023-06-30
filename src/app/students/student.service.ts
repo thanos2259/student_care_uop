@@ -165,4 +165,11 @@ export class StudentsService {
     const studentId: number = this.authService.getSessionId();
     return this.http.get<Question[]>(STUDENTS_URL + "/questions/" + studentId);
   }
+
+  insertStudentTermsAcceptance(areTermsAccepted: boolean): Observable<any> {
+    const studentId = this.authService.getSessionId();
+    return this.http
+      .post<{ message: string }>(STUDENTS_URL + "/insertUserAcceptance/" + studentId, { areTermsAccepted });
+  }
+
 }

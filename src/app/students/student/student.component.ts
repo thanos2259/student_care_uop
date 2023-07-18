@@ -187,7 +187,7 @@ export class StudentComponent implements OnInit, OnDestroy {
     return this.router.url === '/student/applications/' + this.authService.getSessionId();
   }
 
-   isStudentQuestions() {
+  isStudentQuestions() {
     return this.router.url === '/student/questions/' + this.authService.getSessionId();
   }
 

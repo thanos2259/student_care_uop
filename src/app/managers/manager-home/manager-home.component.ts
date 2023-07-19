@@ -94,10 +94,10 @@ export class ManagerHomeComponent implements OnInit {
 
   getYearValueOnChange(event: any, mode: string) {
     if (mode === 'meals') {
-      this.modelMealsSelectedYear = event;
+      this.modelMealsSelectedYear = event.split("-")[0];
       console.log(this.modelMealsSelectedYear);
     } else {
-      this.modelAccommodationSelectedYear = event;
+      this.modelAccommodationSelectedYear = event.split("-")[0];
       console.log(this.modelAccommodationSelectedYear);
     }
   }
@@ -114,8 +114,8 @@ export class ManagerHomeComponent implements OnInit {
       for (let department of departments) {
         let departmentId = Number(department);
 
-        const data = appType == 'meals' ? { date_from: this.modelMealsDateFrom, date_to: this.modelMealsDateTo, app_type: appType, acyear: this.modelMealsSelectedYear.split("-")[0] ?? null }
-                                        : { date_from: this.modelAccommodationDateFrom, date_to: this.modelAccommodationDateTo, app_type: appType, acyear: this.modelAccommodationSelectedYear.split("-")[0] ?? null };
+        const data = appType == 'meals' ? { date_from: this.modelMealsDateFrom, date_to: this.modelMealsDateTo, app_type: appType, acyear: this.modelMealsSelectedYear ?? null }
+                                        : { date_from: this.modelAccommodationDateFrom, date_to: this.modelAccommodationDateTo, app_type: appType, acyear: this.modelAccommodationSelectedYear ?? null };
         this.managerService.insertPeriodDates(data, departmentId).subscribe(responseData => {
           console.log(responseData.message);
           if (responseData.message.includes('error')) {
@@ -157,8 +157,8 @@ export class ManagerHomeComponent implements OnInit {
       for (let department of departments) {
         let departmentId = department.academic_id;
 
-        const data = appType == 'meals' ? { date_from: this.modelMealsDateFrom, date_to: this.modelMealsDateTo, app_type: appType, acyear: this.modelMealsSelectedYear.split("-")[0] ?? null }
-                                        : { date_from: this.modelAccommodationDateFrom, date_to: this.modelAccommodationDateTo, app_type: appType, acyear: this.modelAccommodationSelectedYear.split("-")[0] ?? null };
+        const data = appType == 'meals' ? { date_from: this.modelMealsDateFrom, date_to: this.modelMealsDateTo, app_type: appType, acyear: this.modelMealsSelectedYear ?? null }
+                                        : { date_from: this.modelAccommodationDateFrom, date_to: this.modelAccommodationDateTo, app_type: appType, acyear: this.modelAccommodationSelectedYear ?? null };
         this.managerService.insertPeriodDates(data, departmentId).subscribe(responseData => {
           console.log(responseData.message);
           if (responseData.message.includes('error')) {

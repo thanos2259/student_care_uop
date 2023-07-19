@@ -3,19 +3,30 @@
     <h5 class="font-weight-normal pt-2 pb-2 pl-2">Αιτήσεις Σίτισης</h5>
     <div class="col-md-12">
       <div class="card">
-        <div class="card-header p-2">
-          <ul class="nav nav-pills">
-            <li class="nav-item">
-              <a class="nav-link active" href="#processing" (click)="fetchCurrectAppData(0)" data-toggle="tab">
-                Υπο επεξεργασία</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" style="cursor: pointer;" (click)="fetchOldAppData(1)" data-toggle="tab"> Παλιές
-                Αιτήσεις </a>
-            </li>
-          </ul>
+        <div class="card-header p-3">
+          <label for="acyear" class="col-form-label mt-0 pt-0">Ακ. Έτος</label>
+          <div class="form-group row">
+            <div *ngIf="true" class="container-responsive row">
+              <select #selectedYearMea name="acyear" id="acyear" class="form-select col-sm-12" aria-label="Year select"
+                [ngModel]="this.modelMealsSelectedYear" (change)="getYearValueOnChange(selectedYearMea.value, 'meals')">
+                <option disabled [value]="null">Επιλέξτε Ακ. Έτος</option>
+                <option #firstDate [value]="currentYear - 2">{{(currentYear - 2)
+                        + '-' + (currentYear - 1)}}
+                </option>
+                <option #secondDate [value]="currentYear - 1">
+                  {{(currentYear - 1)
+                        + '-' + currentYear}}</option>
+                <option #thirdDate [value]="currentYear">
+                  {{currentYear
+                        + '-' + (currentYear + 1)}}</option>
+              </select>
+            </div>
+          </div>
         </div>
+
         <div class="card-body">
+
+
           <div class="tab-content">
             <div class="tab-pane active" id="processing">
               <form ngNativeValidate #processing="ngForm" class="form-horizontal" (ngSubmit)="(processing.value)">

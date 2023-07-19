@@ -19,10 +19,16 @@ import {FilesMeals} from 'src/app/students/files-meals.model';
 })
 export class ManagerMealsComponent implements OnInit {
   @ViewChild('processingTable') private table1: DataTables.Api | undefined;
+  @ViewChild('selectedYearAcc') selectedYearAcc: ElementRef | undefined;
+  @ViewChild('selectedYearMea') selectedYearMea: ElementRef | undefined;
   public state: number = 0;
   public studentsSSOData: StudentApplication[] = [];
   public formattedDate: string[] = [];
   private hasMadeComment = [];
+  public isUserNafplio: boolean = false;
+  public modelAccommodationSelectedYear: string | null = null;
+  public modelMealsSelectedYear: string | null = null;
+  public currentYear: number = new Date().getFullYear();
   public filesMeals: FilesMeals = {
     eka8aristiko: false,
     oikogeneiakhKatastasi: false,

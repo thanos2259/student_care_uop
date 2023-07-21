@@ -41,10 +41,28 @@ export class StudentsService {
     return fetchedStudents;
   }
 
+  getStudentsAppsMealsForYear(year: number): Observable<Array<StudentApplication>> {
+    let id = this.authService.getSessionId();
+    const params = new HttpParams()
+      .set('id', id)
+      .set('year', year);
+    const fetchedStudentApps = this.http.get<Array<StudentApplication>>(STUDENTS_URL  + 'getStudentsApplyPhaseMealsByYear', { params });
+    return fetchedStudentApps;
+  }
+
   getStudentsAppsAccommodationForPeriod(): Observable<Array<StudentApplication>> {
     let id = this.authService.getSessionId();
     const fetchedStudents = this.http.get<Array<StudentApplication>>(STUDENTS_URL + 'getStudentsApplyPhaseAccommodation/' + id);
     return fetchedStudents;
+  }
+
+  getStudentsAppsAccommodationForYear(year: number): Observable<Array<StudentApplication>> {
+    let id = this.authService.getSessionId();
+    const params = new HttpParams()
+      .set('id', id)
+      .set('year', year);
+    const fetchedStudentApps = this.http.get<Array<StudentApplication>>(STUDENTS_URL  + 'getStudentsApplyPhaseAccommodationByYear', { params });
+    return fetchedStudentApps;
   }
 
   getOldStudentsAppsForMeals(): Observable<Array<StudentApplication>> {

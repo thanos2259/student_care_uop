@@ -8,25 +8,17 @@
           <div class="form-group row">
             <div *ngIf="true" class="container-responsive row">
               <select #selectedYearMea name="acyear" id="acyear" class="form-select col-sm-12" aria-label="Year select"
-                [ngModel]="this.modelMealsSelectedYear" (change)="getYearValueOnChange(selectedYearMea.value, 'meals')">
+                [ngModel]="this.modelMealsSelectedYear" (change)="getYearValueOnChange(selectedYearMea.value)">
                 <option disabled [value]="null">Επιλέξτε Ακ. Έτος</option>
-                <option #firstDate [value]="currentYear - 2">{{(currentYear - 2)
-                        + '-' + (currentYear - 1)}}
+                <option *ngFor="let year of acyears" #firstDate [value]="year.acyear">
+                  {{year.acyear + '-' + (year.acyear + 1)}}
                 </option>
-                <option #secondDate [value]="currentYear - 1">
-                  {{(currentYear - 1)
-                        + '-' + currentYear}}</option>
-                <option #thirdDate [value]="currentYear">
-                  {{currentYear
-                        + '-' + (currentYear + 1)}}</option>
               </select>
             </div>
           </div>
         </div>
 
         <div class="card-body">
-
-
           <div class="tab-content">
             <div class="tab-pane active" id="processing">
               <form ngNativeValidate #processing="ngForm" class="form-horizontal" (ngSubmit)="(processing.value)">

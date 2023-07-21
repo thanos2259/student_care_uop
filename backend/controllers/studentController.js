@@ -76,10 +76,38 @@ const getStudentsApplyPhaseMeals = async (request, response) => {
   }
 };
 
+const getStudentsApplyPhaseMealsByYear = async (request, response) => {
+  try {
+    const userId = request.query.id;
+    const academicYear = request.query.year;
+    const studentsApps = await studentService.getStudentsApplyPhaseMealsByYear(userId, academicYear);
+    response.status(200).json(studentsApps);
+  } catch (error) {
+    console.error(error.message);
+    response.send({
+      message: error.message
+    });
+  }
+};
+
 const getStudentsApplyPhaseAccommodation = async (request, response) => {
   try {
     const userId = request.params.id;
     const studentsApps = await studentService.getStudentsApplyPhaseAccommodation(userId);
+    response.status(200).json(studentsApps);
+  } catch (error) {
+    console.error(error.message);
+    response.send({
+      message: error.message
+    });
+  }
+};
+
+const getStudentsApplyPhaseAccommodationByYear = async (request, response) => {
+  try {
+    const userId = request.query.id;
+    const academicYear = request.query.year;
+    const studentsApps = await studentService.getStudentsApplyPhaseAccommodationByYear(userId, academicYear);
     response.status(200).json(studentsApps);
   } catch (error) {
     console.error(error.message);
@@ -517,6 +545,8 @@ module.exports = {
   updateCommentsByStudentId,
   getApplicationsById,
   getStudentsApplyPhaseMeals,
+  getStudentsApplyPhaseMealsByYear,
+  getStudentsApplyPhaseAccommodationByYear,
   getStudentsApplyPhaseAccommodation,
   login,
   uploadFile,

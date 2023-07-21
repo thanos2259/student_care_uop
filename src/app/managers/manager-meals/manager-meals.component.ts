@@ -19,16 +19,15 @@ import {FilesMeals} from 'src/app/students/files-meals.model';
 })
 export class ManagerMealsComponent implements OnInit {
   @ViewChild('processingTable') private table1: DataTables.Api | undefined;
-  @ViewChild('selectedYearAcc') selectedYearAcc: ElementRef | undefined;
   @ViewChild('selectedYearMea') selectedYearMea: ElementRef | undefined;
   public state: number = 0;
   public studentsSSOData: StudentApplication[] = [];
   public formattedDate: string[] = [];
   private hasMadeComment = [];
   public isUserNafplio: boolean = false;
-  public modelAccommodationSelectedYear: string | null = null;
   public modelMealsSelectedYear: string | null = null;
-  public currentYear: number = new Date().getFullYear();
+  public acyears = null;
+  private isSpecialCategory: boolean = false;
   public filesMeals: FilesMeals = {
     eka8aristiko: false,
     oikogeneiakhKatastasi: false,
@@ -55,28 +54,35 @@ export class ManagerMealsComponent implements OnInit {
   constructor(public studentsService: StudentsService, public authService: AuthService, public dialog: MatDialog, private chRef: ChangeDetectorRef, public managerService: ManagerService) { }
 
   ngOnInit(): void {
-    this.studentsService.getStudentsAppsMealsForPeriod()
-      .subscribe((students: StudentApplication[]) => {
-        // this.studentsSSOData = students;
-        this.studentsSSOData = Utils.sortArrayOfDepartments(students);
-
-        for (let i = 0; i < students.length; i++) {
-          this.studentsSSOData[i].schacpersonaluniquecode = Utils.getRegistrationNumber(this.studentsSSOData[i].schacpersonaluniquecode);
-          this.formattedDate[i] = Utils.getPreferredTimestamp(this.studentsSSOData[i].submit_date);
-
-          this.managerService.getCommentByStudentIdAndSubject(this.studentsSSOData[i].sso_uid, 'Σίτιση')
-            .subscribe((comment: any) => {
-              if (comment) {
-                this.hasMadeComment.push({ studentId: this.studentsSSOData[i].sso_uid, hasComment: true });
-              } else {
-                this.hasMadeComment.push({ studentId: this.studentsSSOData[i].sso_uid, hasComment: false });
-              }
-            });
+    this.managerService.getAcademicYearsOrdered('meals')
+      .subscribe((years: any[]) => {
+        this.acyears = years;
+        if (this.acyears && this.acyears.length > 0) {
+          this.modelMealsSelectedYear = years[0].acyear;
         }
+        else return;
+        this.studentsService.getStudentsAppsMealsForYear(Number(years[0].acyear))
+          .subscribe((students: StudentApplication[]) => {
+            this.studentsSSOData = Utils.sortArrayOfDepartments(students);
 
-        // Reinitialize the DataTable with the new data
-        this.initDataTable();
-      });
+            for (let i = 0; i < students.length; i++) {
+              this.studentsSSOData[i].schacpersonaluniquecode = Utils.getRegistrationNumber(this.studentsSSOData[i].schacpersonaluniquecode);
+              this.formattedDate[i] = Utils.getPreferredTimestamp(this.studentsSSOData[i].submit_date);
+
+              this.managerService.getCommentByStudentIdAndSubject(this.studentsSSOData[i].sso_uid, 'Σίτιση')
+                .subscribe((comment: any) => {
+                  if (comment) {
+                    this.hasMadeComment.push({ studentId: this.studentsSSOData[i].sso_uid, hasComment: true });
+                  } else {
+                    this.hasMadeComment.push({ studentId: this.studentsSSOData[i].sso_uid, hasComment: false });
+                  }
+                });
+            }
+
+            // Initialize the DataTable with the new data
+            this.initDataTable();
+          });
+    });
   }
 
   async exportToExcel() {
@@ -85,6 +91,8 @@ export class ManagerMealsComponent implements OnInit {
       const itemIndex = this.studentsSSOData.indexOf(item);
       await this.getApplicationFilesData(item);
       const studentData = {
+        "Α/Α": itemIndex + 1,
+        "ΚΑΤΗΓΟΡΙΑ": this.isSpecialCategory ? "1" : "2",
         "TMHMA": this.getDepartmentNameById(Number(item.department_id)),
         "ΑΜ": item.schacpersonaluniquecode,
         "Επώνυμο": item.sn,
@@ -134,10 +142,17 @@ export class ManagerMealsComponent implements OnInit {
   }
 
   async getApplicationFilesData(item: StudentApplication) {
+    this.isSpecialCategory = false;
     return new Promise<any> (resolve => {
       this.studentsService.getAccommodationFiles(item.app_id)
         .subscribe((appFiles: any[]) => {
           for (let item of appFiles) {
+            console.log(item);
+
+            if (item.value == true && item.type === "optional") {
+              this.isSpecialCategory = true;
+            }
+
             if (item.name == 'filePolutekneia') {
               this.filesMeals.polutekneia = true;
             } else if (item.name == 'filePistopoihtikoGoneaFoithth') {
@@ -237,6 +252,12 @@ export class ManagerMealsComponent implements OnInit {
     return Utils.calculateIncomeLimitForMealEligibility(this.studentsSSOData[index]);
   }
 
+  getYearValueOnChange(eventValue: any) {
+    this.modelMealsSelectedYear = eventValue.split("-")[0];
+    console.log(this.modelMealsSelectedYear);
+    this.fetchCurrectAppData(0, Number(this.modelMealsSelectedYear));
+  }
+
   getDepartmentNameById(depId: number) {
     return Utils.departmentsMap[depId];
   }
@@ -307,12 +328,12 @@ export class ManagerMealsComponent implements OnInit {
     });
   }
 
-  fetchCurrectAppData(state: number) {
+  fetchCurrectAppData(state: number, year: number = null) {
     this.state = state;
     this.studentsSSOData = [];
     $('#processingTable').DataTable().destroy();
 
-    this.studentsService.getStudentsAppsMealsForPeriod()
+    this.studentsService.getStudentsAppsMealsForYear(year ?? 1980)
       .subscribe((students: StudentApplication[]) => {
         this.studentsSSOData = students;
         for (let i = 0; i < students.length; i++) {

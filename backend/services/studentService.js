@@ -239,6 +239,53 @@ const getStudentsApplyPhaseMeals = async (userId) => {
   }
 };
 
+
+const getStudentsApplyPhaseMealsByYear = async (userId, academicYear) => {
+  try {
+    const query = `SELECT DISTINCT
+                        apps.id as app_id,
+                        apps.status,
+                        apps.submit_date,
+                        apps.application_type,
+                        apps.uid,
+                        apps.father_name,
+                        apps.location,
+                        apps.city,
+                        apps.phone,
+                        apps.category,
+                        apps.family_income,
+                        apps.family_state,
+                        apps.protected_members,
+                        apps.siblings_students,
+                        apps.children,
+                        apps.is_active,
+                        apps.notes,
+                        student_sso_users.*
+                    FROM sso_users student_sso_users
+                        INNER JOIN student_users ON student_sso_users.uuid = student_users.sso_uid
+                        INNER JOIN applications apps ON apps.uid = student_sso_users.uuid
+                        INNER JOIN sso_users manager_sso_users ON manager_sso_users.uuid = $1
+                        INNER JOIN users_roles ON manager_sso_users.id = users_roles.sso_username
+                        INNER JOIN role_manages_academics ON users_roles.user_role_id = role_manages_academics.user_role_id
+                        INNER JOIN period ON apps.submit_date BETWEEN period.date_from AND period.date_to AND period.department_id = role_manages_academics.academic_id
+                    WHERE student_sso_users.edupersonprimaryaffiliation = 'student'
+                        AND apps.application_type = 'meals'
+                        AND period.app_type = 'meals'
+                        AND student_sso_users.department_id = role_manages_academics.academic_id
+                        AND acyear = $2`;
+
+    const studentsWithAppsMeals = await pool.query(query, [userId, academicYear]);
+
+    let studentsWithFactorProcedureResult = [];
+    studentsWithFactorProcedureResult = await getProcedureResultsForStudent(studentsWithAppsMeals);
+
+    return studentsWithFactorProcedureResult;
+  } catch (error) {
+    console.error('Error while fetching students from active year' + error.message);
+    throw Error('Error while fetching students from active year');
+  }
+};
+
 const getProcedureResultsForStudent = async (studentsWithAppsMeals) => {
   let studentsWithFactorProcedureResult = [];
   for (const student of studentsWithAppsMeals.rows) {
@@ -285,6 +332,37 @@ const getStudentsApplyPhaseAccommodation = async (userId) => {
   } catch (error) {
     console.error('Error while fetching students from active period' + error.message);
     throw Error('Error while fetching students from active period');
+  }
+};
+
+const getStudentsApplyPhaseAccommodationByYear = async (userId, academicYear) => {
+  try {
+    const query = `SELECT DISTINCT
+                        apps.id as app_id,
+                        student_sso_users.*,
+                        apps.*
+                    FROM sso_users student_sso_users
+                        INNER JOIN student_users ON student_sso_users.uuid = student_users.sso_uid
+                        INNER JOIN applications apps ON apps.uid = student_sso_users.uuid
+                        INNER JOIN sso_users manager_sso_users ON manager_sso_users.uuid = $1
+                        INNER JOIN users_roles ON manager_sso_users.id = users_roles.sso_username
+                        INNER JOIN role_manages_academics ON users_roles.user_role_id = role_manages_academics.user_role_id
+                        INNER JOIN period ON apps.submit_date BETWEEN period.date_from AND period.date_to AND period.department_id = role_manages_academics.academic_id
+                    WHERE student_sso_users.edupersonprimaryaffiliation = 'student'
+                        AND apps.application_type = 'accommodation'
+                        AND period.app_type = 'accommodation'
+                        AND student_sso_users.department_id = role_manages_academics.academic_id
+                        AND acyear = $2`;
+
+    const studentsWithAppsAccommodation = await pool.query(query, [userId, academicYear]);
+
+    let studentsWithFactorProcedureResult = [];
+    studentsWithFactorProcedureResult = await getProcedureResultsForStudent(studentsWithAppsAccommodation);
+
+    return studentsWithFactorProcedureResult;
+  } catch (error) {
+    console.error('Error while fetching students from active year' + error.message);
+    throw Error('Error while fetching students from active year');
   }
 };
 
@@ -626,7 +704,9 @@ module.exports = {
   getAccommodationFilesByAppID,
   getCommentByStudentIdAndSubject,
   getStudentsApplyPhaseMeals,
+  getStudentsApplyPhaseMealsByYear,
   getStudentsApplyPhaseAccommodation,
+  getStudentsApplyPhaseAccommodationByYear,
   getApplicationById,
   getOldStudentsAppsForMeals,
   getOldStudentsAppsForAccommodation,

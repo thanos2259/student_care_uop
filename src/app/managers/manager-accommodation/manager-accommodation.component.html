@@ -3,17 +3,19 @@
     <h5 class="font-weight-normal pt-2 pb-2 pl-2">Αιτήσεις Στέγασης</h5>
     <div class="col-md-12">
       <div class="card">
-        <div class="card-header p-2">
-          <ul class="nav nav-pills">
-            <li class="nav-item">
-              <a class="nav-link active" href="#processing" (click)="fetchCurrectAppData(0)" data-toggle="tab">
-                Υπο επεξεργασία</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" style="cursor: pointer;" (click)="fetchOldAppData(1)" data-toggle="tab"> Παλιές
-                Αιτήσεις </a>
-            </li>
-          </ul>
+        <div class="card-header p-3">
+          <label for="acyear" class="col-form-label mt-0 pt-0">Ακ. Έτος</label>
+          <div class="form-group row">
+            <div *ngIf="true" class="container-responsive row">
+              <select #selectedYearAcc name="acyear" id="acyear" class="form-select col-sm-12" aria-label="Year select"
+                [ngModel]="this.modelAccommodationSelectedYear" (change)="getYearValueOnChange(selectedYearAcc.value)">
+                <option disabled [value]="null">Επιλέξτε Ακ. Έτος</option>
+                <option *ngFor="let year of acyears" #firstDate [value]="year.acyear">
+                  {{year.acyear + '-' + (year.acyear + 1)}}
+                </option>
+              </select>
+            </div>
+          </div>
         </div>
         <div class="card-body">
           <div class="tab-content">

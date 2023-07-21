@@ -75,6 +75,20 @@ const getQuestions = async () => {
   }
 };
 
+const getAcademicYearsOrdered = async (id = null, type) => {
+  try {
+    const results = await pool.query(`SELECT distinct acyear
+                                      FROM period
+                                      WHERE app_type = $1
+                                      ORDER BY acyear DESC`, [type]);
+
+    return results.rows;
+  } catch (error) {
+    console.error('Error while getting academic years ' + error.message);
+    throw Error('Error while getting academic years');
+  }
+};
+
 const insertCommentsByStudentId = async (studentId, comments, subject) => {
   try {
     await pool.query("INSERT INTO comments(comment_text, comment_date, student_id, comment_subject) \
@@ -151,6 +165,7 @@ module.exports = {
   getCommentByStudentIdAndSubject,
   getManagerCities,
   getQuestions,
+  getAcademicYearsOrdered,
   insertCommentsByStudentId,
   insertPeriodDates,
   updateCommentsByStudentId,

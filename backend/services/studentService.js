@@ -514,7 +514,27 @@ const updateStudentSpecialData = async (student, id) => {
     return updateResults;
   } catch (error) {
     throw Error('Error while updating student special data');
+  }
+};
 
+const updateOptionalFilesStatus = async (filenames, value, appId) => {
+  try {
+    // Update the value for each filename and appId
+    for (const filename of filenames) {
+      const updateQuery = `
+          UPDATE application_files
+          SET value = $1
+          WHERE name = $2 AND app_id = $3
+        `;
+
+      const values = [value, filename, appId];
+      await pool.query(updateQuery, values);
+    }
+
+    return { message: 'Files status updated successfully.' };
+  } catch (error) {
+    console.error(error.message);
+    throw Error('Error while updating file status for optional files');
   }
 };
 
@@ -720,6 +740,7 @@ module.exports = {
   updateStudentContact,
   updateStudentBasicInfo,
   updateStudentSpecialData,
+  updateOptionalFilesStatus,
   updateSpecialField,
   loginStudent,
   combineToZIP,

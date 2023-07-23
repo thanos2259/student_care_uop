@@ -174,6 +174,15 @@ export class StudentsService {
          { "fieldValue": value, "fieldName": field });
   }
 
+  updateOptionalFilesStatus(appId: number, filenames: string[], value: boolean): any {
+    const requestBody = {
+      filenames: filenames,
+      value: value
+    };
+    return this.http
+      .patch<{ message: string }>(STUDENTS_URL + "applications/updateOptionalFilesStatus/" + appId, requestBody);
+  }
+
   submitQuestion(question: any): Observable<any> {
     question.student_id = this.authService.getSessionId();
     return this.http.post<any>(STUDENTS_URL + "/questions/", question);

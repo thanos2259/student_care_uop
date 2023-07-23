@@ -10,7 +10,7 @@ import { EditNotesDialogComponent } from '../edit-notes-dialog/edit-notes-dialog
 import { AppViewDialogComponent } from '../app-view-dialog/app-view-dialog.component';
 import { StudentViewDialogComponent } from '../student-view-dialog/student-view-dialog.component';
 import * as XLSX from 'xlsx';
-import {FilesMeals} from 'src/app/students/files-meals.model';
+import { FilesMeals } from 'src/app/students/files-meals.model';
 
 @Component({
   selector: 'app-manager-meals',
@@ -24,7 +24,6 @@ export class ManagerMealsComponent implements OnInit {
   public studentsSSOData: StudentApplication[] = [];
   public formattedDate: string[] = [];
   private hasMadeComment = [];
-  public isUserNafplio: boolean = false;
   public modelMealsSelectedYear: string | null = null;
   public acyears = null;
   private isSpecialCategory: boolean = false;
@@ -82,7 +81,7 @@ export class ManagerMealsComponent implements OnInit {
             // Initialize the DataTable with the new data
             this.initDataTable();
           });
-    });
+      });
   }
 
   async exportToExcel() {

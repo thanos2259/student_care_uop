@@ -486,6 +486,26 @@ const updateSpecialField = async (request, response) => {
   }
 };
 
+const updateOptionalFilesStatus= async (request, response) => {
+  try {
+    const appId = request.params.appId;
+    const { filenames, value } = request.body;
+
+    await studentService.updateOptionalFilesStatus(filenames, value, appId);
+
+    response
+      .status(200)
+      .json({
+        message: `Student application ${fieldName} field was updated successfully`
+      });
+  } catch (error) {
+    console.error(error.message);
+    response.status(500).send({
+      message: `Student application ${fieldName} field was not updated, error: ${error.message}`
+    });
+  }
+};
+
 const getQuestionsByStudentId = async (request, response) => {
   try {
     const studentId = request.params.studentId;

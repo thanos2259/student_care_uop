@@ -93,7 +93,7 @@ export class AccommodationComponent implements OnInit {
             // Initialize the DataTable with the new data
             this.initDataTable();
           });
-    });
+      });
   }
 
   exportToExcel() {

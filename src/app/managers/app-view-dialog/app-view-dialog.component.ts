@@ -58,12 +58,22 @@ export class AppViewDialogComponent implements OnInit {
 
   updateSpecialFields(value: string | number, field: string) {
     const appId: number = this.data.studentsData[this.data.index].app_id;
-    // alert('mia xara' + value);
-    // alert('dyo xarites' + this.data.studentsData[this.data.index].app_id)
     this.studentService.updateSpecialField(appId, value, field)
       .subscribe((res: any) => {
         if (res) {
           location.reload();
+        }
+      });
+  }
+
+  updateOptionalFileStatus(filenames: string[]) {
+    if (!filenames || filenames?.length == 0) return;
+    // Set the new status value here (false because we need to deactivate the fields)
+    const value: boolean = false;
+    this.studentService.updateOptionalFilesStatus(this.data.appId, filenames, value)
+      .subscribe((res: any) => {
+        if (res) {
+          // TODO: Handle result
         }
       });
   }

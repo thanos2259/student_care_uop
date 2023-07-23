@@ -29,6 +29,7 @@ router.post("/getMealsAppZipFile/:id", studentController.getMealsAppZipFile);
 router.post("/getAccommodationAppZipFile/:id", studentController.getMealsAppZipFile);
 router.post("/insertUserAcceptance/:id", studentController.insertUserAcceptance);
 router.patch("/applications/updateSpecialField/:id", studentController.updateSpecialField);
+router.patch("/applications/updateOptionalFilesStatus/:appId", studentController.updateOptionalFilesStatus);
 router.get('/questions/:studentId', studentController.getQuestionsByStudentId);
 router.post('/questions', studentController.insertQuestion);
 

@@ -73,7 +73,19 @@ export class AppViewDialogComponent implements OnInit {
     this.studentService.updateOptionalFilesStatus(this.data.appId, filenames, value)
       .subscribe((res: any) => {
         if (res) {
-          // TODO: Handle result
+          Swal.fire({
+            title: 'Απενεργοποίηση',
+            text: 'Το έγγραφο απενεργοποιήθηκε',
+            icon: 'success',
+            showCancelButton: false,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'ΟΚ'
+          }).then(() => {
+            for (let filename of filenames) {
+              this.filesMeals[filename] = false;
+            }
+          });
         }
       });
   }

@@ -1,0 +1,28 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* height: 100vh; */
+  padding: 10px;
+}
+
+.card {
+  width: 300px;
+  margin: 10px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+mat-card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+button {
+  margin-top: 10px;
+}

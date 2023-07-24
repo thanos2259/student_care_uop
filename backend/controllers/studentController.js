@@ -184,6 +184,19 @@ const getOldStudentsAppsForAccommodation = async (request, response) => {
   }
 };
 
+const getStudentsMealsCountByYearAndDepartment = async (request, response) => {
+  try {
+    const academicYear = request.params.year;
+
+    const stats = await studentService.getStudentsMealsCountByYearAndDepartment(academicYear);
+    response.status(200).json(stats);
+  } catch (error) {
+    response.status(400).json({
+      message: error.message
+    });
+  }
+};
+
 const checkUserAcceptance = async (request, response) => {
   const studentId = request.params.id;
   try {
@@ -486,7 +499,7 @@ const updateSpecialField = async (request, response) => {
   }
 };
 
-const updateOptionalFilesStatus= async (request, response) => {
+const updateOptionalFilesStatus = async (request, response) => {
   try {
     const appId = request.params.appId;
     const { filenames, value } = request.body;
@@ -496,12 +509,12 @@ const updateOptionalFilesStatus= async (request, response) => {
     response
       .status(200)
       .json({
-        message: `Student application ${fieldName} field was updated successfully`
+        message: `Student application field was updated successfully`
       });
   } catch (error) {
     console.error(error.message);
     response.status(500).send({
-      message: `Student application ${fieldName} field was not updated, error: ${error.message}`
+      message: `Student application field was not updated, error: ${error.message}`
     });
   }
 };
@@ -553,12 +566,14 @@ module.exports = {
   getOldStudentsAppsForMeals,
   getOldStudentsAppsForAccommodation,
   getQuestionsByStudentId,
+  getStudentsMealsCountByYearAndDepartment,
   checkUserAcceptance,
   updateStudentDetails,
   updateStudentContact,
   updateStudentSpecialData,
   updateStudentBasicInfo,
   updateSpecialField,
+  updateOptionalFilesStatus,
   insertCommentsByStudentId,
   insertQuestion,
   insertUserAcceptance,

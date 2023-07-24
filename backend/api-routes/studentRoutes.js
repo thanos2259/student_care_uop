@@ -16,6 +16,7 @@ router.get("/getOldStudentsAppsForAccommodation/:id", studentController.getOldSt
 router.get("/checkUserAcceptance/:id", studentController.checkUserAcceptance);
 router.get("/getStudentsApplyPhaseMealsByYear/", studentController.getStudentsApplyPhaseMealsByYear);
 router.get("/getStudentsApplyPhaseAccommodationByYear/", studentController.getStudentsApplyPhaseAccommodationByYear);
+router.get("/getStudentsMealsCountByYearAndDepartment/:year", studentController.getStudentsMealsCountByYearAndDepartment);;
 router.put("/updateStudentDetails/:id", studentController.updateStudentDetails);
 router.put("/updateStudentContact/:id", studentController.updateStudentContact);
 router.put("/updateStudentBasicInfo/:id", studentController.updateStudentBasicInfo);

@@ -239,6 +239,45 @@ const getStudentsApplyPhaseMeals = async (userId) => {
   }
 };
 
+const getStudentsMealsCountByYearAndDepartment = async (academicYear) => {
+  try {
+    const query = `SELECT
+                      years.acyear,
+                      departments.department_id,
+                      COALESCE(all_results, 0) AS all_results,
+                      COALESCE(pass, 0) AS pass,
+                      COALESCE(fail, 0) AS fail
+                    FROM (
+                      SELECT DISTINCT department_id FROM sso_users
+                    ) departments
+                    CROSS JOIN (SELECT DISTINCT acyear FROM period WHERE app_type = 'meals' AND acyear = $1) years
+                    LEFT JOIN (
+                      SELECT
+                        acyear,
+                        period.department_id,
+                        SUM(CASE WHEN apps.status IS NULL THEN 1 ELSE 0 END) AS all_results,
+                        SUM(CASE WHEN apps.status = 1 THEN 1 ELSE 0 END) AS pass,
+                        SUM(CASE WHEN apps.status = 0 THEN 1 ELSE 0 END) AS fail
+                      FROM sso_users student_sso_users
+                        INNER JOIN student_users ON student_sso_users.uuid = student_users.sso_uid
+                        INNER JOIN applications apps ON apps.uid = student_sso_users.uuid
+                        INNER JOIN period ON apps.submit_date BETWEEN period.date_from AND period.date_to AND period.department_id = student_sso_users.department_id
+                      WHERE student_sso_users.edupersonprimaryaffiliation = 'student'
+                        AND apps.application_type = 'meals'
+                        AND period.app_type = 'meals'
+                        AND acyear = $1
+                      GROUP BY acyear, period.department_id
+                    ) results
+                    ON departments.department_id = results.department_id AND years.acyear = results.acyear
+                    ORDER BY acyear, departments.department_id`;
+
+    const { rows } = await pool.query(query, [academicYear]);
+    return rows;
+  } catch (error) {
+    console.error('Error while fetching students count from active period' + error.message);
+    throw Error('Error while fetching students count from active period');
+  }
+};
 
 const getStudentsApplyPhaseMealsByYear = async (userId, academicYear) => {
   try {
@@ -527,7 +566,9 @@ const updateOptionalFilesStatus = async (filenames, value, appId) => {
           WHERE name = $2 AND app_id = $3
         `;
 
-      const values = [value, filename, appId];
+      const finalFilename = 'file' + filename.charAt(0).toUpperCase() + filename.slice(1);
+      const values = [value, finalFilename, appId];
+      console.log(value, filename, appId);
       await pool.query(updateQuery, values);
     }
 
@@ -731,6 +772,7 @@ module.exports = {
   getOldStudentsAppsForMeals,
   getOldStudentsAppsForAccommodation,
   getQuestionsByStudentId,
+  getStudentsMealsCountByYearAndDepartment,
   checkUserAcceptance,
   insertOrUpdateApplication,
   insertNewApplication,

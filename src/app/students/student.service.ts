@@ -115,6 +115,10 @@ export class StudentsService {
     return this.http.get<any>(MANAGER_URL + 'getPeriodInfo/' + departmentId);
   }
 
+  getStudentsMealsCountByYearAndDepartment(year: any): Observable<any> {
+    return this.http.get<any>(STUDENTS_URL + 'getStudentsMealsCountByYearAndDepartment/' + year);
+  }
+
   updateStudentDetails(data: any) {
     const id = this.authService.getSessionId();
     // const student: string = modelStudent;

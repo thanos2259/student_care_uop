@@ -3,6 +3,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { Utils } from 'src/app/MiscUtils';
 import { FilesAccommodation } from 'src/app/students/files-accommodation.model';
 import { StudentsService } from 'src/app/students/student.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-app-view-dialog-accommodation',
@@ -69,6 +70,30 @@ export class AppViewDialogAccommodationComponent implements OnInit {
       .subscribe((res: any) => {
         if (res) {
           location.reload();
+        }
+      });
+  }
+
+   updateOptionalFileStatus(filenames: string[]) {
+    if (!filenames || filenames?.length == 0) return;
+    // Set the new status value here (false because we need to deactivate the fields)
+    const value: boolean = false;
+    this.studentService.updateOptionalFilesStatus(this.data.appId, filenames, value)
+      .subscribe((res: any) => {
+        if (res) {
+          Swal.fire({
+            title: 'Απενεργοποίηση',
+            text: 'Το έγγραφο απενεργοποιήθηκε',
+            icon: 'success',
+            showCancelButton: false,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'ΟΚ'
+          }).then(() => {
+            for (let filename of filenames) {
+              this.filesAccommodation[filename] = false;
+            }
+          });
         }
       });
   }

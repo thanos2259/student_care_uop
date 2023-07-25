@@ -184,11 +184,26 @@ const getOldStudentsAppsForAccommodation = async (request, response) => {
   }
 };
 
-const getStudentsMealsCountByYearAndDepartment = async (request, response) => {
+const getStudentsCountByYearAndDepartment = async (request, response) => {
   try {
-    const academicYear = request.params.year;
+    const academicYear = request.query.year;
+    const type = request.query.type;
 
-    const stats = await studentService.getStudentsMealsCountByYearAndDepartment(academicYear);
+    const stats = await studentService.getStudentsCountByYearAndDepartment(academicYear, type);
+    response.status(200).json(stats);
+  } catch (error) {
+    response.status(400).json({
+      message: error.message
+    });
+  }
+};
+
+const getStudentAppsByYear = async (request, response) => {
+  try {
+    const academicYear = request.query.year;
+    const type = request.query.type;
+
+    const stats = await studentService.getStudentAppsByYear(academicYear, type);
     response.status(200).json(stats);
   } catch (error) {
     response.status(400).json({
@@ -566,7 +581,8 @@ module.exports = {
   getOldStudentsAppsForMeals,
   getOldStudentsAppsForAccommodation,
   getQuestionsByStudentId,
-  getStudentsMealsCountByYearAndDepartment,
+  getStudentsCountByYearAndDepartment,
+  getStudentAppsByYear,
   checkUserAcceptance,
   updateStudentDetails,
   updateStudentContact,

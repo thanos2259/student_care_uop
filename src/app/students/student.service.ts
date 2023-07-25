@@ -115,8 +115,19 @@ export class StudentsService {
     return this.http.get<any>(MANAGER_URL + 'getPeriodInfo/' + departmentId);
   }
 
-  getStudentsMealsCountByYearAndDepartment(year: any): Observable<any> {
-    return this.http.get<any>(STUDENTS_URL + 'getStudentsMealsCountByYearAndDepartment/' + year);
+  getStudentsCountByYearAndDepartment(year: any, type: string): Observable<any> {
+    const params = new HttpParams()
+      .set('year', year)
+      .set('type', type);
+
+    return this.http.get<any>(STUDENTS_URL + 'getStudentsCountByYearAndDepartment/', { params });
+  }
+
+  getStudentAppsByYear(year: any, type: string): Observable<any> {
+    const params = new HttpParams()
+      .set('year', year)
+      .set('type', type);
+    return this.http.get<any>(STUDENTS_URL + 'getStudentAppsByYear/', { params });
   }
 
   updateStudentDetails(data: any) {

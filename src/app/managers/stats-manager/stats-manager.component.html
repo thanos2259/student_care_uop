@@ -32,7 +32,7 @@
       </mat-form-field>
 
       <button mat-raised-button color="primary" class="ml-2"
-        (click)="exportToGenericExcel(selectedYear2)">Excel</button>
+        (click)="exportToGenericExcel(selectedYear2, 'meals')">Excel</button>
     </div>
   </div>
   <div class="col-6">
@@ -67,7 +67,8 @@
         </mat-select>
       </mat-form-field>
 
-      <button mat-raised-button color="primary" class="ml-2" (click)="exportToExcelAcc(selectedYearAcc2)">Excel</button>
+      <button mat-raised-button color="primary" class="ml-2"
+        (click)="exportToGenericExcel(selectedYearAcc2, 'acc')">Excel</button>
     </div>
   </div>
 </div>

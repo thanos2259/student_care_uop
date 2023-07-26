@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {Utils} from 'src/app/MiscUtils';
-import {StudentsService} from 'src/app/students/student.service';
+import { Utils } from 'src/app/MiscUtils';
+import {FilesAccommodation} from 'src/app/students/files-accommodation.model';
+import { FilesMeals } from 'src/app/students/files-meals.model';
+import {StudentApplication} from 'src/app/students/student-application.model';
+import { StudentsService } from 'src/app/students/student.service';
 import * as XLSX from 'xlsx';
 
 @Component({
@@ -88,20 +91,49 @@ export class StatsManagerComponent implements OnInit {
       });
   }
 
-  exportToGenericExcel(selectedYearValue: number) {
-    this.studentsService.getStudentAppsByYear(selectedYearValue, 'meals')
+  async exportToGenericExcel(selectedYearValue: number, type: 'meals' | 'acc') {
+    this.studentsService.getStudentAppsByYear(selectedYearValue, type)
       .subscribe((res: any) => {
         let studentsDataJson: any = [];
+
         for (const item of res) {
+
           const itemIndex = res.indexOf(item);
 
           const studentData = {
             "Α/Α": itemIndex + 1,
-            // "ΚΑΤΗΓΟΡΙΑ": this.isSpecialCategory ? "1" : "2",
+            "ΚΑΤΗΓΟΡΙΑ": item.application_files?.length > 0 ? "1" : "2",
             "TMHMA": this.getDepartmentNameById(Number(item.department_id)),
-            "ΑΜ": Utils.getRegistrationNumber(item.schacpersonaluniquecode),
-            "Επώνυμο": item.sn,
-            "Όνομα": item.givenname,
+            "ΑΡΙΘΜΟΣ ΜΗΤΡΩΟΥ": Utils.getRegistrationNumber(item.schacpersonaluniquecode),
+            "ΕΠΩΝΥΜΟ": item.sn,
+            "ΟΝΟΜΑ": item.givenname,
+            "ΠΑΤΡΩΝΥΜΟ": item.father_name,
+            "ΑΡΙΘΜΟΣ ΑΙΤΗΣΗΣ": item.app_id,
+            "ΗΜΕΡΟΜΗΝΙΑ ΑΙΤΗΣΗΣ": Utils.getPreferredTimestamp(item.submit_date),
+            "E-MAIL": item.mail,
+            "ΗM/NIA ΓΕΝΝΗΣΗΣ": Utils.reformatDateOfBirth(item.schacdateofbirth),
+            "ΤΗΛΕΦΩΝΟ": item.phone,
+            "ΠΟΛΗ": item.city,
+            "ΤΚ": item.post_address,
+            "ΔΙΕΥΘΥΝΣΗ": item.address,
+            "ΤΟΠΟΘΕΣΙΑ": item.location,
+            // "ΚΑΤΗΓΟΡΙΑ": item.category,
+            "ΟΙΚΟΓΕΝΕΙΑΚΟ ΕΙΣΟΔΗΜΑ": item.family_income,
+            "ΟΡΙΟ ΕΙΣΟΔΗΜΑΤΟΣ": this.calculateIncomeLimitForStudent(item),
+            "ΟΙΚΟΓΕΝΕΙΑΚΗ ΚΑΤΑΣΤΑΣΗ": item.family_state,
+            "ΠΡΟΣΤΑΤΕΥΟΜΕΝΑ ΜΕΛΗ": item.protected_members,
+            "ΑΔΕΛΦΙΑ ΠΟΥ ΦΟΙΤΟΥΝ": item.siblings_students,
+            "ΠΑΙΔΙΑ ΦΟΙΤΗΤΗ": item.children,
+            "ΠΟΛΥΤΕΚΝΕΙΑ": item.application_files?.includes('filePolutekneia') ? 'ΝΑΙ' : 'ΟΧΙ',
+            "ΤΡΙΤΕΚΝΟΣ Η ΦΟΙΤΗΤΗΤΣ ΓΟΝΕΑΣ": item.application_files?.includes('pistopoihtikoGoneaFoithth') ? 'ΝΑΙ' : 'OXI',
+            "ΑΔΕΡΦΙΑ ΦΟΙΤΗΤΕΣ": item.application_files?.includes('bebaioshSpoudonAderfwn') ? 'ΝΑΙ' : 'OXI',
+            "ΑΓΑΜΗ ΜΗΤΕΡΑ": item.application_files?.includes('agamhMhtera') ? 'ΝΑΙ' : 'OXI',
+            "ΑΠΟΘΝΗΣΚΩΝ ΓΟΝΕΑΣ": item.application_files?.includes('lhksiarxikhPrakshThanatouGoneaA') || item.application_files?.includes('lhksiarxikhPrakshThanatouGoneaB') ? 'ΝΑΙ' : 'OXI',
+            "ΓΟΝΕΙΣ ΑΜΕΑ": item.application_files?.includes('goneisAMEA') || item.application_files?.includes('goneisAMEAIatrikhGnomateush') ? 'ΝΑΙ' : 'OXI',
+            "ΓΟΝΕΙΣ ΘΥΜΑΤΑ ΤΡΟΜΟΚΡΑΤΙΑΣ": item.application_files?.includes('goneisThumataTromokratias1') || item.application_files?.includes('goneisThumataTromokratias2') ? 'ΝΑΙ' : 'OXI',
+            "ΑΝΕΡΓΟΣ/Η": item.application_files?.includes('bebaioshEpidothsdhsAnergeias') ? 'ΝΑΙ' : 'OXI',
+            "ΔΙΑΓΕΥΓΜΕΝΟΙ ΓΟΝΕΙΣ": item.application_files?.includes('diazevgmenoiGoneis1') || item.application_files?.includes('diazevgmenoiGoneis2') ? 'ΝΑΙ' : 'OXI',
+            "ΦΟΙΤΗΤΗΣ / ΡΙΑ ΑΜΕΑ": item.application_files?.includes('AMEA') || item.application_files?.includes('AMEAIatrikhGnomateush') ? 'ΝΑΙ' : 'OXI'
           };
           studentsDataJson.push(studentData);
         }
@@ -113,6 +145,10 @@ export class StatsManagerComponent implements OnInit {
         /* Save to file */
         XLSX.writeFile(wb, excelFileName);
       });
+  }
+
+  calculateIncomeLimitForStudent(item: any) {
+    return Utils.calculateIncomeLimitForMealEligibility(item);
   }
 
   getDepartmentNameById(depId: number) {

@@ -241,30 +241,37 @@ const getStudentsApplyPhaseMeals = async (userId) => {
 
 const getStudentAppsByYear = async (academicYear, type) => {
   try {
-    const query = `SELECT DISTINCT
-                      apps.id as app_id,
-                      apps.status,
-                      apps.submit_date,
-                      apps.application_type,
-                      apps.uid,
-                      apps.father_name,
-                      apps.location,
-                      apps.city,
-                      apps.phone,
-                      apps.category,
-                      apps.family_income,
-                      apps.family_state,
-                      apps.protected_members,
-                      apps.siblings_students,
-                      apps.children,
-                      apps.is_active,
-                      apps.notes,
-                      student_sso_users.*
-                  FROM sso_users student_sso_users
-                      INNER JOIN student_users ON student_sso_users.uuid = student_users.sso_uid
-                      INNER JOIN applications apps ON apps.uid = student_sso_users.uuid
-                      INNER JOIN period ON apps.submit_date BETWEEN period.date_from AND period.date_to AND period.department_id = student_sso_users.department_id
-                  WHERE student_sso_users.edupersonprimaryaffiliation = 'student'
+    const query = `SELECT DISTINCT ON (apps.id)
+                        apps.id AS app_id,
+                        apps.status,
+                        apps.submit_date,
+                        apps.application_type,
+                        apps.uid,
+                        apps.father_name,
+                        apps.location,
+                        apps.city,
+                        apps.phone,
+                        apps.category,
+                        apps.family_income,
+                        apps.family_state,
+                        apps.protected_members,
+                        apps.siblings_students,
+                        apps.children,
+                        apps.is_active,
+                        apps.notes,
+                        student_sso_users.*,
+                        af.application_files
+                    FROM sso_users student_sso_users
+                    INNER JOIN student_users ON student_sso_users.uuid = student_users.sso_uid
+                    INNER JOIN applications apps ON apps.uid = student_sso_users.uuid
+                    INNER JOIN period ON apps.submit_date BETWEEN period.date_from AND period.date_to AND period.department_id = student_sso_users.department_id
+                    LEFT JOIN (
+                        SELECT app_id, STRING_AGG(name, ', ') AS application_files
+                        FROM application_files
+	                      WHERE value = true AND type = 'optional'
+                        GROUP BY app_id
+                    ) af ON af.app_id = apps.id
+                    WHERE student_sso_users.edupersonprimaryaffiliation = 'student'
                       AND apps.application_type = $1
                       AND period.app_type = $1
                       AND acyear = $2`;

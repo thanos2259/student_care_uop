@@ -214,7 +214,7 @@ export class ApplicationsComponent implements OnInit {
       // We can fall back to print the current page directly.
       try {
         window.print();
-      } catch(e) {
+      } catch (e) {
         console.log(e);
       }
     }

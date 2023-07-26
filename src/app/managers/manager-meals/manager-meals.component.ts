@@ -120,7 +120,7 @@ export class ManagerMealsComponent implements OnInit {
         "Παιδιά Φοιτητή": item.children,
         "Πολυτεκνεία": this.filesMeals.polutekneia ? 'ΝΑΙ' : 'OXI',
         "Τρίτεκνος ή Φοιτητής γονέας": this.filesMeals.pistopoihtikoGoneaFoithth ? 'ΝΑΙ' : 'OXI',
-        "Αδέρφιια φοιτητές": this.filesMeals.bebaioshSpoudonAderfwn ? 'ΝΑΙ' : 'OXI',
+        "Αδέρφια φοιτητές": this.filesMeals.bebaioshSpoudonAderfwn ? 'ΝΑΙ' : 'OXI',
         "Άγαμη Μητέρα": this.filesMeals.agamhMhtera ? 'ΝΑΙ' : 'OXI',
         "Αποθνήσκων γονέας": this.filesMeals.lhksiarxikhPrakshThanatouGoneaA || this.filesMeals.lhksiarxikhPrakshThanatouGoneaB ? 'ΝΑΙ' : 'OXI',
         "Γονείς ΑΜΕΑ": this.filesMeals.goneisAMEA || this.filesMeals.goneisAMEAIatrikhGnomateush ? 'ΝΑΙ' : 'OXI',

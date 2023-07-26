@@ -156,10 +156,7 @@ export class AppViewDialogAccommodationComponent implements OnInit {
   }
 
   printToPdf(idx: number): void {
-    let popupWin: Window;
-    popupWin = window.open('', '_blank', 'top=0,left=0,height=1000px,width=auto');
-    popupWin!.document.open();
-    popupWin!.document.write(`
+    let printContent = `
       <html>
         <head>
           <title>Print tab</title>
@@ -295,9 +292,35 @@ export class AppViewDialogAccommodationComponent implements OnInit {
           </table>
           <p><br></p>
         </body>
-      </html>`
-    );
-    popupWin!.document.close();
+      </html>`;
+
+    const popupWin: Window = window.open('', '_blank', 'top=0,left=0,height=1000px,width=auto');
+    if (popupWin) {
+      popupWin.document.open();
+      popupWin.document.write(printContent);
+      popupWin.document.close();
+
+      const closePrintWindow = () => {
+        popupWin.close();
+      };
+
+      // Wait for the content to be rendered before calling window.print()
+      popupWin.onload = () => {
+        popupWin.print();
+        setTimeout(closePrintWindow, 1000); // Close the window after 1 second (adjust as needed)
+      };
+
+      // Handle the onafterprint event to close the window after printing
+      popupWin.onafterprint = closePrintWindow;
+    } else {
+      // If popupWin is null, it means that the browser blocked the popup.
+      // We can fall back to print the current page directly.
+      try {
+        window.print();
+      } catch (e) {
+        console.log(e);
+      }
+    }
   }
 
   getFamilyStateSubfields(appArrayIndex: number) {

@@ -25,6 +25,14 @@ export class ManagerService {
     return citiesManagedByUser;
   }
 
+  getAcademicYearsOrdered(type: string): Observable<any> {
+    let id = this.authService.getSessionId();
+    const params = new HttpParams()
+      .set('id', id)
+      .set('type', type);
+    return this.http.get<Array<number>>(MANAGER_URL + 'getAcademicYearsOrdered/', {params});
+  }
+
   insertCommentsByStudentId(studentId: number, comments: string, subject: string) {
     const commentsJson: any = { 'comments': comments, 'subject': subject };
     this.http

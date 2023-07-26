@@ -108,6 +108,10 @@ const routes: Routes = [{
   {
     path: 'qna',
     component: ManagerComponent
+  },
+  {
+    path: 'stats/:id',
+    component: ManagerComponent
   }
   ]
 },

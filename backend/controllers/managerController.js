@@ -83,6 +83,21 @@ const getCommentByStudentIdAndSubject = async (request, response) => {
   }
 };
 
+const getAcademicYearsOrdered = async (request, response) => {
+  try {
+    const id = request.query.id;
+    const type = request.query.type;
+
+    const comment = await managerService.getAcademicYearsOrdered(id, type);
+
+    response.status(200).json(comment);
+  } catch (error) {
+    response.send({
+      message: error.message
+    });
+  }
+};
+
 const insertCommentsByStudentId = async (request, response) => {
   try {
     const id = request.params.id;
@@ -226,6 +241,7 @@ module.exports = {
   getCommentByStudentIdAndSubject,
   getManagerCities,
   getQuestions,
+  getAcademicYearsOrdered,
   insertCommentsByStudentId,
   insertPeriodDates,
   updateCommentsByStudentId,

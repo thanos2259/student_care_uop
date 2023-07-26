@@ -66,6 +66,8 @@ export class CustomDateParserFormatter extends NgbDateParserFormatter {
 export class ManagerHomeComponent implements OnInit {
   @ViewChild('citySelect') citySelect: ElementRef | undefined;
   @ViewChild('citySelectAcc') citySelectAcc: ElementRef | undefined;
+  @ViewChild('selectedYearAcc') selectedYearAcc: ElementRef | undefined;
+  @ViewChild('selectedYearMea') selectedYearMea: ElementRef | undefined;
   public isUserNafplio: boolean = false;
 	ngSelect = "";
 	ngSelectPhase = "";
@@ -73,6 +75,9 @@ export class ManagerHomeComponent implements OnInit {
 	modelMealsDateTo: string;
 	modelAccommodationDateFrom: string;
 	modelAccommodationDateTo: string;
+  public modelAccommodationSelectedYear: string | null = null;
+  public modelMealsSelectedYear: string | null = null;
+  public currentYear: number = new Date().getFullYear();
 
 	constructor(private ngbCalendar: NgbCalendar,
     private dateAdapter: NgbDateAdapter<string>,
@@ -87,6 +92,17 @@ export class ManagerHomeComponent implements OnInit {
     this.insertPeriodDatesByType('accommodation');
 	}
 
+  getYearValueOnChange(event: any, mode: string) {
+    if (mode === 'meals') {
+      this.modelMealsSelectedYear = event.split("-")[0];
+      console.log(this.modelMealsSelectedYear);
+    } else {
+      this.modelAccommodationSelectedYear = event.split("-")[0];
+      console.log(this.modelAccommodationSelectedYear);
+    }
+  }
+
+
   insertPeriodDatesByType(appType: string) {
     const selectedCity: AvailableCities = appType == 'meals' ? this.citySelect?.nativeElement?.value
                                                              : this.citySelectAcc?.nativeElement?.value;
@@ -98,8 +114,8 @@ export class ManagerHomeComponent implements OnInit {
       for (let department of departments) {
         let departmentId = Number(department);
 
-        const data = appType == 'meals' ? { date_from: this.modelMealsDateFrom, date_to: this.modelMealsDateTo, app_type: appType }
-                                        : { date_from: this.modelAccommodationDateFrom, date_to: this.modelAccommodationDateTo, app_type: appType };
+        const data = appType == 'meals' ? { date_from: this.modelMealsDateFrom, date_to: this.modelMealsDateTo, app_type: appType, acyear: this.modelMealsSelectedYear ?? null }
+                                        : { date_from: this.modelAccommodationDateFrom, date_to: this.modelAccommodationDateTo, app_type: appType, acyear: this.modelAccommodationSelectedYear ?? null };
         this.managerService.insertPeriodDates(data, departmentId).subscribe(responseData => {
           console.log(responseData.message);
           if (responseData.message.includes('error')) {
@@ -141,8 +157,8 @@ export class ManagerHomeComponent implements OnInit {
       for (let department of departments) {
         let departmentId = department.academic_id;
 
-        const data = appType == 'meals' ? { date_from: this.modelMealsDateFrom, date_to: this.modelMealsDateTo, app_type: appType }
-                                        : { date_from: this.modelAccommodationDateFrom, date_to: this.modelAccommodationDateTo, app_type: appType };
+        const data = appType == 'meals' ? { date_from: this.modelMealsDateFrom, date_to: this.modelMealsDateTo, app_type: appType, acyear: this.modelMealsSelectedYear ?? null }
+                                        : { date_from: this.modelAccommodationDateFrom, date_to: this.modelAccommodationDateTo, app_type: appType, acyear: this.modelAccommodationSelectedYear ?? null };
         this.managerService.insertPeriodDates(data, departmentId).subscribe(responseData => {
           console.log(responseData.message);
           if (responseData.message.includes('error')) {
@@ -198,9 +214,11 @@ export class ManagerHomeComponent implements OnInit {
               if (item.app_type == 'meals') {
                 this.modelMealsDateFrom = item.date_from;
                 this.modelMealsDateTo = item.date_to;
+                this.modelMealsSelectedYear = item.acyear;
               } else {
                 this.modelAccommodationDateFrom = item.date_from;
                 this.modelAccommodationDateTo = item.date_to;
+                this.modelAccommodationSelectedYear = item.acyear;
               }
             }
           });
@@ -220,6 +238,7 @@ export class ManagerHomeComponent implements OnInit {
     // Reset mocel values before receiving new values from DB
     this.modelMealsDateFrom = '';
     this.modelMealsDateTo = '';
+    this.modelMealsSelectedYear = null;
 
     this.managerService.getPeriodInfo(departmentId)
       .subscribe(results => {
@@ -227,6 +246,7 @@ export class ManagerHomeComponent implements OnInit {
           if (item.app_type == 'meals') {
             this.modelMealsDateFrom = item.date_from;
             this.modelMealsDateTo = item.date_to;
+            this.modelMealsSelectedYear = item.acyear;
           }
         }
       });
@@ -244,6 +264,7 @@ export class ManagerHomeComponent implements OnInit {
     // Reset mocel values before receiving new values from DB
     this.modelAccommodationDateFrom = '';
     this.modelAccommodationDateTo = '';
+    this.modelAccommodationSelectedYear = null;
 
     this.managerService.getPeriodInfo(departmentId)
       .subscribe(results => {
@@ -251,6 +272,7 @@ export class ManagerHomeComponent implements OnInit {
           if (item.app_type !== 'meals') {
             this.modelAccommodationDateFrom = item.date_from;
             this.modelAccommodationDateTo = item.date_to;
+            this.modelAccommodationSelectedYear = item.acyear;
           }
         }
       });

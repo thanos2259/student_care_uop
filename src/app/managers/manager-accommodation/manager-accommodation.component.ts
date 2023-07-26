@@ -10,6 +10,7 @@ import { EditNotesDialogComponent } from '../edit-notes-dialog/edit-notes-dialog
 import { AppViewDialogAccommodationComponent } from '../app-view-dialog-accommodation/app-view-dialog-accommodation.component';
 import { StudentViewDialogComponent } from '../student-view-dialog/student-view-dialog.component';
 import * as XLSX from 'xlsx';
+import { FilesAccommodation } from 'src/app/students/files-accommodation.model';
 
 @Component({
   selector: 'app-manager-accommodation',
@@ -18,34 +19,80 @@ import * as XLSX from 'xlsx';
 })
 export class AccommodationComponent implements OnInit {
   @ViewChild('processingTable') private table1: ElementRef | undefined;
+  @ViewChild('selectedYearAcc') selectedYearAcc: ElementRef | undefined;
   public state: number = 0;
   public studentsSSOData: StudentApplication[] = [];
   public formattedDate: string[] = [];
   private hasMadeComment = [];
+  public acyears = null;
+  public modelAccommodationSelectedYear: string | null = null;
+  private isSpecialCategory: boolean = false;
+  public filesMeals: FilesAccommodation = {
+    oikogeneiakhKatastasi: false,
+    pistopoihtikoGoneaFoithth: false,
+    tautotita: false,
+    toposMonimhsKatoikias: false,
+    ypeu8unhDilosi: false,
+    polutekneia: false,
+    bebaioshSpoudonAderfwn: false,
+    agamhMhtera: false,
+    lhksiarxikhPrakshThanatouGoneaA: false,
+    lhksiarxikhPrakshThanatouGoneaB: false,
+    goneisAMEA: false,
+    goneisAMEAIatrikhGnomateush: false,
+    goneisThumataTromokratias1: false,
+    goneisThumataTromokratias2: false,
+    diazevgmenoiGoneis1: false,
+    diazevgmenoiGoneis2: false,
+    AMEA: false,
+    AMEAIatrikhGnomateush: false,
+    epidosi: false,
+    vevaiwshSpoudwn: false,
+    stratos: false,
+    ypotrofeia: false,
+    aporia: false,
+    diavathrio: false,
+    pistopoihtikoAlodapou: false,
+    ekkatharistikoAllodapou: false
+  };
 
   constructor(public studentsService: StudentsService, public authService: AuthService, public dialog: MatDialog, private chRef: ChangeDetectorRef, public managerService: ManagerService) { }
 
+  getYearValueOnChange(eventValue: any) {
+    this.modelAccommodationSelectedYear = eventValue.split("-")[0];
+    console.log(this.modelAccommodationSelectedYear);
+    this.fetchCurrectAppData(0, Number(this.modelAccommodationSelectedYear));
+  }
+
   ngOnInit(): void {
-    this.studentsService.getStudentsAppsAccommodationForPeriod()
-      .subscribe((students: StudentApplication[]) => {
-        // this.studentsSSOData = students;
-        this.studentsSSOData = Utils.sortArrayOfDepartments(students);
-        for (let i = 0; i < students.length; i++) {
-          this.studentsSSOData[i].schacpersonaluniquecode = Utils.getRegistrationNumber(this.studentsSSOData[i].schacpersonaluniquecode);
-          this.formattedDate[i] = Utils.getPreferredTimestamp(this.studentsSSOData[i].submit_date);
-
-          this.managerService.getCommentByStudentIdAndSubject(this.studentsSSOData[i].sso_uid, 'Στέγαση')
-            .subscribe((comment: any) => {
-              if (comment) {
-                this.hasMadeComment.push({ studentId: this.studentsSSOData[i].sso_uid, hasComment: true });
-              } else {
-                this.hasMadeComment.push({ studentId: this.studentsSSOData[i].sso_uid, hasComment: false });
-              }
-            });
+    this.managerService.getAcademicYearsOrdered('accommodation')
+      .subscribe((years: any[]) => {
+        this.acyears = years;
+        if (this.acyears && this.acyears.length > 0) {
+          this.modelAccommodationSelectedYear = years[0].acyear;
         }
+        else return;
+        this.studentsService.getStudentsAppsAccommodationForYear(Number(years[0].acyear))
+          .subscribe((students: StudentApplication[]) => {
+            this.studentsSSOData = Utils.sortArrayOfDepartments(students);
 
-        // Reinitialize the DataTable with the new data
-        this.initDataTable();
+            for (let i = 0; i < students.length; i++) {
+              this.studentsSSOData[i].schacpersonaluniquecode = Utils.getRegistrationNumber(this.studentsSSOData[i].schacpersonaluniquecode);
+              this.formattedDate[i] = Utils.getPreferredTimestamp(this.studentsSSOData[i].submit_date);
+
+              this.managerService.getCommentByStudentIdAndSubject(this.studentsSSOData[i].sso_uid, 'Σίτιση')
+                .subscribe((comment: any) => {
+                  if (comment) {
+                    this.hasMadeComment.push({ studentId: this.studentsSSOData[i].sso_uid, hasComment: true });
+                  } else {
+                    this.hasMadeComment.push({ studentId: this.studentsSSOData[i].sso_uid, hasComment: false });
+                  }
+                });
+            }
+
+            // Initialize the DataTable with the new data
+            this.initDataTable();
+          });
       });
   }
 
@@ -54,6 +101,8 @@ export class AccommodationComponent implements OnInit {
     for (const item of this.studentsSSOData) {
       const itemIndex = this.studentsSSOData.indexOf(item);
       studentsDataJson.push({
+        "Α/Α": itemIndex + 1,
+        "ΚΑΤΗΓΟΡΙΑ": this.isSpecialCategory ? "1" : "2",
         "TMHMA": this.getDepartmentNameById(Number(item.department_id)),
         "ΑΜ": item.schacpersonaluniquecode,
         "Επώνυμο": item.sn,
@@ -79,7 +128,16 @@ export class AccommodationComponent implements OnInit {
         "Οικογενειακή κατάσταση": item.family_state,
         "Προστατευόμενα Μέλη": item.protected_members,
         "Αδέλφια που φοιτούν": item.siblings_students,
-        "Παιδιά Φοιτητή": item.children
+        "Παιδιά Φοιτητή": item.children,
+        "Πολυτεκνεία": this.filesMeals.polutekneia ? 'ΝΑΙ' : 'OXI',
+        "Τρίτεκνος ή Φοιτητής γονέας": this.filesMeals.pistopoihtikoGoneaFoithth ? 'ΝΑΙ' : 'OXI',
+        "Αδέρφιια φοιτητές": this.filesMeals.bebaioshSpoudonAderfwn ? 'ΝΑΙ' : 'OXI',
+        "Άγαμη Μητέρα": this.filesMeals.agamhMhtera ? 'ΝΑΙ' : 'OXI',
+        "Αποθνήσκων γονέας": this.filesMeals.lhksiarxikhPrakshThanatouGoneaA || this.filesMeals.lhksiarxikhPrakshThanatouGoneaB ? 'ΝΑΙ' : 'OXI',
+        "Γονείς ΑΜΕΑ": this.filesMeals.goneisAMEA || this.filesMeals.goneisAMEAIatrikhGnomateush ? 'ΝΑΙ' : 'OXI',
+        "Γονείς Θύματα Τρομοκρατίας": this.filesMeals.goneisThumataTromokratias1 || this.filesMeals.goneisThumataTromokratias2 ? 'ΝΑΙ' : 'OXI',
+        "Διαζευγμένοι Γονείς": this.filesMeals.diazevgmenoiGoneis1 || this.filesMeals.diazevgmenoiGoneis2 ? 'ΝΑΙ' : 'OXI',
+        "Φοιτητής / ρια ΑΜΕΑ": this.filesMeals.AMEA || this.filesMeals.AMEAIatrikhGnomateush ? 'ΝΑΙ' : 'OXI'
       });
     }
 
@@ -218,12 +276,59 @@ export class AccommodationComponent implements OnInit {
     });
   }
 
-  fetchCurrectAppData(state: number) {
+  async getApplicationFilesData(item: StudentApplication) {
+    this.isSpecialCategory = false;
+    return new Promise<any> (resolve => {
+      this.studentsService.getAccommodationFiles(item.app_id)
+        .subscribe((appFiles: any[]) => {
+          for (let item of appFiles) {
+
+            if (item.value == true && item.type === "optional") {
+              this.isSpecialCategory = true;
+            }
+
+            if (item.name == 'filePolutekneia') {
+              this.filesMeals.polutekneia = true;
+            } else if (item.name == 'filePistopoihtikoGoneaFoithth') {
+              this.filesMeals.pistopoihtikoGoneaFoithth = true;
+            } else if (item.name == 'fileBebaioshSpoudonAderfwn') {
+              this.filesMeals.bebaioshSpoudonAderfwn = true;
+            } else if (item.name == 'fileAgamhMhtera') {
+              this.filesMeals.agamhMhtera = true;
+            } else if (item.name == 'fileLhksiarxikhPrakshThanatouGoneaA') {
+              this.filesMeals.lhksiarxikhPrakshThanatouGoneaA = true;
+            } else if (item.name == 'fileLhksiarxikhPrakshThanatouGoneaB') {
+              this.filesMeals.lhksiarxikhPrakshThanatouGoneaB = true;
+            } else if (item.name == 'fileGoneisAMEA') {
+              this.filesMeals.goneisAMEA = true;
+            } else if (item.name == 'fileGoneisAMEAIatrikhGnomateush') {
+              this.filesMeals.goneisAMEAIatrikhGnomateush = true;
+            } else if (item.name == 'fileGoneisThumataTromokratias1') {
+              this.filesMeals.goneisThumataTromokratias1 = true;
+            } else if (item.name == 'fileGoneisThumataTromokratias2') {
+              this.filesMeals.goneisThumataTromokratias2 = true;
+            } else if (item.name == 'fileDiazevgmenoiGoneis1') {
+              this.filesMeals.diazevgmenoiGoneis1 = true;
+            } else if (item.name == 'fileDiazevgmenoiGoneis2') {
+              this.filesMeals.diazevgmenoiGoneis2 = true;
+            } else if (item.name == 'fileAMEA') {
+              this.filesMeals.AMEA = true;
+            } else if (item.name == 'fileAMEAIatrikhGnomateush') {
+              this.filesMeals.AMEAIatrikhGnomateush = true;
+            }
+          }
+          // Resolve the promise with the filesMeals object.
+          resolve(this.filesMeals);
+        });
+    });
+  }
+
+  fetchCurrectAppData(state: number, year: number = null) {
     this.state = state;
     this.studentsSSOData = [];
     $('#processingTable').DataTable().destroy();
 
-    this.studentsService.getStudentsAppsAccommodationForPeriod()
+    this.studentsService.getStudentsAppsMealsForYear(year ?? 1980)
       .subscribe((students: StudentApplication[]) => {
         this.studentsSSOData = students;
         for (let i = 0; i < students.length; i++) {

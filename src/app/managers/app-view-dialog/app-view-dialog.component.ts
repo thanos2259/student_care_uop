@@ -58,12 +58,34 @@ export class AppViewDialogComponent implements OnInit {
 
   updateSpecialFields(value: string | number, field: string) {
     const appId: number = this.data.studentsData[this.data.index].app_id;
-    // alert('mia xara' + value);
-    // alert('dyo xarites' + this.data.studentsData[this.data.index].app_id)
     this.studentService.updateSpecialField(appId, value, field)
       .subscribe((res: any) => {
         if (res) {
           location.reload();
+        }
+      });
+  }
+
+  updateOptionalFileStatus(filenames: string[]) {
+    if (!filenames || filenames?.length == 0) return;
+    // Set the new status value here (false because we need to deactivate the fields)
+    const value: boolean = false;
+    this.studentService.updateOptionalFilesStatus(this.data.appId, filenames, value)
+      .subscribe((res: any) => {
+        if (res) {
+          Swal.fire({
+            title: 'Απενεργοποίηση',
+            text: 'Το έγγραφο απενεργοποιήθηκε',
+            icon: 'success',
+            showCancelButton: false,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'ΟΚ'
+          }).then(() => {
+            for (let filename of filenames) {
+              this.filesMeals[filename] = false;
+            }
+          });
         }
       });
   }
@@ -116,10 +138,7 @@ export class AppViewDialogComponent implements OnInit {
   }
 
   printToPdf(idx: number): void {
-    let popupWin: Window;
-    popupWin = window.open('', '_blank', 'top=0,left=0,height=1000px,width=auto');
-    popupWin!.document.open();
-    popupWin!.document.write(`
+    let printContent = `
       <html>
         <head>
           <title>Print tab</title>
@@ -255,9 +274,35 @@ export class AppViewDialogComponent implements OnInit {
           </table>
           <p><br></p>
         </body>
-      </html>`
-    );
-    popupWin!.document.close();
+      </html>`;
+
+    const popupWin: Window = window.open('', '_blank', 'top=0,left=0,height=1000px,width=auto');
+    if (popupWin) {
+      popupWin.document.open();
+      popupWin.document.write(printContent);
+      popupWin.document.close();
+
+      const closePrintWindow = () => {
+        popupWin.close();
+      };
+
+      // Wait for the content to be rendered before calling window.print()
+      popupWin.onload = () => {
+        popupWin.print();
+        setTimeout(closePrintWindow, 1000); // Close the window after 1 second (adjust as needed)
+      };
+
+      // Handle the onafterprint event to close the window after printing
+      popupWin.onafterprint = closePrintWindow;
+    } else {
+      // If popupWin is null, it means that the browser blocked the popup.
+      // We can fall back to print the current page directly.
+      try {
+        window.print();
+      } catch (e) {
+        console.log(e);
+      }
+    }
   }
 
   getFamilyStateSubfields(appArrayIndex: number) {

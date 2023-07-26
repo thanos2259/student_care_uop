@@ -44,7 +44,7 @@ const getManager = async (id) => {
 
 const getPeriodInfo = async (depId) => {
   try {
-    const results = await pool.query(`SELECT to_char("date_from", 'YYYY-MM-DD') as date_from, to_char("date_to", 'YYYY-MM-DD') as date_to, app_type
+    const results = await pool.query(`SELECT to_char("date_from", 'YYYY-MM-DD') as date_from, to_char("date_to", 'YYYY-MM-DD') as date_to, acyear, app_type
                                       FROM period WHERE is_active = 'true' AND department_id = $1 `, [depId]);
     return results.rows;
   } catch (error) {
@@ -75,6 +75,20 @@ const getQuestions = async () => {
   }
 };
 
+const getAcademicYearsOrdered = async (id = null, type) => {
+  try {
+    const results = await pool.query(`SELECT distinct acyear
+                                      FROM period
+                                      WHERE app_type = $1
+                                      ORDER BY acyear DESC`, [type]);
+
+    return results.rows;
+  } catch (error) {
+    console.error('Error while getting academic years ' + error.message);
+    throw Error('Error while getting academic years');
+  }
+};
+
 const insertCommentsByStudentId = async (studentId, comments, subject) => {
   try {
     await pool.query("INSERT INTO comments(comment_text, comment_date, student_id, comment_subject) \
@@ -87,9 +101,10 @@ const insertCommentsByStudentId = async (studentId, comments, subject) => {
 
 const insertPeriodDates = async (id, depId, data) => {
   try {
+    console.log(data);
     await pool.query('UPDATE period SET is_active = \'false\' WHERE department_id = $1 AND app_type = $2', [depId, data.app_type]);
-    await pool.query("INSERT INTO period(sso_user_id, date_from, date_to, app_type, is_active, department_id) \
-                      VALUES ($1, $2, $3, $4, $5, $6)", [id, data.date_from, data.date_to, data.app_type, true, depId]);
+    await pool.query("INSERT INTO period(sso_user_id, date_from, date_to, app_type, is_active, department_id, acyear) \
+                      VALUES ($1, $2, $3, $4, $5, $6, $7)", [id, data.date_from, data.date_to, data.app_type, true, depId, data.acyear]);
   } catch (error) {
     console.log('Error while inserting period dates ' + error.message);
     throw Error('Error while inserting period dates');
@@ -150,6 +165,7 @@ module.exports = {
   getCommentByStudentIdAndSubject,
   getManagerCities,
   getQuestions,
+  getAcademicYearsOrdered,
   insertCommentsByStudentId,
   insertPeriodDates,
   updateCommentsByStudentId,

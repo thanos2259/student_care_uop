@@ -30,6 +30,27 @@
                     </select>
                   </div>
                 </div>
+
+                <label for="acyear" class="col-form-label">Ακ. Έτος</label>
+                <div class="form-group row">
+                  <div *ngIf="isUserNafplio" class="container-responsive row">
+                    <select #selectedYearMea name="acyear" id="acyear" class="form-select col-sm-12"
+                      aria-label="Year select" [ngModel]="this.modelMealsSelectedYear"
+                      (change)="getYearValueOnChange(selectedYearMea.value, 'meals')">
+                      <option disabled [value]="null">Επιλέξτε Ακ. Έτος</option>
+                      <option #firstDate [value]="currentYear - 2">{{(currentYear - 2)
+                        + '-' + (currentYear - 1)}}
+                      </option>
+                      <option #secondDate [value]="currentYear - 1">
+                        {{(currentYear - 1)
+                        + '-' + currentYear}}</option>
+                      <option #thirdDate [value]="currentYear">
+                        {{currentYear
+                        + '-' + (currentYear + 1)}}</option>
+                    </select>
+                  </div>
+                </div>
+
                 <div class="form-group row">
                   <div class="col-sm-6">
                     <label for="date" class="col-form-label">Από:</label>
@@ -85,6 +106,27 @@
                     </select>
                   </div>
                 </div>
+
+                <label for="acyear" class="col-form-label">Ακ. Έτος</label>
+                <div class="form-group row">
+                  <div *ngIf="isUserNafplio" class="container-responsive row">
+                    <select #selectedYearAcc name="acyear" id="acyear" class="form-select col-sm-12"
+                      aria-label="Year select" [ngModel]="this.modelAccommodationSelectedYear"
+                      (change)="getYearValueOnChange(selectedYearAcc.value, 'accommodation')">
+                      <option disabled [value]="null">Επιλέξτε Ακ. Έτος</option>
+                      <option #firstDate [value]="currentYear - 2">{{(currentYear - 2)
+                        + '-' + (currentYear - 1)}}
+                      </option>
+                      <option #secondDate [value]="currentYear - 1">
+                        {{(currentYear - 1)
+                        + '-' + currentYear}}</option>
+                      <option #thirdDate [value]="currentYear">
+                        {{currentYear
+                        + '-' + (currentYear + 1)}}</option>
+                    </select>
+                  </div>
+                </div>
+
                 <div class="form-group row">
                   <div class="col-sm-6">
                     <label for="date" class="col-form-label">Από:</label>

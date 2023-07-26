@@ -41,10 +41,28 @@ export class StudentsService {
     return fetchedStudents;
   }
 
+  getStudentsAppsMealsForYear(year: number): Observable<Array<StudentApplication>> {
+    let id = this.authService.getSessionId();
+    const params = new HttpParams()
+      .set('id', id)
+      .set('year', year);
+    const fetchedStudentApps = this.http.get<Array<StudentApplication>>(STUDENTS_URL  + 'getStudentsApplyPhaseMealsByYear', { params });
+    return fetchedStudentApps;
+  }
+
   getStudentsAppsAccommodationForPeriod(): Observable<Array<StudentApplication>> {
     let id = this.authService.getSessionId();
     const fetchedStudents = this.http.get<Array<StudentApplication>>(STUDENTS_URL + 'getStudentsApplyPhaseAccommodation/' + id);
     return fetchedStudents;
+  }
+
+  getStudentsAppsAccommodationForYear(year: number): Observable<Array<StudentApplication>> {
+    let id = this.authService.getSessionId();
+    const params = new HttpParams()
+      .set('id', id)
+      .set('year', year);
+    const fetchedStudentApps = this.http.get<Array<StudentApplication>>(STUDENTS_URL  + 'getStudentsApplyPhaseAccommodationByYear', { params });
+    return fetchedStudentApps;
   }
 
   getOldStudentsAppsForMeals(): Observable<Array<StudentApplication>> {
@@ -95,6 +113,21 @@ export class StudentsService {
 
   getAllPeriodDates(departmentId: number): Observable<any> {
     return this.http.get<any>(MANAGER_URL + 'getPeriodInfo/' + departmentId);
+  }
+
+  getStudentsCountByYearAndDepartment(year: any, type: string): Observable<any> {
+    const params = new HttpParams()
+      .set('year', year)
+      .set('type', type);
+
+    return this.http.get<any>(STUDENTS_URL + 'getStudentsCountByYearAndDepartment/', { params });
+  }
+
+  getStudentAppsByYear(year: any, type: string): Observable<any> {
+    const params = new HttpParams()
+      .set('year', year)
+      .set('type', type);
+    return this.http.get<any>(STUDENTS_URL + 'getStudentAppsByYear/', { params });
   }
 
   updateStudentDetails(data: any) {
@@ -154,6 +187,15 @@ export class StudentsService {
     return this.http
       .patch<{ message: string }>(STUDENTS_URL + "applications/updateSpecialField/" + appId,
          { "fieldValue": value, "fieldName": field });
+  }
+
+  updateOptionalFilesStatus(appId: number, filenames: string[], value: boolean): any {
+    const requestBody = {
+      filenames: filenames,
+      value: value
+    };
+    return this.http
+      .patch<{ message: string }>(STUDENTS_URL + "applications/updateOptionalFilesStatus/" + appId, requestBody);
   }
 
   submitQuestion(question: any): Observable<any> {

@@ -3,6 +3,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { Utils } from 'src/app/MiscUtils';
 import { FilesAccommodation } from 'src/app/students/files-accommodation.model';
 import { StudentsService } from 'src/app/students/student.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-app-view-dialog-accommodation',
@@ -73,6 +74,30 @@ export class AppViewDialogAccommodationComponent implements OnInit {
       });
   }
 
+   updateOptionalFileStatus(filenames: string[]) {
+    if (!filenames || filenames?.length == 0) return;
+    // Set the new status value here (false because we need to deactivate the fields)
+    const value: boolean = false;
+    this.studentService.updateOptionalFilesStatus(this.data.appId, filenames, value)
+      .subscribe((res: any) => {
+        if (res) {
+          Swal.fire({
+            title: 'Απενεργοποίηση',
+            text: 'Το έγγραφο απενεργοποιήθηκε',
+            icon: 'success',
+            showCancelButton: false,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'ΟΚ'
+          }).then(() => {
+            for (let filename of filenames) {
+              this.filesAccommodation[filename] = false;
+            }
+          });
+        }
+      });
+  }
+
   ngOnInit(): void {
     this.studentService.getAccommodationFiles(this.data.appId)
       .subscribe((files: any[]) => {
@@ -131,10 +156,7 @@ export class AppViewDialogAccommodationComponent implements OnInit {
   }
 
   printToPdf(idx: number): void {
-    let popupWin: Window;
-    popupWin = window.open('', '_blank', 'top=0,left=0,height=1000px,width=auto');
-    popupWin!.document.open();
-    popupWin!.document.write(`
+    let printContent = `
       <html>
         <head>
           <title>Print tab</title>
@@ -270,9 +292,35 @@ export class AppViewDialogAccommodationComponent implements OnInit {
           </table>
           <p><br></p>
         </body>
-      </html>`
-    );
-    popupWin!.document.close();
+      </html>`;
+
+    const popupWin: Window = window.open('', '_blank', 'top=0,left=0,height=1000px,width=auto');
+    if (popupWin) {
+      popupWin.document.open();
+      popupWin.document.write(printContent);
+      popupWin.document.close();
+
+      const closePrintWindow = () => {
+        popupWin.close();
+      };
+
+      // Wait for the content to be rendered before calling window.print()
+      popupWin.onload = () => {
+        popupWin.print();
+        setTimeout(closePrintWindow, 1000); // Close the window after 1 second (adjust as needed)
+      };
+
+      // Handle the onafterprint event to close the window after printing
+      popupWin.onafterprint = closePrintWindow;
+    } else {
+      // If popupWin is null, it means that the browser blocked the popup.
+      // We can fall back to print the current page directly.
+      try {
+        window.print();
+      } catch (e) {
+        console.log(e);
+      }
+    }
   }
 
   getFamilyStateSubfields(appArrayIndex: number) {

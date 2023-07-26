@@ -144,6 +144,17 @@
               </p>
             </a>
           </li>
+
+          <li class="nav-header">
+            Στατιστικά
+          </li>
+          <li class="nav-item">
+            <a [routerLink]="['/manager/stats/' + this.authService.getSessionId()]" class="nav-link">
+              <i class="nav-icon fa fa-chart-line"></i>
+              <p>Στατιστικά</p>
+            </a>
+          </li>
+
           <li class="nav-header">
             {{ "STUDENT.SIDEBAR-SECONDARY-OPTIONS" | translate }}
           </li>
@@ -241,6 +252,7 @@
           <app-contact *ngIf="isContactRoute()"></app-contact>
           <app-questions-answers *ngIf="isManagerQuestionsRoute()"></app-questions-answers>
           <app-qna *ngIf="isManagerQNARoute()"></app-qna>
+          <app-stats-manager *ngIf="isManagerStatsRoute()"></app-stats-manager>
         </div>
       </div>
     </div>

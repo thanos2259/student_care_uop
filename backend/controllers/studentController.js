@@ -76,10 +76,38 @@ const getStudentsApplyPhaseMeals = async (request, response) => {
   }
 };
 
+const getStudentsApplyPhaseMealsByYear = async (request, response) => {
+  try {
+    const userId = request.query.id;
+    const academicYear = request.query.year;
+    const studentsApps = await studentService.getStudentsApplyPhaseMealsByYear(userId, academicYear);
+    response.status(200).json(studentsApps);
+  } catch (error) {
+    console.error(error.message);
+    response.send({
+      message: error.message
+    });
+  }
+};
+
 const getStudentsApplyPhaseAccommodation = async (request, response) => {
   try {
     const userId = request.params.id;
     const studentsApps = await studentService.getStudentsApplyPhaseAccommodation(userId);
+    response.status(200).json(studentsApps);
+  } catch (error) {
+    console.error(error.message);
+    response.send({
+      message: error.message
+    });
+  }
+};
+
+const getStudentsApplyPhaseAccommodationByYear = async (request, response) => {
+  try {
+    const userId = request.query.id;
+    const academicYear = request.query.year;
+    const studentsApps = await studentService.getStudentsApplyPhaseAccommodationByYear(userId, academicYear);
     response.status(200).json(studentsApps);
   } catch (error) {
     console.error(error.message);
@@ -151,6 +179,34 @@ const getOldStudentsAppsForAccommodation = async (request, response) => {
     response.status(200).json(comment);
   } catch (error) {
     response.send({
+      message: error.message
+    });
+  }
+};
+
+const getStudentsCountByYearAndDepartment = async (request, response) => {
+  try {
+    const academicYear = request.query.year;
+    const type = request.query.type;
+
+    const stats = await studentService.getStudentsCountByYearAndDepartment(academicYear, type);
+    response.status(200).json(stats);
+  } catch (error) {
+    response.status(400).json({
+      message: error.message
+    });
+  }
+};
+
+const getStudentAppsByYear = async (request, response) => {
+  try {
+    const academicYear = request.query.year;
+    const type = request.query.type;
+
+    const stats = await studentService.getStudentAppsByYear(academicYear, type);
+    response.status(200).json(stats);
+  } catch (error) {
+    response.status(400).json({
       message: error.message
     });
   }
@@ -458,6 +514,26 @@ const updateSpecialField = async (request, response) => {
   }
 };
 
+const updateOptionalFilesStatus = async (request, response) => {
+  try {
+    const appId = request.params.appId;
+    const { filenames, value } = request.body;
+
+    await studentService.updateOptionalFilesStatus(filenames, value, appId);
+
+    response
+      .status(200)
+      .json({
+        message: `Student application field was updated successfully`
+      });
+  } catch (error) {
+    console.error(error.message);
+    response.status(500).send({
+      message: `Student application field was not updated, error: ${error.message}`
+    });
+  }
+};
+
 const getQuestionsByStudentId = async (request, response) => {
   try {
     const studentId = request.params.studentId;
@@ -505,18 +581,23 @@ module.exports = {
   getOldStudentsAppsForMeals,
   getOldStudentsAppsForAccommodation,
   getQuestionsByStudentId,
+  getStudentsCountByYearAndDepartment,
+  getStudentAppsByYear,
   checkUserAcceptance,
   updateStudentDetails,
   updateStudentContact,
   updateStudentSpecialData,
   updateStudentBasicInfo,
   updateSpecialField,
+  updateOptionalFilesStatus,
   insertCommentsByStudentId,
   insertQuestion,
   insertUserAcceptance,
   updateCommentsByStudentId,
   getApplicationsById,
   getStudentsApplyPhaseMeals,
+  getStudentsApplyPhaseMealsByYear,
+  getStudentsApplyPhaseAccommodationByYear,
   getStudentsApplyPhaseAccommodation,
   login,
   uploadFile,

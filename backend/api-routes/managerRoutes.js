@@ -8,6 +8,7 @@ router.get("/getManager/:id", managerController.getManager);
 router.get("/getCommentByStudentIdAndSubject/", managerController.getCommentByStudentIdAndSubject);
 router.get("/getPeriodInfo/:id", managerController.getPeriodInfo);
 router.get("/getManagerCities/:id", managerController.getManagerCities);
+router.get("/getAcademicYearsOrdered/", managerController.getAcademicYearsOrdered);
 router.post("/login", managerController.login);
 router.post("/insertPeriodDates/", managerController.insertPeriodDates);
 router.post("/insertCommentsByStudentId/:id", managerController.insertCommentsByStudentId);

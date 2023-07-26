@@ -116,4 +116,8 @@ export class ManagerComponent implements OnInit, OnDestroy {
   isManagerQuestionsRoute() {
     return this.router.url === '/manager/questions/' + this.authService.getSessionId();
   }
+
+  isManagerStatsRoute() {
+    return this.router.url === '/manager/stats/' + this.authService.getSessionId();
+  }
 }

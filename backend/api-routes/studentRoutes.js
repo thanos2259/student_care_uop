@@ -14,6 +14,10 @@ router.get("/getStudentsApplyPhaseAccommodation/:id", studentController.getStude
 router.get("/getOldStudentsAppsForMeals/:id", studentController.getOldStudentsAppsForMeals);
 router.get("/getOldStudentsAppsForAccommodation/:id", studentController.getOldStudentsAppsForAccommodation);
 router.get("/checkUserAcceptance/:id", studentController.checkUserAcceptance);
+router.get("/getStudentsApplyPhaseMealsByYear/", studentController.getStudentsApplyPhaseMealsByYear);
+router.get("/getStudentsApplyPhaseAccommodationByYear/", studentController.getStudentsApplyPhaseAccommodationByYear);
+router.get("/getStudentsCountByYearAndDepartment", studentController.getStudentsCountByYearAndDepartment);
+router.get("/getStudentAppsByYear", studentController.getStudentAppsByYear);
 router.put("/updateStudentDetails/:id", studentController.updateStudentDetails);
 router.put("/updateStudentContact/:id", studentController.updateStudentContact);
 router.put("/updateStudentBasicInfo/:id", studentController.updateStudentBasicInfo);
@@ -27,6 +31,7 @@ router.post("/getMealsAppZipFile/:id", studentController.getMealsAppZipFile);
 router.post("/getAccommodationAppZipFile/:id", studentController.getMealsAppZipFile);
 router.post("/insertUserAcceptance/:id", studentController.insertUserAcceptance);
 router.patch("/applications/updateSpecialField/:id", studentController.updateSpecialField);
+router.patch("/applications/updateOptionalFilesStatus/:appId", studentController.updateOptionalFilesStatus);
 router.get('/questions/:studentId', studentController.getQuestionsByStudentId);
 router.post('/questions', studentController.insertQuestion);
 
